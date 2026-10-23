@@ -1,0 +1,1 @@
+- Dual problems depend on $X^TX$ & can be **Kernelized!**

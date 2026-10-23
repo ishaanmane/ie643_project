@@ -1,0 +1,3 @@
+$$\frac{\partial e}{\partial w_{ij}^l} = \frac{\partial e}{\partial a_i^l} \phi'(z_i^l) \cdot a_j^{l-1}$$
+
+$$\begin{bmatrix} \partial e/\partial w_{1j}^l \\ \partial e/\partial w_{2j}^l \\ \vdots \\ \partial e/\partial w_{N_l j}^l \end{bmatrix} = \begin{bmatrix} \frac{\partial e}{\partial a_1^l}\phi'(z_1^l) \cdot a_j^{l-1} \\ \frac{\partial e}{\partial a_2^l}\phi'(z_2^l) \cdot a_j^{l-1} \\ \vdots \\ \frac{\partial e}{\partial a_{N_l}^l}\phi'(z_{N_l}^l) \cdot a_j^{l-1} \end{bmatrix} = \begin{bmatrix} \frac{\partial e}{\partial a_1^l}\phi'(z_1^l) \\ \frac{\partial e}{\partial a_2^l}\phi'(z_2^l) \\ \vdots \\ \frac{\partial e}{\partial a_{N_l}^l}\phi'(z_{N_l}^l) \end{bmatrix} \begin{bmatrix} a_j^{l-1} \end{bmatrix}$$

@@ -1,0 +1,56 @@
+# Dataset
+
+Handwritten pages paired with Markdown/LaTeX ground truth, for fine-tuning a vision-language model to convert a note page into structured Markdown. Four sources, three different media, prefix tells them apart:
+
+| Prefix | Source | Medium | Pages |
+|---|---|---|---|
+| `ie643_lecNN_pageNNN` | IE643 Class Scribes | chalkboard, photographed | 205 |
+| `mlt_weekNN_pageNNN` | MLT Notes | digital stylus ink | 129 |
+| `ie802_notes_pageNNN` | IE802-MINLO course notes | notebook paper, photographed | 56 |
+| `hlcs_noteNN_page001` | [HumynLabs CS Notes](https://huggingface.co/datasets/HumynLabs/Handwritten-Computer-Science-Notes-Dataset) (HF) | notebook paper, photographed | 20 |
+
+## How it was built (reproducible)
+
+Run from the project root:
+
+```bash
+python3 scripts/render_pages.py       # PDF pages -> data/raw_scans/*.jpg   (PyMuPDF, 4x zoom)
+python3 scripts/batch_preprocess.py   # raw -> data/processed/*.jpg          (src/preprocess.py)
+# ground truth -> data/annotations/*.md   (see "Annotation" below)
+python3 scripts/build_dataset.py      # -> train/val/test.jsonl, splits.json, VERIFICATION.md
+```
+
+- **Sources:** `Class Scribes/` (11 PDFs, Lec02-Lec12, rendered by `scripts/render_pages.py`); `MLT Notes/` (10 PDFs, Week01-Week10, `scripts/render_mlt_pages.py`) — digital ink, multi-colour, minimal preprocessing needed; a 56-page IE802 (mixed-integer nonlinear optimization) notebook, one continuous PDF, `scripts/render_ie802_pages.py` — real notebook-paper photos with visible spiral binding and background, exactly the messy-photo case preprocessing is meant for (see caveat below); `HumynLabs/Handwritten-Computer-Science-Notes-Dataset` on Hugging Face (20 single-page PDFs, downloaded via `huggingface_hub`, no ground truth included upstream so labeled the same way as the rest) — also real notebook-paper photos. Early IE643 lectures (Lec02-Lec04) have low native resolution (about 511x307 px pages, upscaled), so their images look blocky.
+- **Preprocessing** (`src/preprocess.py`): background/foreground separation, deskew, CLAHE contrast on the lightness channel, non-local-means denoise, resize to 2000 px long edge. It is deliberately **not** binarized, because a VLM can use shading and color. `binarize()` is a debug view only.
+  - **Background removal** finds the page's actual boundary in the photo (Canny edges, closed with a morphological close to bridge gaps a busy background fragments, then a rotated bounding rect fit to the largest resulting shape) and perspective-warps it flat — this discards desk/hand/background clutter, not just crops to a brightness cutoff. It falls back to a plain brightness-bounding-box crop when no confident page boundary is found (chalkboard photos and the digital-ink MLT pages have no real "page in a larger photo" to find, so they correctly fall through to that fallback, unchanged).
+  - **First version was weaker:** the original border-crop was a single global brightness threshold — it only removed background when the background was clearly darker/lighter than the page. On the IE802 photos (bright wood desk) this under-cropped and left the desk visible. Caught by inspection, fixed, and every processed image was regenerated (`scripts/batch_preprocess.py --force`) — see the before/after check for `ie802_notes_page001` and the `hlcs_*` pages, where background is now fully removed.
+- **Output format:** each JSONL line is `{"messages": [user: image + instruction, assistant: Markdown]}`, the chat format Qwen2.5-VL fine-tuning expects.
+
+## Annotation (how the ground truth was produced)
+
+All 410 annotations are AI-generated and **not yet human-verified**. Two methods were used, and the report should say so explicitly:
+
+| Method | Pages | Notes |
+|---|---|---|
+| Gemini API (`scripts/annotate_gemini.py`, model `gemini-3.6-flash`) | 11 | Stopped by the free-tier cap of 20 requests/day (the plan assumed 1500/day). The key is read from the `GEMINI_API_KEY` env var, never stored. |
+| Claude reading each processed image and writing the Markdown directly | 399 (all of `mlt_*`, `ie802_*`, `hlcs_*`, plus most of `ie643_*`) | No script or API call. Includes the 2 demo pages (`lec02_page005`, `lec05_page004`), which were cross-checked with extra zoom passes. |
+
+A spot check of 2 early pages found one small error (fixed), so errors exist in the rest.
+
+## Splits
+
+Split **by unit** (lecture, week, or whole source for single-unit sources), not by random page. Consecutive pages from the same source repeat the same equations, so a random split leaks near-duplicates into val/test and inflates metrics. Held-out units are set in `HELD_OUT` in `scripts/build_dataset.py` — `lec03`, `lec09`, `week03`, `week09` for test and `lec07`, `week06` for val; all `ie802_*` and `hlcs_*` pages go to train (single continuous document / too few pages to split further).
+
+| Split | Pages |
+|---|---|
+| train | 324 |
+| val | 26 |
+| test | 60 |
+| **total** | **410** |
+
+Exact page lists are in `splits.json`.
+
+## Still to do
+
+1. **Manual verification**, tracked in `VERIFICATION.md`: the pages flagged with `??`, 100% of the test split, and a spot-check of val. Re-run `build_dataset.py` afterward so the checklist and JSONL files pick up your edits.
+2. **Optional consistency check** between the 11 Gemini-labeled pages and the rest for style differences.

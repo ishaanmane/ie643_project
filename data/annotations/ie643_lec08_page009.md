@@ -1,0 +1,3 @@
+$$(W^{l+1})^T = \begin{bmatrix} w_{11}^{l+1} & w_{21}^{l+1} & w_{31}^{l+1} & \cdots & w_{N_{l+1}\,1}^{l+1} \\ w_{12}^{l+1} & w_{22}^{l+1} & w_{32}^{l+1} & \cdots & w_{N_{l+1}\,2}^{l+1} \\ \vdots & & & & \vdots \\ w_{1N_l}^{l+1} & w_{2N_l}^{l+1} & w_{3N_l}^{l+1} & \cdots & w_{N_{l+1}\,N_l}^{l+1} \end{bmatrix}$$
+
+$$\begin{bmatrix} \frac{\partial e}{\partial a_1^{l+1}} \phi'(z_1^{l+1}) \\ \frac{\partial e}{\partial a_2^{l+1}} \phi'(z_2^{l+1}) \\ \vdots \\ \frac{\partial e}{\partial a_{N_{l+1}}^{l+1}} \phi'(z_{N_{l+1}}^{l+1}) \end{bmatrix} = \begin{bmatrix} \frac{\partial e}{\partial a_1^l} \\ \frac{\partial e}{\partial a_2^l} \\ \vdots \\ \frac{\partial e}{\partial a_{N_l}^l} \end{bmatrix}$$

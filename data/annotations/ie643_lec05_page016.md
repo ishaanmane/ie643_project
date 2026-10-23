@@ -1,0 +1,1 @@
+$$= \phi\left(\begin{bmatrix} z_1^l \\ z_2^l \\ \vdots \\ z_{N_l}^l \end{bmatrix}\right) = \phi\left(\begin{bmatrix} \sum_{j=1}^{N_{l-1}} w_{1j}^l a_j^{l-1} \\ \sum_{j=1}^{N_{l-1}} w_{2j}^l a_j^{l-1} \\ \vdots \\ \sum_{j=1}^{N_{l-1}} w_{N_l j}^l a_j^{l-1} \end{bmatrix}\right)$$
