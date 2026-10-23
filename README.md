@@ -10,8 +10,8 @@ The folders are numbered in pipeline order. Each has its own README.
 | Step | Folder | What it does | Status |
 |---|---|---|---|
 | 0 | [00_dataset/](00_dataset/) | Render source PDFs to page images, write ground-truth Markdown, build train/val/test JSONL | Done (410 pages, labels not yet human-verified) |
-| 1 | [01_preprocessing/](01_preprocessing/) | Page-boundary warp, deskew, contrast, denoise (`preprocess.py`); Sauvola binarization as an alternative (`sauvola.py`) | Done; full re-run with the newest background removal pending |
-| 2 | [02_layout/](02_layout/) | Layout detection (Surya / YOLOv8): figures, equations, reading order | To do |
+| 1 | [01_preprocessing/](01_preprocessing/) | Page-boundary warp, deskew, contrast, denoise (`preprocess.py`); Sauvola binarization as an alternative (`sauvola.py`) | Rewritten and tested on a 16-page sample; **full re-run needed** (the old `data/processed/` was wrong for many pages, see [01_preprocessing/](01_preprocessing/)) |
+| 2 | [02_layout/](02_layout/) | Layout detection (Surya / YOLOv8): figures, equations, reading order | Surya tested zero-shot on 10 raw pages ([findings](02_layout/SURYA_FINDINGS.md)); metric and decision pending |
 | 3 | [03_recognition/](03_recognition/) | Fine-tune Qwen2.5-VL-7B (4-bit LoRA) to turn a page into Markdown + LaTeX | To do |
 | 4 | [04_reconstruction/](04_reconstruction/) | Merge pages into one Markdown document, then Pandoc + XeLaTeX to a searchable PDF | To do |
 | 5 | [05_evaluation/](05_evaluation/) | CER/WER, equation exact-match, LaTeX compile rate and other metrics | To do |
@@ -19,7 +19,7 @@ The folders are numbered in pipeline order. Each has its own README.
 Other folders:
 
 - [data/](data/) - page images (`raw_scans/`), ground truth (`annotations/`), region tags and context examples, JSONL splits. See [data/README.md](data/README.md).
-- [docs/](docs/) - project statement, pipeline design, and earlier planning notes in `docs/planning/`.
+- [docs/](docs/) - project statement, pipeline design, [dataset audit](docs/DATASET_AUDIT.md), and earlier planning notes in `docs/planning/`.
 
 ## Quick start
 
@@ -27,7 +27,7 @@ Other folders:
 pip install -r requirements.txt
 
 # run everything from the repo root
-python3 01_preprocessing/batch_preprocess.py          # data/raw_scans -> data/processed (add --force to redo all)
+python3 01_preprocessing/batch_preprocess.py --workers 4 --force   # data/raw_scans -> data/processed + QA report
 python3 00_dataset/build_dataset.py                   # -> data/train.jsonl, val.jsonl, test.jsonl, splits.json
 python3 01_preprocessing/sauvola.py --step 10 --compare   # optional: Sauvola binarization samples
 ```
