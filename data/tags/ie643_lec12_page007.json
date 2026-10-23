@@ -1,0 +1,37 @@
+{
+  "image": "data/processed/ie643_lec12_page007.jpg",
+  "image_size": [2000, 1239],
+  "note": "Bounding boxes hand-estimated from the image for this worked example, not machine-detected. Region-level tags for the full 410-page dataset are the open task (Slide 3) — this shows the target format.",
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "bbox": [20, 20, 1980, 230],
+      "text_preview": "min_{A,B} sum ||ABx^s - y^s||^2 =: E(A,B)"
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "bbox": [130, 370, 1900, 460],
+      "text_preview": "When wts of A are fixed, is E(A_fixed,B) convex wrt wts of B?"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "bbox": [130, 560, 1780, 650],
+      "text_preview": "When wts of B are fixed, is E(A,B_fixed) convex wrt wts of A?"
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "bbox": [20, 760, 1950, 1060],
+      "text_preview": "sum ||y_hat^s - y^s||^2   Y = [y^1 y^2 ... y^S]"
+    },
+    {
+      "id": "b5",
+      "type": "caption",
+      "bbox": [1020, 1080, 1980, 1230],
+      "text_preview": "sample 1 true o/p, sample 2 true o/p, sample S true o/p"
+    }
+  ]
+}
