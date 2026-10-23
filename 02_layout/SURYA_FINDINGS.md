@@ -42,8 +42,26 @@ Ranked by how much it matters for us.
 
 Usable zero-shot on neat pages (digital ink, tidy notebooks) and on chalkboard pages with well-spaced content. Weak on dense notebook pages with margin notes and on chalkboards where items touch. This is not yet enough evidence to decide between "use Surya as it is" and "train a detector on our own boxes".
 
+## Same 10 pages on preprocessed images
+
+Output: [surya_processed_results.json](surya_processed_results.json). Box counts, raw to processed:
+
+| Page | Boxes | What changed |
+|---|---|---|
+| `ie802_notes_page001` | 14 to 41 | **Big improvement.** The red margin notes ("Both schemes are equivalent…", "any point that satisfies above") and the "f(x̂)+∇…" line are now found, split into line-level boxes. Some overlap remains around the faint pencil sketch, and the crop still shows desk at the top and edges. |
+| `ie802_notes_page031` | 28 to 26 | The neighbouring-page bleed ("Integer") is gone. But the two `SectionHeader` boxes ("IInd idea", "IIIrd idea") are now `Text`. |
+| `ie643_lec09_page006` | 7 to 6 | The one-hot vector is no longer mislabelled `Diagram`. |
+| `hlcs_note08_page001` | 12 to 12 | The title is now `PageHeader`, not `SectionHeader`. |
+| `ie643_lec05_page004` | 4 to 4 | One `Equation` became `Text`. |
+| `mlt_week08_page004` | 5 to 4 | One `Equation` box fewer. |
+| `ie643_lec02_page005`, `ie643_lec12_page007`, `hlcs_note01_page001`, `mlt_week03_page001` | about the same | `ie643_lec12_page007` still merges the captions into the last equation. |
+
+Read: preprocessing helped on the hardest notebook page and removed the bleed, which is what it is for. It did not fix the chalkboard cases, and it slightly changed some labels in both directions (headers lost on two pages). From 10 pages that is a pattern to confirm with the metric, not a result.
+
+Preprocessing problems seen while doing this comparison are in `01_preprocessing/README.md`.
+
 ## Still to do
 
-1. Re-run the same 10 pages on the preprocessed images (`data/processed/`) and compare.
+1. ~~Re-run the same 10 pages on the preprocessed images~~ (done, above). Re-run once on the fixed preprocessing for all 410 pages.
 2. Hand-box about 20 test-split pages and report IoU / mAP and reading-order accuracy for Surya. Pre-filling the boxes from Surya's output and correcting them by hand is faster than drawing from scratch.
 3. Only if the numbers are poor on our pages: train a YOLOv8 detector on those boxes.

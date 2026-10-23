@@ -77,7 +77,8 @@ class NotesPreprocessor:
         info["crop"] = "brightness"
         return self._crop_by_brightness(img)
 
-    def _find_page_quad(self, img: np.ndarray, min_area_frac: float = 0.3):
+    def _find_page_quad(self, img: np.ndarray, min_area_frac: float = 0.3,
+                        min_aspect: float = 0.6):
         """Rotated bounding rectangle of the largest edge shape, or (None, frac).
 
         Real photos rarely give a clean unbroken 4-corner outline (busy background
@@ -85,6 +86,11 @@ class NotesPreprocessor:
         rotated rect rather than requiring exactly 4 polygon corners.
         """
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if gray.mean() < 100:
+            # Dark background = chalkboard frame or dark-mode screenshot: there is no
+            # physical page edge, and the largest edge shape is just a block of strokes.
+            # Warping to it cropped away most of the board on some pages.
+            return None, 0.0
         blurred = cv2.GaussianBlur(gray, (5, 5), 0)
         edges = cv2.Canny(blurred, 30, 100)
         edges = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, np.ones((15, 15), np.uint8))
@@ -96,6 +102,8 @@ class NotesPreprocessor:
         frac = w * h / (img.shape[0] * img.shape[1])
         if frac < min_area_frac:
             return None, frac  # too small to plausibly be the whole page
+        if min(w, h) / max(w, h) < min_aspect:
+            return None, frac  # not page-shaped: part of a page, or page plus clutter
         return cv2.boxPoints(rect).astype("float32"), frac
 
     def _warp_to_quad(self, img: np.ndarray, pts: np.ndarray) -> np.ndarray:

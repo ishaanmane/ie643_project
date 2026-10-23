@@ -48,18 +48,21 @@ python3 01_preprocessing/batch_preprocess.py --workers 4 --force
 
 Each page's `preprocess_report.csv` row records the crop method (`quad` or `brightness`), the fraction of the image the page boundary covered, the skew applied, the resize scale, and brightness / contrast / sharpness of the result. 16 pages take about 15 seconds on 4 workers on a laptop.
 
-## Result of the full run (410 pages, 0 failures, 7.5 min on 4 workers)
+## Page-boundary step: bugs found by inspecting the first full run
 
-| Source | Pages | Page-warped (`quad`) | Brightness crop |
-|---|---|---|---|
-| HumynLabs notebook photos | 20 | 20 | 0 |
-| IE802 notebook | 56 | 45 | 11 |
-| IE643 chalkboard | 205 | 15 | 190 (expected: no page edge) |
-| MLT digital ink | 129 | 0 | 129 (expected: no page edge) |
+The first full run (410 pages, 0 failures) looked fine in the report but not in the images:
 
-- The 2 outputs with near-zero contrast are the 2 blank pages (`ie643_lec07_page020`, `mlt_week01_page013`), as expected.
-- 11 IE802 pages fell back to the brightness crop: `ie802_notes_page007, 016, 017, 018, 030, 034, 035, 036, 039, 041, 045`. Some are flat scans with no desk (016, 017 are landscape scans), but the others were not inspected; check their compare sheets before relying on them.
-- Visually inspected: 4 of 16 sample pairs (HumynLabs, IE802 photo and scan, chalkboard). The page crop removes the desk and cover there; the other 12 sheets were generated but not reviewed.
+- **Chalkboard frames:** 15 of them went through the page warp (`quad`). A board has no page edge, so the "page" it found was a block of strokes; the warp kept a tilted sub-region and **cut off most of the board** (`ie643_lec04_page008`, `ie643_lec03_page010`). Fix: the warp is skipped when the image is dark (mean brightness < 100).
+- **Notebook photos:** on `ie802_notes_page043, 048, 049` the warp lost part of the page or left it tilted with a black wedge; the output was 0.47 to 0.55 as wide as it was tall, against 0.75 for a real page. Fix: a candidate whose short side is under 0.6 of its long side is rejected and the content crop is used instead.
+
+After the fix, all four chalkboard test pages are content-cropped with a normal aspect, and the notebook pages that were warped correctly (`hlcs_note01`, `ie802_notes_page026`, `031`) are unchanged. This was checked on 11 pages, not on all 410. The full re-run on the fixed code is still to be done and its counts recorded here.
+
+Before the fix the counts were: HumynLabs 20 of 20 warped, IE802 45 of 56, IE643 15 of 205, MLT 0 of 129. The 2 near-zero-contrast outputs are the 2 blank pages, as expected.
+
+Still weak after the fix:
+- `ie802_notes_page043, 048, 049` fall back to the content crop, so they keep the desk and, for 049, a tilted page with a black wedge.
+- `ie802_notes_page001`: the warp keeps some desk (aspect 1.08 for a portrait page), although layout detection now works on it.
+- The other IE802 pages that fell back (`007, 016, 017, 018, 030, 034, 035, 036, 039, 041, 045`) were not inspected; 016 and 017 are flat scans.
 
 ## Files
 
