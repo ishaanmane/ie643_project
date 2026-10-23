@@ -55,12 +55,12 @@ PDFs -> render -> preprocess -> label -> verify -> split by lecture
 
 | Stage | Input | Output | Tool | Status | File |
 |---|---|---|---|---|---|
-| 1. Preprocess | Page image | Cleaned colour image, 2000 px long edge | OpenCV | **Done** | `src/preprocess.py` |
-| 2. Layout detection | Cleaned image | Figure boxes and reading order | Surya | **To do** (untested on chalkboard) | `src/layout.py` |
-| 3. Recognition | Cleaned image + fixed prompt | Markdown with LaTeX and `[Diagram: ...]` tags | Qwen2.5-VL + LoRA | **To do** | `src/recognize.py` |
-| 4. Reconstruction | Per-page Markdown + diagram crops | One cleaned Markdown document | Python | **To do** | `src/postprocess.py` |
-| 5. PDF generation | Cleaned Markdown | Searchable PDF + editable `.md` + crops | Pandoc + XeLaTeX | **To do** | `src/pdf_gen.py` |
-| 6. Evaluation | Predictions + reference Markdown | Metric scores | jiwer, sacrebleu, custom | **To do** | `src/evaluate.py` |
+| 1. Preprocess | Page image | Cleaned colour image, 2000 px long edge | OpenCV | **Done** | `01_preprocessing/preprocess.py` |
+| 2. Layout detection | Cleaned image | Figure boxes and reading order | Surya | **To do** (untested on chalkboard) | `02_layout/layout.py` |
+| 3. Recognition | Cleaned image + fixed prompt | Markdown with LaTeX and `[Diagram: ...]` tags | Qwen2.5-VL + LoRA | **To do** | `03_recognition/recognize.py` |
+| 4. Reconstruction | Per-page Markdown + diagram crops | One cleaned Markdown document | Python | **To do** | `04_reconstruction/postprocess.py` |
+| 5. PDF generation | Cleaned Markdown | Searchable PDF + editable `.md` + crops | Pandoc + XeLaTeX | **To do** | `04_reconstruction/pdf_gen.py` |
+| 6. Evaluation | Predictions + reference Markdown | Metric scores | jiwer, sacrebleu, custom | **To do** | `05_evaluation/evaluate.py` |
 
 ### Stage 1: Preprocess (done)
 
@@ -84,7 +84,7 @@ On the current chalkboard photos most steps change little because the images are
 
 ### Stage 3: Recognition (to do)
 
-- The model receives the page image plus the fixed instruction prompt. The prompt must be identical to the training prompt (`PROMPT` in `scripts/build_dataset.py`).
+- The model receives the page image plus the fixed instruction prompt. The prompt must be identical to the training prompt (`PROMPT` in `00_dataset/build_dataset.py`).
 - It outputs Markdown with LaTeX for equations. Wherever a diagram appears, it writes a one-line tag: `[Diagram: <caption>]`. Text and equations inside the diagram are written out so they stay searchable.
 - Pages are processed one at a time and merged in stage 4.
 - Runs on a GPU (Kaggle) or slowly on CPU (kanjur).
@@ -127,10 +127,10 @@ SSIM (rendered-image similarity) from the original plan is dropped: one line shi
 
 | Step | What | Status | Code |
 |---|---|---|---|
-| A1 | Render every page of every source PDF to images (PyMuPDF, 4x zoom) | **Done** (410 pages, 4 sources) | `scripts/render_pages.py`, `scripts/render_mlt_pages.py`, `scripts/render_ie802_pages.py` |
-| A2 | Preprocess all pages | **Done** | `scripts/batch_preprocess.py` |
-| A3 | Generate ground-truth Markdown for every page | **Done** (unverified) | `scripts/annotate_gemini.py`, plus direct Claude transcription |
-| A4 | Build train/val/test JSONL files by unit, plus splits file and checklist | **Done** | `scripts/build_dataset.py` |
+| A1 | Render every page of every source PDF to images (PyMuPDF, 4x zoom) | **Done** (410 pages, 4 sources) | `00_dataset/render_pages.py`, `00_dataset/render_mlt_pages.py`, `00_dataset/render_ie802_pages.py` |
+| A2 | Preprocess all pages | **Done** | `01_preprocessing/batch_preprocess.py` |
+| A3 | Generate ground-truth Markdown for every page | **Done** (unverified) | `00_dataset/annotate_gemini.py`, plus direct Claude transcription |
+| A4 | Build train/val/test JSONL files by unit, plus splits file and checklist | **Done** | `00_dataset/build_dataset.py` |
 | A5 | Manually verify labels | **In progress** (you) | see `data/VERIFICATION.md` |
 | A6 | Shorten diagram tags to one line and list in-diagram text | **To do** | one-off script plus a manual pass |
 | A7 | Add diversity: notebook-paper scans and other people's handwriting | **Done** | see `data/README.md` — 4 sources now (chalkboard, digital ink, notebook paper x2) |
@@ -152,22 +152,22 @@ Dataset facts:
 | val | 07 | 20 |
 | test | 03, 09 | 34 |
 
-- 11 pages are flagged with `??` where the board was hard to read. Fix them and remove the marks; re-running `scripts/build_dataset.py` updates the checklist and JSONL files.
+- 11 pages are flagged with `??` where the board was hard to read. Fix them and remove the marks; re-running `00_dataset/build_dataset.py` updates the checklist and JSONL files.
 
 To rebuild from scratch, run from the project root:
 
 ```bash
-python3 scripts/render_pages.py
-python3 scripts/batch_preprocess.py
+python3 00_dataset/render_pages.py
+python3 01_preprocessing/batch_preprocess.py
 # labels -> data/annotations/*.md
-python3 scripts/build_dataset.py
+python3 00_dataset/build_dataset.py
 ```
 
 ### Phase B: Evaluation code and baseline (to do)
 
 | Step | What | Status |
 |---|---|---|
-| B1 | Write `src/evaluate.py` with the metrics in stage 6 | **To do** |
+| B1 | Write `05_evaluation/evaluate.py` with the metrics in stage 6 | **To do** |
 | B2 | Test Surya on about 5 diagram pages | **To do** |
 | B3 | Zero-shot bake-off on the val pages: Qwen2.5-VL vs 1 or 2 other open VLMs (check for newer releases), plus TrOCR as a baseline | **To do** |
 | B4 | Record the baseline scores. This is the "before" number and the model-selection experiment for the report | **To do** |
@@ -188,11 +188,11 @@ Notebooks: `notebooks/02_qwen_finetuning.ipynb` (Kaggle), `notebooks/03_evaluati
 
 | Step | File |
 |---|---|
-| D1 | `src/layout.py` (Surya wrapper) |
-| D2 | `src/recognize.py` (load adapter, run inference) |
-| D3 | `src/postprocess.py` (stage 4) |
-| D4 | `src/pdf_gen.py` (stage 5) |
-| D5 | `src/pipeline.py` (end-to-end orchestrator) |
+| D1 | `02_layout/layout.py` (Surya wrapper) |
+| D2 | `03_recognition/recognize.py` (load adapter, run inference) |
+| D3 | `04_reconstruction/postprocess.py` (stage 4) |
+| D4 | `04_reconstruction/pdf_gen.py` (stage 5) |
+| D5 | `pipeline.py` (repo root) (end-to-end orchestrator) |
 | D6 | `app/gradio_app.py` (upload, convert, download PDF and `.md`, show metrics) |
 
 ### Phase E: Finish (to do)
@@ -241,17 +241,17 @@ Notebooks: `notebooks/02_qwen_finetuning.ipynb` (Kaggle), `notebooks/03_evaluati
 Existing:
 
 ```
-Project643/
-  PROJECT_STATEMENT.md   PIPELINE.md   FINAL_IMPLEMENTATION_PLAN.md
-  data/
-    raw_scans/  processed/  annotations/
-    train.jsonl  val.jsonl  test.jsonl  splits.json
-    README.md  VERIFICATION.md
-  scripts/  render_pages.py  batch_preprocess.py  annotate_gemini.py  build_dataset.py
-  src/      preprocess.py
+ie643_project/
+  README.md   requirements.txt
+  docs/            PROJECT_STATEMENT.md  PIPELINE.md  planning/
+  data/            raw_scans/  processed/ (generated)  annotations/  tags/  context/
+                   train.jsonl  val.jsonl  test.jsonl  splits.json  README.md  VERIFICATION.md
+  00_dataset/      render_*.py  annotate_gemini.py  build_dataset.py  prompts.py
+  01_preprocessing/ preprocess.py  batch_preprocess.py  sauvola.py  binarized_sauvola/
+  02_layout/  03_recognition/  04_reconstruction/  05_evaluation/   (to do)
 ```
 
-Planned: `src/layout.py`, `src/recognize.py`, `src/postprocess.py`, `src/pdf_gen.py`, `src/evaluate.py`, `src/pipeline.py`, `app/gradio_app.py`, `notebooks/`, `models/qwen_lora_adapter/`, `requirements.txt`.
+Planned: `02_layout/layout.py`, `03_recognition/recognize.py`, `04_reconstruction/postprocess.py`, `04_reconstruction/pdf_gen.py`, `05_evaluation/evaluate.py`, `pipeline.py` (repo root), `app/gradio_app.py`, `notebooks/`, `models/qwen_lora_adapter/`, `requirements.txt`.
 
 ---
 
@@ -260,7 +260,7 @@ Planned: `src/layout.py`, `src/recognize.py`, `src/postprocess.py`, `src/pdf_gen
 Do these in order. Items marked (you) need you.
 
 - [ ] (you) Verify the flagged pages (12 as of this writing), all 60 test pages, and at least 5 val pages (`data/VERIFICATION.md`)
-- [ ] Write `src/evaluate.py` (B1)
+- [ ] Write `05_evaluation/evaluate.py` (B1)
 - [ ] Test Surya on about 5 diagram pages (B2)
 - [ ] Shorten diagram tags in the labels (A6)
 - [ ] Run the zero-shot bake-off and record baseline scores (B3, B4)

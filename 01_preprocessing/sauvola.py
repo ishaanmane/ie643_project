@@ -7,14 +7,14 @@ are therefore inverted first. --invert auto decides this per image from the
 median gray level.
 
 Modes (pick exactly one):
-    python sauvola.py --image data/page.jpg
-    python sauvola.py --step 10                    # every 10th image of data/
+    python 01_preprocessing/sauvola.py --image data/raw_scans/page.jpg
+    python 01_preprocessing/sauvola.py --step 10                    # every 10th image of data/raw_scans/
 
 Tuning (several values => one output per combination, names include the params):
-    python sauvola.py --image data/page.jpg --window 31 51 75 --k 0.1 0.2 0.35
+    python 01_preprocessing/sauvola.py --image data/raw_scans/page.jpg --window 31 51 75 --k 0.1 0.2 0.35
 
 Side-by-side original | result images for quick eyeballing:
-    python sauvola.py --step 10 --compare
+    python 01_preprocessing/sauvola.py --step 10 --compare
 """
 
 import argparse
@@ -34,8 +34,8 @@ def parse_args():
     mode.add_argument("--image", help="path of one specific image")
     mode.add_argument("--step", type=int, help="take every Nth image from --data")
 
-    p.add_argument("--data", default="data")
-    p.add_argument("--out", default="binarized_sauvola")
+    p.add_argument("--data", default="data/raw_scans")
+    p.add_argument("--out", default="01_preprocessing/binarized_sauvola")
     p.add_argument("--offset", type=int, default=0)
     p.add_argument("--window", type=int, nargs="+", default=[51],
                    help="odd window size(s) in pixels (default 51)")

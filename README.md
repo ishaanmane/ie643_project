@@ -1,246 +1,44 @@
-# Handwritten Lecture Notes to Digital PDF Pipeline
+# Handwritten Lecture Notes to Digital PDF
 
-This repository contains the initial work for an AI-based document processing pipeline that converts handwritten lecture notes and scanned handwritten pages into clean, searchable, editable, and professionally formatted digital PDFs.
+IE643 course project (Team InTra): convert photos or scans of handwritten lecture notes into clean, searchable, structured PDFs.
+The official problem statement is in [docs/PROJECT_STATEMENT.md](docs/PROJECT_STATEMENT.md); the full design is in [docs/PIPELINE.md](docs/PIPELINE.md).
 
-The project focuses on processing handwritten notes from lecture slides and classroom material, preserving the original meaning while improving readability and structure.
+## Pipeline and repo layout
 
-This README will be updated as the project progresses.
+The folders are numbered in pipeline order. Each has its own README.
 
-## Project Overview
+| Step | Folder | What it does | Status |
+|---|---|---|---|
+| 0 | [00_dataset/](00_dataset/) | Render source PDFs to page images, write ground-truth Markdown, build train/val/test JSONL | Done (410 pages, labels not yet human-verified) |
+| 1 | [01_preprocessing/](01_preprocessing/) | Page-boundary warp, deskew, contrast, denoise (`preprocess.py`); Sauvola binarization as an alternative (`sauvola.py`) | Done; full re-run with the newest background removal pending |
+| 2 | [02_layout/](02_layout/) | Layout detection (Surya / YOLOv8): figures, equations, reading order | To do |
+| 3 | [03_recognition/](03_recognition/) | Fine-tune Qwen2.5-VL-7B (4-bit LoRA) to turn a page into Markdown + LaTeX | To do |
+| 4 | [04_reconstruction/](04_reconstruction/) | Merge pages into one Markdown document, then Pandoc + XeLaTeX to a searchable PDF | To do |
+| 5 | [05_evaluation/](05_evaluation/) | CER/WER, equation exact-match, LaTeX compile rate and other metrics | To do |
 
-The objective of this project is to build a system that takes scanned handwritten lecture notes and converts them into structured digital documents that can be viewed as clean PDFs. The system should retain the original content, equations, diagrams, headings, and logical organization while making the final output easier to read and search.
+Other folders:
 
-The project covers:
-- preprocessing of handwritten document images
-- detection and segmentation of layout elements
-- recognition of handwritten text and equations
-- structure understanding of headings, bullets, paragraphs, diagrams, and tables
-- reconstruction of clean digital pages
-- generation of PDF outputs with quality evaluation
+- [data/](data/) - page images (`raw_scans/`), ground truth (`annotations/`), region tags and context examples, JSONL splits. See [data/README.md](data/README.md).
+- [docs/](docs/) - project statement, pipeline design, and earlier planning notes in `docs/planning/`.
 
-## Problem Statement
-
-Handwritten lecture notes are often difficult to store, search, edit, and reuse. Scanned handwritten pages may include noise, skew, uneven illumination, varying writing styles, and complex layouts with equations and diagrams.
-
-The goal is to create an intelligent pipeline that can:
-- process raw handwritten scanned notes,
-- recognize the content accurately,
-- understand the document structure,
-- reconstruct a clean digital version,
-- and generate a final structured PDF.
-
-## Project Description
-
-Given handwritten lecture notes from lecture slide notes (scanned handwritten pages), develop an AI-based document processing pipeline that recognizes handwritten text, equations, diagrams and structural elements and converts them into a clean, well-formatted digital PDF.
-
-The system should preserve the original content and logical structure while improving readability and organizing the notes into editable, searchable and professionally formatted documents.
-
-## Expected Deliverables
-
-1. Handwritten Note Preprocessing
-   - Develop preprocessing methods for scanned handwritten notes including image enhancement, noise removal, skew correction, page segmentation, and layout analysis.
-
-2. Handwritten Content Recognition
-   - Develop or fine-tune a vision-language or document understanding model to recognize handwritten text, mathematical equations, symbols, tables, and other lecture-note elements.
-
-3. Structure and Layout Understanding
-   - Develop or fine-tune a model to identify headings, subheadings, paragraphs, bullet points, equations, diagrams, and page structure to preserve the organization of the original handwritten notes.
-
-4. Digital Note Reconstruction
-   - Develop or fine-tune a model to convert recognized content into clean, readable, and properly formatted digital pages while preserving the original meaning, equations, diagrams, and logical flow.
-
-5. PDF Generation and Quality Evaluation
-   - Generate searchable, structured PDFs and evaluate recognition and reconstruction quality.
-
-## Final Deliverables Required by the Course
-
-The team is expected to submit and ensure the following:
-
-1. Trained / Fine-tuned Model
-   - All trained or fine-tuned models
-   - Code files with complete documentation
-   - Description of use and dependencies
-
-2. User Interface
-   - An interface where the user can upload or input relevant project-specific inputs to test the developed mechanism.
-
-3. Performance Metrics
-   - A suitable quantitative metric to show the effectiveness of the methodology.
-   - If the project includes visual outputs, qualitative results should also be displayed.
-
-4. Stage-wise Report
-   - Detailed rationale for the steps followed during the project
-   - Major experiments and findings
-   - Dataset details and extraction steps
-   - Methodology for preparing any interface
-
-5. Intensive Assessment Completion
-   - The project must be completed as required by the course assessment.
-
-## Repository Structure
-
-- `sauvola.py` — main Sauvola binarization script used for preprocessing handwritten document images.
-- `data/` — raw scanned handwritten lecture-note images.
-- `binarized_sauvola/` — output binary images generated by the preprocessing pipeline.
-- `binarized_sauvola/compare/` — side-by-side original vs processed comparison output.
-- `README.md` — project documentation.
-
-## Current Progress
-
-At the current stage, the project includes a working adaptive binarization workflow using Sauvola thresholding.
-
-The implemented pipeline performs:
-- grayscale conversion
-- dark/light background detection
-- adaptive thresholding
-- binarized image generation
-- optional side-by-side comparison output
-
-This is the first major preprocessing step for the overall handwritten-note-to-PDF pipeline.
-
-## Image Preprocessing Pipeline
-
-The project will eventually include the following preprocessing stages:
-
-1. Image Acquisition
-   - Load scanned handwritten pages from datasets.
-
-2. Image Enhancement
-   - Improve contrast, suppress noise, and normalize illumination.
-
-3. Skew Correction
-   - Detect and correct rotation in handwritten document scans.
-
-4. Page Segmentation
-   - Separate the page into text blocks, equations, structural blocks, and diagrams.
-
-5. Layout Analysis
-   - Determine headings, paragraphs, bullet points, tables, and equations.
-
-6. Binarization
-   - Convert grayscale images to binary form for cleaner recognition.
-
-7. Quality Check
-   - Inspect processed pages before recognition and reconstruction.
-
-## Recognition and Understanding Components
-
-The final system will include:
-
-- Handwritten text recognition for notes and paragraphs
-- Equation recognition for mathematical expressions and symbols
-- Diagram interpretation for sketches, flowcharts, and figures
-- Layout understanding to preserve document structure
-- Semantic reconstruction for readable digital pages
-
-## Digital Reconstruction Workflow
-
-Once the handwritten content is recognized, the workflow will include:
-
-- parsing recognized text and mathematical structures
-- rebuilding logical sections and page layout
-- generating clean digital content while preserving meaning
-- reconstructing pages in a presentation-friendly format
-- exporting the final output as a searchable PDF
-
-## PDF Generation Strategy
-
-The system will aim to generate:
-
-- clean PDF pages with preserved order and structure
-- searchable text output where possible
-- improved readability compared to raw scans
-- visually coherent lecture-note formatting
-
-## Technical Stack
-
-Likely tools and libraries for this project include:
-
-- Python
-- OpenCV
-- Pillow
-- NumPy
-- scikit-image
-- deep learning / vision-language models for OCR and layout analysis
-- PDF generation libraries
-
-## Setup and Dependencies
-
-Install the required Python dependencies:
+## Quick start
 
 ```bash
-pip install numpy pillow scikit-image
+pip install -r requirements.txt
+
+# run everything from the repo root
+python3 01_preprocessing/batch_preprocess.py          # data/raw_scans -> data/processed (add --force to redo all)
+python3 00_dataset/build_dataset.py                   # -> data/train.jsonl, val.jsonl, test.jsonl, splits.json
+python3 01_preprocessing/sauvola.py --step 10 --compare   # optional: Sauvola binarization samples
 ```
 
-If additional libraries are needed later, they will be added to the project documentation.
+Rendering pages from PDFs (`00_dataset/render_*.py`) needs the original lecture PDFs, which are not in this repo.
 
-## Current Script Usage
+## Dataset at a glance
 
-Single image:
-
-```bash
-python sauvola.py --image data/your_image.jpg
-```
-
-Process every Nth image in the dataset:
-
-```bash
-python sauvola.py --step 10
-```
-
-Use custom parameters:
-
-```bash
-python sauvola.py --image data/your_image.jpg --window 31 51 75 --k 0.1 0.2 0.35
-```
-
-Generate side-by-side comparison images:
-
-```bash
-python sauvola.py --step 10 --compare
-```
-
-## Output
-
-Binarized outputs are saved in:
-
-- `binarized_sauvola/`
-
-Comparison images are saved in:
-
-- `binarized_sauvola/compare/`
-
-## Expected Project Timeline
-
-The project is expected to evolve through stages such as:
-
-1. Dataset preparation and image acquisition
-2. Preprocessing and enhancement
-3. Binarization and segmentation
-4. Handwritten content recognition
-5. Layout and structure analysis
-6. Digital reconstruction
-7. PDF generation
-8. Evaluation and reporting
-
-## Current Status Summary
-
-The repository currently contains:
-- a working Sauvola-based document binarization script
-- a dataset directory of scanned lecture-note images
-- generated binary output images
-- the starting foundation for a larger handwritten document-to-PDF system
-
-## Next Steps
-
-Upcoming project work will focus on:
-- improving the preprocessing pipeline
-- building layout/structure analysis
-- integrating recognition models
-- reconstructing clean digital pages
-- generating final PDF outputs
-- measuring performance with appropriate metrics
+410 handwritten pages from four sources (IE643 chalkboard scribes, MLT digital-ink notes, IE802 notebook photos, HumynLabs CS notes), split by lecture or week so near-duplicate pages never leak between train and test: 324 train, 26 val, 60 test.
 
 ## Notes
 
-This README is intended to document the complete project vision and the work completed so far. As the project grows, additional sections will be added for experiments, model choices, dataset processing, evaluation results, and final system deployment.
+- `data/processed/` is generated and gitignored (about 150 MB); the JSONL files reference it, so preprocess before training.
+- Ground-truth labels are AI-generated and unverified. The checklist for manual review is [data/VERIFICATION.md](data/VERIFICATION.md).

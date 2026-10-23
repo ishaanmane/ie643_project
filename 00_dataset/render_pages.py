@@ -5,7 +5,7 @@ pages: PyMuPDF (fitz) opens each source PDF and rasterizes each page at 4x
 zoom (~288 DPI equivalent, since these PDF pages are natively small/low-DPI
 screen-export size).
 
-Usage: python3 scripts/render_pages.py
+Usage: python3 00_dataset/render_pages.py
 """
 import os
 import fitz

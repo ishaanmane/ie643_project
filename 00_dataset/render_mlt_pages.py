@@ -6,7 +6,7 @@ Kept as a separate script rather than editing render_pages.py, so the existing
 205-page chalkboard set can never be accidentally renamed or regenerated
 differently by a change made for this new source.
 
-Usage: python3 scripts/render_mlt_pages.py
+Usage: python3 00_dataset/render_mlt_pages.py
 """
 import os
 import re

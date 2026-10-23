@@ -6,8 +6,8 @@ equations on the test split. Writes data/train_combined.jsonl; never overwrites
 data/train.jsonl, so the original core-only file is always still there to fall back to.
 
 Usage:
-    python3 scripts/combine_with_core.py --external data/external_train.jsonl
-    python3 scripts/combine_with_core.py --external data/external_train.jsonl --cap 100
+    python3 00_dataset/combine_with_core.py --external data/external_train.jsonl
+    python3 00_dataset/combine_with_core.py --external data/external_train.jsonl --cap 100
 """
 import argparse
 import json

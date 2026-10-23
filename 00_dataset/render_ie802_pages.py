@@ -5,7 +5,7 @@ never touch the render logic for an existing source when adding a new one.
 No natural weekly/lecture boundaries in this single notebook PDF, so pages are
 just numbered straight through under one "notes" unit -- see data/README.md.
 
-Usage: python3 scripts/render_ie802_pages.py
+Usage: python3 00_dataset/render_ie802_pages.py
 """
 import os
 

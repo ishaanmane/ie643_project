@@ -10,7 +10,7 @@ the GEMINI_API_KEY environment variable (never hardcode it into this file).
 
 Usage:
     export GEMINI_API_KEY="your-key-here"
-    python3 scripts/annotate_gemini.py [--limit N]
+    python3 00_dataset/annotate_gemini.py [--limit N]
 
 Resumable: skips any page that already has a .md file in data/annotations/.
 """

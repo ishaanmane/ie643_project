@@ -40,7 +40,7 @@ Recommendation: start with a 5,000–10,000 sample subset of MathWriting, add CR
    ```
 5. **Combine with our own data as a second training task, not a replacement.** Train on both our 205-page dataset (page-level prompt) and the external equation crops (equation-only prompt) together, in the same fine-tuning run — this is what Uni-MuMER calls multi-task fine-tuning, and it's why the two prompts need to stay distinct: the model learns "when asked for the whole page, do structure + equations; when asked for a single equation, just transcribe it," rather than getting confused about what a training example should look like.
 6. **Keep external data a minority of the mix.** Cap it, e.g. external samples ≤ our own page count, so the model doesn't drift toward treating every input as an isolated equation crop and lose the page-structure skill.
-7. Build this as `scripts/build_external_dataset.py`, separate from `scripts/build_dataset.py`, so the external data is always an explicit opt-in and never silently mixed into our core 205-page dataset. The report should describe our data and any external data as two clearly separate sources.
+7. Build this as `00_dataset/build_external_dataset.py`, separate from `00_dataset/build_dataset.py`, so the external data is always an explicit opt-in and never silently mixed into our core 205-page dataset. The report should describe our data and any external data as two clearly separate sources.
 
 ## Caveats
 

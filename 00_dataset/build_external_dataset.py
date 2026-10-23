@@ -12,7 +12,7 @@ InkML files, or its own label format) that produces that labels.json — that co
 is the only dataset-specific code; everything downstream is shared.
 
 Usage:
-    python3 scripts/build_external_dataset.py \
+    python3 00_dataset/build_external_dataset.py \
         --images-dir data/external/mathwriting/images \
         --labels data/external/mathwriting/labels.json \
         --out data/external_train.jsonl

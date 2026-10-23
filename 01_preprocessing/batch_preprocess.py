@@ -1,6 +1,6 @@
-"""Run src/preprocess.py's NotesPreprocessor over every raw scan.
+"""Run 01_preprocessing/preprocess.py's NotesPreprocessor over every raw scan.
 
-Usage: python3 scripts/batch_preprocess.py [--force]
+Usage: python3 01_preprocessing/batch_preprocess.py [--force]
 Skips images that already have a processed output (resumable), unless
 --force is passed to regenerate everything (e.g. after a preprocessing
 algorithm change).
@@ -10,8 +10,8 @@ import sys
 
 import cv2
 
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.preprocess import NotesPreprocessor
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from preprocess import NotesPreprocessor
 
 RAW_DIR = "data/raw_scans"
 OUT_DIR = "data/processed"

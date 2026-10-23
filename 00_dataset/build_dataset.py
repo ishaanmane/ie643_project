@@ -1,6 +1,6 @@
 """Build train/val/test JSONL splits and a manual-verification checklist.
 
-Usage: python3 scripts/build_dataset.py
+Usage: python3 00_dataset/build_dataset.py
 
 Pairs every image in data/processed/ with its data/annotations/<stem>.md and writes
 data/train.jsonl, data/val.jsonl, data/test.jsonl, data/splits.json, data/VERIFICATION.md.
@@ -54,7 +54,7 @@ def record(stem, ground_truth):
 def checklist_lines(title, stems):
     lines = [f"## {title}", ""]
     for s in stems:
-        lines.append(f"- [ ] [{s}](annotations/{s}.md) · [image](processed/{s}.jpg)")
+        lines.append(f"- [ ] [{s}](annotations/{s}.md) · [image](raw_scans/{s}.jpg)")
     lines.append("")
     return lines
 
@@ -93,7 +93,7 @@ def build():
     out = [
         "# Manual verification checklist",
         "",
-        "Regenerate with `python3 scripts/build_dataset.py`. The flagged list shrinks as you "
+        "Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks as you "
         "remove the `??` marks from the annotation files.",
         "",
     ]
