@@ -6,3 +6,7 @@ data/processed/
 # cut from data/processed by 02_layout/surya_to_tags.py; regenerate, do not commit
 data/crops/
 data/processed_boxed/
+# fine-tuning outputs (adapters, checkpoints, predictions)
+runs/
+preds/
+03_recognition/runs/

@@ -1,5 +1,9 @@
 # Step 3 - Recognition (Qwen2.5-VL fine-tuning, Markdown output)
 
+**Main route (local GPU, e.g. RTX 5060 Ti 16 GB): [finetune_qwen25vl.ipynb](finetune_qwen25vl.ipynb).** Plain `transformers` + `peft` QLoRA, bf16. Variants: `boxed_json` (page with Surya boxes + the page's layout tags as JSON in Qwen's `bbox_2d` format), `boxed`, `clean`; target is always `data/annotations/<page>.md`, and only the answer is in the loss. Data logic is in `qwen_data.py` and was tested with Qwen's real processor (no hidden resize, correct label masking, max 3250 tokens per example). Training itself has not been run yet. Install: `requirements-train.txt` (after PyTorch for CUDA 12.8+).
+
+The Unsloth scripts below were the earlier Kaggle-T4 route and are kept for reference.
+
 Fine-tune Qwen2.5-VL-7B with 4-bit LoRA to turn a page image into structured Markdown (LaTeX for equations), using `data/train.jsonl` (324 pages). Design: [../docs/PIPELINE.md](../docs/PIPELINE.md).
 
 **Status: scripts written, not yet run on a GPU.** The data loader and `05_evaluation/evaluate.py` were tested here without a GPU; the Unsloth/TRL calls follow Unsloth's published vision notebooks and may need a small fix on the first run.
