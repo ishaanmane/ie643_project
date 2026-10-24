@@ -12,6 +12,8 @@ Metrics, per page and averaged by source (prefix of the page id):
 Per-page CER/WER is capped at 1.0 so one runaway page cannot dominate the mean, and
 text CER is skipped when the reference has under 20 characters of plain text (the
 ratio is meaningless there). Pages with no prediction file are counted as missing.
+References are read from data/annotations/<id>.md (the current, possibly corrected
+labels), not from the copy inside the JSONL; the split file only says which pages.
 """
 import argparse
 import csv
@@ -77,7 +79,11 @@ def main():
             continue
         if not norm(r["answer"]):
             continue  # nothing to compare against
-        row = score(r["answer"], open(path).read())
+        ref_path = os.path.join("data/annotations", r["id"] + ".md")
+        ref = open(ref_path).read() if os.path.exists(ref_path) else r["answer"]
+        if not norm(ref):
+            continue
+        row = score(ref, open(path).read())
         row.update(id=r["id"], source=r["id"].split("_")[0])
         rows.append(row)
 

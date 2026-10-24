@@ -17,13 +17,20 @@ Checked against the repo as of this commit (410 pages, `data/`). "Fix" means a c
 
 3. **Region-level tags and context exist for 1 page out of 410.** `data/tags/` and `data/context/` only hold the worked example `ie643_lec12_page007`, with hand-estimated boxes. Layout evaluation needs boxes. **Fix:** hand-box about 20 test-split pages (including some notebook pages if item 2 is done). Fastest route: run Surya on those pages, convert its boxes to the tags format, then correct them by hand. Store boxes normalised to 0 to 1000 (Surya's native scale) so they survive resizing.
 
-4. **Labels are AI-written and unverified.** 11 pages came from the Gemini API and 399 from direct transcription. Open work in `data/VERIFICATION.md`: 12 flagged `??` pages, 100% of test (60), a sample of val. A spot check of 2 early pages found 1 error, so the rest almost certainly contain some. Test labels are what every reported number is measured against, so they need a human pass first.
+4. **Labels are AI-written and unverified.** *(Partly handled: the 12 `??` pages are now left out of all splits until fixed, giving train 318, val 25, test 55.)* 11 pages came from the Gemini API and 399 from direct transcription. Open work in `data/VERIFICATION.md`: 12 flagged `??` pages, 100% of test (60), a sample of val. A spot check of 2 early pages found 1 error, so the rest almost certainly contain some. Test labels are what every reported number is measured against, so they need a human pass first.
 
 5. **Low writer and style diversity.** Each source is mostly one person's handwriting (one lecturer on the board, one student's MLT notes, one IE802 notebook, a few HumynLabs notebooks). The model may learn those writers, and test numbers will not show how it does on a stranger's writing. **Fix:** say so in the report; if time allows add pages from other writers (for example the HumynLabs dataset has more notebooks than the 20 we took).
 
 6. **Low-resolution chalkboard pages.** The 16 pages of `ie643_lec02` are 2044x1228 while the other chalkboard frames are 7168x4320. They give blocky images and the worst Surya result (`ie643_lec02_page005`). Keep them but note them in the report; do not read them as typical.
 
 7. **Diagram handling is text only.** 195 of 410 annotations contain a `[Diagram: …]` style description; the diagram crop itself is not stored. That is fine for training the VLM, but the reconstruction stage needs crops (from layout boxes) if the PDF should show the figure, not only describe it.
+
+## Fixed in the pipeline check
+
+- `build_dataset.py` listed pages from `data/processed/` (gitignored), so on a fresh clone it would have written empty training files. It now lists from `data/raw_scans/`.
+- The prompt said "LaTeX ($$...$$) for all math", but 336 of 410 labels also use inline `$...$`. The prompt now says `$...$` inline, `$$...$$` display, and `[Diagram: ...]` for figures, matching the labels. JSONL rebuilt.
+- `evaluate.py` compared against the copy of the label inside the JSONL, which goes stale when a label is corrected. It now reads `data/annotations/`.
+- New `00_dataset/check_dataset.py` checks pairing, split leakage, stale JSONL, near-duplicates and label format in one run.
 
 ## Not a problem, but worth knowing
 

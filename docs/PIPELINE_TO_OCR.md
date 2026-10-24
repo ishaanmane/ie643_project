@@ -84,14 +84,14 @@ Checked: on the 10 test pages it gives 128 blocks and 5 crops (neuron diagram, c
 ## Stage 4: dataset finalisation (A only)
 
 1. **Decide the split.** Currently no notebook-photo pages are in val or test. Option: move a block of IE802 pages and a few HumynLabs notes into test (`HELD_OUT` in `00_dataset/build_dataset.py`).
-2. **Rebuild** the JSONL, split file and checklist: `python3 00_dataset/build_dataset.py`.
+2. **Rebuild** the JSONL, split file and checklist: `python3 00_dataset/build_dataset.py`. Pages still containing `??` are left out of every split until fixed. Then run `python3 00_dataset/check_dataset.py`: it must end with `0 FAIL` (current state: 0 FAIL, 4 WARN, the warnings being the 12 left-out pages, no notebook pages in val/test, and the `??` count).
 3. **Check labels by hand** (`data/VERIFICATION.md`): the 12 flagged pages, all test pages, a val sample. Edit `data/annotations/*.md`, then rebuild again.
 4. **Check layout boxes for about 20 test pages:** correct `data/tags_draft/<page>.json` (boxes, types, order), fill `text_preview`, and move the file to `data/tags/`.
 5. **Layout metric:** box overlap (IoU / mAP) and reading-order agreement between Surya's draft and the checked tags. Script not written yet.
 
 ## Stage 5: hand-off to OCR
 
-What Qwen gets (both A and B): the preprocessed page image and the fixed prompt in `00_dataset/prompts.py`. For training these pairs are in `data/train.jsonl` / `val.jsonl` / `test.jsonl`.
+What Qwen gets (both A and B): the preprocessed page image and the fixed prompt in `00_dataset/prompts.py` (inline `$...$`, display `$$...$$`, `[Diagram: ...]`, matching the labels). Checked: all 398 split pages load through `03_recognition/common.py`, about 1270 visual tokens each at the default 1,000,000-pixel budget, longest label about 570 tokens. For training these pairs are in `data/train.jsonl` / `val.jsonl` / `test.jsonl`.
 
 What the stages after OCR get from here: reading order and block types from the tags, and the figure crops, so the final PDF can show figures instead of only describing them.
 

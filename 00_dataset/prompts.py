@@ -10,8 +10,9 @@ instruction says.
 
 PAGE_PROMPT = (
     "Convert this handwritten lecture note page to clean structured Markdown. "
-    "Use LaTeX ($$...$$) for all math equations. Preserve headings (#, ##), "
-    "bullet points, numbering, and logical structure."
+    "Write math in LaTeX: $...$ for inline math and $$...$$ for display equations. "
+    "Preserve headings (#, ##), bullet points, numbering, and logical structure. "
+    "Describe diagrams as [Diagram: ...]."
 )
 
 EQUATION_PROMPT = "Convert this handwritten mathematical expression to LaTeX."

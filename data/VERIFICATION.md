@@ -2,7 +2,7 @@
 
 Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks as you remove the `??` marks from the annotation files.
 
-## 1. Flagged pages (`??` = uncertain reading), 12 remaining
+## 1. Flagged pages (`??` = uncertain reading), 12 remaining, left out of all splits until fixed
 
 - [ ] [ie643_lec02_page012](annotations/ie643_lec02_page012.md) · [image](raw_scans/ie643_lec02_page012.jpg)
 - [ ] [ie643_lec03_page008](annotations/ie643_lec03_page008.md) · [image](raw_scans/ie643_lec03_page008.jpg)
@@ -17,7 +17,7 @@ Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks 
 - [ ] [ie643_lec12_page016](annotations/ie643_lec12_page016.md) · [image](raw_scans/ie643_lec12_page016.jpg)
 - [ ] [ie802_notes_page014](annotations/ie802_notes_page014.md) · [image](raw_scans/ie802_notes_page014.jpg)
 
-## 2. Test split: verify 100% (60 pages)
+## 2. Test split: verify 100% (55 pages)
 
 - [ ] [ie643_lec03_page001](annotations/ie643_lec03_page001.md) · [image](raw_scans/ie643_lec03_page001.jpg)
 - [ ] [ie643_lec03_page002](annotations/ie643_lec03_page002.md) · [image](raw_scans/ie643_lec03_page002.jpg)
@@ -26,14 +26,11 @@ Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks 
 - [ ] [ie643_lec03_page005](annotations/ie643_lec03_page005.md) · [image](raw_scans/ie643_lec03_page005.jpg)
 - [ ] [ie643_lec03_page006](annotations/ie643_lec03_page006.md) · [image](raw_scans/ie643_lec03_page006.jpg)
 - [ ] [ie643_lec03_page007](annotations/ie643_lec03_page007.md) · [image](raw_scans/ie643_lec03_page007.jpg)
-- [ ] [ie643_lec03_page008](annotations/ie643_lec03_page008.md) · [image](raw_scans/ie643_lec03_page008.jpg)
 - [ ] [ie643_lec03_page009](annotations/ie643_lec03_page009.md) · [image](raw_scans/ie643_lec03_page009.jpg)
 - [ ] [ie643_lec03_page010](annotations/ie643_lec03_page010.md) · [image](raw_scans/ie643_lec03_page010.jpg)
 - [ ] [ie643_lec03_page011](annotations/ie643_lec03_page011.md) · [image](raw_scans/ie643_lec03_page011.jpg)
 - [ ] [ie643_lec03_page012](annotations/ie643_lec03_page012.md) · [image](raw_scans/ie643_lec03_page012.jpg)
-- [ ] [ie643_lec03_page013](annotations/ie643_lec03_page013.md) · [image](raw_scans/ie643_lec03_page013.jpg)
 - [ ] [ie643_lec03_page014](annotations/ie643_lec03_page014.md) · [image](raw_scans/ie643_lec03_page014.jpg)
-- [ ] [ie643_lec03_page015](annotations/ie643_lec03_page015.md) · [image](raw_scans/ie643_lec03_page015.jpg)
 - [ ] [ie643_lec09_page001](annotations/ie643_lec09_page001.md) · [image](raw_scans/ie643_lec09_page001.jpg)
 - [ ] [ie643_lec09_page002](annotations/ie643_lec09_page002.md) · [image](raw_scans/ie643_lec09_page002.jpg)
 - [ ] [ie643_lec09_page003](annotations/ie643_lec09_page003.md) · [image](raw_scans/ie643_lec09_page003.jpg)
@@ -47,11 +44,9 @@ Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks 
 - [ ] [ie643_lec09_page011](annotations/ie643_lec09_page011.md) · [image](raw_scans/ie643_lec09_page011.jpg)
 - [ ] [ie643_lec09_page012](annotations/ie643_lec09_page012.md) · [image](raw_scans/ie643_lec09_page012.jpg)
 - [ ] [ie643_lec09_page013](annotations/ie643_lec09_page013.md) · [image](raw_scans/ie643_lec09_page013.jpg)
-- [ ] [ie643_lec09_page014](annotations/ie643_lec09_page014.md) · [image](raw_scans/ie643_lec09_page014.jpg)
 - [ ] [ie643_lec09_page015](annotations/ie643_lec09_page015.md) · [image](raw_scans/ie643_lec09_page015.jpg)
 - [ ] [ie643_lec09_page016](annotations/ie643_lec09_page016.md) · [image](raw_scans/ie643_lec09_page016.jpg)
 - [ ] [ie643_lec09_page017](annotations/ie643_lec09_page017.md) · [image](raw_scans/ie643_lec09_page017.jpg)
-- [ ] [ie643_lec09_page018](annotations/ie643_lec09_page018.md) · [image](raw_scans/ie643_lec09_page018.jpg)
 - [ ] [ie643_lec09_page019](annotations/ie643_lec09_page019.md) · [image](raw_scans/ie643_lec09_page019.jpg)
 - [ ] [mlt_week03_page001](annotations/mlt_week03_page001.md) · [image](raw_scans/mlt_week03_page001.jpg)
 - [ ] [mlt_week03_page002](annotations/mlt_week03_page002.md) · [image](raw_scans/mlt_week03_page002.jpg)
@@ -80,7 +75,7 @@ Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks 
 - [ ] [mlt_week09_page012](annotations/mlt_week09_page012.md) · [image](raw_scans/mlt_week09_page012.jpg)
 - [ ] [mlt_week09_page013](annotations/mlt_week09_page013.md) · [image](raw_scans/mlt_week09_page013.jpg)
 
-## 3. Val split: spot-check at least 5 of 26
+## 3. Val split: spot-check at least 5 of 25
 
 - [ ] [ie643_lec07_page001](annotations/ie643_lec07_page001.md) · [image](raw_scans/ie643_lec07_page001.jpg)
 - [ ] [ie643_lec07_page002](annotations/ie643_lec07_page002.md) · [image](raw_scans/ie643_lec07_page002.jpg)
@@ -91,7 +86,6 @@ Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks 
 - [ ] [ie643_lec07_page007](annotations/ie643_lec07_page007.md) · [image](raw_scans/ie643_lec07_page007.jpg)
 - [ ] [ie643_lec07_page008](annotations/ie643_lec07_page008.md) · [image](raw_scans/ie643_lec07_page008.jpg)
 - [ ] [ie643_lec07_page009](annotations/ie643_lec07_page009.md) · [image](raw_scans/ie643_lec07_page009.jpg)
-- [ ] [ie643_lec07_page010](annotations/ie643_lec07_page010.md) · [image](raw_scans/ie643_lec07_page010.jpg)
 - [ ] [ie643_lec07_page011](annotations/ie643_lec07_page011.md) · [image](raw_scans/ie643_lec07_page011.jpg)
 - [ ] [ie643_lec07_page012](annotations/ie643_lec07_page012.md) · [image](raw_scans/ie643_lec07_page012.jpg)
 - [ ] [ie643_lec07_page013](annotations/ie643_lec07_page013.md) · [image](raw_scans/ie643_lec07_page013.jpg)

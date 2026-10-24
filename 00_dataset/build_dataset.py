@@ -1,26 +1,38 @@
 """Build train/val/test JSONL splits and a manual-verification checklist.
 
-Usage: python3 00_dataset/build_dataset.py
+Usage: python3 00_dataset/build_dataset.py [--include-flagged]
 
-Pairs every image in data/processed/ with its data/annotations/<stem>.md and writes
+Pairs every page in data/raw_scans/ with its data/annotations/<stem>.md and writes
 data/train.jsonl, data/val.jsonl, data/test.jsonl, data/splits.json, data/VERIFICATION.md.
+The JSONL records point at data/processed/<stem>.jpg, so run preprocessing before
+training (pages are listed from raw_scans/, which is committed, so this works on a
+fresh clone where data/processed/ does not exist yet).
+
+Pages whose annotation still contains "??" (an uncertain reading) are left out of
+every split by default: as a training target they would teach the model to write
+"??", and in val/test they would count our own uncertainty as model error. They are
+listed in VERIFICATION.md; once fixed, a rebuild puts them back.
+Check the result with: python3 00_dataset/check_dataset.py
 
 The split is by unit (lecture or week), not by random page: consecutive pages from
 the same source repeat the same equations and diagrams, so a random split would leak
 near-duplicates into val/test and inflate every metric.
 
-Two sources feed data/processed/ right now, told apart by filename prefix:
-  ie643_lecNN_pageNNN.jpg  -- chalkboard photos (Class Scribes)
-  mlt_weekNN_pageNNN.jpg   -- digital stylus notes (MLT Notes)
-Adding a third source later just means adding its held-out units to HELD_OUT below;
-split_of() itself doesn't change.
+Sources, told apart by filename prefix (the unit is the second part):
+  ie643_lecNN_pageNNN   chalkboard (Class Scribes), unit = lecture
+  mlt_weekNN_pageNNN    digital stylus notes (MLT Notes), unit = week
+  ie802_notes_pageNNN   notebook (IE802), one unit "notes"
+  hlcs_noteNN_page001   HumynLabs notebooks, unit = note
+Units not listed in HELD_OUT go to train.
 """
 import json
 import os
 import re
+import sys
 
 from prompts import PAGE_PROMPT, build_record
 
+RAW_DIR = "data/raw_scans"
 PROCESSED_DIR = "data/processed"
 ANNOTATIONS_DIR = "data/annotations"
 DATA_DIR = "data"
@@ -59,12 +71,14 @@ def checklist_lines(title, stems):
     return lines
 
 
-def build():
+def build(include_flagged=False):
     stems = sorted(
         os.path.splitext(f)[0]
-        for f in os.listdir(PROCESSED_DIR)
+        for f in os.listdir(RAW_DIR)
         if f.lower().endswith(".jpg") and "_debug" not in f
     )
+    if not os.path.isdir(PROCESSED_DIR):
+        print(f"note: {PROCESSED_DIR}/ does not exist yet; run preprocessing before training")
     splits = {"train": [], "val": [], "test": []}
     records = {"train": [], "val": [], "test": []}
     flagged = []
@@ -78,6 +92,8 @@ def build():
             text = f.read().strip()
         if "??" in text:
             flagged.append(stem)
+            if not include_flagged:
+                continue
         split = split_of(stem)
         splits[split].append(stem)
         records[split].append(record(stem, text))
@@ -97,7 +113,9 @@ def build():
         "remove the `??` marks from the annotation files.",
         "",
     ]
-    out += checklist_lines(f"1. Flagged pages (`??` = uncertain reading), {len(flagged)} remaining", flagged)
+    excluded = "" if include_flagged else ", left out of all splits until fixed"
+    out += checklist_lines(f"1. Flagged pages (`??` = uncertain reading), {len(flagged)} remaining{excluded}",
+                           flagged)
     out += checklist_lines(f"2. Test split: verify 100% ({len(splits['test'])} pages)", splits["test"])
     out += checklist_lines(
         f"3. Val split: spot-check at least {MIN_VAL_SPOT_CHECK} of {len(splits['val'])}", splits["val"]
@@ -107,8 +125,8 @@ def build():
 
     total = sum(len(v) for v in splits.values())
     print(f"total {total}: " + ", ".join(f"{k} {len(v)}" for k, v in splits.items()))
-    print(f"flagged for review: {len(flagged)}")
+    print(f"flagged for review: {len(flagged)}" + ("" if include_flagged else " (left out of the splits)"))
 
 
 if __name__ == "__main__":
-    build()
+    build(include_flagged="--include-flagged" in sys.argv)

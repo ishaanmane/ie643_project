@@ -45,12 +45,15 @@ Split **by unit** (lecture, week, or whole source for single-unit sources), not 
 
 | Split | Pages |
 |---|---|
-| train | 324 |
-| val | 26 |
-| test | 60 |
+| train | 318 |
+| val | 25 |
+| test | 55 |
+| left out (flagged `??`) | 12 |
 | **total** | **410** |
 
-Exact page lists are in `splits.json`.
+Exact page lists are in `splits.json`. The 12 pages whose annotation still contains `??` (uncertain reading) are left out of every split until fixed (`build_dataset.py --include-flagged` overrides). Check consistency with `python3 00_dataset/check_dataset.py`.
+
+Known overlap: lecture 08 (train) re-derives backpropagation equations also on lectures 07 (val) and 09 (test); 2 of 24 val and 3 of 55 test pages have 5-gram similarity 0.4 to 0.49 with a train page. Different handwriting, same equations, so equation scores on those pages are slightly optimistic. No page reaches 0.5.
 
 ## Still to do
 
