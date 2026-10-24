@@ -1,0 +1,40 @@
+19:49:46 preprocessed pages: 410, warped: 55 (55 = corrected images)
+19:49:46 input problems for boxed_json: 0
+19:49:46 train: 318 pages
+19:49:46 val: 25 pages
+19:49:46 test: 55 pages
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+19:50:07 examples: 318 train, 25 val | tokens/example max 3450 | answer tokens max 942
+19:50:07 example hlcs_note01_page001: image (840, 1148), prompt starts: 'Convert this handwritten lecture note page to clean structured Markdown. Write math in LaTeX: $...$ for inline math and '
+19:50:07 GPU NVIDIA GeForce RTX 5060 Ti, bf16 True, free 15.3/15.5 GB
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:02<00:09,  2.42s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:05<00:08,  2.83s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:08<00:05,  2.88s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:11<00:02,  2.82s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:11<00:00,  2.01s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:11<00:00,  2.35s/it]
+19:50:20 model loaded in 13s, GPU memory 5.5 GB
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+19:50:23 [1/10] ie643_lec07_page001: 238 chars, 3s
+19:50:26 [2/10] ie643_lec07_page002: 485 chars, 3s
+19:50:30 [3/10] ie643_lec07_page003: 566 chars, 4s
+19:50:34 [4/10] ie643_lec07_page004: 1218 chars, 4s
+19:50:36 [5/10] ie643_lec07_page005: 306 chars, 2s
+19:50:42 [6/10] ie643_lec07_page006: 759 chars, 5s
+19:50:46 [7/10] ie643_lec07_page007: 809 chars, 4s
+19:50:49 [8/10] ie643_lec07_page008: 644 chars, 3s
+19:50:52 [9/10] ie643_lec07_page009: 402 chars, 3s
+19:50:58 [10/10] ie643_lec07_page011: 1043 chars, 5s
+
+=== BASELINE zero-shot (boxed_json, 10 val pages) ===
+scored 10 pages, 15 missing predictions
+source     n    CER    WER  textCER  eqMatch
+ie643     10  0.751  0.911    0.889    0.125
+ALL       10  0.751  0.911    0.889    0.125
+
+trainable params: 47,589,376 || all params: 8,339,756,032 || trainable%: 0.5706
+  0%|          | 0/5 [00:00<?, ?it/s] 20%|██        | 1/5 [00:31<02:06, 31.56s/it]                                              20%|██        | 1/5 [00:31<02:06, 31.56s/it] 40%|████      | 2/5 [01:03<01:34, 31.53s/it]                                              40%|████      | 2/5 [01:03<01:34, 31.53s/it] 60%|██████    | 3/5 [01:33<01:02, 31.10s/it]                                              60%|██████    | 3/5 [01:33<01:02, 31.10s/it] 80%|████████  | 4/5 [02:03<00:30, 30.61s/it]                                              80%|████████  | 4/5 [02:03<00:30, 30.61s/it]100%|██████████| 5/5 [02:33<00:00, 30.33s/it]                                             100%|██████████| 5/5 [02:33<00:00, 30.33s/it]                                             100%|██████████| 5/5 [02:33<00:00, 30.33s/it]100%|██████████| 5/5 [02:33<00:00, 30.67s/it]
+{'loss': 0.7113, 'grad_norm': 1.7399204969406128, 'learning_rate': 0.0, 'epoch': 0.03}
+{'loss': 0.7111, 'grad_norm': 1.9849815368652344, 'learning_rate': 0.0001, 'epoch': 0.05}
+{'loss': 0.8767, 'grad_norm': 2.793245792388916, 'learning_rate': 8.535533905932738e-05, 'epoch': 0.08}
+{'loss': 0.8269, 'grad_norm': 3.474360227584839, 'learning_rate': 5e-05, 'epoch': 0.1}
+{'loss': 0.6024, 'grad_norm': 5.246772766113281, 'learning_rate': 1.4644660940672627e-05, 'epoch': 0.13}
+{'train_runtime': 153.3633, 'train_samples_per_second': 0.261, 'train_steps_per_second': 0.033, 'train_loss': 0.7456675410270691, 'epoch': 0.13}
+19:53:32 5 steps, 31 s/step (8 pages), peak GPU 11.4 GB
+19:53:32 PILOT DONE. Full run: 120 steps -> about 1.0 h of training (+ validation loss after each epoch). Next: rerun without --pilot.

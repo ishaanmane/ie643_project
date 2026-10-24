@@ -6,10 +6,9 @@ data/processed/
 # cut from data/processed by 02_layout/surya_to_tags.py; regenerate, do not commit
 data/crops/
 data/processed_boxed/
-# fine-tuning outputs (adapters, checkpoints, predictions)
+# fine-tuning outputs: adapters and checkpoints are large (kept on the GPU machine);
+# predictions (preds/), logs (logs/) and shared PDFs (results/pdfs/) ARE tracked
 runs/
-preds/
 03_recognition/runs/
 # rendered documents (04_reconstruction/render_document.py)
 out/
-logs/

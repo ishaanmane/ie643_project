@@ -1,0 +1,5 @@
+# Ridge Regression
+
+$$\hat{w}_R = \arg_{w} \min_{l> \text{Ridge}} \sum_{i=1}^{n}(w^Tx_i-y_i)^2 + \lambda \|w\|^2$$
+
+Loss $\quad$ Regularizer
