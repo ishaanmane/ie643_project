@@ -253,11 +253,12 @@ def neutralise(md, bad):
     """Show failing equations verbatim (never edit them) with a visible marker."""
     def disp(m):
         if m.group(1) in bad:
-            return "\n```latex\n" + m.group(1).strip() + "\n```\n\n*⚠ equation could not be typeset; shown as written*\n"
+            return ("\n```latex\n" + m.group(1).strip() + "\n```\n\n"
+                    "*Warning: equation could not be typeset; shown as written.*\n")
         return m.group(0)
 
     def inl(m):
-        return f"`{m.group(1)}`⚠" if m.group(1) in bad else m.group(0)
+        return f"`{m.group(1)}` (not typeset)" if m.group(1) in bad else m.group(0)
     md = DISPLAY_MATH.sub(disp, md)
     return INLINE_MATH.sub(inl, md)
 
@@ -274,8 +275,10 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
         fonts = subprocess.run(["fc-list"], capture_output=True, text=True).stdout
         if "DejaVu Serif" in fonts:  # covers arrows and symbols used in the notes (⇒, →, ⚠)
             font = "mainfont: DejaVu Serif\n"
-    # figures stay where they are in the notes (no LaTeX floating)
-    pin = "header-includes:\n  - \\usepackage{float}\n  - \\floatplacement{figure}{H}\n"
+    # figures stay where they are in the notes (no LaTeX floating); long verbatim lines wrap
+    pin = ("header-includes:\n  - \\usepackage{float}\n  - \\floatplacement{figure}{H}\n"
+           "  - \\usepackage{fvextra}\n"
+           "  - \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\\\\{\\}}\n")
     parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\nfontsize: 11pt\n{font}{pin}---\n"]
 
     for page in pages:
