@@ -77,8 +77,8 @@ class NotesPreprocessor:
         info["crop"] = "brightness"
         return self._crop_by_brightness(img)
 
-    def _find_page_quad(self, img: np.ndarray, min_area_frac: float = 0.3,
-                        min_aspect: float = 0.6):
+    def _find_page_quad(self, img: np.ndarray, min_area_frac: float = 0.8,
+                        min_aspect: float = 0.6, margin: float = 0.02):
         """Rotated bounding rectangle of the largest edge shape, or (None, frac).
 
         Real photos rarely give a clean unbroken 4-corner outline (busy background
@@ -104,6 +104,10 @@ class NotesPreprocessor:
             return None, frac  # too small to plausibly be the whole page
         if min(w, h) / max(w, h) < min_aspect:
             return None, frac  # not page-shaped: part of a page, or page plus clutter
+        # Grow the fitted rectangle a little: it hugs the paper edge, and writing that
+        # runs to the edge was being clipped (last line of ie802_notes_page033).
+        (cx, cy), _, angle = rect
+        rect = ((cx, cy), (w * (1 + 2 * margin), h * (1 + 2 * margin)), angle)
         return cv2.boxPoints(rect).astype("float32"), frac
 
     def _warp_to_quad(self, img: np.ndarray, pts: np.ndarray) -> np.ndarray:
@@ -120,7 +124,8 @@ class NotesPreprocessor:
         dst = np.array([[0, 0], [width - 1, 0], [width - 1, height - 1], [0, height - 1]],
                        dtype="float32")
         M = cv2.getPerspectiveTransform(ordered, dst)
-        return cv2.warpPerspective(img, M, (width, height))
+        # the grown rectangle can reach past the photo edge: repeat edge pixels there
+        return cv2.warpPerspective(img, M, (width, height), borderMode=cv2.BORDER_REPLICATE)
 
     def _crop_by_brightness(self, img: np.ndarray) -> np.ndarray:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
