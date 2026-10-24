@@ -1,0 +1,68 @@
+{
+ "image": "data/processed/ie643_lec06_page001.jpg",
+ "image_size": [
+  2000,
+  960
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    333,
+    222
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    38,
+    276,
+    998,
+    526
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    514,
+    527,
+    834,
+    727
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    154,
+    720,
+    972,
+    979
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

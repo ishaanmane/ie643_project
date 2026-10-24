@@ -1,0 +1,152 @@
+{
+ "image": "data/processed/ie643_lec12_page009.jpg",
+ "image_size": [
+  2000,
+  1191
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 1,
+   "bbox": [
+    17,
+    11,
+    485,
+    167
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 2,
+   "bbox": [
+    5,
+    177,
+    482,
+    273
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 3,
+   "bbox": [
+    112,
+    276,
+    239,
+    898
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 4,
+   "bbox": [
+    550,
+    50,
+    688,
+    184
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 5,
+   "bbox": [
+    545,
+    203,
+    692,
+    300
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b6",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 6,
+   "bbox": [
+    542,
+    381,
+    680,
+    492
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 7,
+   "bbox": [
+    300,
+    537,
+    730,
+    670
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 8,
+   "bbox": [
+    670,
+    665,
+    755,
+    740
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b9",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 9,
+   "bbox": [
+    735,
+    50,
+    885,
+    985
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b10",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 10,
+   "bbox": [
+    850,
+    675,
+    995,
+    825
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

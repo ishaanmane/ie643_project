@@ -1,0 +1,126 @@
+{
+ "image": "data/processed/mlt_week06_page003.jpg",
+ "image_size": [
+  1501,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "table",
+   "surya_label": "Table",
+   "order": 1,
+   "bbox": [
+    283,
+    7,
+    704,
+    80
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week06_page003_b1.png"
+  },
+  {
+   "id": "b2",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 2,
+   "bbox": [
+    114,
+    97,
+    998,
+    175
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    151,
+    192,
+    952,
+    229
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    239,
+    250,
+    616,
+    279
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "table",
+   "surya_label": "Table",
+   "order": 5,
+   "bbox": [
+    211,
+    304,
+    621,
+    351
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week06_page003_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 6,
+   "bbox": [
+    129,
+    365,
+    784,
+    493
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 7,
+   "bbox": [
+    95,
+    521,
+    533,
+    602
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 8,
+   "bbox": [
+    178,
+    978,
+    239,
+    990
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

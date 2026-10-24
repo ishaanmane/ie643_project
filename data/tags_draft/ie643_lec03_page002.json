@@ -1,0 +1,55 @@
+{
+ "image": "data/processed/ie643_lec03_page002.jpg",
+ "image_size": [
+  2000,
+  1194
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    750,
+    600
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec03_page002_b1.png"
+  },
+  {
+   "id": "b2",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 2,
+   "bbox": [
+    325,
+    580,
+    570,
+    985
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    620,
+    540,
+    970,
+    980
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

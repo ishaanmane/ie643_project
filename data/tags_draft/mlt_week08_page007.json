@@ -1,0 +1,40 @@
+{
+ "image": "data/processed/mlt_week08_page007.jpg",
+ "image_size": [
+  785,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    1000,
+    168
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 2,
+   "bbox": [
+    304,
+    978,
+    417,
+    991
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

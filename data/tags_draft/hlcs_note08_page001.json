@@ -14,10 +14,10 @@
    "surya_label": "PageHeader",
    "order": 1,
    "bbox": [
-    362,
-    107,
-    610,
-    143
+    368,
+    124,
+    604,
+    159
    ],
    "skip_in_text": true,
    "text_preview": null
@@ -28,10 +28,10 @@
    "surya_label": "PageHeader",
    "order": 2,
    "bbox": [
-    849,
-    104,
-    896,
-    139
+    838,
+    121,
+    882,
+    151
    ],
    "skip_in_text": true,
    "text_preview": null
@@ -42,10 +42,10 @@
    "surya_label": "Text",
    "order": 3,
    "bbox": [
-    148,
-    166,
-    902,
-    322
+    163,
+    180,
+    887,
+    329
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -56,10 +56,10 @@
    "surya_label": "Text",
    "order": 4,
    "bbox": [
-    161,
-    328,
-    896,
-    429
+    175,
+    335,
+    881,
+    432
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -70,10 +70,10 @@
    "surya_label": "Text",
    "order": 5,
    "bbox": [
-    161,
-    444,
-    916,
-    589
+    177,
+    447,
+    900,
+    585
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -84,10 +84,10 @@
    "surya_label": "Text",
    "order": 6,
    "bbox": [
-    161,
-    604,
-    816,
-    690
+    175,
+    601,
+    804,
+    683
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -98,10 +98,10 @@
    "surya_label": "Text",
    "order": 7,
    "bbox": [
-    725,
-    674,
-    886,
-    698
+    715,
+    668,
+    875,
+    691
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -112,10 +112,10 @@
    "surya_label": "Text",
    "order": 8,
    "bbox": [
-    161,
-    697,
-    923,
-    804
+    175,
+    690,
+    910,
+    793
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -126,10 +126,10 @@
    "surya_label": "Text",
    "order": 9,
    "bbox": [
-    154,
-    814,
-    926,
-    873
+    165,
+    802,
+    910,
+    859
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -140,10 +140,10 @@
    "surya_label": "Text",
    "order": 10,
    "bbox": [
-    154,
-    872,
-    632,
-    906
+    168,
+    858,
+    627,
+    892
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -154,10 +154,10 @@
    "surya_label": "PageFooter",
    "order": 11,
    "bbox": [
-    812,
-    922,
-    878,
-    939
+    18,
+    913,
+    63,
+    928
    ],
    "skip_in_text": true,
    "text_preview": null
@@ -168,10 +168,10 @@
    "surya_label": "PageFooter",
    "order": 12,
    "bbox": [
-    0,
-    930,
-    46,
-    945
+    800,
+    906,
+    864,
+    922
    ],
    "skip_in_text": true,
    "text_preview": null

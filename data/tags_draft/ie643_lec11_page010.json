@@ -1,0 +1,126 @@
+{
+ "image": "data/processed/ie643_lec11_page010.jpg",
+ "image_size": [
+  2000,
+  1164
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    12,
+    20,
+    161,
+    136
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 2,
+   "bbox": [
+    146,
+    125,
+    438,
+    493
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec11_page010_b2.png"
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    189,
+    523,
+    348,
+    656
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 4,
+   "bbox": [
+    479,
+    129,
+    675,
+    390
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec11_page010_b4.png"
+  },
+  {
+   "id": "b5",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 5,
+   "bbox": [
+    478,
+    398,
+    800,
+    646
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    739,
+    10,
+    1000,
+    390
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 7,
+   "bbox": [
+    56,
+    687,
+    830,
+    920
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 8,
+   "bbox": [
+    812,
+    408,
+    994,
+    984
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

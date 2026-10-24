@@ -1,0 +1,96 @@
+{
+ "image": "data/processed/mlt_week02_page007.jpg",
+ "image_size": [
+  1498,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    25,
+    5,
+    920,
+    100
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 2,
+   "bbox": [
+    355,
+    125,
+    625,
+    215
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    35,
+    250,
+    535,
+    305
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    10,
+    295,
+    765,
+    385
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 5,
+   "bbox": [
+    85,
+    405,
+    995,
+    605
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b6",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 6,
+   "bbox": [
+    180,
+    975,
+    250,
+    995
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

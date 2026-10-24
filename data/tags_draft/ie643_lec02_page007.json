@@ -1,0 +1,41 @@
+{
+ "image": "data/processed/ie643_lec02_page007.jpg",
+ "image_size": [
+  2000,
+  1211
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    1000,
+    210
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 2,
+   "bbox": [
+    111,
+    200,
+    960,
+    985
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec02_page007_b2.png"
+  }
+ ]
+}

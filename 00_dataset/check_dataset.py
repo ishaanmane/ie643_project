@@ -111,6 +111,10 @@ def main():
             lines = [json.loads(l) for l in open(f"data/boxed/{k}.jsonl")]
             imgs = [next(c["image"] for c in d["messages"][0]["content"] if c["type"] == "image") for d in lines]
             ids = sorted(os.path.splitext(os.path.basename(i))[0] for i in imgs)
+            if not os.path.isdir("data/processed_boxed"):
+                report("PASS" if ids == sorted(sp[k]) else "FAIL", f"boxed/{k}.jsonl: same pages as {k}")
+                report("WARN", f"boxed/{k}.jsonl: images not generated yet", "run 02_layout/draw_boxes.py")
+                continue
             absent = [i for i in imgs if not os.path.exists(i)]
             ok = ids == sorted(sp[k]) and not absent
             report("PASS" if ok else "FAIL", f"boxed/{k}.jsonl: same pages as {k}, images exist",

@@ -1,0 +1,154 @@
+{
+ "image": "data/processed/ie643_lec10_page002.jpg",
+ "image_size": [
+  2000,
+  1195
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 1,
+   "bbox": [
+    37,
+    38,
+    521,
+    175
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 2,
+   "bbox": [
+    14,
+    158,
+    222,
+    282
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    3,
+    250,
+    671,
+    430
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    112,
+    506,
+    486,
+    606
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 5,
+   "bbox": [
+    34,
+    589,
+    646,
+    993
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec10_page002_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    672,
+    10,
+    993,
+    158
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 7,
+   "bbox": [
+    765,
+    125,
+    993,
+    425
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec10_page002_b7.png"
+  },
+  {
+   "id": "b8",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 8,
+   "bbox": [
+    729,
+    448,
+    997,
+    593
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b9",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 9,
+   "bbox": [
+    664,
+    593,
+    973,
+    815
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b10",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 10,
+   "bbox": [
+    672,
+    791,
+    994,
+    979
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

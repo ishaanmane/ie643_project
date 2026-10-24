@@ -1,0 +1,54 @@
+{
+ "image": "data/processed/ie643_lec10_page001.jpg",
+ "image_size": [
+  2000,
+  1136
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 1,
+   "bbox": [
+    19,
+    50,
+    243,
+    154
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 2,
+   "bbox": [
+    419,
+    10,
+    792,
+    177
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 3,
+   "bbox": [
+    0,
+    196,
+    998,
+    983
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

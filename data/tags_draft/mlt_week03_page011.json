@@ -1,0 +1,99 @@
+{
+ "image": "data/processed/mlt_week03_page011.jpg",
+ "image_size": [
+  1231,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "table",
+   "surya_label": "Table",
+   "order": 1,
+   "bbox": [
+    12,
+    6,
+    267,
+    183
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week03_page011_b1.png"
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    234,
+    73,
+    990,
+    113
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    9,
+    216,
+    841,
+    241
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "table",
+   "surya_label": "Table",
+   "order": 4,
+   "bbox": [
+    12,
+    255,
+    212,
+    418
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week03_page011_b4.png"
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 5,
+   "bbox": [
+    438,
+    236,
+    825,
+    407
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week03_page011_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 6,
+   "bbox": [
+    187,
+    978,
+    266,
+    990
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

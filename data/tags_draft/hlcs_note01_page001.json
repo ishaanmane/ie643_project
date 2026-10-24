@@ -14,10 +14,10 @@
    "surya_label": "SectionHeader",
    "order": 1,
    "bbox": [
-    308,
-    99,
-    591,
-    135
+    314,
+    114,
+    588,
+    150
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -28,10 +28,10 @@
    "surya_label": "Text",
    "order": 2,
    "bbox": [
-    835,
-    104,
-    871,
-    134
+    821,
+    119,
+    854,
+    146
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -42,10 +42,10 @@
    "surya_label": "Text",
    "order": 3,
    "bbox": [
-    114,
-    160,
-    812,
-    200
+    129,
+    173,
+    804,
+    211
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -56,10 +56,10 @@
    "surya_label": "Text",
    "order": 4,
    "bbox": [
-    114,
-    208,
-    825,
-    308
+    128,
+    218,
+    814,
+    315
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -70,10 +70,10 @@
    "surya_label": "Text",
    "order": 5,
    "bbox": [
-    121,
-    325,
-    884,
-    432
+    136,
+    331,
+    870,
+    434
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -84,9 +84,9 @@
    "surya_label": "Text",
    "order": 6,
    "bbox": [
-    129,
+    143,
     441,
-    887,
+    874,
     522
    ],
    "skip_in_text": false,
@@ -98,10 +98,10 @@
    "surya_label": "Text",
    "order": 7,
    "bbox": [
-    131,
-    537,
-    870,
-    586
+    145,
+    535,
+    856,
+    583
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -112,10 +112,10 @@
    "surya_label": "Text",
    "order": 8,
    "bbox": [
-    134,
-    606,
-    853,
-    661
+    148,
+    602,
+    840,
+    655
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -126,10 +126,10 @@
    "surya_label": "Diagram",
    "order": 9,
    "bbox": [
-    124,
-    685,
-    823,
-    847
+    137,
+    677,
+    811,
+    834
    ],
    "skip_in_text": false,
    "text_preview": null,
@@ -141,10 +141,10 @@
    "surya_label": "PageFooter",
    "order": 10,
    "bbox": [
-    786,
-    920,
-    851,
-    937
+    774,
+    903,
+    838,
+    920
    ],
    "skip_in_text": true,
    "text_preview": null

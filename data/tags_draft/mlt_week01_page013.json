@@ -1,0 +1,11 @@
+{
+ "image": "data/processed/mlt_week01_page013.jpg",
+ "image_size": [
+  1608,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": []
+}

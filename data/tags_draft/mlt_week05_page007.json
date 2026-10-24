@@ -1,0 +1,169 @@
+{
+ "image": "data/processed/mlt_week05_page007.jpg",
+ "image_size": [
+  1370,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 1,
+   "bbox": [
+    12,
+    6,
+    741,
+    32
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 2,
+   "bbox": [
+    129,
+    42,
+    413,
+    102
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    505,
+    58,
+    990,
+    150
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    62,
+    160,
+    249,
+    215
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 5,
+   "bbox": [
+    354,
+    138,
+    688,
+    262
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week05_page007_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    9,
+    293,
+    496,
+    396
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 7,
+   "bbox": [
+    16,
+    407,
+    464,
+    643
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 8,
+   "bbox": [
+    33,
+    638,
+    903,
+    791
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b9",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 9,
+   "bbox": [
+    508,
+    292,
+    985,
+    570
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week05_page007_b9.png"
+  },
+  {
+   "id": "b10",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 10,
+   "bbox": [
+    297,
+    772,
+    542,
+    891
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week05_page007_b10.png"
+  },
+  {
+   "id": "b11",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 11,
+   "bbox": [
+    227,
+    978,
+    294,
+    990
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

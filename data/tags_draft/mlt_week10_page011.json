@@ -1,0 +1,139 @@
+{
+ "image": "data/processed/mlt_week10_page011.jpg",
+ "image_size": [
+  1550,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    159,
+    41,
+    431,
+    72
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 2,
+   "bbox": [
+    268,
+    77,
+    670,
+    174
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 3,
+   "bbox": [
+    113,
+    194,
+    594,
+    242
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    410,
+    252,
+    450,
+    277
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 5,
+   "bbox": [
+    368,
+    284,
+    998,
+    372
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    668,
+    378,
+    968,
+    457
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 7,
+   "bbox": [
+    127,
+    358,
+    812,
+    705
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week10_page011_b7.png"
+  },
+  {
+   "id": "b8",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 8,
+   "bbox": [
+    53,
+    725,
+    963,
+    927
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b9",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 9,
+   "bbox": [
+    200,
+    978,
+    269,
+    990
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

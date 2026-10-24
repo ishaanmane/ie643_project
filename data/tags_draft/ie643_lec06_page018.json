@@ -1,0 +1,84 @@
+{
+ "image": "data/processed/ie643_lec06_page018.jpg",
+ "image_size": [
+  1999,
+  1212
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    600,
+    200
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    0,
+    240,
+    350,
+    400
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    480,
+    240,
+    720,
+    400
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 4,
+   "bbox": [
+    30,
+    240,
+    530,
+    995
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec06_page018_b4.png"
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 5,
+   "bbox": [
+    600,
+    440,
+    995,
+    965
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec06_page018_b5.png"
+  }
+ ]
+}

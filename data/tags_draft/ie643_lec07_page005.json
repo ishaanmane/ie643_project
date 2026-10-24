@@ -1,0 +1,54 @@
+{
+ "image": "data/processed/ie643_lec07_page005.jpg",
+ "image_size": [
+  2000,
+  1349
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 1,
+   "bbox": [
+    34,
+    7,
+    579,
+    125
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    38,
+    197,
+    892,
+    632
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 3,
+   "bbox": [
+    101,
+    640,
+    992,
+    986
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

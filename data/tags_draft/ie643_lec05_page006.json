@@ -1,0 +1,126 @@
+{
+ "image": "data/processed/ie643_lec05_page006.jpg",
+ "image_size": [
+  2000,
+  1351
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    1000,
+    500
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec05_page006_b1.png"
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    135,
+    305,
+    875,
+    445
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    895,
+    415,
+    965,
+    505
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    135,
+    470,
+    795,
+    595
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 5,
+   "bbox": [
+    65,
+    555,
+    415,
+    985
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec05_page006_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    535,
+    640,
+    850,
+    770
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 7,
+   "bbox": [
+    545,
+    770,
+    810,
+    915
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 8,
+   "bbox": [
+    875,
+    645,
+    995,
+    815
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

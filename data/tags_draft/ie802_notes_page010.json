@@ -1,0 +1,268 @@
+{
+ "image": "data/processed/ie802_notes_page010.jpg",
+ "image_size": [
+  1497,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "figure",
+   "surya_label": "Picture",
+   "order": 1,
+   "bbox": [
+    250,
+    55,
+    360,
+    125
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie802_notes_page010_b1.png"
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    400,
+    45,
+    850,
+    100
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    350,
+    95,
+    870,
+    150
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    260,
+    155,
+    800,
+    195
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 5,
+   "bbox": [
+    200,
+    185,
+    485,
+    220
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    200,
+    215,
+    855,
+    275
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 7,
+   "bbox": [
+    175,
+    270,
+    660,
+    305
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 8,
+   "bbox": [
+    180,
+    300,
+    570,
+    330
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b9",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 9,
+   "bbox": [
+    510,
+    235,
+    760,
+    345
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie802_notes_page010_b9.png"
+  },
+  {
+   "id": "b10",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 10,
+   "bbox": [
+    150,
+    325,
+    580,
+    405
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b11",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 11,
+   "bbox": [
+    120,
+    430,
+    375,
+    465
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b12",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 12,
+   "bbox": [
+    480,
+    390,
+    700,
+    490
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie802_notes_page010_b12.png"
+  },
+  {
+   "id": "b13",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 13,
+   "bbox": [
+    710,
+    390,
+    900,
+    480
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie802_notes_page010_b13.png"
+  },
+  {
+   "id": "b14",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 14,
+   "bbox": [
+    200,
+    495,
+    750,
+    525
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b15",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 15,
+   "bbox": [
+    170,
+    535,
+    900,
+    595
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b16",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 16,
+   "bbox": [
+    170,
+    615,
+    940,
+    680
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b17",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 17,
+   "bbox": [
+    115,
+    690,
+    940,
+    755
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b18",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 18,
+   "bbox": [
+    205,
+    775,
+    930,
+    880
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

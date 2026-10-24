@@ -1,0 +1,112 @@
+{
+ "image": "data/processed/mlt_week07_page008.jpg",
+ "image_size": [
+  1552,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 1,
+   "bbox": [
+    8,
+    6,
+    347,
+    32
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 2,
+   "bbox": [
+    18,
+    61,
+    981,
+    214
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    25,
+    232,
+    338,
+    277
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 4,
+   "bbox": [
+    8,
+    291,
+    999,
+    415
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 5,
+   "bbox": [
+    142,
+    453,
+    703,
+    746
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week07_page008_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 6,
+   "bbox": [
+    765,
+    472,
+    956,
+    703
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week07_page008_b6.png"
+  },
+  {
+   "id": "b7",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 7,
+   "bbox": [
+    202,
+    978,
+    263,
+    990
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

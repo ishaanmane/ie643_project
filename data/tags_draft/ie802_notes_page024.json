@@ -1,0 +1,280 @@
+{
+ "image": "data/processed/ie802_notes_page024.jpg",
+ "image_size": [
+  2000,
+  1471
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    798,
+    55,
+    868,
+    85
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    65,
+    90,
+    150,
+    115
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 3,
+   "bbox": [
+    80,
+    115,
+    185,
+    145
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    80,
+    145,
+    195,
+    185
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 5,
+   "bbox": [
+    30,
+    180,
+    320,
+    440
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie802_notes_page024_b5.png"
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    350,
+    80,
+    940,
+    165
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 7,
+   "bbox": [
+    400,
+    175,
+    650,
+    275
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 8,
+   "bbox": [
+    410,
+    300,
+    600,
+    330
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b9",
+   "type": "list",
+   "surya_label": "ListGroup",
+   "order": 9,
+   "bbox": [
+    420,
+    340,
+    650,
+    470
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b10",
+   "type": "figure",
+   "surya_label": "Diagram",
+   "order": 10,
+   "bbox": [
+    710,
+    295,
+    860,
+    485
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie802_notes_page024_b10.png"
+  },
+  {
+   "id": "b11",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 11,
+   "bbox": [
+    60,
+    460,
+    400,
+    495
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b12",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 12,
+   "bbox": [
+    50,
+    510,
+    160,
+    545
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b13",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 13,
+   "bbox": [
+    65,
+    555,
+    290,
+    655
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b14",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 14,
+   "bbox": [
+    420,
+    505,
+    680,
+    630
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b15",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 15,
+   "bbox": [
+    30,
+    670,
+    390,
+    745
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b16",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 16,
+   "bbox": [
+    85,
+    740,
+    325,
+    775
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b17",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 17,
+   "bbox": [
+    40,
+    790,
+    440,
+    860
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b18",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 18,
+   "bbox": [
+    355,
+    860,
+    395,
+    885
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b19",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 19,
+   "bbox": [
+    380,
+    935,
+    820,
+    995
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

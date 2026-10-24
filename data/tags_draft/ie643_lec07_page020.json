@@ -1,0 +1,11 @@
+{
+ "image": "data/processed/ie643_lec07_page020.jpg",
+ "image_size": [
+  2000,
+  1332
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": []
+}

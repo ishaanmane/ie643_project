@@ -1,0 +1,26 @@
+{
+ "image": "data/processed/ie643_lec03_page015.jpg",
+ "image_size": [
+  2000,
+  638
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    993,
+    1000
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

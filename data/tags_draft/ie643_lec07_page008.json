@@ -1,0 +1,69 @@
+{
+ "image": "data/processed/ie643_lec07_page008.jpg",
+ "image_size": [
+  2000,
+  1000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    88,
+    0,
+    637,
+    176
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 2,
+   "bbox": [
+    220,
+    177,
+    665,
+    350
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 3,
+   "bbox": [
+    0,
+    320,
+    560,
+    985
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/ie643_lec07_page008_b3.png"
+  },
+  {
+   "id": "b4",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 4,
+   "bbox": [
+    578,
+    227,
+    1000,
+    688
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  }
+ ]
+}

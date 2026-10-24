@@ -1,0 +1,267 @@
+{
+ "image": "data/processed/mlt_week09_page004.jpg",
+ "image_size": [
+  1570,
+  1999
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 1,
+   "bbox": [
+    40,
+    7,
+    866,
+    47
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 2,
+   "bbox": [
+    61,
+    83,
+    244,
+    122
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 3,
+   "bbox": [
+    171,
+    111,
+    560,
+    309
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week09_page004_b3.png"
+  },
+  {
+   "id": "b4",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 4,
+   "bbox": [
+    615,
+    125,
+    804,
+    206
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b5",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 5,
+   "bbox": [
+    594,
+    233,
+    753,
+    342
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b6",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 6,
+   "bbox": [
+    278,
+    348,
+    654,
+    396
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b7",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 7,
+   "bbox": [
+    307,
+    404,
+    418,
+    430
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b8",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 8,
+   "bbox": [
+    242,
+    437,
+    648,
+    646
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week09_page004_b8.png"
+  },
+  {
+   "id": "b9",
+   "type": "figure",
+   "surya_label": "Figure",
+   "order": 9,
+   "bbox": [
+    69,
+    738,
+    412,
+    953
+   ],
+   "skip_in_text": false,
+   "text_preview": null,
+   "crop": "data/crops/mlt_week09_page004_b9.png"
+  },
+  {
+   "id": "b10",
+   "type": "heading",
+   "surya_label": "SectionHeader",
+   "order": 10,
+   "bbox": [
+    601,
+    710,
+    764,
+    746
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b11",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 11,
+   "bbox": [
+    546,
+    764,
+    666,
+    794
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b12",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 12,
+   "bbox": [
+    590,
+    804,
+    677,
+    838
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b13",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 13,
+   "bbox": [
+    610,
+    847,
+    667,
+    870
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b14",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 14,
+   "bbox": [
+    590,
+    804,
+    812,
+    838
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b15",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 15,
+   "bbox": [
+    737,
+    847,
+    794,
+    870
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b16",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 16,
+   "bbox": [
+    814,
+    785,
+    912,
+    861
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b17",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 17,
+   "bbox": [
+    554,
+    903,
+    894,
+    952
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b18",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 18,
+   "bbox": [
+    200,
+    978,
+    259,
+    990
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

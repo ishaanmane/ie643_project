@@ -1,0 +1,54 @@
+{
+ "image": "data/processed/mlt_week06_page005.jpg",
+ "image_size": [
+  930,
+  2000
+ ],
+ "coords": "normalised 0-1000",
+ "source": "surya-ocr-2 zero-shot, NOT verified",
+ "error": false,
+ "blocks": [
+  {
+   "id": "b1",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 1,
+   "bbox": [
+    0,
+    0,
+    1000,
+    75
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b2",
+   "type": "equation",
+   "surya_label": "Equation",
+   "order": 2,
+   "bbox": [
+    145,
+    85,
+    1000,
+    170
+   ],
+   "skip_in_text": false,
+   "text_preview": null
+  },
+  {
+   "id": "b3",
+   "type": "page_footer",
+   "surya_label": "PageFooter",
+   "order": 3,
+   "bbox": [
+    111,
+    978,
+    214,
+    991
+   ],
+   "skip_in_text": true,
+   "text_preview": null
+  }
+ ]
+}

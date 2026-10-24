@@ -1,8 +1,8 @@
 {
  "image": "data/processed/ie802_notes_page001.jpg",
  "image_size": [
-  2000,
-  1857
+  1471,
+  2000
  ],
  "coords": "normalised 0-1000",
  "source": "surya-ocr-2 zero-shot, NOT verified",
@@ -10,14 +10,14 @@
  "blocks": [
   {
    "id": "b1",
-   "type": "text",
-   "surya_label": "Text",
+   "type": "heading",
+   "surya_label": "SectionHeader",
    "order": 1,
    "bbox": [
-    738,
-    32,
-    796,
-    62
+    68,
+    61,
+    185,
+    85
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -28,38 +28,38 @@
    "surya_label": "Text",
    "order": 2,
    "bbox": [
-    750,
-    62,
-    796,
-    114
+    53,
+    90,
+    207,
+    132
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b3",
-   "type": "text",
-   "surya_label": "Text",
+   "type": "equation",
+   "surya_label": "Equation",
    "order": 3,
    "bbox": [
-    796,
-    62,
-    844,
-    89
+    73,
+    130,
+    257,
+    155
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b4",
-   "type": "heading",
-   "surya_label": "SectionHeader",
+   "type": "equation",
+   "surya_label": "Equation",
    "order": 4,
    "bbox": [
-    68,
-    77,
-    184,
-    111
+    73,
+    151,
+    257,
+    176
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -70,66 +70,66 @@
    "surya_label": "Equation",
    "order": 5,
    "bbox": [
-    51,
-    116,
-    207,
-    179
+    83,
+    171,
+    253,
+    194
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b6",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 6,
    "bbox": [
-    71,
-    178,
-    256,
-    212
+    83,
+    190,
+    277,
+    233
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b7",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 7,
    "bbox": [
-    71,
-    208,
-    256,
-    242
+    73,
+    237,
+    200,
+    260
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b8",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 8,
    "bbox": [
-    71,
-    238,
+    110,
     256,
-    271
+    240,
+    278
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b9",
-   "type": "text",
-   "surya_label": "Text",
+   "type": "equation",
+   "surya_label": "Equation",
    "order": 9,
    "bbox": [
-    71,
-    271,
-    278,
-    325
+    90,
+    279,
+    440,
+    327
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -140,24 +140,24 @@
    "surya_label": "Text",
    "order": 10,
    "bbox": [
-    71,
-    333,
-    240,
-    392
+    73,
+    330,
+    175,
+    358
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b11",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 11,
    "bbox": [
-    88,
-    396,
-    440,
-    461
+    260,
+    325,
+    378,
+    350
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -168,24 +168,24 @@
    "surya_label": "Text",
    "order": 12,
    "bbox": [
-    71,
-    471,
-    176,
-    509
+    120,
+    350,
+    240,
+    380
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b13",
-   "type": "text",
-   "surya_label": "Text",
+   "type": "equation",
+   "surya_label": "Equation",
    "order": 13,
    "bbox": [
-    260,
-    463,
-    377,
-    496
+    125,
+    375,
+    320,
+    405
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -196,10 +196,10 @@
    "surya_label": "Text",
    "order": 14,
    "bbox": [
-    119,
-    496,
-    241,
-    542
+    73,
+    418,
+    132,
+    445
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -210,52 +210,52 @@
    "surya_label": "Equation",
    "order": 15,
    "bbox": [
-    124,
-    539,
-    321,
-    582
+    145,
+    425,
+    255,
+    450
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b16",
-   "type": "text",
-   "surya_label": "Text",
+   "type": "equation",
+   "surya_label": "Equation",
    "order": 16,
    "bbox": [
-    71,
-    599,
-    131,
-    639
+    155,
+    445,
+    365,
+    480
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b17",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 17,
    "bbox": [
-    144,
-    609,
-    256,
-    646
+    400,
+    420,
+    585,
+    450
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b18",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 18,
    "bbox": [
-    157,
-    639,
-    363,
-    688
+    90,
+    485,
+    135,
+    510
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -266,10 +266,10 @@
    "surya_label": "Text",
    "order": 19,
    "bbox": [
-    88,
-    694,
-    131,
-    729
+    100,
+    530,
+    155,
+    555
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -280,24 +280,24 @@
    "surya_label": "Text",
    "order": 20,
    "bbox": [
-    100,
-    762,
-    152,
-    797
+    65,
+    565,
+    165,
+    590
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b21",
-   "type": "text",
-   "surya_label": "Text",
+   "type": "equation",
+   "surya_label": "Equation",
    "order": 21,
    "bbox": [
-    63,
-    812,
-    165,
-    849
+    115,
+    575,
+    410,
+    615
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -308,10 +308,10 @@
    "surya_label": "Equation",
    "order": 22,
    "bbox": [
-    116,
-    829,
-    406,
-    886
+    150,
+    605,
+    370,
+    635
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -322,10 +322,10 @@
    "surya_label": "Equation",
    "order": 23,
    "bbox": [
-    149,
-    875,
-    365,
-    918
+    145,
+    635,
+    370,
+    665
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -336,38 +336,38 @@
    "surya_label": "Equation",
    "order": 24,
    "bbox": [
-    146,
-    918,
-    370,
-    959
+    155,
+    665,
+    265,
+    695
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b25",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 25,
    "bbox": [
-    155,
-    963,
-    262,
-    1000
+    60,
+    715,
+    230,
+    765
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b26",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 26,
    "bbox": [
-    392,
-    92,
-    487,
-    148
+    265,
+    680,
+    500,
+    720
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -378,24 +378,24 @@
    "surya_label": "Equation",
    "order": 27,
    "bbox": [
-    434,
-    138,
-    534,
-    170
+    350,
+    700,
+    630,
+    750
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b28",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 28,
    "bbox": [
-    584,
-    127,
-    670,
-    154
+    60,
+    760,
+    170,
+    815
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -406,24 +406,24 @@
    "surya_label": "Equation",
    "order": 29,
    "bbox": [
-    399,
-    177,
-    547,
-    226
+    100,
+    750,
+    800,
+    845
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b30",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 30,
    "bbox": [
-    481,
-    216,
-    677,
-    252
+    100,
+    815,
+    510,
+    875
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -434,10 +434,10 @@
    "surya_label": "Equation",
    "order": 31,
    "bbox": [
-    481,
-    248,
-    693,
-    282
+    110,
+    865,
+    500,
+    945
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -448,42 +448,42 @@
    "surya_label": "Text",
    "order": 32,
    "bbox": [
-    463,
-    288,
-    642,
-    325
+    740,
+    30,
+    850,
+    90
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b33",
-   "type": "text",
-   "surya_label": "Text",
-   "order": 33,
-   "bbox": [
-    496,
-    323,
-    624,
-    358
-   ],
-   "skip_in_text": false,
-   "text_preview": null
-  },
-  {
-   "id": "b34",
    "type": "figure",
    "surya_label": "Diagram",
-   "order": 34,
+   "order": 33,
    "bbox": [
-    612,
-    391,
-    771,
-    575
+    610,
+    275,
+    775,
+    405
    ],
    "skip_in_text": false,
    "text_preview": null,
-   "crop": "data/crops/ie802_notes_page001_b34.png"
+   "crop": "data/crops/ie802_notes_page001_b33.png"
+  },
+  {
+   "id": "b34",
+   "type": "text",
+   "surya_label": "Text",
+   "order": 34,
+   "bbox": [
+    410,
+    455,
+    750,
+    505
+   ],
+   "skip_in_text": false,
+   "text_preview": null
   },
   {
    "id": "b35",
@@ -491,10 +491,10 @@
    "surya_label": "Text",
    "order": 35,
    "bbox": [
-    404,
-    606,
-    581,
-    644
+    460,
+    490,
+    740,
+    540
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -505,10 +505,10 @@
    "surya_label": "Text",
    "order": 36,
    "bbox": [
-    408,
-    653,
-    747,
-    725
+    510,
+    510,
+    880,
+    600
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -519,10 +519,10 @@
    "surya_label": "Text",
    "order": 37,
    "bbox": [
-    464,
-    703,
-    737,
-    777
+    630,
+    630,
+    750,
+    665
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -533,10 +533,10 @@
    "surya_label": "Text",
    "order": 38,
    "bbox": [
-    508,
-    738,
-    878,
-    860
+    575,
+    800,
+    840,
+    835
    ],
    "skip_in_text": false,
    "text_preview": null
@@ -547,42 +547,27 @@
    "surya_label": "Text",
    "order": 39,
    "bbox": [
-    548,
-    803,
-    755,
-    858
+    575,
+    835,
+    840,
+    875
    ],
    "skip_in_text": false,
    "text_preview": null
   },
   {
    "id": "b40",
-   "type": "equation",
-   "surya_label": "Equation",
+   "type": "text",
+   "surya_label": "Text",
    "order": 40,
    "bbox": [
-    628,
-    914,
-    746,
-    954
+    650,
+    865,
+    940,
+    905
    ],
    "skip_in_text": false,
    "text_preview": null
-  },
-  {
-   "id": "b41",
-   "type": "figure",
-   "surya_label": "Diagram",
-   "order": 41,
-   "bbox": [
-    428,
-    750,
-    896,
-    900
-   ],
-   "skip_in_text": false,
-   "text_preview": null,
-   "crop": "data/crops/ie802_notes_page001_b41.png"
   }
  ]
 }
