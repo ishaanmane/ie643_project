@@ -15,6 +15,14 @@ PAGE_PROMPT = (
     "Describe diagrams as [Diagram: ...]."
 )
 
+# Same instruction for the "boxed" variant (pages with Surya layout boxes drawn on),
+# plus one sentence so the model knows what the boxes are and does not skip content
+# Surya missed.
+BOXED_PROMPT = PAGE_PROMPT + (
+    " Thin cyan boxes mark detected layout blocks; they are hints only, so transcribe"
+    " everything on the page, including anything outside the boxes."
+)
+
 EQUATION_PROMPT = "Convert this handwritten mathematical expression to LaTeX."
 
 

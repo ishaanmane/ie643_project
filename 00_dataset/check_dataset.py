@@ -104,6 +104,21 @@ def main():
         if bad_prompt or bad_path:
             report("FAIL", f"{k}.jsonl prompt/path", f"{bad_prompt} wrong prompts, {bad_path} wrong paths")
 
+    # 3b. boxed variant, if built: same pages per split, images present, boxes present
+    if os.path.isdir("data/boxed"):
+        no_tags = 0
+        for k in ("train", "val", "test"):
+            lines = [json.loads(l) for l in open(f"data/boxed/{k}.jsonl")]
+            imgs = [next(c["image"] for c in d["messages"][0]["content"] if c["type"] == "image") for d in lines]
+            ids = sorted(os.path.splitext(os.path.basename(i))[0] for i in imgs)
+            absent = [i for i in imgs if not os.path.exists(i)]
+            ok = ids == sorted(sp[k]) and not absent
+            report("PASS" if ok else "FAIL", f"boxed/{k}.jsonl: same pages as {k}, images exist",
+                   "" if ok else f"{len(absent)} images missing; ids match: {ids == sorted(sp[k])}")
+            no_tags += sum(not os.path.exists(f"data/tags_draft/{i}.json") for i in ids)
+        report("WARN" if no_tags else "PASS", "boxed variant: every page has Surya boxes",
+               f"{no_tags} pages without boxes (Surya not run on them)" if no_tags else "")
+
     # 4. near-duplicate leakage
     train_sh = {s: shingles(text[s]) for s in sp["train"]}
     for k in ("val", "test"):

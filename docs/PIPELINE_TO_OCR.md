@@ -81,6 +81,14 @@ Output per page:
 
 Checked: on the 10 test pages it gives 128 blocks and 5 crops (neuron diagram, circle sketch, compile-flow figure and two more), and pointing it at raw scans instead writes no crops and warns.
 
+## Stage 3b: boxed variant (for the clean-vs-boxed comparison)
+
+```bash
+python3 02_layout/draw_boxes.py                        # data/processed + data/tags_draft -> data/processed_boxed/
+python3 00_dataset/build_dataset.py --variant boxed    # -> data/boxed/{train,val,test}.jsonl, same pages and splits
+```
+Thin cyan boxes (3 px on a 2000 px page), a colour none of our inks use. The boxed files use `BOXED_PROMPT`, which tells the model the boxes are hints and to transcribe everything, including content outside the boxes (Surya misses some). Pages without Surya tags are copied without boxes and reported; the builder warns if any are left. The clean files (`data/*.jsonl`) are not touched. A model trained on the boxed set needs Surya and `draw_boxes.py` on every input at inference time too.
+
 ## Stage 4: dataset finalisation (A only)
 
 1. **Decide the split.** Currently no notebook-photo pages are in val or test. Option: move a block of IE802 pages and a few HumynLabs notes into test (`HELD_OUT` in `00_dataset/build_dataset.py`).

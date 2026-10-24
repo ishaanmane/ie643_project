@@ -1,6 +1,10 @@
 """Build train/val/test JSONL splits and a manual-verification checklist.
 
-Usage: python3 00_dataset/build_dataset.py [--include-flagged]
+Usage: python3 00_dataset/build_dataset.py [--include-flagged] [--variant boxed]
+
+--variant boxed writes data/boxed/{train,val,test}.jsonl instead: the same pages in the
+same splits, but pointing at data/processed_boxed/ (Surya boxes drawn on, made by
+02_layout/draw_boxes.py) and using BOXED_PROMPT. The clean files are not touched.
 
 Pairs every page in data/raw_scans/ with its data/annotations/<stem>.md and writes
 data/train.jsonl, data/val.jsonl, data/test.jsonl, data/splits.json, data/VERIFICATION.md.
@@ -30,7 +34,7 @@ import os
 import re
 import sys
 
-from prompts import PAGE_PROMPT, build_record
+from prompts import BOXED_PROMPT, PAGE_PROMPT, build_record
 
 RAW_DIR = "data/raw_scans"
 PROCESSED_DIR = "data/processed"
@@ -59,8 +63,10 @@ def split_of(stem):
     return "train"
 
 
-def record(stem, ground_truth):
-    return build_record(f"{PROCESSED_DIR}/{stem}.jpg", PAGE_PROMPT, ground_truth)
+VARIANTS = {  # image folder, output folder, prompt
+    "clean": (PROCESSED_DIR, DATA_DIR, PAGE_PROMPT),
+    "boxed": ("data/processed_boxed", "data/boxed", BOXED_PROMPT),
+}
 
 
 def checklist_lines(title, stems):
@@ -71,13 +77,23 @@ def checklist_lines(title, stems):
     return lines
 
 
-def build(include_flagged=False):
+def build(include_flagged=False, variant="clean"):
+    image_dir, out_dir, prompt = VARIANTS[variant]
     stems = sorted(
         os.path.splitext(f)[0]
         for f in os.listdir(RAW_DIR)
         if f.lower().endswith(".jpg") and "_debug" not in f
     )
-    if not os.path.isdir(PROCESSED_DIR):
+    if variant == "boxed":
+        missing = [s for s in stems if not os.path.exists(f"{image_dir}/{s}.jpg")]
+        if missing:
+            sys.exit(f"{len(missing)} pages have no boxed image in {image_dir}/ "
+                     f"(run 02_layout/draw_boxes.py first): {missing[:5]}")
+        no_tags = [s for s in stems if not os.path.exists(f"data/tags_draft/{s}.json")]
+        if no_tags:
+            print(f"WARNING: {len(no_tags)} of {len(stems)} pages have no Surya tags, so their "
+                  f"'boxed' image has no boxes. Run Surya on all pages first.")
+    elif not os.path.isdir(PROCESSED_DIR):
         print(f"note: {PROCESSED_DIR}/ does not exist yet; run preprocessing before training")
     splits = {"train": [], "val": [], "test": []}
     records = {"train": [], "val": [], "test": []}
@@ -96,12 +112,16 @@ def build(include_flagged=False):
                 continue
         split = split_of(stem)
         splits[split].append(stem)
-        records[split].append(record(stem, text))
+        records[split].append(build_record(f"{image_dir}/{stem}.jpg", prompt, text))
 
+    os.makedirs(out_dir, exist_ok=True)
     for split, recs in records.items():
-        with open(os.path.join(DATA_DIR, f"{split}.jsonl"), "w") as f:
+        with open(os.path.join(out_dir, f"{split}.jsonl"), "w") as f:
             for r in recs:
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    if variant != "clean":
+        print(f"{variant}: " + ", ".join(f"{k} {len(v)}" for k, v in splits.items()) + f" -> {out_dir}/")
+        return
 
     with open(os.path.join(DATA_DIR, "splits.json"), "w") as f:
         json.dump({"held_out_lectures": HELD_OUT, "splits": splits}, f, indent=2)
@@ -129,4 +149,5 @@ def build(include_flagged=False):
 
 
 if __name__ == "__main__":
-    build(include_flagged="--include-flagged" in sys.argv)
+    build(include_flagged="--include-flagged" in sys.argv,
+          variant="boxed" if "--variant" in sys.argv and "boxed" in sys.argv else "clean")

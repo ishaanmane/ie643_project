@@ -5,3 +5,4 @@ __pycache__/
 data/processed/
 # cut from data/processed by 02_layout/surya_to_tags.py; regenerate, do not commit
 data/crops/
+data/processed_boxed/
