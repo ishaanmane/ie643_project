@@ -121,18 +121,28 @@ raw scans ──► 01 preprocessing ──► data/processed/ (410 pages)
 **Workflow**
 - Laptop cannot reach the GPU machine; transfer via git only. `gh auth login --web` with device code worked for the GPU machine.
 
-## 6. In progress right now
+## 6. Current state (2026-10-25)
 
-Step 1 of "improve generation": **measure the generator on all 42 units** (labels as input, so it measures the generator, not extraction).
-- `04_reconstruction/evaluate_generation.py` and the `outline.py --all` option: **tested on the Mac, 2026-10-25**. Full mock run: 42 units, 410 pages, 2,579/2,579 blocks kept, 227 sections, 227/243 diagrams matched, 10/2,739 equations flagged by Tectonic; no PDFs requested. See `results/generation_eval_mock.md` and `findings/05_evaluation.md`. These are pipeline checks, not LLM quality measurements.
-- Fixed two issues found during testing: HTML outputs were counted as PDFs, and unmatched diagram descriptions containing brackets caused false missing-block reports.
-- Next action: push the tested changes **only on the user's request**, then on the GPU:
-  ```bash
-  python3 04_reconstruction/outline.py --all --out out/outlines_all
-  python3 04_reconstruction/render_document.py --all --outlines out/outlines_all --out out/documents_all
-  python3 04_reconstruction/evaluate_generation.py --docs out/documents_all --outlines out/outlines_all --md results/generation_eval.md
-  ```
-  then commit `results/generation_eval.md` (+ a few PDFs) and push. Watch the IE802 unit (56 pages, ~700 blocks: long prompt; max_new_tokens 1536 may be tight).
+- GPU all-unit **LLM outline** run completed: 42 saved, 36 accepted. Rejected:
+  `ie643_lec03`, `ie643_lec04`, `ie802_notes`, `mlt_week03`, `mlt_week05`, `mlt_week09`.
+  All six pasted response endings are incomplete JSON, consistent with output truncation.
+  No all-unit PDF results have been reported yet. Originals remain in GPU `out/outlines_all`.
+- Research/priorities: `docs/PIPELINE_RESEARCH_REVIEW.md`; submission is today.
+  Keep the trained clean adapter and working environment. Prioritize renderer and
+  evaluation fixes, actual-prediction comparisons, then submission interface/report.
+- New fixes: aspect-preserving figure sizing, explicit compiler error/unchecked status,
+  ordered occurrence checks for intermediate Markdown, missing page/report accounting,
+  run manifests to ignore stale reports, actual rendered outline usage in evaluation.
+- Outline retries: `--retry-rejected --max-new-tokens 4096`, compact topic prompt;
+  accepted files are skipped and rejected originals backed up. See stage README.
+- Verified locally: eight regression tests; two validation PDFs built with Tectonic,
+  128/128 blocks retained, 9/10 figure descriptions matched, one diagnosed equation
+  failure, all nine images preserve aspect ratio. Lecture 7 page010 absent from
+  predictions is already excluded for uncertain labels. No new model improvement claim.
+- **Next action:** commit locally, push only when requested, then GPU pull on the same
+  branch and retry the six rejected outlines. Validate the retries before rendering.
+  All-unit outlines use annotations: do not apply them to prediction Markdown.
+  Create separate prediction-based outlines for the validation comparison.
 
 ## 7. Next steps (agreed order)
 

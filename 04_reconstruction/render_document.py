@@ -30,6 +30,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import uuid
 
 from PIL import Image, ImageOps, ImageStat
 
@@ -192,61 +193,117 @@ def find_math(md):
            [m.group(1) for m in INLINE_MATH.finditer(DISPLAY_MATH.sub(" ", md))]
 
 
-def bad_math_latex(snippets):
-    """Exact check: typeset every snippet with xelatex; return the ones that fail."""
-    if not snippets:
-        return set()
-    lines = [r"\documentclass{article}", r"\usepackage{amsmath,amssymb,mathtools}",
-             r"\usepackage{unicode-math}", r"\begin{document}"]
-    first = len(lines) + 1
-    for s in snippets:
-        lines.append(r"\[" + s.replace("\n", " ") + r"\]")
-    lines.append(r"\end{document}")
-    with tempfile.TemporaryDirectory() as tmp:
-        open(os.path.join(tmp, "m.tex"), "w").write("\n".join(lines))
-        subprocess.run(["xelatex", "-interaction=nonstopmode", "m.tex"],
-                       cwd=tmp, capture_output=True, text=True, timeout=300)
-        log = open(os.path.join(tmp, "m.log"), errors="ignore").read() if os.path.exists(os.path.join(tmp, "m.log")) else ""
-    bad = set()
-    for ln in re.findall(r"^l\.(\d+)", log, flags=re.M):
-        k = int(ln) - first
-        if 0 <= k < len(snippets):
-            bad.add(snippets[k])
-    return bad
+class MathCheckError(RuntimeError):
+    """The checker could not finish; this is not evidence of valid equations."""
 
 
-def bad_math_tectonic(snippets, max_rounds=40):
-    """Exact check with Tectonic, which stops at the first error: find the failing line,
-    set that equation aside, retry until the rest compiles."""
-    if not snippets:
-        return set()
+def check_latex(snippets, engine, max_rounds=None):
+    """Remove one diagnosed bad snippet at a time, then compile the remainder.
+
+    Halt at the first TeX error so later errors cannot be mistaken for independent
+    failures. Infrastructure errors and an exhausted retry budget remain explicit.
+    """
     bad, remaining = set(), list(snippets)
     head = [r"\documentclass{article}", r"\usepackage{amsmath,amssymb,mathtools}",
             r"\usepackage{unicode-math}", r"\begin{document}"]
-    for _ in range(max_rounds):
+    rounds = len(remaining) + 1 if max_rounds is None else max_rounds
+    for _ in range(rounds):
+        if not remaining:
+            return bad
         lines = head + [r"\[" + s.replace("\n", " ") + r"\]" for s in remaining] + [r"\end{document}"]
         with tempfile.TemporaryDirectory() as tmp:
-            open(os.path.join(tmp, "m.tex"), "w").write("\n".join(lines))
-            r = subprocess.run(["tectonic", "m.tex"], cwd=tmp, capture_output=True, text=True, timeout=600)
+            with open(os.path.join(tmp, "m.tex"), "w") as f:
+                f.write("\n".join(lines))
+            cmd = ([engine, "-interaction=nonstopmode", "-halt-on-error", "-file-line-error", "m.tex"]
+                   if engine == "xelatex" else [engine, "m.tex"])
+            r = subprocess.run(cmd, cwd=tmp, capture_output=True, text=True, timeout=300)
+            log = r.stderr + "\n" + r.stdout
+            log_path = os.path.join(tmp, "m.log")
+            if os.path.exists(log_path):
+                with open(log_path, errors="replace") as f:
+                    log += "\n" + f.read()
         if r.returncode == 0:
             return bad
-        m = re.search(r"m\.tex:(\d+):", r.stderr + r.stdout)
+        m = re.search(r"m\.tex:(\d+):", log) or re.search(r"^l\.(\d+)", log, re.M)
         k = int(m.group(1)) - len(head) - 1 if m else -1
         if not 0 <= k < len(remaining):
-            break  # error outside the equations (e.g. a missing package): give up quietly
+            raise MathCheckError(f"{engine} failed outside a mapped equation: {log[-1200:]}")
         bad.add(remaining.pop(k))
-    return bad
+    raise MathCheckError(f"{engine}: equation check exceeded {rounds} attempts")
+
+
+def bad_math_latex(snippets):
+    return check_latex(snippets, "xelatex")
+
+
+def bad_math_tectonic(snippets, max_rounds=None):
+    return check_latex(snippets, "tectonic", max_rounds)
 
 
 def bad_math_pandoc(snippets, pandoc):
-    """Approximate check without LaTeX: pandoc's math parser (texmath) must accept it."""
+    """Approximate syntax check; does not establish LaTeX compilation success."""
     bad = set()
     for s in snippets:
         r = subprocess.run([pandoc, "-f", "markdown", "-t", "html", "--mathml"],
-                           input=f"$${s}$$", capture_output=True, text=True)
+                           input=f"$${s}$$", capture_output=True, text=True, timeout=60)
+        if r.returncode:
+            raise MathCheckError(f"pandoc checker failed: {r.stderr[-1200:]}")
         if "Could not convert TeX math" in r.stderr:
             bad.add(s)
     return bad
+
+
+def equation_check(snippets):
+    pandoc = shutil.which("pandoc")
+    if shutil.which("xelatex"):
+        how, checker = "xelatex", bad_math_latex
+    elif shutil.which("tectonic"):
+        how, checker = "tectonic", bad_math_tectonic
+    elif pandoc:
+        how, checker = "pandoc math parser (approximate)", lambda xs: bad_math_pandoc(xs, pandoc)
+    else:
+        return set(), {"status": "unchecked", "checked_with": "none", "error": "no equation checker installed"}
+    try:
+        bad = checker(snippets)
+    except (MathCheckError, OSError, subprocess.TimeoutExpired) as e:
+        return set(), {"status": "error", "checked_with": how, "error": str(e)}
+    return bad, {"status": "completed", "checked_with": how, "error": None}
+
+
+def figure_width_percent(size):
+    # Explicit letter paper and 2 cm margins below. Specify only width so Pandoc
+    # preserves aspect ratio, while also fitting tall drawings within 30% height.
+    text_width, text_height = 8.5 - 4 / 2.54, 11 - 4 / 2.54
+    return min(55.0, 30.0 * text_height / text_width * size[0] / size[1])
+
+
+def missing_source_blocks(sources, doc):
+    """Ordered, occurrence-aware Markdown text check, before math fallback.
+
+    This checks intermediate text retention, not final PDF fidelity or OCR accuracy.
+    """
+    flat = re.sub(r"\s+", " ", doc)
+    cursor, missing = 0, []
+    for block in sources:
+        if block.lstrip().startswith("#"):
+            keys = [block.lstrip().lstrip("#").strip()]
+        elif DIAGRAM.match(block):
+            key = DIAGRAM.match(block).group(1).strip()
+            keys = [key, key.replace("[", "\\[").replace("]", "\\]")]
+        else:
+            keys = [block]
+        found = []
+        for key in keys:
+            key = re.sub(r"\s+", " ", key).strip()
+            pos = flat.find(key, cursor)
+            if pos >= 0:
+                found.append((pos, len(key)))
+        if found:
+            pos, length = min(found)
+            cursor = pos + length
+        else:
+            missing.append(block[:80])
+    return missing
 
 
 def neutralise(md, bad):
@@ -269,14 +326,17 @@ def heading_text(block):
     return re.sub(r"\s+", " ", block.lstrip().lstrip("#").strip().strip("*")).lower()
 
 
-def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
+def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
     """outline: {"sections": [{"start": "p4.3", "title": ..., "level": 1|2}]} from outline.py, or None."""
     starts = {sec["start"]: sec for sec in (outline or {}).get("sections", [])}
     out = os.path.join(out_root, unit)
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(os.path.join(out, "figures"))
-    report = {"unit": unit, "pages": [], "missing_pages": [],
+    report = {"unit": unit, "run_id": run_id, "pages": [], "missing_pages": [],
+              "expected_pages": len(pages), "input_directory": os.path.abspath(md_dir),
+              "outline_sections": len(starts), "requested_format": fmt,
               "outline": f"{len(starts)} sections" if starts else "none (page order)"}
+    applied_sections = set()
     sources = []  # every source block, to verify nothing is lost
     font = ""
     if fmt == "pdf" and shutil.which("fc-list"):
@@ -287,7 +347,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
     pin = ("header-includes:\n  - \\usepackage{float}\n  - \\floatplacement{figure}{H}\n"
            "  - \\usepackage{fvextra}\n"
            "  - \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\\\\{\\}}\n")
-    parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\nfontsize: 11pt\n{font}{pin}---\n"]
+    parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\npapersize: letter\nfontsize: 11pt\n{font}{pin}---\n"]
 
     for page in pages:
         src = os.path.join(md_dir, page + ".md")
@@ -308,11 +368,12 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
 
         def figure_md(fig, caption):
             name = f"{page}_{fig['block'].replace('+', '-')}.png"
-            clean_crop(page_img, fig["bbox"]).save(os.path.join(out, "figures", name))
+            crop = clean_crop(page_img, fig["bbox"])
+            crop.save(os.path.join(out, "figures", name))
             # a captioned image alone in a paragraph becomes a numbered, centred figure;
             # brackets in the caption are escaped so they cannot end the caption early
             cap = caption.replace("[", "\\[").replace("]", "\\]").replace("\n", " ")
-            return f"![{cap}]({'figures/' + name}){{width=55% height=30%}}"
+            return f"![{cap}]({'figures/' + name}){{width={figure_width_percent(crop.size):.4f}%}}"
 
         body = [f"<!-- page: {page} -->"]
         pnum = int(re.search(r"page(\d+)$", page).group(1))
@@ -320,6 +381,8 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
             bid = f"p{pnum}.{k}"
             sources.append(b)
             sec = starts.get(bid)
+            if sec:
+                applied_sections.add(bid)
             if sec and b.lstrip().startswith("#"):
                 # the section starts on a heading: print that heading, verbatim, at the section level
                 body.append("#" * sec["level"] + " " + b.lstrip().lstrip("#").strip())
@@ -343,36 +406,18 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
                                 "merged_from": n_split, "matched": len(pairs), "extra_figures_added": len(extra),
                                 "descriptions_without_figure": len(desc_idx) - len(pairs)})
 
+    report["outline_sections"] = len(applied_sections)
+    report["outline_unapplied_starts"] = sorted(set(starts) - applied_sections)
+    report["outline"] = f"{len(applied_sections)} sections" if applied_sections else "none (page order)"
     doc = "\n\n".join(parts) + "\n"
-    # preservation check: every source block's text must be in the document
-    flat = re.sub(r"\s+", " ", doc)
-    missing = []
-    for b in sources:
-        if b.lstrip().startswith("#"):
-            key = b.lstrip().lstrip("#").strip()
-        elif DIAGRAM.match(b):
-            key = DIAGRAM.match(b).group(1).strip()
-            # Captions escape brackets; unmatched descriptions stay as plain text.
-            escaped = key.replace("[", "\\[").replace("]", "\\]")
-            if re.sub(r"\s+", " ", escaped).strip() in flat:
-                continue
-        else:
-            key = b
-        if re.sub(r"\s+", " ", key).strip() not in flat:
-            missing.append(b[:80])
-    report["preservation"] = {"blocks": len(sources), "missing": len(missing), "missing_list": missing[:10]}
+    missing = missing_source_blocks(sources, doc)
+    report["preservation"] = {"blocks": len(sources), "missing": len(missing), "missing_list": missing[:10],
+                              "scope": "ordered occurrences in Markdown before math fallback; not PDF accuracy"}
     pandoc = shutil.which("pandoc")
     snippets = sorted(set(find_math(doc)))
-    if shutil.which("xelatex"):
-        bad, how = bad_math_latex(snippets), "xelatex"
-    elif shutil.which("tectonic"):
-        bad, how = bad_math_tectonic(snippets), "tectonic"
-    elif pandoc:
-        bad, how = bad_math_pandoc(snippets, pandoc), "pandoc math parser (approximate)"
-    else:
-        bad, how = set(), "not checked (no pandoc)"
+    bad, check = equation_check(snippets)
     doc = neutralise(doc, bad)
-    report["math"] = {"equations": len(snippets), "failed": len(bad), "checked_with": how, "failed_list": sorted(bad)[:20]}
+    report["math"] = {"equations": len(snippets), "failed": len(bad), "failed_list": sorted(bad)[:20], **check}
     md_path = os.path.join(out, unit + ".md")
     open(md_path, "w").write(doc)
 
@@ -407,16 +452,23 @@ def main():
     chosen = sorted(units) if a.all else (a.unit or [])
     if not chosen:
         sys.exit("give --unit <name> or --all; units: " + ", ".join(sorted(units)))
+    unknown = set(chosen) - set(units)
+    if unknown:
+        sys.exit("unknown units: " + ", ".join(sorted(unknown)))
+    os.makedirs(a.out, exist_ok=True)
+    run_id = uuid.uuid4().hex
+    with open(os.path.join(a.out, "run.json"), "w") as f:
+        json.dump({"run_id": run_id, "units": chosen, "pages_md": a.pages_md, "format": fmt}, f, indent=2)
     for u in chosen:
         outline = None
         if a.outlines and os.path.exists(os.path.join(a.outlines, u + ".json")):
             outline = json.load(open(os.path.join(a.outlines, u + ".json")))["outline"]  # None if rejected
-        r = render_unit(u, units[u], a.pages_md, a.out, fmt, outline)
+        r = render_unit(u, units[u], a.pages_md, a.out, fmt, outline, run_id)
         pg = r["pages"]
         print(f"{u:14s} pages {len(pg):3d} (missing {len(r['missing_pages'])}) | figures matched "
               f"{sum(x['matched'] for x in pg)}/{sum(x['descriptions'] for x in pg)} descriptions, "
               f"+{sum(x['extra_figures_added'] for x in pg)} extra | equations {r['math']['equations']}, "
-              f"failed {r['math']['failed']} ({r['math']['checked_with']}) | sections: {r['outline']} | "
+              f"failed {r['math']['failed']} ({r['math']['checked_with']}: {r['math']['status']}) | sections: {r['outline']} | "
               f"blocks kept {r['preservation']['blocks'] - r['preservation']['missing']}/{r['preservation']['blocks']} | "
               f"output: {r['output'] or 'md only'}")
 

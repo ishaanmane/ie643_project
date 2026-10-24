@@ -10,7 +10,7 @@ Checks (in code, not trusted to the model):
   - valid JSON with a non-empty "sections" list
   - every start id exists; starts strictly increase in reading order; levels are 1 or 2
   - every content word of a title (4+ letters, not a stop word) occurs in the notes;
-    otherwise the title is replaced by the first line of the block it starts at
+    otherwise that section break is dropped
 A failing outline is not used: the document falls back to plain page order.
 
 Usage (from the repo root):
@@ -25,6 +25,9 @@ import json
 import os
 import re
 import sys
+import shutil
+import time
+from pathlib import Path
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -90,7 +93,9 @@ def build_prompt(unit, blocks):
         "- section starts are block ids, in increasing reading order\n"
         "- titles are 2-8 words and use only words that appear in the blocks (prefer an existing heading)\n"
         "- start a new section where the topic changes, not on every page\n"
-        f"- between 2 and {max(3, len(blocks) // 6)} sections\n"
+        f"- between 2 and {min(24, max(3, len(blocks) // 6))} sections; group related blocks into topics\n"
+        "- titles must be short topic names, never equations or copied paragraphs\n"
+        "- use compact JSON without indentation; close every bracket before finishing\n"
         'Answer with JSON only: {"sections": [{"start": "<id>", "title": "<title>", "level": 1}]}'
     )
 
@@ -216,19 +221,42 @@ def main():
     p.add_argument("--out", default=os.path.join(ROOT, "out", "outlines"))
     p.add_argument("--model", default="Qwen/Qwen2.5-VL-7B-Instruct")
     p.add_argument("--mock", action="store_true", help="outline from existing headings, no model")
+    p.add_argument("--max-new-tokens", type=int, default=1536, help="output budget; use 4096 for truncated responses")
+    p.add_argument("--retry-rejected", action="store_true",
+                   help="retry only existing rejected files in --out; back up their originals")
     a = p.parse_args()
+    if a.max_new_tokens < 1:
+        p.error("--max-new-tokens must be positive")
     a.out, a.pages_md = os.path.abspath(a.out), os.path.abspath(a.pages_md)
     os.makedirs(a.out, exist_ok=True)
     units = all_units()
     if not (a.all or a.unit):
         sys.exit("give --unit <name> or --all")
+    backup_dir = os.path.join(a.out, "retry_backups", str(time.time_ns()))
     for unit in (sorted(units) if a.all else a.unit):
+        output_path = os.path.join(a.out, unit + ".json")
+        if a.retry_rejected:
+            if not os.path.exists(output_path):
+                continue
+            with open(output_path) as f:
+                previous = json.load(f)
+            if previous.get("outline"):
+                print(f"{unit}: kept existing accepted outline")
+                continue
         blocks = collect_blocks(units[unit], a.pages_md)
+        if not blocks:
+            print(f"{unit}: no input blocks; skipped")
+            continue
         prompt = build_prompt(unit, blocks)
-        raw = mock_outline(blocks) if a.mock else call_llm(prompt, a.model)
+        raw = mock_outline(blocks) if a.mock else call_llm(prompt, a.model, a.max_new_tokens)
         outline, report = validate(raw, blocks)
-        json.dump({"unit": unit, "outline": outline, "report": report, "raw_model_output": raw,
-                   "blocks": len(blocks)}, open(os.path.join(a.out, unit + ".json"), "w"), indent=1)
+        if a.retry_rejected:
+            os.makedirs(backup_dir, exist_ok=True)
+            shutil.copy2(output_path, os.path.join(backup_dir, unit + ".json"))
+        Path(output_path).write_text(json.dumps(
+            {"unit": unit, "outline": outline, "report": report, "raw_model_output": raw,
+             "blocks": len(blocks), "pages_md": a.pages_md,
+             "model": "mock" if a.mock else a.model, "max_new_tokens": a.max_new_tokens}, indent=1))
         status = "OK" if outline else "REJECTED (page order will be used)"
         print(f"{unit}: {len(blocks)} blocks -> {status}; sections {report.get('sections', 0)}, "
               f"titles replaced {len(report['titles_replaced'])}, problems {len(report['problems'])}")
