@@ -361,6 +361,7 @@ def main():
     p.add_argument("--format", choices=["pdf", "html", "md"], default=None,
                    help="default: pdf if xelatex is installed, else html if pandoc is, else md")
     a = p.parse_args()
+    a.out, a.pages_md = os.path.abspath(a.out), os.path.abspath(a.pages_md)  # pandoc runs inside the output folder
     latex = shutil.which("xelatex") or shutil.which("tectonic")
     fmt = a.format or ("pdf" if latex and shutil.which("pandoc") else "html" if shutil.which("pandoc") else "md")
     units = all_units()
