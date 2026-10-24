@@ -1,0 +1,24 @@
+{
+  "input_image": "binarized_sauvola/ie643_lec05_page019.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [0, 132, 5376, 4121]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [5376, 386, 6932, 1312]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5383, 1963, 6315, 2335]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [5383, 2434, 6306, 2919]"
+      }
+    ]
+  }
+}

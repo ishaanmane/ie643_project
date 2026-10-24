@@ -1,0 +1,92 @@
+{
+  "input_image": "binarized_sauvola/mlt_week01_page003.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [846, 152, 2295, 450]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [207, 478, 717, 600]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [785, 520, 2286, 782]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [287, 835, 705, 1081]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [904, 867, 1832, 1086]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [790, 1149, 1484, 1202]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [492, 1196, 1508, 1497]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [181, 1588, 2224, 1824]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [184, 1873, 2229, 1978]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [172, 2003, 1587, 2208]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [176, 2275, 2186, 2402]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [246, 2400, 1135, 2553]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [180, 2615, 2298, 2739]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [167, 2758, 527, 2844]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [170, 2805, 494, 2855]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [147, 2898, 576, 2980]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [661, 2894, 861, 2982]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [982, 2886, 1103, 2947]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1215, 2869, 1720, 2941]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1820, 2823, 2401, 3050]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [543, 3116, 669, 3135]"
+      }
+    ]
+  }
+}

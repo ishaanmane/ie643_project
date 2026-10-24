@@ -1,0 +1,88 @@
+{
+  "input_image": "binarized_sauvola/ie643_lec03_page012.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [302, 245, 1742, 632]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [729, 801, 1789, 1801]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1332, 1503, 3585, 2421]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [159, 2786, 1789, 4060]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1787, 315, 2627, 722]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3055, 276, 3593, 769]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1800, 2767, 3575, 3691]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1845, 3761, 2742, 4136]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3579, 344, 3942, 614]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [4219, 411, 4787, 670]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5028, 309, 5380, 625]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5344, 970, 5378, 1098]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3610, 1521, 5361, 1891]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3584, 2113, 3900, 2265]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3586, 2737, 5318, 3547]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [3763, 3714, 4298, 4208]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [5374, 410, 6835, 811]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [5380, 869, 6547, 1276]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [5376, 1556, 6839, 1919]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [5562, 2723, 6501, 3550]"
+      }
+    ]
+  }
+}

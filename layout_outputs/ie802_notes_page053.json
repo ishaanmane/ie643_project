@@ -1,0 +1,24 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page053.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "paragraph",
+        "content": "Location: [43, 118, 198, 1201]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [212, 199, 1662, 2314]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [954, 166, 1723, 1164]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [2, 2401, 1783, 2454]"
+      }
+    ]
+  }
+}

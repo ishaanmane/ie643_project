@@ -1,0 +1,36 @@
+{
+  "input_image": "binarized_sauvola/hlcs_note20_page001.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [54, 167, 2299, 1192]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [364, 1196, 2163, 1536]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [479, 1540, 2112, 1683]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [468, 1742, 2087, 1937]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1524, 1969, 2175, 2050]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [719, 2136, 2163, 2356]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [48, 2408, 2317, 3203]"
+      }
+    ]
+  }
+}

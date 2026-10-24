@@ -1,0 +1,38 @@
+{
+  "image": "/home/intralab/ie643_project/binarized_sauvola/hlcs_note01_page001.png",
+  "image_name": "hlcs_note01_page001.png",
+  "width": 2380,
+  "height": 3368,
+  "coordinate_format": "absolute_pixels_xyxy",
+  "boxes": [
+    {
+      "label": "chapter_heading",
+      "x1": 701,
+      "y1": 420,
+      "x2": 1514,
+      "y2": 639
+    },
+    {
+      "label": "text",
+      "x1": 301,
+      "y1": 639,
+      "x2": 2082,
+      "y2": 2205
+    },
+    {
+      "label": "text",
+      "x1": 1910,
+      "y1": 459,
+      "x2": 2065,
+      "y2": 609
+    },
+    {
+      "label": "diagram",
+      "x1": 305,
+      "y1": 2248,
+      "x2": 2082,
+      "y2": 2768
+    }
+  ],
+  "updated_at": "2026-10-24T06:02:59.986153+00:00"
+}

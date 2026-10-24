@@ -1,0 +1,80 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page052.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "paragraph",
+        "content": "Location: [23, 86, 93, 147]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [349, 139, 1211, 288]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [349, 294, 889, 418]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [265, 484, 1165, 579]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [438, 639, 963, 905]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [825, 848, 1579, 1012]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [221, 1054, 664, 1115]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [394, 1144, 911, 1180]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [565, 1224, 796, 1251]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [329, 1287, 1123, 1338]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1025, 1267, 1395, 1302]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [300, 1359, 1090, 1438]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [292, 1451, 1494, 1560]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [323, 1572, 1465, 1726]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [363, 1765, 934, 2006]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1030, 1775, 1581, 2076]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1055, 2089, 1526, 2234]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [7, 2400, 1786, 2454]"
+      }
+    ]
+  }
+}

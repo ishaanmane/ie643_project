@@ -1,0 +1,84 @@
+{
+  "input_image": "binarized_sauvola/mlt_week03_page009.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [148, 198, 1303, 271]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [138, 315, 2425, 1216]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [135, 1198, 2356, 1295]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [147, 1346, 686, 1446]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [156, 1515, 2431, 1627]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [154, 1651, 2438, 1892]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [154, 1901, 1111, 2014]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [140, 2032, 2274, 2145]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [173, 2173, 955, 2298]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [175, 2346, 2368, 2401]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [618, 2399, 1928, 2440]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2214, 2400, 2356, 2434]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [188, 2482, 1089, 2583]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1345, 2566, 1455, 2635]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1416, 2580, 1579, 2683]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [639, 2587, 1288, 2701]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [150, 2797, 466, 2911]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [241, 2962, 1047, 3019]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [573, 3113, 715, 3133]"
+      }
+    ]
+  }
+}

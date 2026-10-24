@@ -1,0 +1,88 @@
+{
+  "input_image": "binarized_sauvola/ie643_lec06_page020.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [265, 161, 1796, 536]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [293, 1182, 1777, 1654]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [265, 1782, 1766, 2638]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [224, 2984, 1791, 3824]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1802, 129, 3583, 731]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1816, 1141, 3410, 1548]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1867, 1968, 3314, 2799]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [2040, 3425, 3400, 4125]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3690, 213, 5049, 620]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3598, 746, 4085, 1106]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [4969, 1048, 5357, 1647]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3645, 1847, 5000, 2531]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [4552, 2733, 4787, 3033]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [4417, 2910, 4892, 3657]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [4874, 3284, 5384, 3980]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3589, 3438, 3791, 3855]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3981, 3474, 4323, 3744]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [5387, 681, 6897, 1554]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [5416, 1943, 6062, 2590]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [5372, 3349, 6777, 4142]"
+      }
+    ]
+  }
+}

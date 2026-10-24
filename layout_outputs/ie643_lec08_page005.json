@@ -1,0 +1,80 @@
+{
+  "input_image": "binarized_sauvola/ie643_lec08_page005.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [142, 187, 1793, 593]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [534, 765, 1796, 3870]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1793, 321, 2166, 451]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2775, 652, 3440, 1481]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2148, 1858, 3582, 2354]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2418, 2569, 3262, 3147]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2268, 3398, 3480, 3883]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3956, 190, 4739, 506]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3610, 673, 5380, 1237]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3839, 1296, 5331, 1572]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3593, 1679, 5382, 2771]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [3603, 3153, 5371, 4018]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5553, 206, 6230, 688]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5377, 863, 5497, 1040]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5384, 1250, 5864, 1495]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5388, 1911, 6616, 2295]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5381, 2408, 6772, 3396]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5387, 3436, 6841, 4216]"
+      }
+    ]
+  }
+}

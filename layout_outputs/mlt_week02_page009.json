@@ -1,0 +1,80 @@
+{
+  "input_image": "binarized_sauvola/mlt_week02_page009.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [220, 140, 2431, 280]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [285, 348, 937, 480]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [296, 535, 1867, 764]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [560, 866, 2205, 1037]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [756, 1005, 1765, 1146]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1026, 1149, 1729, 1201]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1011, 1199, 1726, 1259]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [308, 1355, 939, 1475]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [661, 1486, 1488, 1673]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1616, 1545, 2113, 1601]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [522, 1746, 1264, 1853]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [562, 1904, 2346, 2044]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [569, 2076, 2390, 2207]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [282, 2324, 2218, 2402]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [312, 2399, 2266, 2464]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [673, 2566, 2244, 2713]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [679, 2764, 2287, 2951]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [581, 3115, 722, 3134]"
+      }
+    ]
+  }
+}

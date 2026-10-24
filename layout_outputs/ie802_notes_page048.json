@@ -1,0 +1,60 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page048.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "paragraph",
+        "content": "Location: [228, 169, 1615, 229]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [241, 248, 1618, 516]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [231, 565, 1517, 628]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [237, 632, 1630, 775]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [233, 813, 1611, 945]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [310, 961, 1569, 1100]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [289, 1141, 1632, 1187]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [49, 1208, 716, 2378]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1046, 1201, 1674, 1385]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [835, 1564, 1011, 1670]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [196, 1686, 727, 1749]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [240, 1804, 1557, 2091]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [572, 2429, 1081, 2443]"
+      }
+    ]
+  }
+}

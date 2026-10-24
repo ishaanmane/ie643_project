@@ -1,0 +1,20 @@
+{
+  "input_image": "binarized_sauvola/mlt_week10_page009.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [676, 134, 2266, 357]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [117, 1241, 2328, 2299]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [637, 3114, 805, 3137]"
+      }
+    ]
+  }
+}

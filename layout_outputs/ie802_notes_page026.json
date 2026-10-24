@@ -1,0 +1,204 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page026.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [258, 9, 1085, 155]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [218, 148, 560, 188]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [198, 188, 1198, 486]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [672, 536, 813, 574]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [197, 610, 908, 743]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [228, 641, 1197, 752]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [263, 763, 1196, 859]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [377, 841, 1194, 920]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [229, 944, 1197, 1045]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [221, 1052, 1192, 1190]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [296, 1208, 1194, 1285]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [421, 1292, 1195, 1391]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [874, 1438, 1080, 1483]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [983, 1697, 1197, 1758]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1213, -7, 2390, 136]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1240, 148, 1987, 199]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2145, 135, 2308, 183]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1406, 213, 2141, 400]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2063, 321, 2370, 416]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1369, 453, 1477, 517]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1439, 445, 1732, 495]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1858, 486, 2096, 552]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1514, 541, 1916, 607]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1444, 596, 1761, 682]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1757, 600, 1890, 687]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1834, 525, 1981, 644]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1948, 550, 2121, 650]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2251, 511, 2387, 643]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2302, 668, 2390, 732]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1208, 729, 1719, 783]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1944, 790, 2087, 834]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1340, 804, 2283, 1020]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1941, 1020, 2171, 1091]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1635, 1044, 2012, 1119]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1910, 1124, 2282, 1168]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1696, 1191, 2076, 1241]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1662, 1250, 1881, 1315]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2022, 1284, 2172, 1326]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2069, 1350, 2380, 1401]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1693, 1443, 1897, 1493]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2044, 1466, 2350, 1510]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1723, 1535, 2039, 1579]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1887, 1597, 2291, 1641]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1275, 1694, 1492, 1774]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1626, 1704, 1757, 1778]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1826, 1708, 1934, 1783]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2216, 1724, 2306, 1783]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [2400, 5, 2455, 1622]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [2437, 1727, 2454, 1781]"
+      }
+    ]
+  }
+}

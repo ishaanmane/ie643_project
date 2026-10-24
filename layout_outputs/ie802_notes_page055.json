@@ -1,0 +1,92 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page055.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [36, 154, 1735, 1201]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [220, 1206, 538, 1265]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [184, 1304, 576, 1349]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [254, 1542, 686, 1634]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [234, 1655, 634, 1829]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [248, 1829, 610, 1999]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [240, 2006, 594, 2128]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [219, 2145, 586, 2238]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [200, 2253, 583, 2315]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [911, 1194, 1492, 1330]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [980, 1347, 1494, 1404]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1073, 1425, 1621, 1512]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1061, 1540, 1654, 1623]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1128, 1658, 1641, 1729]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1123, 1746, 1585, 1818]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1194, 1825, 1642, 1964]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [984, 1998, 1483, 2074]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [970, 2095, 1445, 2169]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1009, 2190, 1417, 2251]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1062, 2268, 1419, 2311]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [505, 2430, 1349, 2457]"
+      }
+    ]
+  }
+}

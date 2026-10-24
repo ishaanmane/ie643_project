@@ -1,0 +1,20 @@
+{
+  "input_image": "binarized_sauvola/hlcs_note11_page001.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [52, 172, 2314, 1197]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [67, 1203, 2271, 2389]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [51, 2409, 2320, 3201]"
+      }
+    ]
+  }
+}

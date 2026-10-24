@@ -1,0 +1,40 @@
+{
+  "input_image": "binarized_sauvola/ie643_lec07_page016.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [324, 238, 1713, 654]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [94, 910, 737, 1228]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [982, 913, 1777, 1601]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [243, 1927, 1793, 3383]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1833, 254, 3586, 634]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1809, 1073, 3571, 1622]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3588, 146, 5360, 2269]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5465, 150, 7080, 3957]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "input_image": "binarized_sauvola/mlt_week09_page008.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [445, 136, 1555, 382]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [426, 397, 1265, 685]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [338, 809, 931, 975]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [320, 1045, 2340, 1999]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1688, 1172, 1810, 1198]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [395, 2173, 1924, 2794]"
+      },
+      {
+        "block_type": "caption",
+        "content": "Location: [575, 3114, 715, 3132]"
+      }
+    ]
+  }
+}

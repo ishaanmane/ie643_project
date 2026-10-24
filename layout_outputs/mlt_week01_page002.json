@@ -1,0 +1,84 @@
+{
+  "input_image": "binarized_sauvola/mlt_week01_page002.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [234, 140, 888, 226]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [146, 291, 1125, 432]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [163, 505, 873, 1093]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1416, 914, 1724, 1146]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1788, 853, 2149, 1016]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1344, 1164, 1488, 1201]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1483, 1174, 1660, 1202]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1853, 1173, 1947, 1195]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [136, 1200, 2162, 1449]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [139, 1487, 1974, 1629]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [139, 1640, 1991, 1737]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [149, 1933, 1977, 2069]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [142, 2098, 2033, 2197]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [921, 2231, 1631, 2340]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [931, 2348, 2033, 2400]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [821, 2399, 2174, 2423]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [139, 2521, 2298, 2618]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [213, 2657, 2296, 3036]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [542, 3116, 665, 3135]"
+      }
+    ]
+  }
+}

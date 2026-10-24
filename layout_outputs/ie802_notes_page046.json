@@ -1,0 +1,84 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page046.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "paragraph",
+        "content": "Location: [8, 52, 178, 1197]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [216, 168, 661, 235]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [249, 269, 599, 321]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [257, 331, 868, 388]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [266, 391, 470, 445]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [259, 522, 624, 667]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [365, 679, 529, 800]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [393, 825, 961, 871]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [224, 905, 870, 952]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [291, 962, 930, 1008]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [235, 1040, 1070, 1099]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [349, 1111, 751, 1160]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [341, 1172, 784, 1199]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1055, 140, 1700, 943]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1156, 1017, 1665, 1122]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [63, 1208, 1622, 2387]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1762, 1809, 1785, 2276]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1766, 2351, 1784, 2391]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [81, 2400, 1782, 2454]"
+      }
+    ]
+  }
+}

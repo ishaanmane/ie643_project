@@ -1,0 +1,80 @@
+{
+  "input_image": "binarized_sauvola/ie643_lec03_page008.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [168, 126, 1785, 730]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [1001, 907, 1803, 1497]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [80, 2022, 1791, 3663]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [3248, 304, 3574, 612]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2202, 1063, 2589, 1316]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [3276, 998, 3584, 1317]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [2052, 2031, 2201, 2193]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1803, 2343, 2126, 2533]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1791, 2552, 2117, 2818]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [1800, 3271, 2479, 3554]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [3108, 2723, 3551, 3090]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [3095, 2704, 5379, 4096]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [3058, 2704, 5379, 4096]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3589, 363, 4592, 822]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [3592, 909, 5380, 2354]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5378, 996, 6474, 1393]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [5384, 1471, 6576, 2434]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [5376, 2839, 6731, 3535]"
+      }
+    ]
+  }
+}

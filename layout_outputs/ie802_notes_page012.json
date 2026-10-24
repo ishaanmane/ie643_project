@@ -1,0 +1,36 @@
+{
+  "input_image": "binarized_sauvola/ie802_notes_page012.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "other",
+        "content": "Location: [130, 50, 1731, 1191]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [146, 1200, 1649, 1536]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [133, 1538, 1550, 1838]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1032, 1829, 1468, 2101]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [234, 2147, 1559, 2217]"
+      },
+      {
+        "block_type": "paragraph",
+        "content": "Location: [216, 2266, 1525, 2395]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [9, 2401, 1786, 2455]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "input_image": "binarized_sauvola/mlt_week09_page005.png",
+  "model": "surya-legacy-layout",
+  "data": {
+    "page_layout": [
+      {
+        "block_type": "image",
+        "content": "Location: [508, 140, 931, 305]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [608, 200, 923, 438]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [395, 491, 1048, 741]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [641, 474, 1103, 856]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1229, 862, 1863, 998]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1911, 943, 2277, 1093]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [265, 1046, 1044, 1208]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1179, 1133, 1476, 1197]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1500, 1141, 1786, 1201]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1555, 148, 2088, 420]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [1400, 519, 2113, 839]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [265, 1198, 2081, 1366]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [967, 1458, 1327, 1579]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [242, 1640, 1530, 1760]"
+      },
+      {
+        "block_type": "other",
+        "content": "Location: [346, 1954, 816, 2385]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [932, 1907, 2256, 2710]"
+      },
+      {
+        "block_type": "image",
+        "content": "Location: [405, 2402, 848, 2643]"
+      },
+      {
+        "block_type": "caption",
+        "content": "Location: [568, 3113, 706, 3133]"
+      }
+    ]
+  }
+}
