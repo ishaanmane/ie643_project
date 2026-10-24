@@ -24,7 +24,7 @@
 
 1. Layout metric script (box overlap, reading order).
 2. Stage 4: rebuild a document from the Markdown plus figure crops, then generate the PDF.
-3. Inference path for a new page: preprocessing → Surya → tags → boxes → Qwen with the adapter.
+3. Inference path for a new page: preprocessing → Qwen with the `clean` adapter for the Markdown; Surya alongside for figure crops and reading order.
 4. User interface.
 5. Report.
 
