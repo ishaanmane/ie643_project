@@ -124,9 +124,9 @@ raw scans ──► 01 preprocessing ──► data/processed/ (410 pages)
 ## 6. In progress right now
 
 Step 1 of "improve generation": **measure the generator on all 42 units** (labels as input, so it measures the generator, not extraction).
-- `04_reconstruction/evaluate_generation.py`: **written, not yet tested, not committed.** Summarises render reports + outlines: blocks kept, sections, outlines used/rejected, titles dropped, repeats merged, equations failed, figures matched, PDFs built.
-- `04_reconstruction/outline.py`: an `--all` option was added (**uncommitted, untested**).
-- Next action: test locally with `--mock` (`outline.py --all --mock --out <dir>`, render `--all --outlines <dir> --format md`, then `evaluate_generation.py`), commit, push on request, then on the GPU:
+- `04_reconstruction/evaluate_generation.py` and the `outline.py --all` option: **tested on the Mac, 2026-10-25**. Full mock run: 42 units, 410 pages, 2,579/2,579 blocks kept, 227 sections, 227/243 diagrams matched, 10/2,739 equations flagged by Tectonic; no PDFs requested. See `results/generation_eval_mock.md` and `findings/05_evaluation.md`. These are pipeline checks, not LLM quality measurements.
+- Fixed two issues found during testing: HTML outputs were counted as PDFs, and unmatched diagram descriptions containing brackets caused false missing-block reports.
+- Next action: push the tested changes **only on the user's request**, then on the GPU:
   ```bash
   python3 04_reconstruction/outline.py --all --out out/outlines_all
   python3 04_reconstruction/render_document.py --all --outlines out/outlines_all --out out/documents_all

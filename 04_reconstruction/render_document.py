@@ -351,7 +351,11 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
         if b.lstrip().startswith("#"):
             key = b.lstrip().lstrip("#").strip()
         elif DIAGRAM.match(b):
-            key = DIAGRAM.match(b).group(1).strip().replace("[", "\\[").replace("]", "\\]")
+            key = DIAGRAM.match(b).group(1).strip()
+            # Captions escape brackets; unmatched descriptions stay as plain text.
+            escaped = key.replace("[", "\\[").replace("]", "\\]")
+            if re.sub(r"\s+", " ", escaped).strip() in flat:
+                continue
         else:
             key = b
         if re.sub(r"\s+", " ", key).strip() not in flat:

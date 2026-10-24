@@ -44,6 +44,33 @@ python3 04_reconstruction/outline.py --unit ie643_lec07 --pages-md preds/lora_cl
 python3 04_reconstruction/render_document.py --unit ie643_lec07 --pages-md preds/lora_clean_val --outlines out/outlines
 ```
 
+## Measure generation across all units
+
+Use labels as input to measure reconstruction separately from recognition. For a local
+smoke check without loading the model:
+
+```bash
+python3 04_reconstruction/outline.py --all --mock --out out/mock_outlines
+python3 04_reconstruction/render_document.py --all --outlines out/mock_outlines --out out/mock_documents --format md
+python3 04_reconstruction/evaluate_generation.py --docs out/mock_documents --outlines out/mock_outlines --md out/mock_generation_eval.md
+```
+
+Expect: 42 outlines and render reports, a per-unit table and totals, and zero PDFs
+because this check requests Markdown. Mock outlines test the pipeline using existing
+headings; they do not measure LLM outline quality.
+
+On the GPU, omit `--mock`, render PDFs, and save the measured summary:
+
+```bash
+python3 04_reconstruction/outline.py --all --out out/outlines_all
+python3 04_reconstruction/render_document.py --all --outlines out/outlines_all --out out/documents_all
+python3 04_reconstruction/evaluate_generation.py --docs out/documents_all --outlines out/outlines_all --md results/generation_eval.md
+```
+
+Expect: 42 unit rows with block preservation, outline acceptance, section counts,
+validation problems, equation check method and failures, diagram matching and PDF counts.
+Use fresh output folders when changing input sets so old reports do not enter the totals.
+
 ## Next steps
 
 3. Mark repeated content (recaps) using the leakage-check similarity.

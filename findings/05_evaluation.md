@@ -29,3 +29,28 @@ Perfect predictions score 0.000 on every metric; randomly dropping 5% of charact
 
 - Layout metric: box overlap (IoU / mAP) and reading-order agreement between Surya and hand-checked tags on about 20 pages.
 - PDF-level checks once reconstruction exists (LaTeX compile rate, text recoverable from the PDF).
+
+## Generation pipeline smoke check (2026-10-25, Mac)
+
+`outline.py --all --mock`, followed by `render_document.py --all --format md`
+and `evaluate_generation.py`, ran on all labels. Results:
+
+- 42 units, 410 pages, no missing pages; **2,579/2,579 blocks retained**.
+- 42 mock outlines used, 227 sections; no rejected outlines or validation problems.
+- 227/243 diagram descriptions matched to crops.
+- 2,739 equation snippets checked with Tectonic; 10 flagged (0.37%).
+- 0 PDFs requested; this run checks Markdown reconstruction, not PDF compilation.
+
+Table: `results/generation_eval_mock.md`. Mock outlines use existing headings, so
+these numbers do not evaluate LLM section choices. The real GPU run is still pending.
+
+Testing found and fixed false missing-block reports for two unmatched lecture 9
+diagram descriptions containing square brackets. Captions escape brackets; plain
+descriptions do not. The evaluator now distinguishes HTML from PDF output and
+includes the equation check method. Additional checks covered accepted, rejected
+and absent outlines, Markdown export and empty report folders.
+
+Tectonic crashed inside the sandbox; the full run was repeated outside it, where a
+minimal document also compiled successfully. The existing renderer can silently
+return no equation failures after an infrastructure error; a zero count alone is
+not proof that the compiler ran successfully.
