@@ -12,3 +12,4 @@ preds/
 03_recognition/runs/
 # rendered documents (04_reconstruction/render_document.py)
 out/
+logs/

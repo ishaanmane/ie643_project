@@ -215,6 +215,29 @@ def bad_math_latex(snippets):
     return bad
 
 
+def bad_math_tectonic(snippets, max_rounds=40):
+    """Exact check with Tectonic, which stops at the first error: find the failing line,
+    set that equation aside, retry until the rest compiles."""
+    if not snippets:
+        return set()
+    bad, remaining = set(), list(snippets)
+    head = [r"\documentclass{article}", r"\usepackage{amsmath,amssymb,mathtools}",
+            r"\usepackage{unicode-math}", r"\begin{document}"]
+    for _ in range(max_rounds):
+        lines = head + [r"\[" + s.replace("\n", " ") + r"\]" for s in remaining] + [r"\end{document}"]
+        with tempfile.TemporaryDirectory() as tmp:
+            open(os.path.join(tmp, "m.tex"), "w").write("\n".join(lines))
+            r = subprocess.run(["tectonic", "m.tex"], cwd=tmp, capture_output=True, text=True, timeout=600)
+        if r.returncode == 0:
+            return bad
+        m = re.search(r"m\.tex:(\d+):", r.stderr + r.stdout)
+        k = int(m.group(1)) - len(head) - 1 if m else -1
+        if not 0 <= k < len(remaining):
+            break  # error outside the equations (e.g. a missing package): give up quietly
+        bad.add(remaining.pop(k))
+    return bad
+
+
 def bad_math_pandoc(snippets, pandoc):
     """Approximate check without LaTeX: pandoc's math parser (texmath) must accept it."""
     bad = set()
@@ -301,6 +324,8 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
     snippets = sorted(set(find_math(doc)))
     if shutil.which("xelatex"):
         bad, how = bad_math_latex(snippets), "xelatex"
+    elif shutil.which("tectonic"):
+        bad, how = bad_math_tectonic(snippets), "tectonic"
     elif pandoc:
         bad, how = bad_math_pandoc(snippets, pandoc), "pandoc math parser (approximate)"
     else:
