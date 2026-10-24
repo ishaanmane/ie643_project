@@ -27,7 +27,7 @@ Smaller is cheaper but chalkboard handwriting gets harder to read. The pilot pic
 
 0. **Before anything:** `data/processed/` must exist and be the fixed version (`git pull`, then `python3 01_preprocessing/batch_preprocess.py --workers 4 --force`). The JSONL files point at it.
 1. **Kaggle setup** (GPU T4, Internet On): clone the repo, create a Python 3.11 environment, install Unsloth, TRL and jiwer. Kaggle's default Python is 3.13, which Unsloth may not support.
-2. **Pilot** at 500k, 1M and 1.5M pixels, 20 steps each. Pick the largest size that fits with headroom; note the seconds per step and compute the real training time.
+2. **Pilot** at 500k, 1M and 1.5M pixels, 20 steps each, with `--grad-accum 1` (so seconds per step is seconds per page; training time is that times 324 times the epochs). Pick the largest size that fits with headroom; note the seconds per step and compute the real training time.
 3. **Zero-shot baseline:** `infer_qwen_vl.py` with no adapter on the 26 validation pages, then `evaluate.py`. This is the number the fine-tuned model must beat.
 4. **Fine-tune:** 3 epochs on the 324 training pages. Adapters are saved after every epoch to `/kaggle/working/qwen_lora`. Download or upload them before the session ends, because Kaggle wipes the disk.
 5. **Evaluate the adapter** on validation with the same two commands, and compare with step 3.
