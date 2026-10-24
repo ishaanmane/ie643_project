@@ -19,6 +19,7 @@ The folders are numbered in pipeline order. Each has its own README.
 Other folders:
 
 - [data/](data/) - page images (`raw_scans/`), ground truth (`annotations/`), region tags and context examples, JSONL splits. See [data/README.md](data/README.md).
+- [docs/HANDOFF.md](docs/HANDOFF.md) - full context for a new session: setup, results, gotchas, current work.
 - [findings/](findings/) - what was built, measured and learned, one file per stage.
 - [docs/](docs/) - project statement, pipeline design, [dataset audit](docs/DATASET_AUDIT.md), and earlier planning notes in `docs/planning/`.
 
