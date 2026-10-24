@@ -265,11 +265,19 @@ def neutralise(md, bad):
 
 # ---- document -------------------------------------------------------------------------
 
-def render_unit(unit, pages, md_dir, out_root, fmt):
+def heading_text(block):
+    return re.sub(r"\s+", " ", block.lstrip().lstrip("#").strip().strip("*")).lower()
+
+
+def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
+    """outline: {"sections": [{"start": "p4.3", "title": ..., "level": 1|2}]} from outline.py, or None."""
+    starts = {sec["start"]: sec for sec in (outline or {}).get("sections", [])}
     out = os.path.join(out_root, unit)
     shutil.rmtree(out, ignore_errors=True)
     os.makedirs(os.path.join(out, "figures"))
-    report = {"unit": unit, "pages": [], "missing_pages": []}
+    report = {"unit": unit, "pages": [], "missing_pages": [],
+              "outline": f"{len(starts)} sections" if starts else "none (page order)"}
+    sources = []  # every source block, to verify nothing is lost
     font = ""
     if fmt == "pdf" and shutil.which("fc-list"):
         fonts = subprocess.run(["fc-list"], capture_output=True, text=True).stdout
@@ -307,7 +315,18 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
             return f"![{cap}]({'figures/' + name}){{width=55% height=30%}}"
 
         body = [f"<!-- page: {page} -->"]
+        pnum = int(re.search(r"page(\d+)$", page).group(1))
         for k, b in enumerate(blocks):
+            bid = f"p{pnum}.{k}"
+            sources.append(b)
+            sec = starts.get(bid)
+            if sec:
+                body.append("#" * sec["level"] + " " + sec["title"])
+            if starts and b.lstrip().startswith("#"):
+                if sec and heading_text(b) == heading_text(sec["title"]):
+                    continue  # the section title is this heading: do not print it twice
+                body.append("### " + b.lstrip().lstrip("#").strip())  # in-page heading under the sections
+                continue
             if k in matched_desc:
                 body.append(figure_md(matched_desc[k], DIAGRAM.match(b).group(1).strip()))
             elif DIAGRAM.match(b):
@@ -323,6 +342,19 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
                                 "descriptions_without_figure": len(desc_idx) - len(pairs)})
 
     doc = "\n\n".join(parts) + "\n"
+    # preservation check: every source block's text must be in the document
+    flat = re.sub(r"\s+", " ", doc)
+    missing = []
+    for b in sources:
+        if b.lstrip().startswith("#"):
+            key = b.lstrip().lstrip("#").strip()
+        elif DIAGRAM.match(b):
+            key = DIAGRAM.match(b).group(1).strip().replace("[", "\\[").replace("]", "\\]")
+        else:
+            key = b
+        if re.sub(r"\s+", " ", key).strip() not in flat:
+            missing.append(b[:80])
+    report["preservation"] = {"blocks": len(sources), "missing": len(missing), "missing_list": missing[:10]}
     pandoc = shutil.which("pandoc")
     snippets = sorted(set(find_math(doc)))
     if shutil.which("xelatex"):
@@ -358,6 +390,7 @@ def main():
     p.add_argument("--pages-md", default=os.path.join(D, "annotations"),
                    help="folder of per-page Markdown (labels or model predictions)")
     p.add_argument("--out", default=os.path.join(ROOT, "out", "documents"))
+    p.add_argument("--outlines", default=None, help="folder of outlines from outline.py (adds sections)")
     p.add_argument("--format", choices=["pdf", "html", "md"], default=None,
                    help="default: pdf if xelatex is installed, else html if pandoc is, else md")
     a = p.parse_args()
@@ -369,12 +402,17 @@ def main():
     if not chosen:
         sys.exit("give --unit <name> or --all; units: " + ", ".join(sorted(units)))
     for u in chosen:
-        r = render_unit(u, units[u], a.pages_md, a.out, fmt)
+        outline = None
+        if a.outlines and os.path.exists(os.path.join(a.outlines, u + ".json")):
+            outline = json.load(open(os.path.join(a.outlines, u + ".json")))["outline"]  # None if rejected
+        r = render_unit(u, units[u], a.pages_md, a.out, fmt, outline)
         pg = r["pages"]
         print(f"{u:14s} pages {len(pg):3d} (missing {len(r['missing_pages'])}) | figures matched "
               f"{sum(x['matched'] for x in pg)}/{sum(x['descriptions'] for x in pg)} descriptions, "
               f"+{sum(x['extra_figures_added'] for x in pg)} extra | equations {r['math']['equations']}, "
-              f"failed {r['math']['failed']} ({r['math']['checked_with']}) | output: {r['output'] or 'md only'}")
+              f"failed {r['math']['failed']} ({r['math']['checked_with']}) | sections: {r['outline']} | "
+              f"blocks kept {r['preservation']['blocks'] - r['preservation']['missing']}/{r['preservation']['blocks']} | "
+              f"output: {r['output'] or 'md only'}")
 
 
 if __name__ == "__main__":
