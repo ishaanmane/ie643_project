@@ -45,4 +45,4 @@ os.environ["SURYA_INFERENCE_URL"] = "http://localhost:8000/v1"
 
 Why those server flags: `--dtype half` (the T4 has no bf16), `--limit-mm-per-prompt '{"video": 0}'` and a small `--max-num-batched-tokens` (otherwise vLLM's start-up memory check for video inputs runs the card out of memory), `--enforce-eager` (skips a memory-heavy optimisation). To stop a stuck server, kill by GPU process id (`nvidia-smi --query-compute-apps=pid --format=csv,noheader | xargs kill -9`); `pkill -f 'vllm serve'` also kills the shell running it.
 
-Planned: `layout.py` (wrapper that returns normalised 0-1000 boxes, labels and order).
+Convert Surya output to our tags format and crop figures: `python3 02_layout/surya_to_tags.py --results <results.json> --images data/processed` (writes `data/tags_draft/` and `data/crops/`). Full runbook: [../docs/PIPELINE_TO_OCR.md](../docs/PIPELINE_TO_OCR.md).
