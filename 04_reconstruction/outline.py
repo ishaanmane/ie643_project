@@ -181,13 +181,21 @@ def validate(raw, blocks):
             report["problems"].append(f"start {s['start']} is not after the previous section")
             continue
         level = s.get("level") if s.get("level") in (1, 2) else 2
-        title = str(s.get("title", "")).strip().lstrip("#").strip()  # models sometimes add '# ' 
-        unknown = [w for w in content_words(title) if w[:5] not in vocab]
-        if not title or unknown:
-            new = first_line(blocks[i]["text"])
-            report["titles_replaced"].append({"start": s["start"], "model_title": title,
-                                              "words_not_in_notes": unknown, "used": new})
-            title = new
+        title = str(s.get("title", "")).strip().lstrip("#").strip()  # models sometimes add '# '
+        start_text = blocks[i]["text"]
+        if blocks[i]["type"] == "heading":
+            # a section that starts on a heading keeps the notes' exact wording
+            title = start_text.lstrip().lstrip("#").strip().strip("*").strip().rstrip(":").strip()
+        else:
+            unknown = [w for w in content_words(title) if w[:5] not in vocab]
+            if not title or unknown:
+                # no faithful title available: drop this section break rather than invent one
+                report["titles_replaced"].append({"start": s["start"], "model_title": title,
+                                                  "words_not_in_notes": unknown, "used": "(section dropped)"})
+                continue
+        if clean and title.lower() == clean[-1]["title"].lower():
+            report.setdefault("merged_repeats", []).append(s["start"])  # same title twice in a row
+            continue
         clean.append({"start": s["start"], "title": title, "level": level})
         last = i
     if not clean or len(report["problems"]) > len(clean):

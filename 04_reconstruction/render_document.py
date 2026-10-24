@@ -320,11 +320,13 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None):
             bid = f"p{pnum}.{k}"
             sources.append(b)
             sec = starts.get(bid)
+            if sec and b.lstrip().startswith("#"):
+                # the section starts on a heading: print that heading, verbatim, at the section level
+                body.append("#" * sec["level"] + " " + b.lstrip().lstrip("#").strip())
+                continue
             if sec:
                 body.append("#" * sec["level"] + " " + sec["title"])
             if starts and b.lstrip().startswith("#"):
-                if sec and heading_text(b) == heading_text(sec["title"]):
-                    continue  # the section title is this heading: do not print it twice
                 body.append("### " + b.lstrip().lstrip("#").strip())  # in-page heading under the sections
                 continue
             if k in matched_desc:
