@@ -95,15 +95,21 @@ def build_prompt(unit, blocks):
     )
 
 
-def call_llm(prompt, model_id, max_new_tokens=1024):
-    """Text-only generation with Qwen2.5-VL (already downloaded for extraction) in 4-bit."""
+_MODEL = {}
+
+
+def call_llm(prompt, model_id, max_new_tokens=1536):
+    """Text-only generation with Qwen2.5-VL (already downloaded for extraction) in 4-bit.
+    The model is loaded once and reused for every unit."""
     import torch
     from transformers import AutoProcessor, BitsAndBytesConfig, Qwen2_5_VLForConditionalGeneration
-    bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
-                             bnb_4bit_compute_dtype=torch.bfloat16)
-    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-        model_id, quantization_config=bnb, torch_dtype=torch.bfloat16, device_map={"": 0})
-    proc = AutoProcessor.from_pretrained(model_id)
+    if model_id not in _MODEL:
+        bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
+                                 bnb_4bit_compute_dtype=torch.bfloat16)
+        _MODEL[model_id] = (Qwen2_5_VLForConditionalGeneration.from_pretrained(
+            model_id, quantization_config=bnb, dtype=torch.bfloat16, device_map={"": 0}),
+            AutoProcessor.from_pretrained(model_id))
+    model, proc = _MODEL[model_id]
     messages = [{"role": "system", "content": [{"type": "text", "text":
                  "You organise lecture notes into sections. You never write, add or change content."}]},
                 {"role": "user", "content": [{"type": "text", "text": prompt}]}]
@@ -138,14 +144,28 @@ def content_words(s):
     return [w for w in re.findall(r"[a-zA-Z]{4,}", s.lower()) if w not in STOP]
 
 
+def parse_sections(raw):
+    """Accept {"sections": [...]} or a bare [...] list, with or without ```json fences."""
+    text = re.sub(r"```(?:json)?", "", raw).strip()
+    for pattern in (r"\{.*\}", r"\[.*\]"):
+        m = re.search(pattern, text, flags=re.S)
+        if not m:
+            continue
+        try:
+            obj = json.loads(m.group(0))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(obj, dict) and isinstance(obj.get("sections"), list):
+            return obj["sections"]
+        if isinstance(obj, list):
+            return obj
+    return None
+
+
 def validate(raw, blocks):
     """Parse and check the model's outline. Returns (outline or None, report)."""
     report = {"ok": False, "problems": [], "titles_replaced": []}
-    m = re.search(r"\{.*\}", raw, flags=re.S)
-    try:
-        secs = json.loads(m.group(0))["sections"] if m else None
-    except (json.JSONDecodeError, KeyError, TypeError):
-        secs = None
+    secs = parse_sections(raw)
     if not isinstance(secs, list) or not secs:
         report["problems"].append("no valid JSON with a 'sections' list")
         return None, report
@@ -161,7 +181,7 @@ def validate(raw, blocks):
             report["problems"].append(f"start {s['start']} is not after the previous section")
             continue
         level = s.get("level") if s.get("level") in (1, 2) else 2
-        title = str(s.get("title", "")).strip()
+        title = str(s.get("title", "")).strip().lstrip("#").strip()  # models sometimes add '# ' 
         unknown = [w for w in content_words(title) if w[:5] not in vocab]
         if not title or unknown:
             new = first_line(blocks[i]["text"])
