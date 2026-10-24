@@ -251,7 +251,9 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
         fonts = subprocess.run(["fc-list"], capture_output=True, text=True).stdout
         if "DejaVu Serif" in fonts:  # covers arrows and symbols used in the notes (⇒, →, ⚠)
             font = "mainfont: DejaVu Serif\n"
-    parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\nfontsize: 11pt\n{font}---\n"]
+    # figures stay where they are in the notes (no LaTeX floating)
+    pin = "header-includes:\n  - \\usepackage{float}\n  - \\floatplacement{figure}{H}\n"
+    parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\nfontsize: 11pt\n{font}{pin}---\n"]
 
     for page in pages:
         src = os.path.join(md_dir, page + ".md")
@@ -273,7 +275,10 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
         def figure_md(fig, caption):
             name = f"{page}_{fig['block'].replace('+', '-')}.png"
             clean_crop(page_img, fig["bbox"]).save(os.path.join(out, "figures", name))
-            return f"![]({'figures/' + name}){{width=65%}}\n\n*Figure: {caption}*"
+            # a captioned image alone in a paragraph becomes a numbered, centred figure;
+            # brackets in the caption are escaped so they cannot end the caption early
+            cap = caption.replace("[", "\\[").replace("]", "\\]").replace("\n", " ")
+            return f"![{cap}]({'figures/' + name}){{width=55% height=30%}}"
 
         body = [f"<!-- page: {page} -->"]
         for k, b in enumerate(blocks):
@@ -309,7 +314,8 @@ def render_unit(unit, pages, md_dir, out_root, fmt):
     if pandoc and fmt in ("pdf", "html"):
         target = os.path.join(out, f"{unit}.{fmt}")
         cmd = [pandoc, md_path, "-o", target, "--resource-path", out]
-        cmd += ["--pdf-engine=xelatex"] if fmt == "pdf" else ["--standalone", "--mathjax"]
+        engine = "xelatex" if shutil.which("xelatex") else "tectonic"  # tectonic: small LaTeX engine for laptops
+        cmd += [f"--pdf-engine={engine}"] if fmt == "pdf" else ["--standalone", "--mathjax"]
         r = subprocess.run(cmd, capture_output=True, text=True, cwd=out)
         report["output"] = target if r.returncode == 0 and os.path.exists(target) else None
         report["pandoc_errors"] = r.stderr[-1500:] if r.returncode else ""
@@ -327,7 +333,8 @@ def main():
     p.add_argument("--format", choices=["pdf", "html", "md"], default=None,
                    help="default: pdf if xelatex is installed, else html if pandoc is, else md")
     a = p.parse_args()
-    fmt = a.format or ("pdf" if shutil.which("xelatex") else "html" if shutil.which("pandoc") else "md")
+    latex = shutil.which("xelatex") or shutil.which("tectonic")
+    fmt = a.format or ("pdf" if latex and shutil.which("pandoc") else "html" if shutil.which("pandoc") else "md")
     units = all_units()
     chosen = sorted(units) if a.all else (a.unit or [])
     if not chosen:

@@ -13,6 +13,7 @@ No model is involved, so nothing can be invented: every sentence and equation is
 | Over-split figures | When Surya has more figure boxes than the page has descriptions, the closest boxes on the same row/column are merged until the counts match (one drawing boxed as three icons becomes one crop) |
 | Unmatched | A description without a crop stays as italic text; a Surya drawing without a description is added only if it covers at least 3% of the page |
 | Crop cleaning | Chalkboard crops: grayscale, inverted to dark-on-white; others: contrast stretch |
+| Figure layout | Numbered, centred figures with the description as caption; at most 55% page width / 30% page height; pinned in place (no LaTeX floating), so order matches the notes |
 | Equations | Checked with xelatex when installed (exact), else pandoc's math parser (approximate). A failing equation is shown verbatim with a ⚠ marker, never changed. |
 
 All 42 units, labels as input (Mac, HTML output): 410 pages, 243 diagram descriptions, 227 matched to a crop (93%), 16 kept as text, 38 extra drawings, 2,739 equations with 1 parser failure (`\hphantom`, which LaTeX itself accepts).
@@ -23,6 +24,8 @@ python3 04_reconstruction/render_document.py --unit ie643_lec07 --pages-md preds
 python3 04_reconstruction/render_document.py --all
 ```
 Output: `out/documents/<unit>/<unit>.pdf`, `<unit>.md`, `figures/`, `report.json` (per page: descriptions, Surya figures, matched, extra; failed equations).
+
+PDF engine: xelatex if installed, else Tectonic (small; `brew install tectonic` on a Mac). The exact equation check needs xelatex; with Tectonic the approximate check is used.
 
 Needs on Ubuntu: `sudo apt-get install -y pandoc texlive-xetex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended lmodern fonts-dejavu`.
 
