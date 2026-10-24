@@ -46,13 +46,37 @@ Generation takes 1-11 s per page.
 
 - **Output completeness:** 17 of 25 pages are 0.88-1.22 times the label length. The baseline's long outputs (for example 1,218 characters for a 398-character label) were verbose; the fine-tuned model learned the label style.
 - **Near-perfect pages:** `lec07_page001` (CER 0.01), `005` (0.03), `015` (0.02), `019` (0.00). Similarity to the closest train page 0.08, 0.33, 0.15, 0.39: mostly genuine reading, with some topic overlap on two of them.
-- **Main weakness: side notes dropped.** `lec07_page011` keeps both equations, the algorithm and the stopping rule, but misses "N: very large → overload", "w⁰" and the step-length aside. Pages `011` and `012` are about 0.65 of the label length. Untested hypothesis: the model may skip content Surya did not box; the clean run will show.
+- **Main weakness of `boxed_json`: side notes dropped.** `lec07_page011` keeps both equations, the algorithm and the stopping rule, but misses "N: very large → overload", "w⁰" and the step-length aside. Pages `011` and `012` are about 0.65 of the label length. Confirmed by the clean run (below): the boxes are the cause.
 - **Diagram descriptions** are free text, so correct descriptions in other words still count as errors (for example `lec07_page004`, CER 0.47, structure correct). Text-only CER is the fairer number.
 - **Blank page** (`lec07_page020`): short note instead of the label's longer note; harmless.
 
-## In progress
+## Comparison: layout input vs clean page
 
-Comparison run `--variant clean` (no boxes, no JSON), same pages and settings, to see whether layout input helps, especially on side notes.
+Same 25 validation pages, same settings; `clean` = plain preprocessed page, no boxes, no JSON.
+
+| Fine-tuned | CER | WER | text-only CER | equation exact match |
+|---|---|---|---|---|
+| `boxed_json` | 0.287 | 0.469 | 0.258 | 0.273 |
+| `clean` | **0.277** | 0.485 | **0.222** | 0.244 |
+
+| By source | `boxed_json` | `clean` |
+|---|---|---|
+| Chalkboard: CER / text-only CER / eq. match | 0.290 / 0.286 / 0.344 | 0.286 / 0.238 / 0.292 |
+| Digital ink: CER / text-only CER / eq. match | 0.277 / 0.168 / 0.083 | 0.249 / 0.171 / 0.117 |
+
+Zero-shot baselines: `boxed_json` CER 0.712, `clean` 0.776; layout hints help the untrained model on chalkboards but fine-tuning removes the gap.
+
+**The boxes cause the dropped side notes.** Output length on the pages with side notes:
+
+| Page | Label | `boxed_json` | `clean` |
+|---|---|---|---|
+| `lec07_page011` | 557 | 361 (65%) | 545 (98%) |
+| `lec07_page012` | 558 | 375 (67%) | 542 (97%) |
+| `lec07_page004` | 398 | 309 (78%) | 328 (82%) |
+
+The boxed model learns that content lives inside boxes and skips what Surya did not box, despite the prompt; the clean model keeps it.
+
+**Decision: `clean` for extraction.** Equal or better on text, keeps side notes, and needs no Surya step before Qwen at inference. Surya is still used for figure crops and reading order in the PDF stage. Overall differences are single runs on 25 pages, so small gaps (0.01-0.04) are within run-to-run variation; to be confirmed on the test split.
 
 ## Caveats
 

@@ -5,7 +5,7 @@
 | Decision | Options | Effect |
 |---|---|---|
 | Notebook pages in val/test | Hold out a block of IE802 pages and some HumynLabs notes, or keep the split | Holding out means a small code change (IE802 is one unit), about 30 fewer training pages, and re-running fine-tuning for final numbers |
-| Which variant to keep | `boxed_json` vs `clean` (and `boxed`) | Decided by the comparison run now in progress; `boxed_json` needs Surya at inference |
+| Which variant to keep | **Decided: `clean`** | Keeps side notes, better text accuracy, no Surya before Qwen; confirm on the test split |
 
 ## Dataset
 
@@ -15,9 +15,9 @@
 
 ## Model
 
-1. Finish the clean comparison run and compare with `boxed_json`.
-2. Score the chosen model on the test split (after step 2 above).
-3. Address dropped side notes (more examples with margin notes, or a variant without boxes if the comparison points that way).
+1. Score the `clean` model on the test split (after the test labels are checked).
+2. Back up `runs/qwen25vl_clean/final_adapter` (the chosen model).
+3. Improve equation exact match (0.244); possible: more epochs, equation-heavy examples.
 4. Optional: a 4th epoch (validation loss was still falling slightly).
 
 ## Pipeline
