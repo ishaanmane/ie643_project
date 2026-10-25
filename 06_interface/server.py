@@ -184,7 +184,12 @@ class Application:
         except Exception as error:
             LOG.exception('Conversion failed for job %s', jid)
             # Detailed paths/tracebacks belong on the machine, not the public endpoint.
-            message = str(error) if isinstance(error, ValueError) else 'Conversion failed. Ask the operator to inspect this job’s logs.'
+            # Our own ValueError/RuntimeError messages are written for users (no tracebacks);
+            # anything else stays generic and goes to the operator log.
+            if isinstance(error, (ValueError, RuntimeError)):
+                message = str(error).split(';')[0].replace(str(self.root), '').strip()
+            else:
+                message = 'Conversion failed. Ask the operator to inspect this job’s logs.'
             with self.lock:
                 self.jobs[jid].update(status='error', message=message[:300])
         finally:
@@ -401,6 +406,12 @@ def main():
     print(f'Access key: stored privately at {application.root / ".access-token"}; use manage.py token to display it.', flush=True)
     if args.demo:
         print('INTERFACE TEST MODE: real file decoding, no OCR or layout model.', flush=True)
+    if hasattr(recognizer, 'unload'):
+        # Stopping the server must also stop the model processes it started (they run in their
+        # own process groups and would otherwise keep the GPU and port 8001).
+        import atexit, signal, sys
+        atexit.register(recognizer.unload)
+        signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
     serve(create_app(application, args.public_origin), host='127.0.0.1', port=args.port,
           threads=4, connection_limit=12, channel_timeout=60, max_request_body_size=MAX_REQUEST,
           max_request_header_size=16384, clear_untrusted_proxy_headers=True, expose_tracebacks=False)

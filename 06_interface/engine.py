@@ -79,7 +79,7 @@ class WarmModels:
         if self.qwen is not None and self.qwen.poll() is None:
             return
         progress('Loading the recognition model (first upload only)')
-        self.qwen = subprocess.Popen(
+        self.qwen = subprocess.Popen(  # same process group: dies with the server if it is killed
             [sys.executable, str(HERE / 'recognition_worker.py'), '--adapter', str(self.adapter),
              '--max-pixels', str(self.max_pixels), '--max-new-tokens', str(self.max_new_tokens)],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=(self.log_dir / 'qwen_worker.log').open('a'),
