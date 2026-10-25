@@ -483,7 +483,11 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
             with Image.open(source) as image:
                 width, height = image.size
                 name = f"source_{number:03d}.jpg"
-                image.convert("RGB").save(os.path.join(out, "sources", name), quality=95)
+                # For checking only: 1600 px is legible on screen and keeps the PDF small
+                # (full 4000 px pages at quality 95 made a few-page PDF over 5 MB).
+                small = image.convert("RGB")
+                small.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+                small.save(os.path.join(out, "sources", name), quality=80, optimize=True)
             percent = min(90.0, 80.0 * (11 - 4/2.54) / (8.5 - 4/2.54) * width / height)
             doc += f"\n![Original source page {number}](sources/{name}){{width={percent:.4f}%}}\n"
         report["source_appendix_pages"] = len(source_pages)
