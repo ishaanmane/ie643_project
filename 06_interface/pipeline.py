@@ -7,6 +7,7 @@ import re
 import shutil
 import sys
 import subprocess
+import threading
 import time
 import zipfile
 
@@ -14,7 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 for folder in ('01_preprocessing', '03_recognition', '04_reconstruction'):
     sys.path.insert(0, str(ROOT / folder))
 
-IMAGE_TYPES = {'.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tif', '.tiff'}
+IMAGE_TYPES = {'.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tif', '.tiff', '.heic', '.heif', '.hif'}
+MAX_IMAGE_PIXELS = 40_000_000
 MODEL_ID = 'Qwen/Qwen2.5-VL-7B-Instruct'
 DEFAULT_ADAPTER = ROOT / 'runs/final_clean/final_adapter'
 
@@ -93,7 +95,15 @@ class CleanRecognizer:
 
 def extract_pages(inputs, raw_dir, max_pages=20):
     """Input order is explicit; PDF/TIFF pages follow their native order."""
-    from PIL import Image, ImageOps, ImageSequence
+    from PIL import Image, ImageOps, ImageSequence, UnidentifiedImageError
+    import warnings
+    # Explicit decoder: old Surya/Pillow installations must not silently reject Apple photos.
+    try:
+        from pillow_heif import register_heif_opener
+        register_heif_opener(thumbnails=False)
+    except ImportError:
+        if any(Path(p).suffix.lower() in {'.heic', '.heif', '.hif'} for p in inputs):
+            raise ValueError('HEIC support is missing. Install 06_interface/requirements.txt in the server environment.')
     raw_dir = Path(raw_dir)
     raw_dir.mkdir(parents=True, exist_ok=True)
     pages, manifest = [], []
@@ -102,7 +112,15 @@ def extract_pages(inputs, raw_dir, max_pages=20):
         if len(pages) >= max_pages:
             raise ValueError(f'Input exceeds the {max_pages}-page limit; split the document.')
         name = f'upload_notes_page{len(pages)+1:03d}'
-        image = ImageOps.exif_transpose(image).convert('RGB')
+        if image.width * image.height > MAX_IMAGE_PIXELS:
+            raise ValueError('A photo exceeds the 40-megapixel decoding limit. Export a smaller copy.')
+        image = ImageOps.exif_transpose(image)
+        # Transparency should become white paper, not black writing/background.
+        if image.mode in ('RGBA', 'LA') or 'transparency' in image.info:
+            rgba = image.convert('RGBA')
+            canvas = Image.new('RGBA', rgba.size, 'white')
+            image = Image.alpha_composite(canvas, rgba)
+        image = image.convert('RGB')
         # Bound processing memory while retaining the uploaded originals separately.
         image.thumbnail((4000,4000), Image.Resampling.LANCZOS)
         target = raw_dir / (name+'.jpg')
@@ -114,21 +132,43 @@ def extract_pages(inputs, raw_dir, max_pages=20):
         path = Path(filename)
         if path.suffix.lower() == '.pdf':
             import fitz
-            with fitz.open(path) as pdf:
+            try:
+                document = fitz.open(path)
+            except (fitz.FileDataError, fitz.EmptyFileError, OSError) as error:
+                raise ValueError('The PDF could not be opened. Export a fresh, unencrypted PDF.') from error
+            with document as pdf:
+                if not pdf.is_pdf:
+                    raise ValueError('The uploaded file is not a PDF.')
                 if pdf.needs_pass:
                     raise ValueError('Password-protected PDFs are not supported.')
                 if len(pages)+pdf.page_count > max_pages:
                     raise ValueError(f'Input exceeds the {max_pages}-page limit; split the document.')
                 for index, page in enumerate(pdf):
+                    if not (0 < page.rect.width <= 20000 and 0 < page.rect.height <= 20000):
+                        raise ValueError('PDF page dimensions are invalid or too large.')
                     scale = min(2.0, 4000/max(page.rect.width,page.rect.height))
                     pix = page.get_pixmap(matrix=fitz.Matrix(scale,scale), colorspace=fitz.csRGB, alpha=False)
                     save(Image.frombytes('RGB',[pix.width,pix.height],pix.samples),path.name,index+1)
         elif path.suffix.lower() in IMAGE_TYPES:
-            with Image.open(path) as image:
-                for index, frame in enumerate(ImageSequence.Iterator(image)):
-                    save(frame.copy(),path.name,index+1)
+            try:
+                with warnings.catch_warnings():
+                    warnings.simplefilter('error', Image.DecompressionBombWarning)
+                    with Image.open(path) as image:
+                        formats = {'.jpg': 'JPEG', '.jpeg': 'JPEG', '.png': 'PNG', '.webp': 'WEBP', '.bmp': 'BMP', '.tif': 'TIFF', '.tiff': 'TIFF', '.heic': 'HEIF', '.heif': 'HEIF', '.hif': 'HEIF'}
+                        if image.format != formats[path.suffix.lower()]:
+                            raise ValueError('Image content does not match its file extension.')
+                        count = getattr(image, 'n_frames', 1)
+                        if count + len(pages) > max_pages:
+                            raise ValueError(f'Input exceeds the {max_pages}-page limit; split the document.')
+                        for index, frame in enumerate(ImageSequence.Iterator(image)):
+                            # Check before copy/load: an oversized compressed image must never allocate its full raster.
+                            if frame.width * frame.height > MAX_IMAGE_PIXELS:
+                                raise ValueError('A photo exceeds the 40-megapixel decoding limit. Export a smaller copy.')
+                            save(frame.copy(), path.name, index+1)
+            except (UnidentifiedImageError, Image.DecompressionBombError, Image.DecompressionBombWarning, OSError) as error:
+                raise ValueError('An image could not be decoded safely. Export it again as HEIC, JPEG or PNG.') from error
         else:
-            raise ValueError('Supported input types: PDF, PNG, JPEG, WebP, BMP, TIFF.')
+            raise ValueError('Supported input types: PDF, HEIC/HEIF, PNG, JPEG, WebP, BMP, TIFF.')
     if not pages:
         raise ValueError('No pages were found.')
     return pages, manifest
@@ -139,48 +179,20 @@ def validate_prediction(text):
     if not text.strip():
         raise ValueError('Model returned an empty transcription.')
     blocked = r'\\(?:input|include|includegraphics|openin|openout|read|write(?:18)?|catcode|csname|let|futurelet|expandafter|def|edef|gdef|xdef|newcommand|renewcommand|usepackage|documentclass|special|directlua|endlinechar)\b'
-    if '^^' in text or re.search(blocked, text, re.I) or re.search(r'!\[.*?\]\s*\(',text,re.S):
+    if '^^' in text or re.search(blocked, text, re.I) or re.search(r'!\s*\[',text):
         raise ValueError('Transcription contains a file/resource command; raw prediction saved for review.')
+    allowed = set("frac dfrac tfrac cfrac textit mathfrak overrightarrow overleftarrow hookrightarrow hookleftarrow sqrt left right middle big Big bigg Bigg bigl bigr Bigl Bigr biggl biggr Biggl Biggr sum prod int iint iiint oint lim limsup liminf infty partial nabla alpha beta gamma delta epsilon varepsilon zeta eta theta vartheta iota kappa lambda mu nu xi pi varpi rho varrho sigma varsigma tau upsilon phi varphi chi psi omega Gamma Delta Theta Lambda Xi Pi Sigma Upsilon Phi Psi Omega mathbb mathcal mathrm mathbf mathit mathsf mathtt mathscr boldsymbol bm text textrm textbf operatorname overline underline hat widehat tilde widetilde bar vec dot ddot dots ldots cdots vdots ddots cdot times div pm mp ast star circ bullet otimes oplus odot le leq ge geq neq ne approx sim simeq equiv cong propto ll gg in notin ni subset subseteq supset supseteq cup cap union emptyset varnothing forall exists neg land lor wedge vee implies iff to gets rightarrow leftarrow Rightarrow Leftarrow leftrightarrow Leftrightarrow mapsto longrightarrow longleftarrow Longrightarrow Longleftarrow uparrow downarrow updownarrow perp parallel angle langle rangle lceil rceil lfloor rfloor vert Vert mid sin cos tan cot sec csc sinh cosh tanh arcsin arccos arctan log ln exp max min arg det dim ker rank Pr mod bmod pmod gcd lcm Re Im top bot ell hbar prime colon quad qquad thinspace enspace smallskip medskip bigskip limits nolimits underbrace overbrace overset underset stackrel binom dbinom tbinom choose displaystyle textstyle scriptstyle scriptscriptstyle substack boxed fbox cancel bcancel xcancel phantom vphantom hphantom mathop mathrel mathbin mathord mathpunct mathopen mathclose ensuremath begin end label tag nonumber notag rowcolor hline cline hdotsfor arraystretch small tiny large Large rm bf cal Bbb sf tt textsc textnormal mathnormal percent therefore because square triangle triangleq checkmark lnot lvert rvert lVert rVert lt gt degree sharp flat natural setminus backslash addlinespace toprule midrule bottomrule".split())
+    commands = [c for c in re.findall(r'\\([A-Za-z]+|[^A-Za-z])', text) if c.isalpha()]
+    if any(command not in allowed for command in commands):
+        raise ValueError('Transcription contains an unsupported TeX command; raw prediction saved for review.')
+    safe_environments = {'matrix', 'pmatrix', 'bmatrix', 'Bmatrix', 'vmatrix', 'Vmatrix', 'smallmatrix',
+                         'cases', 'array', 'aligned', 'alignedat', 'gathered', 'split', 'align', 'align*',
+                         'equation', 'equation*', 'gather', 'gather*'}
+    for environment in re.findall(r'\\(?:begin|end)\s*\{([^}]+)\}', text):
+        if environment not in safe_environments:
+            raise ValueError('Transcription contains an unsupported TeX environment.')
     if re.search(r'<\s*(?:script|iframe|img|object|embed)\b',text,re.I):
         raise ValueError('Transcription contains embedded resources; raw prediction saved for review.')
-
-
-def recognize_in_worker(recognizer, data, pages, output, progress):
-    request = {'adapter': str(recognizer.adapter), 'max_pixels': recognizer.max_pixels,
-               'max_new_tokens': recognizer.max_new_tokens, 'pages': pages,
-               'images': str(data/'processed'), 'output': str(output)}
-    request_path = output/'recognition_request.json'
-    request_path.write_text(json.dumps(request))
-    log_path = output/'recognition.log'
-    progress('Loading Qwen in isolated recognition worker')
-    with log_path.open('w') as log:
-        proc = subprocess.Popen([sys.executable, str(Path(__file__).with_name('recognition_worker.py')),
-                                 str(request_path)], stdout=log, stderr=subprocess.STDOUT)
-        try:
-            deadline = time.monotonic() + 7200
-            previous = ''
-            while proc.poll() is None:
-                if time.monotonic() >= deadline:
-                    raise RuntimeError('Recognition exceeded two hours; inspect recognition.log.')
-                lines = log_path.read_text(errors='replace').splitlines()
-                status = next((line for line in reversed(lines) if line.startswith('Recognizing page ')), '')
-                if status and status != previous:
-                    progress(status); previous = status
-                time.sleep(1)
-            if proc.returncode:
-                raise RuntimeError('Recognition worker failed; inspect recognition.log. GPU worker has exited.')
-        finally:
-            if proc.poll() is None:
-                proc.terminate()
-                try: proc.wait(timeout=15)
-                except subprocess.TimeoutExpired:
-                    proc.kill(); proc.wait()
-    result = json.loads((output/'recognition_result.json').read_text())
-    if [p['page'] for p in result] != pages:
-        raise RuntimeError('Recognition worker returned incomplete or unordered pages.')
-    for page in pages:
-        validate_prediction((output/'predictions'/(page+'.md')).read_text())
-    return result
 
 
 def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20, progress=None, layout_mode='none'):
@@ -218,15 +230,31 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
         preprocessing.append({'page':page,**info})
     (output/'preprocessing.json').write_text(json.dumps(preprocessing,indent=2))
     layout_info = {'status': 'disabled'}
-    if layout_mode == 'surya':
-        from layout import run_layout
-        recognizer.release()
-        layout_info = run_layout(data, pages, output, progress)
-    elif layout_mode != 'none':
+    if layout_mode not in ('surya', 'none'):
         raise ValueError('Unknown layout mode')
-    if isinstance(recognizer, CleanRecognizer):
-        predictions = recognize_in_worker(recognizer, data, pages, output, progress)
+    if hasattr(recognizer, 'recognize'):  # engine.WarmModels: models stay loaded between uploads
+        with recognizer:
+            if layout_mode == 'surya':
+                # Surya starts first (its server measures free GPU memory), then layout runs in the
+                # background while Qwen reads the pages: the two models work at the same time.
+                recognizer.surya.start(progress)
+                box = {}
+                def layout_job():
+                    try: box['info'] = recognizer.layout(data, pages, output, lambda _: None)
+                    except Exception as error: box['error'] = error
+                thread = threading.Thread(target=layout_job); thread.start()
+            predictions = recognizer.recognize(data, pages, output, progress)
+            if layout_mode == 'surya':
+                progress('Finishing diagram detection')
+                thread.join()
+                if 'error' in box:
+                    raise box['error']
+                layout_info = box['info']
     else:
+        if layout_mode == 'surya':
+            from layout import run_layout
+            recognizer.release()  # one-shot layout needs the whole GPU
+            layout_info = run_layout(data, pages, output, progress)
         predictions=[]
         for i,page in enumerate(pages,1):
             progress(f'Recognizing page {i}/{len(pages)}' + (' — first run loads the trained model' if i==1 else ''))
@@ -236,7 +264,7 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
             predictions.append({'page':page,**details})
     progress('Checking equations and building searchable PDF')
     report = render_unit('upload_notes',pages,str(output/'predictions'),str(output/'documents'),
-                         'pdf',data_dir=str(data),document_title=title,
+                         'pdf',data_dir=str(data),document_title=title,secure_input=True,
                          source_pages=[data/'raw'/(p+'.jpg') for p in pages])
     warnings = ['Automatic diagram cropping is unavailable for new uploads in this mode. '
                 'Original source pages are appended so diagrams remain available for checking.',
@@ -295,8 +323,12 @@ def main():
     args=parser.parse_args()
     if args.max_pages<1 or args.max_new_tokens<1:
         parser.error('Limits must be positive.')
-    recognizer=CleanRecognizer(args.adapter,max_new_tokens=args.max_new_tokens)
-    result=run_document(args.inputs,args.out,recognizer,args.title,args.max_pages,layout_mode=args.layout)
+    from engine import WarmModels
+    models=WarmModels(args.adapter,args.out.parent/'model_logs',max_new_tokens=args.max_new_tokens)
+    try:
+        result=run_document(args.inputs,args.out,models,args.title,args.max_pages,layout_mode=args.layout)
+    finally:
+        models.unload()
     print(json.dumps(result,indent=2))
 
 

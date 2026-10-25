@@ -1,4 +1,8 @@
-"""Managed, isolated Surya v2 server. Never stops a server it did not start."""
+"""Surya v2 layout: a private vLLM server plus the surya_layout client.
+
+SuryaServer can stay running between uploads (the interface keeps it warm and stops it
+after an idle period); run_layout() is the one-shot batch form used by 02_layout/run_layout.py.
+Never stops a server it did not start."""
 import json
 import os
 from pathlib import Path
@@ -60,55 +64,87 @@ def stop_owned_server(proc):
     proc.wait(timeout=10)
 
 
+class SuryaServer:
+    """Private vLLM server for Surya on localhost. gpu_fraction leaves room for Qwen
+    when both stay loaded (0.35 of 16 GB is enough for the 0.7B model and its cache)."""
+
+    def __init__(self, log_dir, gpu_fraction=0.35):
+        env_root = Path(os.environ.get('IE643_LAYOUT_ENVS', str(ENV_ROOT)))
+        self.surya, self.vllm = env_root / 'surya0221/bin', env_root / 'vllm0320/bin'
+        self.port = int(os.environ.get('IE643_LAYOUT_PORT', '8001'))
+        self.log_dir, self.gpu_fraction = Path(log_dir), gpu_fraction
+        self.proc = None
+        self.env = os.environ.copy()
+        self.env.update(SURYA_INFERENCE_BACKEND='vllm', SURYA_INFERENCE_URL=f'http://127.0.0.1:{self.port}/v1')
+        self.env.setdefault('HF_HOME', '/home/intralab/workspace/hf_cache')
+
+    @property
+    def running(self):
+        return self.proc is not None and self.proc.poll() is None
+
+    def start(self, progress=print):
+        if self.running:
+            return
+        for python, package, expected in [(self.surya/'python', 'surya-ocr', '0.22.1'),
+                                          (self.vllm/'python', 'vllm', '0.32.0')]:
+            installed = subprocess.check_output([str(python), '-c',
+                f'from importlib.metadata import version; print(version({package!r}))'], text=True).strip()
+            if installed != expected:
+                raise RuntimeError(f'{package}: expected {expected}, found {installed}')
+        with socket.socket() as probe:
+            try: probe.bind(('127.0.0.1', self.port))
+            except OSError:
+                raise RuntimeError(f'Port {self.port} is occupied. Stop the other Surya server first.')
+        self.log_dir.mkdir(parents=True, exist_ok=True)
+        command = [str(self.vllm/'vllm'), 'serve', MODEL, '--host', '127.0.0.1', '--port', str(self.port),
+                   '--dtype', 'half', '--max-model-len', '8192', '--max-num-batched-tokens', '8192',
+                   '--limit-mm-per-prompt', '{"video": 0}', '--enforce-eager',
+                   '--gpu-memory-utilization', str(self.gpu_fraction)]
+        progress('Loading the layout model (first upload only)')
+        log = (self.log_dir/'surya_server.log').open('w')
+        self.proc = subprocess.Popen(command, env=self.env, stdout=log, stderr=subprocess.STDOUT,
+                                     start_new_session=True)
+        deadline = time.monotonic() + 600
+        while True:
+            if self.proc.poll() is not None:
+                self.proc = None
+                raise RuntimeError(f'Surya server exited; see {self.log_dir}/surya_server.log.')
+            try:
+                with urlopen(self.env['SURYA_INFERENCE_URL'] + '/models', timeout=2) as response:
+                    if any(m['id'] == MODEL for m in json.load(response).get('data', [])):
+                        return
+            except (OSError, ValueError):
+                pass
+            if time.monotonic() >= deadline:
+                self.stop()
+                raise RuntimeError('Surya startup timed out.')
+            time.sleep(2)
+
+    def detect(self, data, pages, output, progress=print, timeout=1800):
+        """Layout for data/processed/*.jpg -> data/tags/ and data/crops/."""
+        self.start(progress)
+        layout_out = Path(output) / 'surya_layout'
+        layout_out.mkdir(exist_ok=True)
+        with (layout_out/'client.log').open('w') as client_log:
+            subprocess.run([str(self.surya/'surya_layout'), str(Path(data)/'processed'), '--images',
+                            '--output_dir', str(layout_out)], env=self.env, stdout=client_log,
+                           stderr=subprocess.STDOUT, check=True, timeout=timeout)
+        convert_results(layout_out/'processed/results.json', Path(data), pages)
+        return {'model': MODEL, 'surya_version': '0.22.1', 'vllm_version': '0.32.0',
+                'pages': len(pages), 'status': 'completed'}
+
+    def stop(self):
+        if self.proc is not None:
+            stop_owned_server(self.proc)
+            self.proc = None
+
+
 def run_layout(data, pages, output, progress, timeout=1800):
-    env_root = Path(os.environ.get('IE643_LAYOUT_ENVS', str(ENV_ROOT)))
-    surya = env_root / 'surya0221/bin'
-    vllm = env_root / 'vllm0320/bin'
-    for python, package, expected in [(surya/'python', 'surya-ocr', '0.22.1'),
-                                      (vllm/'python', 'vllm', '0.32.0')]:
-        installed = subprocess.check_output([str(python), '-c',
-            f'from importlib.metadata import version; print(version({package!r}))'], text=True).strip()
-        if installed != expected:
-            raise RuntimeError(f'{package}: expected {expected}, found {installed}')
-    port = int(os.environ.get('IE643_LAYOUT_PORT', '8001'))
-    with socket.socket() as probe:
-        try: probe.bind(('127.0.0.1', port))
-        except OSError:
-            raise RuntimeError(f'Port {port} is occupied. Stop the manual Surya server before using managed layout.')
-    env = os.environ.copy()
-    env['SURYA_INFERENCE_BACKEND'] = 'vllm'
-    env['SURYA_INFERENCE_URL'] = f'http://127.0.0.1:{port}/v1'
-    env.setdefault('HF_HOME', '/home/intralab/workspace/hf_cache')
-    layout_out = output / 'surya_layout'
-    layout_out.mkdir()
-    command = [str(vllm/'vllm'), 'serve', MODEL, '--host', '127.0.0.1', '--port', str(port),
-               '--dtype', 'half', '--max-model-len', '8192', '--max-num-batched-tokens', '8192',
-               '--limit-mm-per-prompt', '{"video": 0}', '--enforce-eager',
-               '--gpu-memory-utilization', '0.90']
-    progress('Loading tested Surya v2 layout model')
-    with (layout_out/'server.log').open('w') as log:
-        proc = subprocess.Popen(command, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
-        try:
-            deadline = time.monotonic() + 600
-            while True:
-                if proc.poll() is not None:
-                    raise RuntimeError('Surya server exited; inspect surya_layout/server.log.')
-                try:
-                    with urlopen(env['SURYA_INFERENCE_URL']+'/models', timeout=2) as response:
-                        models = json.load(response)
-                    if any(m['id'] == MODEL for m in models.get('data', [])): break
-                except (OSError, ValueError): pass
-                if time.monotonic() >= deadline:
-                    raise RuntimeError('Surya startup timed out; inspect surya_layout/server.log.')
-                time.sleep(2)
-            progress(f'Detecting diagrams and layout on {len(pages)} pages')
-            with (layout_out/'client.log').open('w') as client_log:
-                subprocess.run([str(surya/'surya_layout'), str(data/'processed'), '--images',
-                                '--output_dir', str(layout_out)], env=env, stdout=client_log,
-                               stderr=subprocess.STDOUT, check=True, timeout=timeout)
-        finally:
-            progress('Releasing Surya GPU memory')
-            stop_owned_server(proc)
-    convert_results(layout_out/'processed/results.json', data, pages)
-    return {'model': MODEL, 'surya_version': '0.22.1', 'vllm_version': '0.32.0',
-            'pages': len(pages), 'status': 'completed'}
+    """One-shot: start Surya with the whole GPU, run all pages, stop it."""
+    server = SuryaServer(Path(output) / 'surya_layout', gpu_fraction=0.90)
+    progress(f'Detecting diagrams and layout on {len(pages)} pages')
+    try:
+        return server.detect(data, pages, output, progress, timeout)
+    finally:
+        progress('Releasing Surya GPU memory')
+        server.stop()
