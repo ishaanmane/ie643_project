@@ -1,0 +1,9 @@
+
+=== FINE-TUNED (boxed_json, test) ===
+scored 76 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       4  0.147  0.238    0.147      -  
+ie643     34  0.325  0.493    0.304    0.174
+ie802     12  0.410  0.634    0.282    0.130
+mlt       26  0.327  0.548    0.219    0.155
+ALL       76  0.330  0.521    0.253    0.160

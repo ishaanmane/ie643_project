@@ -1,0 +1,9 @@
+
+=== FINE-TUNED (boxed_json, val) ===
+scored 31 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       1  0.040  0.137    0.040      -  
+ie643     20  0.317  0.503    0.299    0.275
+ie802      4  0.483  0.786    0.515    0.129
+mlt        6  0.237  0.485    0.162    0.167
+ALL       31  0.314  0.524    0.296    0.237

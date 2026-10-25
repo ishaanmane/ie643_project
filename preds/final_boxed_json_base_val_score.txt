@@ -1,5 +1,5 @@
 
-=== BASELINE zero-shot (boxed_json, 31 val pages) ===
+=== BASELINE zero-shot (boxed_json, val) ===
 scored 31 pages, 0 missing predictions
 source     n    CER    WER  textCER  eqMatch
 hlcs       1  0.338  0.607    0.338      -  
