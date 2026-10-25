@@ -125,3 +125,47 @@ checker failures/timeouts, incomplete checks, report coverage and targeted retri
 Remaining: crop completeness/table inclusion, source transcription errors, figure
 matching quality, semantic equation correctness, and a real-model outline comparison.
 These changes do not fix or establish improvement in recognition CER.
+
+## Tested rendering fixes and GPU command (2026-10-25)
+
+```bash
+bash 04_reconstruction/run_render_fixes.sh --notebook
+```
+
+Run after pulling the committed changes. This runs 13 regression tests, renders the
+25 validation predictions with explicit reviewed fixes, and (with `--notebook`)
+rebuilds the annotation-based notebook. It loads no model and changes no predictions.
+Logs: `out/render_grounded_val.log`, `out/render_fitted_notebook.log`.
+PDFs: `out/reconstruction_grounded_val/<unit>/`,
+`out/reconstruction_fitted_notebook/ie802_notes/`.
+Summary: `results/generation_eval_grounded_val.md`.
+
+Changes:
+
+- The PDF-only Pandoc filter and raw TeX header shrink display equations only when
+  wider than the available line. Symbols and words are retained. Very long equations
+  become smaller; automatic semantic splitting is not attempted. Inline math is
+  unaffected. Keep these two support files next to the renderer.
+- `cancel` is loaded by both the syntax checker and renderer, supporting `\bcancel`.
+- Tectonic error mapping now ignores preceding warnings. Previously a warning about
+  a wide equation could be misattributed as the cause of a later compilation error.
+- `--reviewed-fixes 04_reconstruction/reviewed_render_fixes.json` opts into one exact
+  syntax repair and one explicitly verified Surya table-to-diagram link. The repair
+  escapes an ampersand and separates nested math from text mode; it must pass the
+  checker before application. Reports retain the original failed expression and
+  both strings. No source/prediction file is edited. This is curated rendering
+  assistance, not an improvement in recognition accuracy or a learned grounding model.
+- The K-fold link checks exact caption, page, Surya block, bbox and image dimensions;
+  altered/ambiguous matches fail rather than choosing another table. No other table
+  is added by this reviewed link. Missing captions are left alone in other input variants.
+- `pdf_audit.py` checks word boxes against PDF page edges using Poppler `pdftotext`.
+  If unavailable, it explicitly reports unchecked. This does not detect all overlaps,
+  missing glyphs, bad crops or incorrect mathematics. Compiler warnings are retained
+  in each report. Requested PDF failures now make the renderer exit nonzero.
+
+Expected local verification: validation 128/128 blocks retained, 10/10 descriptions
+matched, one original syntax failure repaired, zero remaining diagnosed failures,
+two PDFs and zero out-of-page words. Notebook: 622/622 blocks retained, three
+remaining syntax failures (visible verbatim), zero out-of-page words. Pagination and
+fonts differ across machines. The GPU XeLaTeX run remains necessary to verify its
+font/package environment. Some notebook glyph warnings and imperfect crops remain.

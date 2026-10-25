@@ -51,6 +51,8 @@ def main():
             "repeats_merged": len(orep.get("merged_repeats", [])),
             "problems": len(orep.get("problems", [])),
             "equations": r["math"]["equations"], "eq_failed": r["math"]["failed"],
+            "eq_repaired": len(r["math"].get("reviewed_repairs", [])),
+            "eq_remaining": r["math"].get("remaining_failed", r["math"]["failed"]),
             "diagrams": sum(x["descriptions"] for x in pages), "matched": sum(x["matched"] for x in pages),
             "pdf": bool(r.get("output") and r["output"].lower().endswith(".pdf")
                         and os.path.isfile(os.path.join(os.path.dirname(rp), os.path.basename(r["output"])))),
@@ -61,12 +63,12 @@ def main():
         raise SystemExit("no report.json files under " + a.docs)
 
     cols = ["unit", "pages", "missing_pages", "kept", "blocks", "outline", "sections", "titles_dropped", "repeats_merged",
-            "problems", "equations", "eq_failed", "math_status", "math_check", "matched", "diagrams", "pdf"]
+            "problems", "equations", "eq_failed", "eq_repaired", "eq_remaining", "math_status", "math_check", "matched", "diagrams", "pdf"]
     lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
     for x in rows:
         lines.append("| " + " | ".join(str(x[c]) for c in cols) + " |")
     T = {k: sum(x[k] for x in rows) for k in ("pages", "missing_pages", "blocks", "kept", "sections", "titles_dropped",
-                                              "repeats_merged", "problems", "equations", "eq_failed",
+                                              "repeats_merged", "problems", "equations", "eq_failed", "eq_repaired", "eq_remaining",
                                               "diagrams", "matched")}
     used = sum(x["outline"] == "used" for x in rows)
     rejected = sum(x["outline"] == "rejected" for x in rows)
@@ -81,6 +83,7 @@ def main():
         f"titles dropped {T['titles_dropped']}, repeats merged {T['repeats_merged']}, outline problems {T['problems']}",
         f"unique equation snippets per unit {T['equations']}, diagnosed failures {T['eq_failed']} ({100 * T['eq_failed'] / max(T['equations'], 1):.2f}%)",
         f"units with incomplete or unknown math checks {sum(x['math_status'] != 'completed' for x in rows)}; zero diagnosed failures does not establish correctness",
+        f"reviewed equation repairs {T['eq_repaired']}, remaining diagnosed failures {T['eq_remaining']}",
         "equation checks: " + ", ".join(sorted({x["math_check"] for x in rows})),
         f"diagrams matched to a crop {T['matched']}/{T['diagrams']}",
         f"PDFs built {sum(x['pdf'] for x in rows)}/{len(expected) if expected is not None else len(rows)}",

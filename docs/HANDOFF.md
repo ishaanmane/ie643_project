@@ -148,6 +148,20 @@ raw scans ──► 01 preprocessing ──► data/processed/ (410 pages)
 - All outputs are reconstruction checks or a two-unit ablation, not new recognition
   scores or proof of mathematical correctness. Existing CER result remains unchanged.
 
+### Latest implementation after the comparison
+
+Renderer now supports `cancel`, fits wide display math within the line, records
+compiler warnings, and optionally checks PDF word bounds using `pdftotext`.
+`--reviewed-fixes` applies an audited K-fold Surya table link and one exact syntax
+repair, preserving source predictions and original diagnostics. Thirteen tests pass;
+local validation PDFs retain 128/128 blocks, match 10/10 descriptions, and have zero
+remaining diagnosed syntax failures. Notebook retains 622/622 blocks; three syntax
+failures remain; clipped expressions now fit. See `results/render_fixes_local_validation.md`.
+This is curated rendering improvement, not a change in recognition CER.
+Next: user-authorized push, GPU pull, then
+`bash 04_reconstruction/run_render_fixes.sh --notebook`.
+No new model loading/training is needed. Inspect GPU results before claiming parity.
+
 ## 7. Next steps (agreed order)
 
 1. Generation measurement (above), then record in `findings/`.

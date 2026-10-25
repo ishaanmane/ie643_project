@@ -33,6 +33,7 @@ import tempfile
 import uuid
 
 from PIL import Image, ImageOps, ImageStat
+from pdf_audit import audit_pdf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 D = os.path.join(ROOT, "data")
@@ -204,7 +205,7 @@ def check_latex(snippets, engine, max_rounds=None):
     failures. Infrastructure errors and an exhausted retry budget remain explicit.
     """
     bad, remaining = set(), list(snippets)
-    head = [r"\documentclass{article}", r"\usepackage{amsmath,amssymb,mathtools}",
+    head = [r"\documentclass{article}", r"\usepackage{amsmath,amssymb,mathtools,cancel}",
             r"\usepackage{unicode-math}", r"\begin{document}"]
     rounds = len(remaining) + 1 if max_rounds is None else max_rounds
     for _ in range(rounds):
@@ -224,7 +225,12 @@ def check_latex(snippets, engine, max_rounds=None):
                     log += "\n" + f.read()
         if r.returncode == 0:
             return bad
-        m = re.search(r"m\.tex:(\d+):", log) or re.search(r"^l\.(\d+)", log, re.M)
+        if engine == "tectonic":
+            # Warnings (including overfull boxes) can precede the actual error.
+            # They must not cause a valid, wide equation to be neutralised.
+            m = re.search(r"^error:.*?m\.tex:(\d+):", log, re.M)
+        else:
+            m = re.search(r"m\.tex:(\d+):", log) or re.search(r"^l\.(\d+)", log, re.M)
         k = int(m.group(1)) - len(head) - 1 if m else -1
         if not 0 <= k < len(remaining):
             raise MathCheckError(f"{engine} failed outside a mapped equation: {log[-1200:]}")
@@ -326,8 +332,9 @@ def heading_text(block):
     return re.sub(r"\s+", " ", block.lstrip().lstrip("#").strip().strip("*")).lower()
 
 
-def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
+def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, reviewed_fixes=None):
     """outline: {"sections": [{"start": "p4.3", "title": ..., "level": 1|2}]} from outline.py, or None."""
+    reviewed_fixes = reviewed_fixes or {}
     starts = {sec["start"]: sec for sec in (outline or {}).get("sections", [])}
     out = os.path.join(out_root, unit)
     shutil.rmtree(out, ignore_errors=True)
@@ -336,6 +343,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
               "expected_pages": len(pages), "input_directory": os.path.abspath(md_dir),
               "outline_sections": len(starts), "requested_format": fmt,
               "outline": f"{len(starts)} sections" if starts else "none (page order)"}
+    report["reviewed_figure_links"] = []
     applied_sections = set()
     sources = []  # every source block, to verify nothing is lost
     font = ""
@@ -347,6 +355,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
     pin = ("header-includes:\n  - \\usepackage{float}\n  - \\floatplacement{figure}{H}\n"
            "  - \\usepackage{fvextra}\n"
            "  - \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\\\\{\\}}\n")
+    pin += "  - \\usepackage{cancel}\n"
     parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\npapersize: letter\nfontsize: 11pt\n{font}{pin}---\n"]
 
     for page in pages:
@@ -365,6 +374,31 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
         matched_desc = {desc_idx[i]: figs[j] for i, j in pairs}
         matched_figs = {j for _, j in pairs}
         page_img = Image.open(os.path.join(D, "processed", page + ".jpg")).convert("RGB")
+
+        if figs:
+            _, tagged_size = page_figures(page)
+            if tuple(tagged_size) != page_img.size:
+                raise ValueError(f"{page}: Surya image size differs from the processed image")
+        for link in reviewed_fixes.get("figures", []):
+            if link["page"] != page:
+                continue
+            candidates = [k for k in desc_idx
+                          if DIAGRAM.match(blocks[k]).group(1).strip() == link["description"]]
+            if not candidates:
+                continue  # the reviewed caption does not occur in this input variant
+            if len(candidates) != 1 or candidates[0] in matched_desc:
+                raise ValueError(f"{page}: reviewed caption is ambiguous or already matched")
+            with open(os.path.join(D, "tags_draft", page + ".json")) as f:
+                tags = json.load(f)
+            tagged = [b for b in tags["blocks"] if b["id"] == link["surya_block"]]
+            if (len(tagged) != 1 or tagged[0]["bbox"] != link["bbox"]
+                    or tuple(tags["image_size"]) != page_img.size
+                    or tuple(link["image_size"]) != page_img.size):
+                raise ValueError(f"{page}: reviewed Surya box or image dimensions have changed")
+            if tagged[0]["type"] not in ("figure", "table"):
+                raise ValueError(f"{page}: reviewed box is not a figure or table")
+            matched_desc[candidates[0]] = {"block": link["surya_block"], "bbox": link["bbox"]}
+            report["reviewed_figure_links"].append(link)
 
         def figure_md(fig, caption):
             name = f"{page}_{fig['block'].replace('+', '-')}.png"
@@ -403,8 +437,8 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
             body.append(figure_md(f, "drawing from the page (no description in the notes)"))
         parts.append("\n\n".join(body))
         report["pages"].append({"page": page, "descriptions": len(desc_idx), "surya_figures": len(figs),
-                                "merged_from": n_split, "matched": len(pairs), "extra_figures_added": len(extra),
-                                "descriptions_without_figure": len(desc_idx) - len(pairs)})
+                                "merged_from": n_split, "matched": len(matched_desc), "extra_figures_added": len(extra),
+                                "descriptions_without_figure": len(desc_idx) - len(matched_desc)})
 
     report["outline_sections"] = len(applied_sections)
     report["outline_unapplied_starts"] = sorted(set(starts) - applied_sections)
@@ -414,10 +448,31 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
     report["preservation"] = {"blocks": len(sources), "missing": len(missing), "missing_list": missing[:10],
                               "scope": "ordered occurrences in Markdown before math fallback; not PDF accuracy"}
     pandoc = shutil.which("pandoc")
-    snippets = sorted(set(find_math(doc)))
+    snippets = sorted(set(find_math("\n\n".join(parts[1:]))))
     bad, check = equation_check(snippets)
-    doc = neutralise(doc, bad)
-    report["math"] = {"equations": len(snippets), "failed": len(bad), "failed_list": sorted(bad)[:20], **check}
+    repairs = []
+    replacements = {fix["original"]: fix for fix in reviewed_fixes.get("math", [])}
+    # Apply a reviewed repair only to an actually diagnosed failure and only if
+    # the same checker confirms its replacement. Keep every original in the report.
+    for original in sorted(bad):
+        fix = replacements.get(original)
+        if not fix:
+            continue
+        rejected, repaired_check = equation_check([fix["replacement"]])
+        if repaired_check["status"] == "completed" and not rejected:
+            repairs.append(fix)
+    accepted = {fix["original"]: fix["replacement"] for fix in repairs}
+    def replace_math(match):
+        original = match.group(1)
+        return "$$" + accepted[original] + "$$" if original in accepted else match.group(0)
+    # This opt-in manifest currently targets display math only.
+    applied = {m.group(1) for m in DISPLAY_MATH.finditer(doc)} & set(accepted)
+    doc = DISPLAY_MATH.sub(replace_math, doc)
+    remaining_bad = bad - applied
+    doc = neutralise(doc, remaining_bad)
+    report["math"] = {"equations": len(snippets), "failed": len(bad), "failed_list": sorted(bad)[:20],
+                      "reviewed_repairs": [f for f in repairs if f["original"] in applied],
+                      "remaining_failed": len(remaining_bad), **check}
     md_path = os.path.join(out, unit + ".md")
     open(md_path, "w").write(doc)
 
@@ -426,10 +481,14 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None):
         target = os.path.join(out, f"{unit}.{fmt}")
         cmd = [pandoc, md_path, "-o", target, "--resource-path", out]
         engine = "xelatex" if shutil.which("xelatex") else "tectonic"  # tectonic: small LaTeX engine for laptops
-        cmd += [f"--pdf-engine={engine}"] if fmt == "pdf" else ["--standalone", "--mathjax"]
+        cmd += [f"--pdf-engine={engine}", "--lua-filter", os.path.join(ROOT, "04_reconstruction", "fit_display_math.lua"),
+                "--include-in-header", os.path.join(ROOT, "04_reconstruction", "fit_display_math.tex")] if fmt == "pdf" else ["--standalone", "--mathjax"]
         r = subprocess.run(cmd, capture_output=True, text=True, cwd=out)
         report["output"] = target if r.returncode == 0 and os.path.exists(target) else None
         report["pandoc_errors"] = r.stderr[-1500:] if r.returncode else ""
+        report["pandoc_warnings"] = r.stderr[-3000:] if not r.returncode else ""
+        if report["output"] and fmt == "pdf":
+            report["pdf_audit"] = audit_pdf(target)
     json.dump(report, open(os.path.join(out, "report.json"), "w"), indent=1)
     return report
 
@@ -444,7 +503,9 @@ def main():
     p.add_argument("--outlines", default=None, help="folder of outlines from outline.py (adds sections)")
     p.add_argument("--format", choices=["pdf", "html", "md"], default=None,
                    help="default: pdf if xelatex is installed, else html if pandoc is, else md")
+    p.add_argument("--reviewed-fixes", help="opt-in JSON of explicit, audited math and crop fixes")
     a = p.parse_args()
+    reviewed_fixes = json.load(open(a.reviewed_fixes)) if a.reviewed_fixes else None
     a.out, a.pages_md = os.path.abspath(a.out), os.path.abspath(a.pages_md)  # pandoc runs inside the output folder
     latex = shutil.which("xelatex") or shutil.which("tectonic")
     fmt = a.format or ("pdf" if latex and shutil.which("pandoc") else "html" if shutil.which("pandoc") else "md")
@@ -459,18 +520,24 @@ def main():
     run_id = uuid.uuid4().hex
     with open(os.path.join(a.out, "run.json"), "w") as f:
         json.dump({"run_id": run_id, "units": chosen, "pages_md": a.pages_md, "format": fmt}, f, indent=2)
+    failed_outputs = []
     for u in chosen:
         outline = None
         if a.outlines and os.path.exists(os.path.join(a.outlines, u + ".json")):
             outline = json.load(open(os.path.join(a.outlines, u + ".json")))["outline"]  # None if rejected
-        r = render_unit(u, units[u], a.pages_md, a.out, fmt, outline, run_id)
+        r = render_unit(u, units[u], a.pages_md, a.out, fmt, outline, run_id, reviewed_fixes)
+        if fmt in ("pdf", "html") and not r["output"]:
+            failed_outputs.append(u)
         pg = r["pages"]
         print(f"{u:14s} pages {len(pg):3d} (missing {len(r['missing_pages'])}) | figures matched "
               f"{sum(x['matched'] for x in pg)}/{sum(x['descriptions'] for x in pg)} descriptions, "
               f"+{sum(x['extra_figures_added'] for x in pg)} extra | equations {r['math']['equations']}, "
-              f"failed {r['math']['failed']} ({r['math']['checked_with']}: {r['math']['status']}) | sections: {r['outline']} | "
+              f"failed {r['math']['failed']}, repaired {len(r['math']['reviewed_repairs'])}, remaining {r['math']['remaining_failed']} ({r['math']['checked_with']}: {r['math']['status']}) | sections: {r['outline']} | "
               f"blocks kept {r['preservation']['blocks'] - r['preservation']['missing']}/{r['preservation']['blocks']} | "
               f"output: {r['output'] or 'md only'}")
+
+    if failed_outputs:
+        sys.exit("Requested output failed for: " + ", ".join(failed_outputs) + "; inspect report.json pandoc_errors")
 
 
 if __name__ == "__main__":

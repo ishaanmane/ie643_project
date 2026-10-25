@@ -42,13 +42,13 @@ class RendererTests(unittest.TestCase):
 
     def test_diagnosed_equation_removed_then_remainder_compiles(self):
         for engine in ['xelatex', 'tectonic']:
-            responses = [subprocess.CompletedProcess([], 1, '', 'm.tex:5: undefined control sequence'),
+            responses = [subprocess.CompletedProcess([], 1, '', 'error: m.tex:5: undefined control sequence'),
                          subprocess.CompletedProcess([], 0, '', '')]
             with patch.object(renderer.subprocess, 'run', side_effect=responses):
                 self.assertEqual(renderer.check_latex([r'\bogus', 'x'], engine), {r'\bogus'})
 
     def test_retry_limit_is_not_success(self):
-        response = subprocess.CompletedProcess([], 1, '', 'm.tex:5: undefined control sequence')
+        response = subprocess.CompletedProcess([], 1, '', 'error: m.tex:5: undefined control sequence')
         with patch.object(renderer.subprocess, 'run', return_value=response):
             with self.assertRaises(renderer.MathCheckError):
                 renderer.check_latex([r'\bogus', 'x'], 'tectonic', max_rounds=1)

@@ -1,0 +1,12 @@
+\usepackage{cancel,graphicx}
+% Measure in display style; shrink only when wider than the available line.
+\newcommand{\fitdisplaymath}[1]{%
+  \begingroup
+  \sbox0{$\displaystyle #1$}%
+  \ifdim\wd0>\linewidth
+    \resizebox{\linewidth}{!}{\usebox0}%
+  \else
+    \usebox0%
+  \fi
+  \endgroup
+}
