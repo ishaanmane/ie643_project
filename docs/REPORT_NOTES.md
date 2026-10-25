@@ -67,3 +67,12 @@ is refused before it is sent.
 - clean and boxed_json are statistically indistinguishable (test paired NED +0.001, CI -0.019 to
   +0.020); clean kept for simplicity, speed and memory. This replaces the old finding that boxes
   dropped side notes (that was on the old split and images).
+
+## Ablations (final run)
+
+- Raw vs preprocessed input to the trained model: no significant difference in recognition
+  (test paired NED +0.008, CI -0.015 to +0.029). Report honestly; argue preprocessing for crops,
+  PDF quality and robustness rather than for OCR accuracy.
+- Surya figure count vs labels: recall 0.93, precision 0.73 (all pages); test exact-count 0.88
+  (`results/layout/count_metrics.md`).
+- Hand-graded crops: pending (`results/crop_review/*.html`).

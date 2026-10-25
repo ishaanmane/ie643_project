@@ -15,4 +15,9 @@ binarised (the model uses pen colour); deskew off by default (it rotated straigh
 - Earlier fixes still in place: no warp on dark (chalkboard) images, page-shape and page-area
   checks for the warp, 2% margin so edge writing is not clipped.
 - Alternatives kept as experiments: Sauvola binarisation (`experiments/`), not compared on accuracy.
-- Planned: raw vs preprocessed recognition accuracy with the trained model (no retraining).
+- **Raw vs preprocessed input** (same trained clean model, `05_evaluation/raw_vs_processed.py`):
+  test NED 0.311 preprocessed vs 0.319 raw; paired difference +0.008 (95% CI -0.015 to +0.029),
+  preprocessed better on 44 of 76 pages, worse on 25. Val: +0.001 (CI -0.019 to +0.021).
+  **Not significant**: the model trained on preprocessed pages reads raw scans about as well.
+  Preprocessing's clear benefits are elsewhere: smaller, upright, desk-free images for Surya crops
+  and for the PDF appendix, and consistent input for uploads.
