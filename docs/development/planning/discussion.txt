@@ -1,0 +1,16 @@
+identify models which can convert img to text.. (handwritten notes to pdf)
+
+fine tuning methods-- we need to fine tune the above models on our dataset..
+
+****data set collection .. explore sites..****
+Kaggle, Huggingface.
+
+
+
+OCR --> VLM -->
+
+
+architecture of VLM check its interal st5ructure.. and try to change..
+mail for verification..
+
+quality evalutauin matircs search and validate why we are using them.
