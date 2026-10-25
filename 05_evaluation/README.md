@@ -27,3 +27,11 @@ python3 05_evaluation/evaluate.py --pred preds/final_clean_base_test --compare p
 Metrics in `metrics.py`. Considered but not used: **CDM** (renders both LaTeX formulas and matches
 characters visually, CVPR 2025; needs its own rendering and detection toolchain) and an LLM judge
 (not reproducible). Layout (figure detection) metrics are separate: see `docs/REPORT_NOTES.md`.
+
+## Stage 5 extras
+
+| Script | What | Where it runs |
+|---|---|---|
+| `layout_counts.py` | Surya figure/table regions vs `[Diagram]` count in the labels, per split and source | Mac, from `data/tags/` -> `results/layout/count_metrics.md` |
+| `raw_vs_processed.py` | Same trained model on raw scans instead of preprocessed pages (does preprocessing help?) | GPU -> `preds/final_clean_raw_{val,test}` + paired comparison |
+| `crop_review.py` | HTML sheet to hand-grade every placed figure (correct / partial / wrong / not a drawing), and its scorer | sheet built on GPU, graded in any browser |
