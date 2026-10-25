@@ -173,3 +173,9 @@ No new model loading/training is needed. Inspect GPU results before claiming par
 - Hold out notebook-photo pages for val/test (needs code change: IE802 is one unit) or keep the split and note it.
 - Fix the 12 `??` pages; check the 55 test labels by hand (`data/VERIFICATION.md`).
 - Revoke the Gemini API key pasted in chat early in the project.
+
+## Latest update: upload interface (2026-10-25)
+
+GPU render fixes verified and pulled at `d8beb66`: two validation PDFs retain 128/128 blocks, match 10/10 descriptions with one reviewed link, one syntax repair leaves zero diagnosed failures. Notebook has three remaining syntax fallbacks; all three PDFs have zero out-of-page words.
+
+`06_interface/` adds inference-only clean-adapter processing for new PDFs/images and a stdlib localhost upload UI. No Gradio/Streamlit required. Seven CPU tests pass plus thirteen renderer regressions; simulated recognition with real preprocessing/PDF compilation passes. Real GPU inference is pending. Fresh Surya is not integrated; original scans are appended for checking diagrams. See its README for exact next commands. User confirmed adapter config and 181.6 MiB weights. Current access is Antigravity terminal, similar to SSH; port forwarding is unconfirmed and physical GPU access may be available later. No physical access needed for CLI. Push only on explicit instruction. Submission blockers tracked in `docs/SUBMISSION_READINESS.md`.

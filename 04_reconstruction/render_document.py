@@ -173,9 +173,9 @@ def merge_split_figures(figs, target):
     return figs
 
 
-def page_figures(page):
+def page_figures(page, data_dir=None):
     """Surya figure blocks of a page, with their position (0-1) in reading order."""
-    path = os.path.join(D, "tags_draft", page + ".json")
+    path = os.path.join(data_dir or D, "tags_draft", page + ".json")
     if not os.path.exists(path):
         return [], 0
     tags = json.load(open(path))
@@ -332,8 +332,9 @@ def heading_text(block):
     return re.sub(r"\s+", " ", block.lstrip().lstrip("#").strip().strip("*")).lower()
 
 
-def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, reviewed_fixes=None):
+def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, reviewed_fixes=None, data_dir=None, document_title=None, source_pages=None):
     """outline: {"sections": [{"start": "p4.3", "title": ..., "level": 1|2}]} from outline.py, or None."""
+    data_dir = data_dir or D
     reviewed_fixes = reviewed_fixes or {}
     starts = {sec["start"]: sec for sec in (outline or {}).get("sections", [])}
     out = os.path.join(out_root, unit)
@@ -356,7 +357,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
            "  - \\usepackage{fvextra}\n"
            "  - \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\\\\{\\}}\n")
     pin += "  - \\usepackage{cancel}\n"
-    parts = [f"---\ntitle: \"{unit_title(unit)}\"\ngeometry: margin=2cm\npapersize: letter\nfontsize: 11pt\n{font}{pin}---\n"]
+    parts = [f"---\ntitle: {json.dumps(document_title or unit_title(unit))}\ngeometry: margin=2cm\npapersize: letter\nfontsize: 11pt\n{font}{pin}---\n"]
 
     for page in pages:
         src = os.path.join(md_dir, page + ".md")
@@ -366,17 +367,17 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
         blocks = split_blocks(open(src).read())
         desc_idx = [k for k, b in enumerate(blocks) if DIAGRAM.match(b)]
         nb = max(len(blocks) - 1, 1)
-        figs, _ = page_figures(page)
+        figs, _ = page_figures(page, data_dir)
         n_split = len(figs)
         if len(figs) > len(desc_idx):
             figs = merge_split_figures(figs, max(1, len(desc_idx)))
         pairs = align([k / nb for k in desc_idx], [f["pos"] for f in figs])
         matched_desc = {desc_idx[i]: figs[j] for i, j in pairs}
         matched_figs = {j for _, j in pairs}
-        page_img = Image.open(os.path.join(D, "processed", page + ".jpg")).convert("RGB")
+        page_img = Image.open(os.path.join(data_dir, "processed", page + ".jpg")).convert("RGB")
 
         if figs:
-            _, tagged_size = page_figures(page)
+            _, tagged_size = page_figures(page, data_dir)
             if tuple(tagged_size) != page_img.size:
                 raise ValueError(f"{page}: Surya image size differs from the processed image")
         for link in reviewed_fixes.get("figures", []):
@@ -388,7 +389,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
                 continue  # the reviewed caption does not occur in this input variant
             if len(candidates) != 1 or candidates[0] in matched_desc:
                 raise ValueError(f"{page}: reviewed caption is ambiguous or already matched")
-            with open(os.path.join(D, "tags_draft", page + ".json")) as f:
+            with open(os.path.join(data_dir, "tags_draft", page + ".json")) as f:
                 tags = json.load(f)
             tagged = [b for b in tags["blocks"] if b["id"] == link["surya_block"]]
             if (len(tagged) != 1 or tagged[0]["bbox"] != link["bbox"]
@@ -473,6 +474,19 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
     report["math"] = {"equations": len(snippets), "failed": len(bad), "failed_list": sorted(bad)[:20],
                       "reviewed_repairs": [f for f in repairs if f["original"] in applied],
                       "remaining_failed": len(remaining_bad), **check}
+    if source_pages:
+        # Preserve original scans when fresh layout/crops are unavailable. Explicit
+        # appendix, not a claim that diagrams were reconstructed or recognized.
+        os.makedirs(os.path.join(out, "sources"), exist_ok=True)
+        doc += "\n# Original source pages\n\nOriginal scans for checking transcription and diagrams.\n"
+        for number, source in enumerate(source_pages, 1):
+            with Image.open(source) as image:
+                width, height = image.size
+                name = f"source_{number:03d}.jpg"
+                image.convert("RGB").save(os.path.join(out, "sources", name), quality=95)
+            percent = min(90.0, 80.0 * (11 - 4/2.54) / (8.5 - 4/2.54) * width / height)
+            doc += f"\n![Original source page {number}](sources/{name}){{width={percent:.4f}%}}\n"
+        report["source_appendix_pages"] = len(source_pages)
     md_path = os.path.join(out, unit + ".md")
     open(md_path, "w").write(doc)
 
