@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 import shutil
 import sys
+import subprocess
 import time
 import zipfile
 
@@ -60,6 +61,8 @@ class CleanRecognizer:
         self.model, self.processor = model, processor
 
     def release(self):
+        if self.model is None and self.processor is None:
+            return
         import gc
         self.model = self.processor = None
         gc.collect()
@@ -142,6 +145,44 @@ def validate_prediction(text):
         raise ValueError('Transcription contains embedded resources; raw prediction saved for review.')
 
 
+def recognize_in_worker(recognizer, data, pages, output, progress):
+    request = {'adapter': str(recognizer.adapter), 'max_pixels': recognizer.max_pixels,
+               'max_new_tokens': recognizer.max_new_tokens, 'pages': pages,
+               'images': str(data/'processed'), 'output': str(output)}
+    request_path = output/'recognition_request.json'
+    request_path.write_text(json.dumps(request))
+    log_path = output/'recognition.log'
+    progress('Loading Qwen in isolated recognition worker')
+    with log_path.open('w') as log:
+        proc = subprocess.Popen([sys.executable, str(Path(__file__).with_name('recognition_worker.py')),
+                                 str(request_path)], stdout=log, stderr=subprocess.STDOUT)
+        try:
+            deadline = time.monotonic() + 7200
+            previous = ''
+            while proc.poll() is None:
+                if time.monotonic() >= deadline:
+                    raise RuntimeError('Recognition exceeded two hours; inspect recognition.log.')
+                lines = log_path.read_text(errors='replace').splitlines()
+                status = next((line for line in reversed(lines) if line.startswith('Recognizing page ')), '')
+                if status and status != previous:
+                    progress(status); previous = status
+                time.sleep(1)
+            if proc.returncode:
+                raise RuntimeError('Recognition worker failed; inspect recognition.log. GPU worker has exited.')
+        finally:
+            if proc.poll() is None:
+                proc.terminate()
+                try: proc.wait(timeout=15)
+                except subprocess.TimeoutExpired:
+                    proc.kill(); proc.wait()
+    result = json.loads((output/'recognition_result.json').read_text())
+    if [p['page'] for p in result] != pages:
+        raise RuntimeError('Recognition worker returned incomplete or unordered pages.')
+    for page in pages:
+        validate_prediction((output/'predictions'/(page+'.md')).read_text())
+    return result
+
+
 def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20, progress=None, layout_mode='none'):
     import cv2
     from preprocess import NotesPreprocessor
@@ -183,13 +224,16 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
         layout_info = run_layout(data, pages, output, progress)
     elif layout_mode != 'none':
         raise ValueError('Unknown layout mode')
-    predictions=[]
-    for i,page in enumerate(pages,1):
-        progress(f'Recognizing page {i}/{len(pages)}' + (' — first run loads the trained model' if i==1 else ''))
-        text, details = recognizer.predict(data/'processed'/(page+'.jpg'))
-        (output/'predictions'/(page+'.md')).write_text(text)
-        validate_prediction(text)
-        predictions.append({'page':page,**details})
+    if isinstance(recognizer, CleanRecognizer):
+        predictions = recognize_in_worker(recognizer, data, pages, output, progress)
+    else:
+        predictions=[]
+        for i,page in enumerate(pages,1):
+            progress(f'Recognizing page {i}/{len(pages)}' + (' — first run loads the trained model' if i==1 else ''))
+            text, details = recognizer.predict(data/'processed'/(page+'.jpg'))
+            (output/'predictions'/(page+'.md')).write_text(text)
+            validate_prediction(text)
+            predictions.append({'page':page,**details})
     progress('Checking equations and building searchable PDF')
     report = render_unit('upload_notes',pages,str(output/'predictions'),str(output/'documents'),
                          'pdf',data_dir=str(data),document_title=title,

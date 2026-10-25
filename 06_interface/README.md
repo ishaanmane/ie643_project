@@ -1,3 +1,9 @@
+## GPU memory correction
+
+The first managed run failed: the UI process retained 7,398 MiB and Surya could not reserve 90% of VRAM. Recognition now runs in a short-lived `recognition_worker.py` subprocess, exits before rendering, and leaves the UI process without model weights. Surya still runs first in its own managed process group. No-op release no longer imports torch or initializes CUDA. Recognition failures retain `recognition.log` and raw predictions; incomplete worker output is rejected. Twelve CPU interface tests pass; repeated GPU uploads must still be tested.
+
+After pulling this fix, stop and restart the existing UI process once to release its old memory. Current session naming: `notes-tunnel` contains the Python UI; `web-tunnel` contains cloudflared. Keep `web-tunnel` running. Check GPU memory after stopping the UI; then source the Qwen environment and restart `python3 06_interface/server.py`. Use its new application token.
+
 ## Current managed layout update
 
 The CLI and server now default to `--layout surya`. Uses the verified Surya 0.22.1 client and vLLM 0.32.0 in `/home/intralab/workspace/ie643_layout_envs/`, checkpoint `datalab-to/surya-ocr-2`. Set `IE643_LAYOUT_ENVS` to override that directory and `IE643_LAYOUT_PORT` to override port 8001. Versions are checked before starting. There is no fallback to Surya 0.7.0.
