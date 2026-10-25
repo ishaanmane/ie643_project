@@ -1,0 +1,119 @@
+{
+ "unit": "mlt_week06",
+ "run_id": "6d108d3403134044a1d96bd5aa14b5b1",
+ "pages": [
+  {
+   "page": "mlt_week06_page001",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "mlt_week06_page002",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "mlt_week06_page003",
+   "descriptions": 1,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "mlt_week06_page004",
+   "descriptions": 0,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "mlt_week06_page005",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "mlt_week06_page006",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  }
+ ],
+ "missing_pages": [],
+ "expected_pages": 6,
+ "input_directory": "/home/intralab/workspace/ie643_project/preds/lora_clean_val",
+ "outline_sections": 0,
+ "requested_format": "pdf",
+ "outline": "none (page order)",
+ "reviewed_figure_links": [
+  {
+   "page": "mlt_week06_page003",
+   "description": "A row of boxes labeled $F_1, F_2, \\dots, F_k$, each representing a fold.",
+   "surya_block": "b5",
+   "bbox": [
+    211,
+    304,
+    621,
+    351
+   ],
+   "image_size": [
+    1501,
+    2000
+   ],
+   "reason": "Visually verified against the processed source: the K-fold row is Surya table b5, not training/validation table b1."
+  }
+ ],
+ "outline_unapplied_starts": [],
+ "preservation": {
+  "blocks": 37,
+  "missing": 0,
+  "missing_list": [],
+  "scope": "ordered occurrences in Markdown before math fallback; not PDF accuracy"
+ },
+ "math": {
+  "equations": 39,
+  "failed": 1,
+  "failed_list": [
+   "= E\\left[\\|\\hat{w}_{ML}-w\\|^2\\right] \\quad \\text{(Expected value of the norm of estimator & $w\\in\\mathbb{R}^d$, over randomness in $y$)}"
+  ],
+  "reviewed_repairs": [
+   {
+    "original": "= E\\left[\\|\\hat{w}_{ML}-w\\|^2\\right] \\quad \\text{(Expected value of the norm of estimator & $w\\in\\mathbb{R}^d$, over randomness in $y$)}",
+    "replacement": "= E\\left[\\|\\hat{w}_{ML}-w\\|^2\\right] \\quad \\text{(Expected value of the norm of estimator \\& } w\\in\\mathbb{R}^d \\text{, over randomness in } y \\text{)}",
+    "reason": "Escape literal ampersand and move dollar-delimited math out of text mode; retain the original symbols and words."
+   }
+  ],
+  "remaining_failed": 0,
+  "status": "completed",
+  "checked_with": "xelatex",
+  "error": null
+ },
+ "output": "/home/intralab/workspace/ie643_project/out/reconstruction_grounded_val/mlt_week06/mlt_week06.pdf",
+ "pandoc_errors": "",
+ "pandoc_warnings": "",
+ "pdf_audit": {
+  "status": "completed",
+  "pages": 3,
+  "outside_words": 0,
+  "examples": [],
+  "scope": "word bounds only; not overlap, glyph or semantic correctness"
+ }
+}
