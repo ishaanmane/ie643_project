@@ -45,3 +45,5 @@ Options: `--tunnel cloudflare` (random trycloudflare.com link) or `--tunnel none
 | `index.html`, `app.js`, `style.css` | The page |
 | `demo.py` | Test mode without models |
 | `tests/` | `python3 -m unittest discover -s 06_interface/tests` |
+
+Limits and extreme cases (more than 20 pages, size, formats, timeouts): [../docs/REPORT_NOTES.md](../docs/REPORT_NOTES.md).
