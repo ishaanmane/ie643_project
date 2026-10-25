@@ -133,8 +133,22 @@ def clean_crop(page_img, bbox, pad=0.01):
     if ImageStat.Stat(gray).mean[0] < 100:
         # chalkboard: grayscale first (inverting a green board in colour gives pink), then
         # invert so strokes are dark on white for print
-        return ImageOps.autocontrast(ImageOps.invert(gray), cutoff=1).convert("RGB")
-    return ImageOps.autocontrast(crop, cutoff=1)
+        crop = ImageOps.autocontrast(ImageOps.invert(gray), cutoff=1).convert("RGB")
+    else:
+        crop = ImageOps.autocontrast(crop, cutoff=1)
+    return trim_whitespace(crop)
+
+
+def trim_whitespace(img, margin=0.03):
+    """Cut empty paper around the drawing (Surya boxes are often loose), keeping a small
+    margin; the drawing itself is never cut."""
+    ink = ImageOps.grayscale(img).point(lambda v: 255 if v < 170 else 0).getbbox()
+    if not ink:
+        return img
+    w, h = img.size
+    m = int(margin * max(w, h)) + 4
+    box = (max(0, ink[0] - m), max(0, ink[1] - m), min(w, ink[2] + m), min(h, ink[3] + m))
+    return img.crop(box) if (box[2] - box[0]) * (box[3] - box[1]) < 0.9 * w * h else img
 
 
 def merge_split_figures(figs, target):

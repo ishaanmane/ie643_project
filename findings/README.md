@@ -11,8 +11,9 @@ are superseded where they differ.
 | [01_preprocessing.md](01_preprocessing.md) | Page clean-up, desk whitening |
 | [02_layout.md](02_layout.md) | Surya v2 figure detection |
 | [03_recognition.md](03_recognition.md) | Qwen2.5-VL fine-tuning, clean vs boxed_json |
+| [04_reconstruction.md](04_reconstruction.md) | PDF building, outline, style |
 | [05_evaluation.md](05_evaluation.md) | Metrics used and why |
 | [06_interface.md](06_interface.md) | Notes2PDF upload page, speed, limits |
 | [../docs/REPORT_NOTES.md](../docs/REPORT_NOTES.md) | Points the report must mention, extreme cases |
 
-Stage 4 (reconstruction) is still to be reviewed on the final predictions.
+
