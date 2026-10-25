@@ -2,6 +2,11 @@
 
 Usage (from the repo root):
     python 05_evaluation/evaluate.py --pred preds/base_val --split data/val.jsonl [--csv out.csv]
+    python 05_evaluation/evaluate.py --pred preds/final_clean_test --split data/test.jsonl --full
+    python 05_evaluation/evaluate.py --pred preds/A --compare preds/B --split data/test.jsonl
+--full adds the metrics in metrics.py (corpus CER, NED, token P/R/F1, BLEU-4, normalised
+equation P/R/F1 and edit score, diagram counts, headings, 95% bootstrap intervals);
+--compare runs a paired bootstrap of NED, A vs B, on the same pages.
 
 Metrics, per page and averaged by source (prefix of the page id):
   CER / WER   character and word error rate on the whole page (lower is better)
@@ -24,6 +29,9 @@ import statistics as st
 import sys
 
 import jiwer
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import metrics as M  # noqa: E402
 
 
 def load_records(jsonl_path):
@@ -83,9 +91,11 @@ def main():
     p.add_argument("--pred", required=True)
     p.add_argument("--split", required=True)
     p.add_argument("--csv", default="")
+    p.add_argument("--full", action="store_true", help="also the extended metrics")
+    p.add_argument("--compare", default="", help="second prediction folder for a paired comparison")
     a = p.parse_args()
 
-    rows, missing = [], []
+    rows, missing, refs = [], [], {}
     for r in load_records(a.split):
         path = os.path.join(a.pred, r["id"] + ".md")
         if not os.path.exists(path):
@@ -97,8 +107,12 @@ def main():
         ref = open(ref_path).read() if os.path.exists(ref_path) else r["answer"]
         if not norm(ref):
             continue
-        row = score(ref, open(path).read())
+        pred = open(path).read()
+        row = score(ref, pred)
         row.update(id=r["id"], source=r["id"].split("_")[0])
+        if a.full or a.compare:
+            row["full"] = M.page_metrics(ref, pred)
+        refs[r["id"]] = ref
         rows.append(row)
 
     print(f"scored {len(rows)} pages, {len(missing)} missing predictions")
@@ -108,11 +122,50 @@ def main():
         print(f"{src:8s} {len(sub):3d} {mean([r['cer'] for r in sub]):>6s} "
               f"{mean([r['wer'] for r in sub]):>6s} {mean([r['text_cer'] for r in sub]):>8s} "
               f"{mean([r['eq_match'] for r in sub]):>8s}")
+    if a.full:
+        full_report(rows)
+    if a.compare:
+        compare(rows, refs, a.compare)
     if a.csv:
         with open(a.csv, "w", newline="") as fh:
             w = csv.DictWriter(fh, fieldnames=["id", "source", "cer", "wer", "text_cer", "eq_match"])
             w.writeheader()
             w.writerows(rows)
+
+
+def fmt(v):
+    return "  -  " if v is None else f"{v:.3f}"
+
+
+def full_report(rows):
+    cols = [("corpCER", "corpus_cer"), ("NED", "ned"), ("tokP", "tok_p"), ("tokR", "tok_r"), ("tokF1", "tok_f1"),
+            ("BLEU4", "bleu4"), ("len", "len_ratio"), ("eqP", "eq_p"), ("eqR", "eq_r"), ("eqF1", "eq_f1"),
+            ("eqEdit", "eq_edit"), ("diagEx", "diag_exact"), ("diagP", "diag_p"), ("diagR", "diag_r"), ("headR", "heading_r")]
+    print("\nextended metrics (higher is better except corpCER, NED; len = prediction/reference length)")
+    print(f"{'source':8s} {'n':>3s} " + " ".join(f"{c:>7s}" for c, _ in cols))
+    for src in sorted({r["source"] for r in rows}) + ["ALL"]:
+        sub = [r["full"] for r in rows if src == "ALL" or r["source"] == src]
+        s = M.summarise(sub)
+        print(f"{src:8s} {len(sub):3d} " + " ".join(f"{fmt(s[k]):>7s}" for _, k in cols))
+    for name, key in (("CER (capped, page mean)", None), ("NED", "ned"), ("token F1", "tok_f1"), ("eq edit score", "eq_edit")):
+        vals = [r["cer"] for r in rows] if key is None else [r["full"][key] for r in rows]
+        ci = M.bootstrap_ci(vals)
+        if ci:
+            print(f"95% CI {name}: {ci[0]:.3f} - {ci[1]:.3f}")
+
+
+def compare(rows, refs, other_dir):
+    a, b = [], []
+    for r in rows:
+        path = os.path.join(other_dir, r["id"] + ".md")
+        if os.path.exists(path):
+            a.append(r["full"]["ned"])
+            b.append(M.page_metrics(refs[r["id"]], open(path).read())["ned"])
+    diff, ci, p_better = M.paired_bootstrap(a, b)
+    wins = sum(y < x for x, y in zip(a, b))
+    print(f"\npaired comparison on {len(a)} pages, NED (lower is better): B - A = {diff:+.3f} "
+          f"(95% CI {ci[0]:+.3f} to {ci[1]:+.3f}); B better on {wins} pages, worse on "
+          f"{sum(y > x for x, y in zip(a, b))}; B better in {100 * p_better:.0f}% of resamples")
 
 
 if __name__ == "__main__":

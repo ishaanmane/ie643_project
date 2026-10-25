@@ -49,3 +49,14 @@ is refused before it is sent.
 - Surya v2 is used zero-shot, only for figure crops; its weights are licensed for research use.
 - Earlier results (old split, 25 val pages) are superseded by the `final_*` runs and must not be
   mixed with them.
+
+## Metrics (see 05_evaluation/README.md)
+
+- Report the standard set: corpus CER and NED (comparable with Nougat / OmniDocBench), token
+  precision/recall/F1 (hallucination vs omission), BLEU-4, normalised equation F1 and edit score,
+  diagram-count accuracy, heading recall, each with 95% bootstrap intervals over test pages.
+- Strict equation match (0.137 on test) understates quality: after LaTeX normalisation equation F1
+  is 0.338 and the mean equation edit score 0.703 (final_clean, test). Explain the difference.
+- Fine-tuned vs zero-shot (test, NED): fine-tuned better on 74 of 76 pages, difference
+  0.284 (95% CI 0.247-0.324).
+- CDM (rendered-formula matching) not used: needs its own toolchain; mention as future work.
