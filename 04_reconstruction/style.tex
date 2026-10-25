@@ -1,0 +1,60 @@
+% Notes2PDF document style (included in every reconstructed PDF).
+% Main font is set by render_document.py (Merriweather when available).
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{225B45}   % deep green, same as the interface
+\definecolor{ink}{HTML}{1F2A26}
+\definecolor{muted}{HTML}{6B7A72}
+\definecolor{rule}{HTML}{D5DED7}
+\color{ink}
+
+% spacing: slightly open lines, space between paragraphs instead of indents
+\linespread{1.18}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55\baselineskip plus 2pt}
+\setlength{\emergencystretch}{3em}
+\raggedbottom
+
+% one heading scale for the whole document
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{accent}}{}{0pt}{}[{\color{rule}\titlerule[0.6pt]}]
+\titleformat{\subsection}{\large\bfseries\color{accent}}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{ink}}{}{0pt}{}
+\titleformat{\paragraph}[runin]{\normalsize\bfseries\color{ink}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.7\baselineskip}
+\titlespacing*{\subsection}{0pt}{1.2\baselineskip}{0.4\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{1.0\baselineskip}{0.3\baselineskip}
+\titlespacing*{\paragraph}{0pt}{0.6\baselineskip}{0.6em}
+
+% title block: title in accent, thin rule, no date clutter
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begingroup\noindent
+  {\color{muted}\footnotesize\addfontfeatures{LetterSpace=8}HANDWRITTEN NOTES, RECONSTRUCTED\par}
+  \vspace{0.4\baselineskip}
+  {\color{accent}\huge\bfseries\@title\par}
+  \vspace{0.5\baselineskip}{\color{rule}\rule{\linewidth}{0.8pt}}\par
+  \vspace{0.8\baselineskip}\endgroup}
+\makeatother
+
+% figures: muted caption, accent label
+\usepackage{caption}
+\captionsetup{font={small,color=muted},labelfont={bf,color=accent},labelsep=period,skip=6pt}
+
+% lists: compact and evenly spaced
+\usepackage{enumitem}
+\setlist{itemsep=0.25\baselineskip,topsep=0.4\baselineskip,leftmargin=1.6em}
+\setlist[itemize,1]{label={\color{accent}\textbullet}}
+
+% quotes (used for notes and warnings): light green bar
+\usepackage{framed}
+\renewenvironment{quote}{\def\FrameCommand{{\color{rule}\vrule width 2.5pt}\hspace{8pt}}\MakeFramed{\advance\hsize-\width}\color{muted}}{\endMakeFramed}
+
+% header and footer: document title and page number, small and grey
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\makeatletter\fancyhead[L]{\color{muted}\footnotesize\@title}\makeatother
+\fancyfoot[C]{\color{muted}\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\color{muted}\footnotesize\thepage}}
+
+\usepackage{newunicodechar}

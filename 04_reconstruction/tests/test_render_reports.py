@@ -24,9 +24,9 @@ class RendererTests(unittest.TestCase):
     def test_tall_and_wide_crops_fit_without_forcing_two_dimensions(self):
         for w, h in [(667, 134), (134, 667), (100, 100)]:
             percent = renderer.figure_width_percent((w, h))
-            width = percent / 100 * (8.5 - 4 / 2.54)
+            width = percent / 100 * (8.5 - 4.4 / 2.54)
             self.assertLessEqual(percent, 55)
-            self.assertLessEqual(width * h / w, .30 * (11 - 4 / 2.54) + 1e-9)
+            self.assertLessEqual(width * h / w, .30 * (11 - 4.4 / 2.54) + 1e-9)
 
     def test_missing_package_is_checker_error_not_zero_failures(self):
         response = subprocess.CompletedProcess([], 1, '', 'missing package unicode-math')

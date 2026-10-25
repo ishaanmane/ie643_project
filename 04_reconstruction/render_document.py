@@ -281,10 +281,36 @@ def equation_check(snippets):
     return bad, {"status": "completed", "checked_with": how, "error": None}
 
 
+FONT_DIR = os.path.join(ROOT, "04_reconstruction", "fonts")
+
+
+def pdf_style_header(out):
+    """LaTeX header for the PDF look: style.tex plus the fonts available on this machine.
+    Merriweather (bundled in 04_reconstruction/fonts/ or installed) for text; characters it
+    lacks (arrows, circled numbers, check marks, Greek) come from DejaVu Serif."""
+    installed = subprocess.run(["fc-list"], capture_output=True, text=True).stdout if shutil.which("fc-list") else ""
+    lines = []
+    if os.path.exists(os.path.join(FONT_DIR, "Merriweather-Regular.ttf")):
+        lines.append("\\setmainfont{Merriweather}[Path=" + FONT_DIR + "/, UprightFont=*-Regular, "
+                     "BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic, Extension=.ttf]")
+    elif "Merriweather" in installed:
+        lines.append("\\setmainfont{Merriweather}")
+    elif "DejaVu Serif" in installed:
+        lines.append("\\setmainfont{DejaVu Serif}")
+    lines.append("\\input{" + os.path.join(ROOT, "04_reconstruction", "style.tex") + "}")
+    if "DejaVu Serif" in installed and len(lines) > 1 and "DejaVu" not in lines[0]:
+        lines.append("\\newfontfamily\\symbolfont{DejaVu Serif}")
+        lines.append("\\input{" + os.path.join(ROOT, "04_reconstruction", "fallback_chars.tex") + "}")
+    path = os.path.join(out, "style_header.tex")
+    with open(path, "w") as f:
+        f.write("\n".join(lines) + "\n")
+    return path
+
+
 def figure_width_percent(size):
-    # Explicit letter paper and 2 cm margins below. Specify only width so Pandoc
+    # Explicit letter paper and 2.2 cm margins below. Specify only width so Pandoc
     # preserves aspect ratio, while also fitting tall drawings within 30% height.
-    text_width, text_height = 8.5 - 4 / 2.54, 11 - 4 / 2.54
+    text_width, text_height = 8.5 - 4.4 / 2.54, 11 - 4.4 / 2.54
     return min(55.0, 30.0 * text_height / text_width * size[0] / size[1])
 
 
@@ -352,17 +378,13 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
     report["reviewed_figure_links"] = []
     applied_sections = set()
     sources = []  # every source block, to verify nothing is lost
-    font = ""
-    if fmt == "pdf" and shutil.which("fc-list"):
-        fonts = subprocess.run(["fc-list"], capture_output=True, text=True).stdout
-        if "DejaVu Serif" in fonts:  # covers arrows and symbols used in the notes (⇒, →, ⚠)
-            font = "mainfont: DejaVu Serif\n"
+    font = ""  # chosen in pdf_style_header() at PDF build time
     # figures stay where they are in the notes (no LaTeX floating); long verbatim lines wrap
     pin = ("header-includes:\n  - \\usepackage{float}\n  - \\floatplacement{figure}{H}\n"
            "  - \\usepackage{fvextra}\n"
            "  - \\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,breakanywhere,commandchars=\\\\\\{\\}}\n")
     pin += "  - \\usepackage{cancel}\n"
-    parts = [f"---\ntitle: {json.dumps(document_title or unit_title(unit))}\ngeometry: margin=2cm\npapersize: letter\nfontsize: 11pt\n{font}{pin}---\n"]
+    parts = [f"---\ntitle: {json.dumps(document_title or unit_title(unit))}\ngeometry: margin=2.2cm\npapersize: letter\nfontsize: 10pt\n{font}{pin}---\n"]
 
     for page in pages:
         src = os.path.join(md_dir, page + ".md")
@@ -495,7 +517,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
                 small = image.convert("RGB")
                 small.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
                 small.save(os.path.join(out, "sources", name), quality=80, optimize=True)
-            percent = min(90.0, 80.0 * (11 - 4/2.54) / (8.5 - 4/2.54) * width / height)
+            percent = min(90.0, 80.0 * (11 - 4.4/2.54) / (8.5 - 4.4/2.54) * width / height)
             doc += f"\n![Original source page {number}](sources/{name}){{width={percent:.4f}%}}\n"
         report["source_appendix_pages"] = len(source_pages)
     md_path = os.path.join(out, unit + ".md")
@@ -509,7 +531,8 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
             cmd += ["--from=markdown-raw_tex-raw_html"]
         engine = "xelatex" if shutil.which("xelatex") else "tectonic"  # tectonic: small LaTeX engine for laptops
         cmd += [f"--pdf-engine={engine}", "--lua-filter", os.path.join(ROOT, "04_reconstruction", "fit_display_math.lua"),
-                "--include-in-header", os.path.join(ROOT, "04_reconstruction", "fit_display_math.tex")] if fmt == "pdf" else ["--standalone", "--mathjax"]
+                "--include-in-header", os.path.join(ROOT, "04_reconstruction", "fit_display_math.tex"),
+                "--include-in-header", pdf_style_header(out)] if fmt == "pdf" else ["--standalone", "--mathjax"]
         if fmt == "pdf" and engine == "xelatex":
             cmd += ["--pdf-engine-opt=-no-shell-escape"]
         r = subprocess.run(cmd, capture_output=True, text=True, cwd=out, timeout=600)
