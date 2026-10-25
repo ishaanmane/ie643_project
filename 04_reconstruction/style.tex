@@ -10,9 +10,10 @@
 % spacing: slightly open lines, space between paragraphs instead of indents
 \linespread{1.18}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{0.55\baselineskip plus 2pt}
+\setlength{\parskip}{0.55\baselineskip}
 \setlength{\emergencystretch}{3em}
-\raggedbottom
+% short pages end with white space at the bottom instead of stretched gaps between figures
+\AtBeginDocument{\raggedbottom}
 
 % one heading scale for the whole document
 \usepackage{titlesec}
@@ -28,6 +29,7 @@
 % title block: title in accent, thin rule, no date clutter
 \makeatletter
 \renewcommand{\maketitle}{%
+  \thispagestyle{plain}% no running title on the title page
   \begingroup\noindent
   {\color{muted}\footnotesize\addfontfeatures{LetterSpace=8}HANDWRITTEN NOTES, RECONSTRUCTED\par}
   \vspace{0.4\baselineskip}
