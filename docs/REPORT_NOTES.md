@@ -60,3 +60,10 @@ is refused before it is sent.
 - Fine-tuned vs zero-shot (test, NED): fine-tuned better on 74 of 76 pages, difference
   0.284 (95% CI 0.247-0.324).
 - CDM (rendered-formula matching) not used: needs its own toolchain; mention as future work.
+
+## Recognition experiments (results/recognition_experiments.md)
+
+- Zero-shot vs fine-tuned clean vs fine-tuned boxed_json, on val (31) and test (76), all metrics.
+- clean and boxed_json are statistically indistinguishable (test paired NED +0.001, CI -0.019 to
+  +0.020); clean kept for simplicity, speed and memory. This replaces the old finding that boxes
+  dropped side notes (that was on the old split and images).
