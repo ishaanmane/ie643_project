@@ -31,7 +31,7 @@ pip install -r requirements.txt
 # run everything from the repo root
 python3 01_preprocessing/batch_preprocess.py --workers 4 --force   # data/raw_scans -> data/processed + QA report
 python3 00_dataset/build_dataset.py                   # -> data/train.jsonl, val.jsonl, test.jsonl, splits.json
-python3 01_preprocessing/sauvola.py --step 10 --compare   # optional: Sauvola binarization samples
+python3 01_preprocessing/experiments/sauvola.py --step 10 --compare   # optional: Sauvola binarization samples
 ```
 
 Rendering pages from PDFs (`00_dataset/render_*.py`) needs the original lecture PDFs, which are not in this repo.

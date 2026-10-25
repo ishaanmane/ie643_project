@@ -36,6 +36,6 @@ Smaller is cheaper but chalkboard handwriting gets harder to read. The pilot pic
 4. **Fine-tune:** 3 epochs on the 324 training pages. Adapters are saved after every epoch to `/kaggle/working/qwen_lora`. Download or upload them before the session ends, because Kaggle wipes the disk.
 5. **Evaluate the adapter** on validation with the same two commands, and compare with step 3.
 6. **Test split** only once the test labels have been checked by hand (`data/VERIFICATION.md`).
-7. **Optional:** repeat steps 4 and 5 on binarized images (`01_preprocessing/sauvola.py`) and compare.
+7. **Optional:** repeat steps 4 and 5 on binarized images (`01_preprocessing/experiments/sauvola.py`) and compare.
 
 Defaults: LoRA rank 16, learning rate 2e-4, batch 1 with gradient accumulation 8, fp16 (the T4 has no bf16), loss on the answer only, no evaluation inside the training loop.

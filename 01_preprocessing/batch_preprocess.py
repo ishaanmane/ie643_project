@@ -23,7 +23,7 @@ from preprocess import NotesPreprocessor
 
 RAW_DIR = "data/raw_scans"
 OUT_DIR = "data/processed"
-FIELDS = ["file", "in_w", "in_h", "out_w", "out_h", "crop", "page_frac", "skew_deg",
+FIELDS = ["file", "in_w", "in_h", "out_w", "out_h", "crop", "page_frac", "bg_removed", "skew_deg",
           "skew_gain", "scale", "illum", "brightness", "contrast", "sharpness"]
 
 

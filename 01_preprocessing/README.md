@@ -6,14 +6,14 @@ Turns a raw page photo or scan into a clean page image for layout detection and 
 
 | # | Step | How | Notes |
 |---|---|---|---|
-| 1 | Background removal | Canny edges, close gaps, fit a rotated rectangle to the largest shape, perspective-warp it flat. Falls back to a brightness bounding-box crop. | Works on notebook photos. Chalkboard frames and digital-ink pages have no page edge, so they use the fallback (crop to content). |
+| 1 | Background removal | Canny edges, close gaps, fit a rotated rectangle to the largest shape, perspective-warp it flat. Falls back to whitening the desk (light images) and a brightness bounding-box crop. | Works on notebook photos. Chalkboard frames and digital-ink pages have no page edge, so they use the fallback (crop to content). |
 | 2 | Deskew | Projection-profile estimator, strict confidence gate | **Off by default**, see below. |
 | 3 | Resize | Long edge to 2000 px | Done before denoising for speed (the chalkboard frames are 7168 px wide). |
 | 4 | Illumination flattening | Divide by a large-kernel morphological background | Light backgrounds only; fixes shadows and uneven light. |
 | 5 | Contrast | CLAHE on the lightness channel | |
 | 6 | Denoise | Non-local-means | |
 
-The output is **not binarized**: the VLM can use shading and pen colour. `sauvola.py` is Ishaan's binarization alternative, kept for comparison; `binarize()` in `preprocess.py` is a debug view.
+The output is **not binarized**: the VLM can use shading and pen colour. `experiments/sauvola.py` is Ishaan's binarization alternative, kept for comparison; `binarize()` in `preprocess.py` is a debug view.
 
 ## Why deskew is off by default (measured)
 
@@ -58,14 +58,20 @@ The first full run (410 pages, 0 failures) looked fine in the report but not in 
 - **Notebook photos, partial warp (found on the Kaggle run of the fixed code):** 7 IE802 pages (`001, 002, 003, 014, 015, 024, 055`) were warped to a rectangle covering only 53-72% of the photo. The output was square or landscape although the page is portrait, and the bottom or top of the page was cut off. Every correct warp covers at least 85% and keeps the page shape. Fix: the minimum covered area is now 0.8 (was 0.3), so these 7 fall back to the content crop and keep all their content.
 - **Edge clipping:** the fitted page rectangle hugs the paper edge, and writing that runs to the edge was clipped (the last line of `ie802_notes_page033`). Fix: the rectangle is grown by 2% per side, and anything past the photo edge is filled by repeating edge pixels.
 
-After the fix, all four chalkboard test pages are content-cropped with a normal aspect, and the notebook pages that were warped correctly (`hlcs_note01`, `ie802_notes_page026`, `031`) are unchanged. This was checked on 11 pages, not on all 410. The full re-run on the fixed code is still to be done and its counts recorded here.
+## Desk whitening for notebook photos without a page edge (2026-10-25)
 
-Before the fix the counts were: HumynLabs 20 of 20 warped, IE802 45 of 56, IE643 15 of 205, MLT 0 of 129. The 2 near-zero-contrast outputs are the 2 blank pages, as expected.
+21 IE802 photos never got the warp: they sit on a white canvas with only strips of desk
+and spiral binding visible, so there is no closed page outline, and the brightness crop
+kept the desk (and the tilt wedge on `page049`). Since `048` and `049` are test pages, this
+matters. Fix (`_whiten_background`): when no page edge is found and the image is light,
+regions that are dark or saturated, touch the image border and are large are painted
+white before the brightness crop. Ink strokes are thin and not on the border, so they stay.
+Checked on all 410 raw pages: it fires on 19 of the 21 IE802 fallback pages (removing
+1-16% of the image) and on no chalkboard, digital-ink or HumynLabs page. The report column
+`bg_removed` records the whitened fraction; `crop` is then `whiten+brightness`.
 
-Still weak after the fix:
-- `ie802_notes_page043, 048, 049` fall back to the content crop, so they keep the desk and, for 049, a tilted page with a black wedge.
-- `ie802_notes_page001`: the warp keeps some desk (aspect 1.08 for a portrait page), although layout detection now works on it.
-- The other IE802 pages that fell back (`007, 016, 017, 018, 030, 034, 035, 036, 039, 041, 045`) were not inspected; 016 and 017 are flat scans.
+Expected counts after a full run: IE643 205 brightness, MLT 129 brightness, HumynLabs 20 quad,
+IE802 35 quad + 19 whiten+brightness + 2 brightness (the flat scans 016, 017).
 
 ## Files
 
@@ -74,7 +80,7 @@ Still weak after the fix:
 | `preprocess.py` | `NotesPreprocessor` (`process`, `process_with_info`, `estimate_skew`, `binarize`) |
 | `batch_preprocess.py` | Run it over `data/raw_scans/`; `--sample`, `--workers`, `--force`, `--deskew`, QA CSV |
 | `compare_sheet.py` | Side-by-side raw / processed PNGs for visual QA |
-| `sauvola.py`, `binarized_sauvola/` | Sauvola binarization alternative and its sample outputs |
+| `experiments/sauvola.py`, `experiments/binarized_sauvola/` | Sauvola binarization alternative (experiment, not in the pipeline) and its sample outputs |
 
 ## Known limits / not built yet
 

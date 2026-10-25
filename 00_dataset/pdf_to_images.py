@@ -4,9 +4,9 @@ This is the pipeline's entry point for new material. The 00_dataset/render_*.py
 scripts do the same job for our three fixed source folders.
 
 Usage (from the repo root):
-    python3 01_preprocessing/pdf_to_images.py notes.pdf --out input_pages/
-    python3 01_preprocessing/pdf_to_images.py photo.jpg --out input_pages/
-    python3 01_preprocessing/pdf_to_images.py scans_folder/ --out input_pages/ --prefix mynotes
+    python3 00_dataset/pdf_to_images.py notes.pdf --out input_pages/
+    python3 00_dataset/pdf_to_images.py photo.jpg --out input_pages/
+    python3 00_dataset/pdf_to_images.py scans_folder/ --out input_pages/ --prefix mynotes
 
 Output names: <prefix>_pageNNN.jpg, numbered in order. PDF pages are rendered at
 --zoom (default 3.0, about 216 DPI); images are copied as JPEG unchanged.

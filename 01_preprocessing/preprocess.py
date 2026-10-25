@@ -75,7 +75,38 @@ class NotesPreprocessor:
             info["crop"] = "quad"
             return self._warp_to_quad(img, quad)
         info["crop"] = "brightness"
+        if cv2.cvtColor(img, cv2.COLOR_BGR2GRAY).mean() >= 100:
+            img, removed = self._whiten_background(img)
+            info["bg_removed"] = round(removed, 3)
+            if removed:
+                info["crop"] = "whiten+brightness"
         return self._crop_by_brightness(img)
+
+    def _whiten_background(self, img: np.ndarray, min_frac: float = 0.002):
+        """Paint white the desk/binding regions around a photographed page.
+
+        Used when no page boundary was found. Some notebook photos sit on a white canvas
+        with only strips of desk visible, so there is no page edge for the warp; the
+        brightness crop then kept the desk. Desk and binding are dark or saturated
+        regions that touch the image border and are large; ink strokes are neither,
+        so they are kept. Measured: fires on 19 of the 21 IE802 fallback pages and on
+        no chalkboard, digital-ink or HumynLabs page. Returns (image, fraction whitened).
+        """
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        bg = ((hsv[..., 2] < 150) | (hsv[..., 1] > 70)).astype(np.uint8)
+        k = max(3, img.shape[1] // 300)
+        bg = cv2.morphologyEx(bg, cv2.MORPH_CLOSE, np.ones((k, k), np.uint8))
+        n, labels, stats, _ = cv2.connectedComponentsWithStats(bg, 8)
+        h_img, w_img = bg.shape
+        out, removed = img.copy(), 0
+        for i in range(1, n):
+            x, y, w, h, area = stats[i]
+            touches_border = x == 0 or y == 0 or x + w == w_img or y + h == h_img
+            if touches_border and area > min_frac * h_img * w_img and (w > 0.1 * w_img or h > 0.1 * h_img):
+                mask = cv2.dilate((labels == i).astype(np.uint8), np.ones((2 * k, 2 * k), np.uint8))
+                out[mask.astype(bool)] = 255
+                removed += area
+        return out, removed / (h_img * w_img)
 
     def _find_page_quad(self, img: np.ndarray, min_area_frac: float = 0.8,
                         min_aspect: float = 0.6, margin: float = 0.02):

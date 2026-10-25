@@ -6,7 +6,7 @@ Run all commands from the repo root.
 
 | Stage | Script | Needs GPU | Tested |
 |---|---|---|---|
-| 0. Input to page images | `01_preprocessing/pdf_to_images.py` | no | yes (PDF of 15 pages, single image) |
+| 0. Input to page images | `00_dataset/pdf_to_images.py` | no | yes (PDF of 15 pages, single image) |
 | 1. Preprocess | `01_preprocessing/batch_preprocess.py` | no | yes (410 pages before the crop fixes; fixes checked on 11 pages) |
 | 2. Layout detection | Surya (`surya_layout`) with a vLLM server | yes | yes, 10 pages on Kaggle T4 |
 | 3. Layout to tags + figure crops | `02_layout/surya_to_tags.py` | no | yes, on the 10 Surya pages |
@@ -28,9 +28,9 @@ Run all commands from the repo root.
 
 (B) New input:
 ```bash
-python3 01_preprocessing/pdf_to_images.py notes.pdf --out input_pages/            # PDF, 3x zoom
-python3 01_preprocessing/pdf_to_images.py photo.jpg --out input_pages/            # single photo
-python3 01_preprocessing/pdf_to_images.py scans/ --out input_pages/ --prefix mine # folder of PDFs/images
+python3 00_dataset/pdf_to_images.py notes.pdf --out input_pages/            # PDF, 3x zoom
+python3 00_dataset/pdf_to_images.py photo.jpg --out input_pages/            # single photo
+python3 00_dataset/pdf_to_images.py scans/ --out input_pages/ --prefix mine # folder of PDFs/images
 ```
 Output: `<prefix>_pageNNN.jpg`.
 
