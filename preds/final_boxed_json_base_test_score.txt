@@ -1,0 +1,9 @@
+
+=== BASELINE zero-shot (boxed_json, 76 test pages) ===
+scored 76 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       4  0.550  0.650    0.550      -  
+ie643     34  0.771  0.903    0.871    0.022
+ie802     12  0.526  0.816    0.586    0.000
+mlt       26  0.574  0.782    0.695    0.015
+ALL       76  0.653  0.835    0.719    0.016

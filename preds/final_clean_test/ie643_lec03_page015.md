@@ -1,0 +1,1 @@
+$$\sum_{t=0}^{T} \langle w^{t+1}, w^* \rangle - \langle w^t, w^* \rangle$$

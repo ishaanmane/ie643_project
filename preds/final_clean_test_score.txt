@@ -1,0 +1,9 @@
+
+=== FINE-TUNED (clean, test) ===
+scored 76 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       4  0.190  0.323    0.190      -  
+ie643     34  0.339  0.522    0.290    0.108
+ie802     12  0.349  0.597    0.214    0.174
+mlt       26  0.317  0.554    0.193    0.159
+ALL       76  0.325  0.534    0.227    0.137

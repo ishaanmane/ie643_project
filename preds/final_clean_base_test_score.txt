@@ -1,0 +1,9 @@
+
+=== BASELINE zero-shot (clean, test) ===
+scored 76 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       4  0.539  0.659    0.539      -  
+ie643     34  0.879  0.975    0.959    0.017
+ie802     12  0.598  0.854    0.697    0.000
+mlt       26  0.626  0.814    0.710    0.008
+ALL       76  0.730  0.884    0.774    0.011

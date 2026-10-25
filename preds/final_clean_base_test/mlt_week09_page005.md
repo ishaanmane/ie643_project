@@ -1,0 +1,29 @@
+```markdown
+# Week 9 Page 5
+
+## Linear Separability with ε-Margin
+
+We see that we are right back where we started. The algorithm is unable to provide a w which can correctly classify all the data points correctly. It just won't converge. Let's modify our assumption.
+
+### Assumption
+
+Linear Separability with ε-Margin
+
+The gap can be very small but not zero. No points lie on the gap.
+
+[Diagram: A dataset $\{ (x_i, y_i) \}$ is linearly separable with ε-margin if there exists some $γ > 0$ such that $(w^T x_i)y_i ≥ γ$ for all $i$.]
+
+$$
+\begin{aligned}
+ω^1 &= ω^0 + x_3y_3 \\
+&= \begin{bmatrix} 0 \\ 0 \end{bmatrix} + \begin{bmatrix} -1 \\ 1/2 \end{bmatrix} × 1 \\
+&= \begin{bmatrix} -1 \\ 1/2 \end{bmatrix} \\
+ω^2 &= ω^1 + x_1y_1 \\
+&= \begin{bmatrix} 1 \\ -1/2 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \end{bmatrix} × 1 \\
+&= \begin{bmatrix} 1 \\ 1/2 \end{bmatrix} \\
+ω^3 &= ω^2 + x_2y_2 \\
+&= \begin{bmatrix} 1 \\ 1/2 \end{bmatrix} + \begin{bmatrix} 0 \\ 1 \end{bmatrix} × 1 \\
+&= \begin{bmatrix} 1 \\ 1/2 \end{bmatrix}
+\end{aligned}
+$$
+```

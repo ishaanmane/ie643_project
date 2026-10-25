@@ -1,0 +1,1 @@
+[Diagram: A hexagonal grid of small circles, each with a dot at its center, arranged in a repeating pattern across the page.]

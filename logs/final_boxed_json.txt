@@ -1,0 +1,167 @@
+18:24:24 preprocessed pages: 410, desk-whitened: 19 (19 = current version)
+18:24:24 input problems for boxed_json: 0
+18:24:24 train: 303 pages
+18:24:24 val: 31 pages
+18:24:24 test: 76 pages
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
+18:24:43 examples: 303 train, 31 val | tokens/example max 3450 | answer tokens max 942
+18:24:43 example hlcs_note01_page001: image (840, 1148), prompt starts: 'Convert this handwritten lecture note page to clean structured Markdown. Write math in LaTeX: $...$ for inline math and '
+18:24:44 GPU NVIDIA GeForce RTX 5060 Ti, bf16 True, free 15.3/15.5 GB
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:04<00:17,  4.48s/it]Loading checkpoint shards:  40%|████      | 2/5 [00:08<00:12,  4.19s/it]Loading checkpoint shards:  60%|██████    | 3/5 [00:12<00:08,  4.18s/it]Loading checkpoint shards:  80%|████████  | 4/5 [00:17<00:04,  4.26s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  2.99s/it]Loading checkpoint shards: 100%|██████████| 5/5 [00:17<00:00,  3.55s/it]
+18:25:03 model loaded in 20s, GPU memory 5.5 GB
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+18:25:09 [1/31] hlcs_note16_page001: 781 chars, 5s
+18:25:11 [2/31] ie643_lec07_page001: 238 chars, 2s
+18:25:14 [3/31] ie643_lec07_page002: 485 chars, 3s
+18:25:18 [4/31] ie643_lec07_page003: 566 chars, 4s
+18:25:22 [5/31] ie643_lec07_page004: 1218 chars, 4s
+18:25:24 [6/31] ie643_lec07_page005: 306 chars, 2s
+18:25:30 [7/31] ie643_lec07_page006: 759 chars, 5s
+18:25:34 [8/31] ie643_lec07_page007: 809 chars, 4s
+18:25:37 [9/31] ie643_lec07_page008: 644 chars, 3s
+18:25:40 [10/31] ie643_lec07_page009: 402 chars, 3s
+18:25:44 [11/31] ie643_lec07_page010: 589 chars, 4s
+18:25:49 [12/31] ie643_lec07_page011: 1043 chars, 5s
+18:25:53 [13/31] ie643_lec07_page012: 525 chars, 4s
+18:25:58 [14/31] ie643_lec07_page013: 763 chars, 5s
+18:26:01 [15/31] ie643_lec07_page014: 404 chars, 3s
+18:26:05 [16/31] ie643_lec07_page015: 396 chars, 3s
+18:26:07 [17/31] ie643_lec07_page016: 431 chars, 3s
+18:26:11 [18/31] ie643_lec07_page017: 590 chars, 3s
+18:26:16 [19/31] ie643_lec07_page018: 664 chars, 5s
+18:26:21 [20/31] ie643_lec07_page019: 673 chars, 5s
+18:26:24 [21/31] ie643_lec07_page020: 414 chars, 3s
+18:26:26 [22/31] ie802_notes_page041: 497 chars, 3s
+18:26:29 [23/31] ie802_notes_page042: 369 chars, 3s
+18:26:39 [24/31] ie802_notes_page043: 1214 chars, 10s
+18:26:51 [25/31] ie802_notes_page044: 1485 chars, 11s
+18:26:54 [26/31] mlt_week06_page001: 625 chars, 3s
+18:27:01 [27/31] mlt_week06_page002: 1217 chars, 7s
+18:27:04 [28/31] mlt_week06_page003: 539 chars, 3s
+18:27:12 [29/31] mlt_week06_page004: 953 chars, 8s
+18:27:15 [30/31] mlt_week06_page005: 273 chars, 3s
+18:27:19 [31/31] mlt_week06_page006: 633 chars, 4s
+
+=== BASELINE zero-shot (boxed_json, 31 val pages) ===
+scored 31 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       1  0.338  0.607    0.338      -  
+ie643     20  0.752  0.947    0.916    0.078
+ie802      4  0.685  0.939    1.000    0.000
+mlt        6  0.596  0.852    0.809    0.000
+ALL       31  0.700  0.917    0.887    0.053
+
+18:27:22 [1/76] hlcs_note17_page001: 573 chars, 3s
+18:27:25 [2/76] hlcs_note18_page001: 581 chars, 3s
+18:27:28 [3/76] hlcs_note19_page001: 458 chars, 3s
+18:27:32 [4/76] hlcs_note20_page001: 802 chars, 4s
+18:27:35 [5/76] ie643_lec03_page001: 370 chars, 3s
+18:27:39 [6/76] ie643_lec03_page002: 925 chars, 4s
+18:27:48 [7/76] ie643_lec03_page003: 1763 chars, 9s
+18:27:54 [8/76] ie643_lec03_page004: 1072 chars, 5s
+18:27:58 [9/76] ie643_lec03_page005: 511 chars, 4s
+18:28:05 [10/76] ie643_lec03_page006: 907 chars, 7s
+18:28:09 [11/76] ie643_lec03_page007: 576 chars, 4s
+18:28:11 [12/76] ie643_lec03_page008: 285 chars, 2s
+18:28:14 [13/76] ie643_lec03_page009: 329 chars, 3s
+18:28:17 [14/76] ie643_lec03_page010: 816 chars, 3s
+18:28:21 [15/76] ie643_lec03_page011: 501 chars, 4s
+18:28:23 [16/76] ie643_lec03_page012: 283 chars, 2s
+18:28:28 [17/76] ie643_lec03_page013: 714 chars, 5s
+18:28:32 [18/76] ie643_lec03_page014: 371 chars, 3s
+18:28:33 [19/76] ie643_lec03_page015: 153 chars, 2s
+18:28:35 [20/76] ie643_lec09_page001: 239 chars, 2s
+18:28:39 [21/76] ie643_lec09_page002: 535 chars, 4s
+18:28:47 [22/76] ie643_lec09_page003: 1756 chars, 8s
+18:28:50 [23/76] ie643_lec09_page004: 221 chars, 2s
+18:28:53 [24/76] ie643_lec09_page005: 989 chars, 4s
+18:29:00 [25/76] ie643_lec09_page006: 1351 chars, 6s
+18:29:02 [26/76] ie643_lec09_page007: 292 chars, 2s
+18:29:07 [27/76] ie643_lec09_page008: 979 chars, 5s
+18:29:15 [28/76] ie643_lec09_page009: 1188 chars, 8s
+18:29:21 [29/76] ie643_lec09_page010: 941 chars, 6s
+18:29:27 [30/76] ie643_lec09_page011: 1510 chars, 7s
+18:29:32 [31/76] ie643_lec09_page012: 804 chars, 5s
+18:29:37 [32/76] ie643_lec09_page013: 890 chars, 5s
+18:29:41 [33/76] ie643_lec09_page014: 850 chars, 4s
+18:29:45 [34/76] ie643_lec09_page015: 593 chars, 4s
+18:29:51 [35/76] ie643_lec09_page016: 979 chars, 5s
+18:29:53 [36/76] ie643_lec09_page017: 294 chars, 3s
+18:29:58 [37/76] ie643_lec09_page018: 672 chars, 5s
+18:30:04 [38/76] ie643_lec09_page019: 1166 chars, 6s
+18:30:11 [39/76] ie802_notes_page045: 906 chars, 7s
+18:30:15 [40/76] ie802_notes_page046: 872 chars, 4s
+18:30:21 [41/76] ie802_notes_page047: 1301 chars, 6s
+18:30:26 [42/76] ie802_notes_page048: 880 chars, 4s
+18:30:30 [43/76] ie802_notes_page049: 741 chars, 5s
+18:30:36 [44/76] ie802_notes_page050: 1194 chars, 6s
+18:30:40 [45/76] ie802_notes_page051: 699 chars, 4s
+18:30:47 [46/76] ie802_notes_page052: 1029 chars, 7s
+18:30:54 [47/76] ie802_notes_page053: 1050 chars, 7s
+18:31:01 [48/76] ie802_notes_page054: 1136 chars, 7s
+18:31:06 [49/76] ie802_notes_page055: 597 chars, 5s
+18:31:09 [50/76] ie802_notes_page056: 542 chars, 4s
+18:31:16 [51/76] mlt_week03_page001: 1111 chars, 6s
+18:31:22 [52/76] mlt_week03_page002: 646 chars, 6s
+18:31:27 [53/76] mlt_week03_page003: 913 chars, 5s
+18:31:29 [54/76] mlt_week03_page004: 268 chars, 2s
+18:31:34 [55/76] mlt_week03_page005: 745 chars, 5s
+18:31:36 [56/76] mlt_week03_page006: 373 chars, 3s
+18:31:42 [57/76] mlt_week03_page007: 702 chars, 5s
+18:31:45 [58/76] mlt_week03_page008: 789 chars, 4s
+18:31:51 [59/76] mlt_week03_page009: 1109 chars, 5s
+18:32:00 [60/76] mlt_week03_page010: 1420 chars, 9s
+18:32:05 [61/76] mlt_week03_page011: 614 chars, 5s
+18:32:10 [62/76] mlt_week03_page012: 950 chars, 5s
+18:32:13 [63/76] mlt_week03_page013: 662 chars, 3s
+18:32:19 [64/76] mlt_week09_page001: 768 chars, 5s
+18:32:21 [65/76] mlt_week09_page002: 282 chars, 2s
+18:32:26 [66/76] mlt_week09_page003: 754 chars, 5s
+18:32:34 [67/76] mlt_week09_page004: 1099 chars, 8s
+18:32:41 [68/76] mlt_week09_page005: 1105 chars, 7s
+18:32:45 [69/76] mlt_week09_page006: 653 chars, 4s
+18:32:52 [70/76] mlt_week09_page007: 909 chars, 7s
+18:32:58 [71/76] mlt_week09_page008: 839 chars, 6s
+18:33:02 [72/76] mlt_week09_page009: 588 chars, 4s
+18:33:08 [73/76] mlt_week09_page010: 977 chars, 6s
+18:33:11 [74/76] mlt_week09_page011: 385 chars, 3s
+18:33:20 [75/76] mlt_week09_page012: 1124 chars, 8s
+18:33:29 [76/76] mlt_week09_page013: 1548 chars, 9s
+
+=== BASELINE zero-shot (boxed_json, 76 test pages) ===
+scored 76 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       4  0.550  0.650    0.550      -  
+ie643     34  0.771  0.903    0.871    0.022
+ie802     12  0.526  0.816    0.586    0.000
+mlt       26  0.574  0.782    0.695    0.015
+ALL       76  0.653  0.835    0.719    0.016
+
+trainable params: 47,589,376 || all params: 8,339,756,032 || trainable%: 0.5706
+  0%|          | 0/114 [00:00<?, ?it/s]  1%|          | 1/114 [00:30<58:06, 30.86s/it]  2%|▏         | 2/114 [01:02<58:13, 31.20s/it]  3%|▎         | 3/114 [01:33<58:05, 31.40s/it]  4%|▎         | 4/114 [02:03<56:28, 30.81s/it]  4%|▍         | 5/114 [02:34<55:37, 30.62s/it]                                                 4%|▍         | 5/114 [02:34<55:37, 30.62s/it]  5%|▌         | 6/114 [03:02<53:50, 29.91s/it]  6%|▌         | 7/114 [03:31<52:51, 29.64s/it]{'loss': 0.7558, 'grad_norm': 1.415529489517212, 'learning_rate': 0.0001, 'epoch': 0.13}
+Traceback (most recent call last):
+  File "/home/intralab/workspace/ie643_final/03_recognition/finetune_qwen25vl.py", line 205, in <module>
+    main()
+  File "/home/intralab/workspace/ie643_final/03_recognition/finetune_qwen25vl.py", line 179, in main
+    result = trainer.train()
+             ^^^^^^^^^^^^^^^
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/transformers/trainer.py", line 2325, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/transformers/trainer.py", line 2674, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/transformers/trainer.py", line 4071, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/accelerate/accelerator.py", line 2861, in backward
+    loss.backward(**kwargs)
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/torch/_tensor.py", line 631, in backward
+    torch.autograd.backward(
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/torch/autograd/__init__.py", line 381, in backward
+    _engine_run_backward(
+  File "/home/intralab/ie643/.qwen/lib/python3.11/site-packages/torch/autograd/graph.py", line 869, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.96 GiB. GPU 0 has a total capacity of 15.48 GiB of which 1.50 GiB is free. Including non-PyTorch memory, this process has 13.80 GiB memory in use. Of the allocated memory 10.99 GiB is allocated by PyTorch, and 2.64 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+  6%|▌         | 7/114 [03:34<54:38, 30.64s/it]
