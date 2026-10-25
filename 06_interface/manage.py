@@ -101,8 +101,16 @@ def supervise(args):
             if status.get('BackendState') != 'Running':
                 raise RuntimeError('Tailscale is not logged in; run: sudo tailscale up --hostname notes2pdf')
             origin = 'https://' + status['Self']['DNSName'].rstrip('.')
-            subprocess.run(['tailscale', 'funnel', '--bg', str(args.port)], check=True,
-                           stdout=subprocess.DEVNULL, timeout=60)
+            try:
+                subprocess.run(['tailscale', 'funnel', '--bg', str(args.port)], check=True,
+                               capture_output=True, text=True, timeout=60)
+            except subprocess.TimeoutExpired as error:
+                # First use on a tailnet: Tailscale waits until Funnel is approved in the browser.
+                said = (error.stdout or '') + (error.stderr or '') if isinstance(error.stdout, str) else ''
+                link = re.search(r'https://login\.tailscale\.com/\S+', said)
+                raise RuntimeError('Tailscale Funnel needs one-time approval: open '
+                                   + (link.group(0) if link else 'the link printed by `tailscale funnel --bg 7860`')
+                                   + ' and approve, then run start again.') from None
             funnel_on = True
         elif args.tunnel == 'cloudflare':
             cloudflared = Path(args.cloudflared).expanduser()
