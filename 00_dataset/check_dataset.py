@@ -114,7 +114,7 @@ def main():
             ids = sorted(os.path.splitext(os.path.basename(i))[0] for i in imgs)
             if not os.path.isdir("data/processed_boxed"):
                 report("PASS" if ids == sorted(sp[k]) else "FAIL", f"boxed/{k}.jsonl: same pages as {k}")
-                report("WARN", f"boxed/{k}.jsonl: images not generated yet", "run 02_layout/draw_boxes.py")
+                report("WARN", f"boxed/{k}.jsonl: images not generated yet", "run 02_layout/experiments/draw_boxes.py")
                 continue
             absent = [i for i in imgs if not os.path.exists(i)]
             ok = ids == sorted(sp[k]) and not absent

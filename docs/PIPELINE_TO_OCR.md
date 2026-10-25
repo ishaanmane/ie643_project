@@ -15,7 +15,7 @@ Run all commands from the repo root.
 
 ## Corrections to the earlier plan
 
-1. Surya runs on **preprocessed** pages, not raw scans. On the 10-page test this found the margin notes it missed on raw scans and removed the neighbouring-page bleed (`02_layout/SURYA_FINDINGS.md`).
+1. Surya runs on **preprocessed** pages, not raw scans. On the 10-page test this found the margin notes it missed on raw scans and removed the neighbouring-page bleed (`02_layout/experiments/SURYA_FINDINGS.md`).
 2. The full preprocessing must be **re-run on the fixed code** before Surya is run on all pages. The only full run predates the two page-crop fixes.
 3. Boxes are stored **normalised to 0-1000**, and figure crops are cut from **exactly the image Surya saw**. Preprocessing crops the page, so boxes from a processed image cannot be mapped onto the raw scan; the converter refuses to crop if the sizes differ.
 4. Surya output goes to `data/tags_draft/` (unverified). Only hand-checked pages go to `data/tags/`.
@@ -84,7 +84,7 @@ Checked: on the 10 test pages it gives 128 blocks and 5 crops (neuron diagram, c
 ## Stage 3b: boxed variant (for the clean-vs-boxed comparison)
 
 ```bash
-python3 02_layout/draw_boxes.py                        # data/processed + data/tags_draft -> data/processed_boxed/
+python3 02_layout/experiments/draw_boxes.py                        # data/processed + data/tags_draft -> data/processed_boxed/
 python3 00_dataset/build_dataset.py --variant boxed    # -> data/boxed/{train,val,test}.jsonl, same pages and splits
 ```
 Thin cyan boxes (3 px on a 2000 px page), a colour none of our inks use. The boxed files use `BOXED_PROMPT`, which tells the model the boxes are hints and to transcribe everything, including content outside the boxes (Surya misses some). Pages without Surya tags are copied without boxes and reported; the builder warns if any are left. The clean files (`data/*.jsonl`) are not touched. A model trained on the boxed set needs Surya and `draw_boxes.py` on every input at inference time too.

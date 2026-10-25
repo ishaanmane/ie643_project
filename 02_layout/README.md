@@ -1,8 +1,32 @@
 # Step 2 - Layout detection
 
-Detects text blocks, equations, diagrams and tables on a page, with reading order. Tried so far: Surya v2, zero-shot. Results and verdict: [SURYA_FINDINGS.md](SURYA_FINDINGS.md). Raw output: `surya_raw_results.json`. Design: [../docs/PIPELINE.md](../docs/PIPELINE.md).
+Surya v2 (`surya-ocr` 0.22.1, model `datalab-to/surya-ocr-2`, zero-shot, served by vLLM 0.32.0).
+In the final pipeline it is used **only to find figures and tables** and crop them; all text
+and its order come from the recognition model (stage 3).
 
-## Running Surya on Kaggle (T4)
+## Run (GPU machine)
+
+```bash
+python3 02_layout/run_layout.py
+```
+
+Starts a private vLLM server, runs Surya on every image in `data/processed/`, stops the server,
+and writes `data/tags_draft/<page>.json` (blocks, boxes normalised to 0-1000) and
+`data/crops/<page>_bN.png` (one per figure/table). Previous tags and crops are moved to
+`out/layout_backup_<time>/`. Uses the same code as the upload interface (`06_interface/layout.py`)
+and the environments in `/home/intralab/workspace/ie643_layout_envs` (see `docs/OPERATIONS.md`).
+
+**Re-run it whenever `data/processed/` is regenerated**: boxes are in the pixel space of the
+processed image, so old tags give wrong crops.
+
+| File | Purpose |
+|---|---|
+| `run_layout.py` | Batch run over `data/processed/` |
+| `surya_to_tags.py` | Surya results.json -> tags + crops (used by `run_layout.py` and the interface) |
+| `experiments/` | First 10-page test (`SURYA_FINDINGS.md`), the Kaggle all-page run, `draw_boxes.py` for the dropped boxed variant |
+
+## Earlier: running Surya on Kaggle (T4)
+
 
 Settings: Accelerator GPU T4 x2, Internet On. Surya v2 needs a vLLM server, and Kaggle has no Docker, so we start it ourselves. The two packages go in **separate** environments, because installing them together made `uv` fall back to a 2023 `vllm` that cannot build.
 

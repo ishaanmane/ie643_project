@@ -1,6 +1,6 @@
 # 03 · Layout detection (Surya v2)
 
-Model: `surya-ocr` 0.22.1 with `datalab-to/surya-ocr-2` (0.7B), zero-shot, served by vLLM 0.32 on a Kaggle T4. Weights are free for research use. Detailed write-up of the 10-page test: `02_layout/SURYA_FINDINGS.md`.
+Model: `surya-ocr` 0.22.1 with `datalab-to/surya-ocr-2` (0.7B), zero-shot, served by vLLM 0.32 on a Kaggle T4. Weights are free for research use. Detailed write-up of the 10-page test: `02_layout/experiments/SURYA_FINDINGS.md`.
 
 ## 10-page test on raw scans
 
@@ -30,7 +30,7 @@ Preprocessing helped where it is meant to (busy notebook photos) and changed a f
 
 ## Outputs
 
-- `02_layout/surya_results_all.json`: raw Surya output, the only part that needs a GPU.
+- `02_layout/experiments/surya_results_all.json`: raw Surya output, the only part that needs a GPU.
 - `data/tags_draft/<page>.json` (`surya_to_tags.py`): blocks in reading order with type, box normalised to 0-1000, header/footer flag. Unverified drafts.
 - `data/crops/` (gitignored): figure and table crops for the PDF stage.
 - `data/processed_boxed/` (`draw_boxes.py`): thin cyan boxes, no labels (labels would cover handwriting and could be copied into the output).

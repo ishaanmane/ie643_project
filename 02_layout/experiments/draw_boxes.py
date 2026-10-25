@@ -6,8 +6,8 @@ clean set uses data/processed/ as is. Boxes come from data/tags_draft/ (written 
 our inks use (MLT notes use red, green, blue and purple; IE802 has red notes).
 
 Usage (from the repo root):
-    python3 02_layout/draw_boxes.py                       # all pages -> data/processed_boxed/
-    python3 02_layout/draw_boxes.py --labels              # also write the block type above each box
+    python3 02_layout/experiments/draw_boxes.py                       # all pages -> data/processed_boxed/
+    python3 02_layout/experiments/draw_boxes.py --labels              # also write the block type above each box
 
 A page with no tags file (Surya not run on it, or Surya failed) is copied without
 boxes, and counted in the summary, so the boxed set always has every page.

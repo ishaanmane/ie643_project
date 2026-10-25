@@ -4,7 +4,7 @@ Usage: python3 00_dataset/build_dataset.py [--include-flagged] [--variant boxed]
 
 --variant boxed writes data/boxed/{train,val,test}.jsonl instead: the same pages in the
 same splits, but pointing at data/processed_boxed/ (Surya boxes drawn on, made by
-02_layout/draw_boxes.py) and using BOXED_PROMPT. The clean files are not touched.
+02_layout/experiments/draw_boxes.py) and using BOXED_PROMPT. The clean files are not touched.
 
 Pairs every page in data/raw_scans/ with its data/annotations/<stem>.md and writes
 data/train.jsonl, data/val.jsonl, data/test.jsonl, data/splits.json, data/VERIFICATION.md.
@@ -102,7 +102,7 @@ def build(include_flagged=False, variant="clean"):
         missing = [s for s in stems if not os.path.exists(f"{image_dir}/{s}.jpg")]
         if missing:
             sys.exit(f"{len(missing)} pages have no boxed image in {image_dir}/ "
-                     f"(run 02_layout/draw_boxes.py first): {missing[:5]}")
+                     f"(run 02_layout/experiments/draw_boxes.py first): {missing[:5]}")
         no_tags = [s for s in stems if not os.path.exists(f"data/tags_draft/{s}.json")]
         if no_tags:
             print(f"WARNING: {len(no_tags)} of {len(stems)} pages have no Surya tags, so their "

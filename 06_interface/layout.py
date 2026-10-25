@@ -60,7 +60,7 @@ def stop_owned_server(proc):
     proc.wait(timeout=10)
 
 
-def run_layout(data, pages, output, progress):
+def run_layout(data, pages, output, progress, timeout=1800):
     env_root = Path(os.environ.get('IE643_LAYOUT_ENVS', str(ENV_ROOT)))
     surya = env_root / 'surya0221/bin'
     vllm = env_root / 'vllm0320/bin'
@@ -105,7 +105,7 @@ def run_layout(data, pages, output, progress):
             with (layout_out/'client.log').open('w') as client_log:
                 subprocess.run([str(surya/'surya_layout'), str(data/'processed'), '--images',
                                 '--output_dir', str(layout_out)], env=env, stdout=client_log,
-                               stderr=subprocess.STDOUT, check=True, timeout=1800)
+                               stderr=subprocess.STDOUT, check=True, timeout=timeout)
         finally:
             progress('Releasing Surya GPU memory')
             stop_owned_server(proc)
