@@ -65,4 +65,8 @@ class DecoderTests(unittest.TestCase):
         for text in ['![scan][resource]\n\n[resource]: /etc/passwd', '![shortcut]\n\n[shortcut]: https://example.com/secret', r'\font\foo=/etc/passwd',r'\pdfobj file{/etc/passwd}',r'\begin{document}x\end{document}',r'\href{file:///etc/passwd}{x}',r'\csname input\endcsname{x}']:
             with self.subTest(text=text),self.assertRaises(ValueError):pipeline.validate_prediction(text)
 
+    def test_unknown_math_command_is_a_warning_not_a_failure(self):
+        warnings = pipeline.validate_prediction(r'$$\mathscr{L} = \hslash \omega$$')
+        self.assertTrue(any('hslash' in w for w in warnings))
+
 if __name__=='__main__':unittest.main()

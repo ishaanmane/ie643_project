@@ -175,24 +175,34 @@ def extract_pages(inputs, raw_dir, max_pages=20):
 
 
 def validate_prediction(text):
-    """Keep document content from issuing TeX file/command operations at rendering."""
+    """Keep document content from issuing TeX file/command operations at rendering.
+
+    File access, redefinitions and embedded resources stop the job. Commands or environments
+    outside the known list are only reported: the PDF is built with raw TeX disabled and every
+    equation is compiled on its own, so an unknown command can at worst make that one equation
+    fall back to plain text. Returns the list of such warnings."""
     if not text.strip():
         raise ValueError('Model returned an empty transcription.')
-    blocked = r'\\(?:input|include|includegraphics|openin|openout|read|write(?:18)?|catcode|csname|let|futurelet|expandafter|def|edef|gdef|xdef|newcommand|renewcommand|usepackage|documentclass|special|directlua|endlinechar)\b'
+    blocked = r'\\(?:input|include|includegraphics|openin|openout|read|write(?:18)?|catcode|csname|let|futurelet|expandafter|def|edef|gdef|xdef|newcommand|renewcommand|usepackage|documentclass|special|directlua|endlinechar|font|pdf[A-Za-z]*|href|url|immediate|jobname|openout|scantokens|luaexec|luadirect|lowercase|uppercase|csname)\b'
     if '^^' in text or re.search(blocked, text, re.I) or re.search(r'!\s*\[',text):
         raise ValueError('Transcription contains a file/resource command; raw prediction saved for review.')
     allowed = set("frac dfrac tfrac cfrac textit mathfrak overrightarrow overleftarrow hookrightarrow hookleftarrow sqrt left right middle big Big bigg Bigg bigl bigr Bigl Bigr biggl biggr Biggl Biggr sum prod int iint iiint oint lim limsup liminf infty partial nabla alpha beta gamma delta epsilon varepsilon zeta eta theta vartheta iota kappa lambda mu nu xi pi varpi rho varrho sigma varsigma tau upsilon phi varphi chi psi omega Gamma Delta Theta Lambda Xi Pi Sigma Upsilon Phi Psi Omega mathbb mathcal mathrm mathbf mathit mathsf mathtt mathscr boldsymbol bm text textrm textbf operatorname overline underline hat widehat tilde widetilde bar vec dot ddot dots ldots cdots vdots ddots cdot times div pm mp ast star circ bullet otimes oplus odot le leq ge geq neq ne approx sim simeq equiv cong propto ll gg in notin ni subset subseteq supset supseteq cup cap union emptyset varnothing forall exists neg land lor wedge vee implies iff to gets rightarrow leftarrow Rightarrow Leftarrow leftrightarrow Leftrightarrow mapsto longrightarrow longleftarrow Longrightarrow Longleftarrow uparrow downarrow updownarrow perp parallel angle langle rangle lceil rceil lfloor rfloor vert Vert mid sin cos tan cot sec csc sinh cosh tanh arcsin arccos arctan log ln exp max min arg det dim ker rank Pr mod bmod pmod gcd lcm Re Im top bot ell hbar prime colon quad qquad thinspace enspace smallskip medskip bigskip limits nolimits underbrace overbrace overset underset stackrel binom dbinom tbinom choose displaystyle textstyle scriptstyle scriptscriptstyle substack boxed fbox cancel bcancel xcancel phantom vphantom hphantom mathop mathrel mathbin mathord mathpunct mathopen mathclose ensuremath begin end label tag nonumber notag rowcolor hline cline hdotsfor arraystretch small tiny large Large rm bf cal Bbb sf tt textsc textnormal mathnormal percent therefore because square triangle triangleq checkmark lnot lvert rvert lVert rVert lt gt degree sharp flat natural setminus backslash addlinespace toprule midrule bottomrule".split())
     commands = [c for c in re.findall(r'\\([A-Za-z]+|[^A-Za-z])', text) if c.isalpha()]
-    if any(command not in allowed for command in commands):
-        raise ValueError('Transcription contains an unsupported TeX command; raw prediction saved for review.')
+    warnings = []
+    unknown = sorted({command for command in commands if command not in allowed})
+    if unknown:
+        warnings.append('Uncommon TeX commands kept for checking: ' + ', '.join('\\' + c for c in unknown[:8]))
     safe_environments = {'matrix', 'pmatrix', 'bmatrix', 'Bmatrix', 'vmatrix', 'Vmatrix', 'smallmatrix',
                          'cases', 'array', 'aligned', 'alignedat', 'gathered', 'split', 'align', 'align*',
                          'equation', 'equation*', 'gather', 'gather*'}
     for environment in re.findall(r'\\(?:begin|end)\s*\{([^}]+)\}', text):
+        if environment.strip().lower() in {'document', 'filecontents', 'filecontents*', 'verbatimwrite', 'luacode', 'luacode*'}:
+            raise ValueError('Transcription contains an unsafe TeX environment.')
         if environment not in safe_environments:
-            raise ValueError('Transcription contains an unsupported TeX environment.')
+            warnings.append('Uncommon TeX environment kept for checking: ' + environment)
     if re.search(r'<\s*(?:script|iframe|img|object|embed)\b',text,re.I):
         raise ValueError('Transcription contains embedded resources; raw prediction saved for review.')
+    return warnings
 
 
 def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20, progress=None, layout_mode='none'):
@@ -260,7 +270,7 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
             progress(f'Recognizing page {i}/{len(pages)}' + (' — first run loads the trained model' if i==1 else ''))
             text, details = recognizer.predict(data/'processed'/(page+'.jpg'))
             (output/'predictions'/(page+'.md')).write_text(text)
-            validate_prediction(text)
+            details = {**details, 'tex_warnings': validate_prediction(text)}
             predictions.append({'page':page,**details})
     progress('Checking equations and building searchable PDF')
     report = render_unit('upload_notes',pages,str(output/'predictions'),str(output/'documents'),
@@ -277,6 +287,9 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
         review = {'unmatched_pages': unmatched, 'pages': report['pages'],
                   'note': 'No guessed or manually corrected boxes were applied.'}
         (output/'diagram_review.json').write_text(json.dumps(review, indent=2))
+    tex_notes = [p['page'] for p in predictions if p.get('tex_warnings')]
+    if tex_notes:
+        warnings.append('Uncommon LaTeX commands on ' + ', '.join(tex_notes) + '; check those equations against the originals.')
     if any(p.get('possibly_truncated') for p in predictions):
         warnings.append('At least one prediction reached the token budget; inspect its ending.')
     if report['math']['status'] != 'completed':

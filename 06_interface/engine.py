@@ -108,7 +108,7 @@ class WarmModels:
             answer = json.loads(line)
             if not answer.get('ok'):
                 raise RuntimeError('Recognition failed: ' + answer.get('error', 'unknown error'))
-            validate_prediction(target.read_text())
+            tex_warnings = validate_prediction(target.read_text())
             results.append({'page': page, 'generated_tokens': answer['generated_tokens'],
-                            'possibly_truncated': answer['possibly_truncated']})
+                            'possibly_truncated': answer['possibly_truncated'], 'tex_warnings': tex_warnings})
         return results
