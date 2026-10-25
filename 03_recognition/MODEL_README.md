@@ -35,3 +35,8 @@ Or run the whole pipeline: `python3 06_interface/pipeline.py page.jpg --out out/
 Versions used: PyTorch (CUDA 12.8), transformers 4.57.6, peft 0.21.2, bitsandbytes 0.50.2.
 The base model weights are not included (download from Hugging Face; Qwen licence applies).
 `SHA256SUMS` lists checksums of the adapter files.
+
+## Download
+GitHub release: https://github.com/ishaanmane/ie643_project/releases/tag/model-final-clean
+(`notes2pdf_final_clean_adapter.zip`, 172 MB, SHA-256
+`bf8a4c5f1ae3adc633ace079094e8d3df2dea42a62a0ca91c7119c7a30a3bf7a`).

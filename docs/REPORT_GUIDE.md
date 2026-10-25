@@ -31,6 +31,7 @@ These files are source material and numbers, not report text.
 | **Novelty plan** | `docs/development/findings/07_open_items.md`, "Not used"/"future" notes in `05_evaluation/README.md`, `findings/02_layout.md` | Ideas: Qwen grounding for figure boxes (removes the matching problem), CDM formula metric, notebook-writer generalisation, cross-page sentence joining |
 | **Conclusion** | `findings/README.md` + the headline numbers above | |
 | GitHub link (required) | https://github.com/ishaanmane/ie643_project/tree/final | |
+| Trained model (required) | https://github.com/ishaanmane/ie643_project/releases/tag/model-final-clean, `03_recognition/MODEL_README.md` | Adapter zip, 172 MB, with checksum |
 
 ## References already used (check details before citing; follow the template format)
 
