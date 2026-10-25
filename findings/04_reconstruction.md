@@ -1,6 +1,6 @@
 # 04 · Reconstruction (deterministic renderer + LLM outline)
 
-Run: `04_reconstruction/run_reconstruction.sh` on the fine-tuned clean model's predictions;
+Run (re-run with trimmed crops): `04_reconstruction/run_reconstruction.sh` on the fine-tuned clean model's predictions;
 reports and PDFs in `results/reconstruction/`. No hand fixes applied.
 
 | | val (4 units, 31 pages) | test (9 units, 76 pages) |
@@ -18,8 +18,10 @@ reports and PDFs in `results/reconstruction/`. No hand fixes applied.
   (e.g. "Kullback-Leibler Divergence", "Mistake Analysis" were proposed but not used).
   Examples of accepted structure: lec09 Announcements -> Backward Pass (Recall) ->
   Vanishing/Exploding Grad -> ... -> Soft-Max Function.
-- **"Matched" is not "correct":** matching pairs descriptions and crops by position; development
-  review found wrong pairings. A hand-graded sample of crops is still needed.
+- **Hand-graded figures** (all 58 placed in val + test, `results/crop_review/summary.md`):
+  72% correct, 12% partial crop, 12% wrong drawing, 3% not a drawing; right drawing 84.5%.
+  Chalkboard 15/16 and digital ink 17/18 correct; IE802 notebook pages only 10/24 (dense small
+  sketches: Surya splits/merges them and position matching picks a neighbour).
 - **PDF style:** Merriweather text (bundled, OFL), Latin Modern maths, DejaVu Serif for arrows,
   circled numbers and check marks Merriweather lacks; uniform green headings, 1.18 line spacing,
   paragraph gaps, grey captions with green labels, running title and page numbers.

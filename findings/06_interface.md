@@ -13,4 +13,10 @@
   pipeline steps on the page, model status in the footer; outdated deployment docs removed.
 - Limits and extreme cases (e.g. a 30-page PDF under 25 MiB is accepted, then stopped before any
   model runs): [../docs/REPORT_NOTES.md](../docs/REPORT_NOTES.md).
-- Not yet verified on the GPU with the final adapter.
+- **Verified on the GPU** with the final adapter (real uploads, PDFs downloaded). Problems found
+  and fixed while testing: Tailscale Funnel needed a one-time approval (now shown by the
+  launcher) and its relay was too slow for downloads (~3 KB/s), so Cloudflare is used for the
+  demo; a stopped server left its Surya vLLM process holding port 8001 and 5 GB (stopping now
+  unloads the models); text like `↓ = ∑` broke the PDF through the symbol fallback (now XeTeX
+  character classes); a `<!-- page -->` marker was printed on uploads; 5.7 MB PDFs from
+  full-size appendix pages (now 1600 px, about 5x smaller).

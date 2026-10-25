@@ -23,8 +23,8 @@ These files are source material and numbers, not report text.
 | **Results: recognition** | `results/recognition_experiments.md`, `preds/*_score.txt` | Zero-shot vs clean vs boxed_json, val and test, 12 metrics, bootstrap CIs, paired test |
 | Results: layout | `results/layout/count_metrics.md`, `results/layout/block_counts.txt`, `results/layout/examples/` | Surya recall 0.93 / precision 0.73; overlay images for qualitative figures |
 | Results: reconstruction | `results/reconstruction/{val,test}_{plain,outlined}.md`, `results/reconstruction/pdfs_{val,test}/`, `results/reconstruction/outlines_*` | Generation tables, real PDFs for qualitative figures, outline examples |
-| Results: preprocessing ablation | `preds/final_clean_raw_{val,test}_score.txt`, `logs/raw_vs_processed.txt` (after the current GPU run) | Raw vs preprocessed input, same model |
-| Results: figure crops (hand-graded) | `results/crop_review/*_grades.json` (after you grade the sheets) | correct / partial / wrong / not a drawing rates |
+| Results: preprocessing ablation | `preds/final_clean_raw_{val,test}_score.txt`, `logs/raw_vs_processed.txt`, `findings/01_preprocessing.md` | Raw vs preprocessed input, same model |
+| Results: figure crops (hand-graded) | `results/crop_review/summary.md`, `*_grades.json` | correct / partial / wrong / not a drawing rates |
 | Qualitative figures | `results/reconstruction/pdfs_test/*.pdf`, `results/style/sample_lec07.pdf`, `results/layout/examples/*.jpg`, `data/raw_scans/` (originals) | Before/after page pairs, outline vs plain |
 | Interface (demo section) | `findings/06_interface.md`, `06_interface/README.md` | Notes2PDF features, warm models, limits |
 | Limitations / extreme cases | `docs/REPORT_NOTES.md` | Everything the report must state honestly |

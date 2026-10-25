@@ -75,4 +75,5 @@ is refused before it is sent.
   PDF quality and robustness rather than for OCR accuracy.
 - Surya figure count vs labels: recall 0.93, precision 0.73 (all pages); test exact-count 0.88
   (`results/layout/count_metrics.md`).
-- Hand-graded crops: pending (`results/crop_review/*.html`).
+- Hand-graded crops: 58 figures, 72% correct, 84.5% right drawing; errors concentrated on IE802
+  notebook pages (10/24 correct) (`results/crop_review/summary.md`).

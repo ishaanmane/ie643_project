@@ -11,4 +11,7 @@
   figure problem seen in development was matching crops to descriptions, not detection.
 - Known weaknesses (development test): missed margin notes on busy notebook pages, boxes mixing
   text and equations, some partial or missed figures. Weights: research-use licence.
-- Planned metrics: figure count vs `[Diagram]` count per page; a hand-graded sample of crops.
+- **Count check** (`results/layout/count_metrics.md`): Surya finds 93% of the drawings the labels
+  mention (recall 0.93) and reports extra regions (precision 0.73: tables, split drawings); exact
+  count on 88% of test pages; weakest on chalkboard test pages (7 of 11).
+- **Hand-graded crops** after reconstruction: see `04_reconstruction.md` (84.5% right drawing).
