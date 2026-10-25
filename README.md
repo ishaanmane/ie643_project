@@ -23,5 +23,5 @@ Split by unit (lecture/week/notebook): train 303, val 31, test 76 — fixed in `
 | 5 Evaluation | `05_evaluation/evaluate.py` | scores |
 | 6 Interface | `python3 06_interface/manage.py start` | Notes2PDF upload page at https://notes2pdf.<tailnet>.ts.net |
 
-Each stage folder has its own README; `experiments/` subfolders hold alternatives that were
+Findings per stage: [findings/](findings/). Each stage folder has its own README; `experiments/` subfolders hold alternatives that were
 tried and are reported, but are not part of the final pipeline.
