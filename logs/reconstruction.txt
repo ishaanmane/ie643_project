@@ -1,0 +1,92 @@
+----------------------------------------------------------------------
+Ran 13 tests in 0.046s
+
+OK
+hlcs_note16: 7 blocks -> OK; sections 3, titles replaced 0, problems 0
+ie643_lec07: 101 blocks -> OK; sections 17, titles replaced 1, problems 0
+ie802_notes: 39 blocks -> OK; sections 3, titles replaced 1, problems 0
+mlt_week06: 42 blocks -> OK; sections 5, titles replaced 0, problems 0
+hlcs_note16    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/plain/hlcs_note16/hlcs_note16.pdf
+ie643_lec07    pages  20 (missing 0) | figures matched 8/9 descriptions, +0 extra | equations 91, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 101/101 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/plain/ie643_lec07/ie643_lec07.pdf
+ie802_notes    pages   4 (missing 0) | figures matched 11/11 descriptions, +0 extra | equations 60, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 39/39 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/plain/ie802_notes/ie802_notes.pdf
+mlt_week06     pages   6 (missing 0) | figures matched 1/2 descriptions, +0 extra | equations 41, failed 1, repaired 0, remaining 1 (xelatex: completed) | sections: none (page order) | blocks kept 42/42 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/plain/mlt_week06/mlt_week06.pdf
+hlcs_note16    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 3 sections | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/outlined/hlcs_note16/hlcs_note16.pdf
+ie643_lec07    pages  20 (missing 0) | figures matched 8/9 descriptions, +0 extra | equations 91, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 17 sections | blocks kept 101/101 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/outlined/ie643_lec07/ie643_lec07.pdf
+ie802_notes    pages   4 (missing 0) | figures matched 11/11 descriptions, +0 extra | equations 60, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 3 sections | blocks kept 39/39 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/outlined/ie802_notes/ie802_notes.pdf
+mlt_week06     pages   6 (missing 0) | figures matched 1/2 descriptions, +0 extra | equations 41, failed 1, repaired 0, remaining 1 (xelatex: completed) | sections: 5 sections | blocks kept 42/42 | output: /home/intralab/workspace/ie643_final/out/reconstruction_val/outlined/mlt_week06/mlt_week06.pdf
+intermediate Markdown blocks retained 189/189 (100.0%)
+outlines used 0, rejected 0, none 4; sections 0 (mean 0.0 per used outline)
+titles dropped 0, repeats merged 0, outline problems 0
+unique equation snippets per unit 192, diagnosed failures 1 (0.52%)
+units with incomplete or unknown math checks 0; zero diagnosed failures does not establish correctness
+reviewed equation repairs 0, remaining diagnosed failures 1
+equation checks: xelatex
+diagrams matched to a crop 20/22
+PDFs built 4/4
+Text retention and syntax checks are not OCR accuracy, equation correctness, or visual PDF quality.
+
+written results/reconstruction/val_plain.md
+intermediate Markdown blocks retained 189/189 (100.0%)
+outlines used 4, rejected 0, none 0; sections 28 (mean 7.0 per used outline)
+titles dropped 2, repeats merged 1, outline problems 0
+unique equation snippets per unit 192, diagnosed failures 1 (0.52%)
+units with incomplete or unknown math checks 0; zero diagnosed failures does not establish correctness
+reviewed equation repairs 0, remaining diagnosed failures 1
+equation checks: xelatex
+diagrams matched to a crop 20/22
+PDFs built 4/4
+Text retention and syntax checks are not OCR accuracy, equation correctness, or visual PDF quality.
+
+written results/reconstruction/val_outlined.md
+hlcs_note17: 7 blocks -> OK; sections 3, titles replaced 0, problems 0
+hlcs_note18: 7 blocks -> OK; sections 2, titles replaced 0, problems 0
+hlcs_note19: 5 blocks -> OK; sections 2, titles replaced 0, problems 0
+hlcs_note20: 7 blocks -> OK; sections 4, titles replaced 0, problems 0
+ie643_lec03: 71 blocks -> OK; sections 11, titles replaced 4, problems 0
+ie643_lec09: 79 blocks -> OK; sections 12, titles replaced 2, problems 0
+ie802_notes: 147 blocks -> OK; sections 7, titles replaced 0, problems 0
+mlt_week03: 92 blocks -> OK; sections 7, titles replaced 0, problems 0
+mlt_week09: 114 blocks -> OK; sections 7, titles replaced 0, problems 0
+hlcs_note17    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/hlcs_note17/hlcs_note17.pdf
+hlcs_note18    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/hlcs_note18/hlcs_note18.pdf
+hlcs_note19    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 5/5 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/hlcs_note19/hlcs_note19.pdf
+hlcs_note20    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/hlcs_note20/hlcs_note20.pdf
+ie643_lec03    pages  15 (missing 0) | figures matched 4/4 descriptions, +0 extra | equations 82, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 71/71 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/ie643_lec03/ie643_lec03.pdf
+ie643_lec09    pages  19 (missing 0) | figures matched 3/7 descriptions, +1 extra | equations 71, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 79/79 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/ie643_lec09/ie643_lec09.pdf
+ie802_notes    pages  12 (missing 0) | figures matched 13/13 descriptions, +0 extra | equations 103, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: none (page order) | blocks kept 147/147 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/ie802_notes/ie802_notes.pdf
+mlt_week03     pages  13 (missing 0) | figures matched 6/6 descriptions, +0 extra | equations 90, failed 1, repaired 0, remaining 1 (xelatex: completed) | sections: none (page order) | blocks kept 92/92 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/mlt_week03/mlt_week03.pdf
+mlt_week09     pages  13 (missing 0) | figures matched 11/12 descriptions, +0 extra | equations 125, failed 2, repaired 0, remaining 2 (xelatex: completed) | sections: none (page order) | blocks kept 114/114 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/plain/mlt_week09/mlt_week09.pdf
+hlcs_note17    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 3 sections | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/hlcs_note17/hlcs_note17.pdf
+hlcs_note18    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 2 sections | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/hlcs_note18/hlcs_note18.pdf
+hlcs_note19    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 2 sections | blocks kept 5/5 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/hlcs_note19/hlcs_note19.pdf
+hlcs_note20    pages   1 (missing 0) | figures matched 0/0 descriptions, +0 extra | equations 0, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 4 sections | blocks kept 7/7 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/hlcs_note20/hlcs_note20.pdf
+ie643_lec03    pages  15 (missing 0) | figures matched 4/4 descriptions, +0 extra | equations 82, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 11 sections | blocks kept 71/71 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/ie643_lec03/ie643_lec03.pdf
+ie643_lec09    pages  19 (missing 0) | figures matched 3/7 descriptions, +1 extra | equations 71, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 12 sections | blocks kept 79/79 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/ie643_lec09/ie643_lec09.pdf
+ie802_notes    pages  12 (missing 0) | figures matched 13/13 descriptions, +0 extra | equations 103, failed 0, repaired 0, remaining 0 (xelatex: completed) | sections: 7 sections | blocks kept 147/147 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/ie802_notes/ie802_notes.pdf
+mlt_week03     pages  13 (missing 0) | figures matched 6/6 descriptions, +0 extra | equations 90, failed 1, repaired 0, remaining 1 (xelatex: completed) | sections: 7 sections | blocks kept 92/92 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/mlt_week03/mlt_week03.pdf
+mlt_week09     pages  13 (missing 0) | figures matched 11/12 descriptions, +0 extra | equations 125, failed 2, repaired 0, remaining 2 (xelatex: completed) | sections: 7 sections | blocks kept 114/114 | output: /home/intralab/workspace/ie643_final/out/reconstruction_test/outlined/mlt_week09/mlt_week09.pdf
+intermediate Markdown blocks retained 529/529 (100.0%)
+outlines used 0, rejected 0, none 9; sections 0 (mean 0.0 per used outline)
+titles dropped 0, repeats merged 0, outline problems 0
+unique equation snippets per unit 471, diagnosed failures 3 (0.64%)
+units with incomplete or unknown math checks 0; zero diagnosed failures does not establish correctness
+reviewed equation repairs 0, remaining diagnosed failures 3
+equation checks: xelatex
+diagrams matched to a crop 37/42
+PDFs built 9/9
+Text retention and syntax checks are not OCR accuracy, equation correctness, or visual PDF quality.
+
+written results/reconstruction/test_plain.md
+intermediate Markdown blocks retained 529/529 (100.0%)
+outlines used 9, rejected 0, none 0; sections 55 (mean 6.1 per used outline)
+titles dropped 6, repeats merged 1, outline problems 0
+unique equation snippets per unit 471, diagnosed failures 3 (0.64%)
+units with incomplete or unknown math checks 0; zero diagnosed failures does not establish correctness
+reviewed equation repairs 0, remaining diagnosed failures 3
+equation checks: xelatex
+diagrams matched to a crop 37/42
+PDFs built 9/9
+Text retention and syntax checks are not OCR accuracy, equation correctness, or visual PDF quality.
+
+written results/reconstruction/test_outlined.md
+Saved: results/reconstruction/ (reports, outlines, outlined PDFs for val and test)

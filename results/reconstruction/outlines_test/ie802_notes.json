@@ -1,0 +1,54 @@
+{
+ "unit": "ie802_notes",
+ "outline": {
+  "sections": [
+   {
+    "start": "p45.0",
+    "title": "Projection of M",
+    "level": 1
+   },
+   {
+    "start": "p46.0",
+    "title": "Intersection Cuts",
+    "level": 1
+   },
+   {
+    "start": "p50.0",
+    "title": "Finding Good Upper Bounds",
+    "level": 1
+   },
+   {
+    "start": "p53.0",
+    "title": "Heuristics for MINLO",
+    "level": 1
+   },
+   {
+    "start": "p54.0",
+    "title": "Convex MINLO Case (Pure Binary)",
+    "level": 1
+   },
+   {
+    "start": "p55.0",
+    "title": "Local Branching (Improvement)",
+    "level": 1
+   },
+   {
+    "start": "p56.0",
+    "title": "Recall",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [],
+  "sections": 7,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p45.0\", \"title\": \"Projection of M\", \"level\": 1}, {\"start\": \"p46.0\", \"title\": \"Intersection Cuts\", \"level\": 1}, {\"start\": \"p50.0\", \"title\": \"Finding Good Upper Bounds\", \"level\": 1}, {\"start\": \"p53.0\", \"title\": \"Heuristics for MINLO\", \"level\": 1}, {\"start\": \"p54.0\", \"title\": \"Convex MINLO Case\", \"level\": 1}, {\"start\": \"p55.0\", \"title\": \"Local Branching\", \"level\": 1}, {\"start\": \"p56.0\", \"title\": \"Recall\", \"level\": 1}]}\n```",
+ "blocks": 147,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_test",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}

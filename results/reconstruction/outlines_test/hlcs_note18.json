@@ -1,0 +1,29 @@
+{
+ "unit": "hlcs_note18",
+ "outline": {
+  "sections": [
+   {
+    "start": "p1.0",
+    "title": "C++ Tutorials (18)",
+    "level": 1
+   },
+   {
+    "start": "p1.4",
+    "title": "Explicit Type Casting",
+    "level": 2
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [],
+  "sections": 2,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p1.0\", \"title\": \"# C++ Tutorials\", \"level\": 1}, {\"start\": \"p1.4\", \"title\": \"Explicit Type Casting\", \"level\": 2}]}\n```",
+ "blocks": 7,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_test",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}
