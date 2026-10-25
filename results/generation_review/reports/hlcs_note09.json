@@ -1,0 +1,38 @@
+{
+ "unit": "hlcs_note09",
+ "run_id": "0ef59e8d00294ef3be0f376d23e9ff32",
+ "pages": [
+  {
+   "page": "hlcs_note09_page001",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  }
+ ],
+ "missing_pages": [],
+ "expected_pages": 1,
+ "input_directory": "/home/intralab/workspace/ie643_project/data/annotations",
+ "outline_sections": 2,
+ "requested_format": "pdf",
+ "outline": "2 sections",
+ "outline_unapplied_starts": [],
+ "preservation": {
+  "blocks": 6,
+  "missing": 0,
+  "missing_list": [],
+  "scope": "ordered occurrences in Markdown before math fallback; not PDF accuracy"
+ },
+ "math": {
+  "equations": 0,
+  "failed": 0,
+  "failed_list": [],
+  "status": "completed",
+  "checked_with": "xelatex",
+  "error": null
+ },
+ "output": "/home/intralab/workspace/ie643_project/out/documents_all/hlcs_note09/hlcs_note09.pdf",
+ "pandoc_errors": ""
+}
