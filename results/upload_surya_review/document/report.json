@@ -1,0 +1,223 @@
+{
+ "unit": "upload_notes",
+ "run_id": null,
+ "pages": [
+  {
+   "page": "upload_notes_page001",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page002",
+   "descriptions": 0,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 0,
+   "extra_figures_added": 1,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page003",
+   "descriptions": 3,
+   "surya_figures": 3,
+   "merged_from": 3,
+   "matched": 3,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page004",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page005",
+   "descriptions": 0,
+   "surya_figures": 2,
+   "merged_from": 2,
+   "matched": 0,
+   "extra_figures_added": 2,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page006",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page007",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page008",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 2,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page009",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page010",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page011",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page012",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page013",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page014",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page015",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page016",
+   "descriptions": 0,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page017",
+   "descriptions": 1,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 1
+  },
+  {
+   "page": "upload_notes_page018",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  },
+  {
+   "page": "upload_notes_page019",
+   "descriptions": 1,
+   "surya_figures": 0,
+   "merged_from": 0,
+   "matched": 0,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 1
+  },
+  {
+   "page": "upload_notes_page020",
+   "descriptions": 1,
+   "surya_figures": 1,
+   "merged_from": 1,
+   "matched": 1,
+   "extra_figures_added": 0,
+   "descriptions_without_figure": 0
+  }
+ ],
+ "missing_pages": [],
+ "expected_pages": 20,
+ "input_directory": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/predictions",
+ "outline_sections": 0,
+ "requested_format": "pdf",
+ "outline": "none (page order)",
+ "reviewed_figure_links": [],
+ "outline_unapplied_starts": [],
+ "preservation": {
+  "blocks": 119,
+  "missing": 0,
+  "missing_list": [],
+  "scope": "ordered occurrences in Markdown before math fallback; not PDF accuracy"
+ },
+ "math": {
+  "equations": 148,
+  "failed": 1,
+  "failed_list": [
+   "\\lambda \\in \\[0,1\\]"
+  ],
+  "reviewed_repairs": [],
+  "remaining_failed": 1,
+  "status": "completed",
+  "checked_with": "xelatex",
+  "error": null
+ },
+ "source_appendix_pages": 20,
+ "output": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/documents_surya_20261025_110929/upload_notes/upload_notes.pdf",
+ "pandoc_errors": "",
+ "pandoc_warnings": "",
+ "pdf_audit": {
+  "status": "completed",
+  "pages": 21,
+  "outside_words": 0,
+  "examples": [],
+  "scope": "word bounds only; not overlap, glyph or semantic correctness"
+ }
+}

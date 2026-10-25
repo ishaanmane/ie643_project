@@ -1,0 +1,138 @@
+{
+  "image": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/processed/upload_notes_page010.jpg",
+  "image_size": [
+    2000,
+    1197
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        0,
+        25,
+        360,
+        145
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        10,
+        185,
+        245,
+        275
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 3,
+      "bbox": [
+        0,
+        295,
+        445,
+        435
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        10,
+        465,
+        485,
+        575
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 5,
+      "bbox": [
+        20,
+        585,
+        965,
+        985
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 6,
+      "bbox": [
+        540,
+        15,
+        995,
+        415
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 7,
+      "bbox": [
+        670,
+        425,
+        945,
+        550
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 8,
+      "bbox": [
+        685,
+        555,
+        975,
+        725
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 9,
+      "bbox": [
+        770,
+        735,
+        975,
+        985
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

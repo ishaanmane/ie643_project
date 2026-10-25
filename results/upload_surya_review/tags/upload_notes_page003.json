@@ -1,0 +1,113 @@
+{
+  "image": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/processed/upload_notes_page003.jpg",
+  "image_size": [
+    2000,
+    1088
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        10,
+        10,
+        160,
+        125
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        5,
+        160,
+        385,
+        275
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 3,
+      "bbox": [
+        125,
+        405,
+        315,
+        655
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/crops/upload_notes_page003_b3.png"
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 4,
+      "bbox": [
+        35,
+        685,
+        430,
+        850
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 5,
+      "bbox": [
+        425,
+        305,
+        595,
+        430
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/crops/upload_notes_page003_b5.png"
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        610,
+        60,
+        995,
+        635
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 7,
+      "bbox": [
+        590,
+        660,
+        855,
+        980
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/crops/upload_notes_page003_b7.png"
+    }
+  ]
+}

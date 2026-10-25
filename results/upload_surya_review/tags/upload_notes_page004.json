@@ -1,0 +1,111 @@
+{
+  "image": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/processed/upload_notes_page004.jpg",
+  "image_size": [
+    2000,
+    1137
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        6,
+        14,
+        225,
+        117
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        4,
+        144,
+        362,
+        450
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        484,
+        41,
+        988,
+        159
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 4,
+      "bbox": [
+        431,
+        157,
+        971,
+        520
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        764,
+        534,
+        1000,
+        786
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        487,
+        643,
+        710,
+        808
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 7,
+      "bbox": [
+        29,
+        417,
+        470,
+        983
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_project/out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output/data/crops/upload_notes_page004_b7.png"
+    }
+  ]
+}
