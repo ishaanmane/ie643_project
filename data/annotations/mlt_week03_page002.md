@@ -1,3 +1,7 @@
+$$\frac{}{\sum_{i=1}^{n}\mathbb{1}(z_i=k)}$$
+
+$z_i=k$ refers to assignment in the $k^{th}$ cluster
+
 ## Example
 
 $\{x_1,x_2,x_3,x_4,x_5\}$, $k=2$

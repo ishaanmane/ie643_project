@@ -1,4 +1,4 @@
-## Linear Separability Assumption
+## Linear separability assumption
 
 $$D = \{(x^t, y^t)\}_{t=1,2,\dots} \quad (x^t \in \mathbb{R}^d, y^t \in \{+1,-1\})$$
 

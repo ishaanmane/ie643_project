@@ -10,7 +10,7 @@ $$\lambda^1+\lambda^2=1, \; y_i\geq0 \Big\}$$
 → all are convex now..
 
 **Perspective function**
-$$p(\cdots) = \begin{cases}\lambda^1g_i\left(\dfrac{\bar{x}^1}{\lambda^1},\dfrac{\bar{y}^1}{\lambda^1}\right) & \lambda^1>0\\0 & \lambda^1=0\end{cases}$$
+$$p(\cdots) = \begin{cases}\lambda^1g_i\left(\dfrac{\bar{x}^1}{\lambda^1},\dfrac{\bar{y}^1}{\lambda^2}\right) & \lambda^1>0\\0 & \lambda^1=0\end{cases}$$
 
 **Upcoming:**
 - Intersection cuts

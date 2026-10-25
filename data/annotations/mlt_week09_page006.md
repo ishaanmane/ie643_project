@@ -8,7 +8,7 @@ $\forall i \in$ Dataset, $\|x\|_2 < R$, for some $R>0$
 
 Without loss of generality, assume $\|w^*\|=1$
 
-[Diagram: A unit circle with vector $w^*$ pointing toward a cluster of "+" points, a rotated candidate $w^1$, and dashed lines marking the margin boundaries $\{x:w^{*T}x=\gamma\}$ and $\{x:w^{*T}x=-\gamma\}$.]
+[Diagram: A unit circle with vector $w^*$ pointing toward a cluster of "+" points, a shorter collinear vector $w'$, and dashed lines marking the margin boundaries $\{x:w^{*T}x=\gamma\}$ and $\{x:w^{*T}x=-\gamma\}$.]
 
 $$\frac{w^{*T}x}{\|w^*\|} = \frac{\gamma}{\|w^*\|}, \qquad \gamma' = \frac{\gamma}{\|w^*\|}$$
 $$\left(\frac{w^*}{\|w^*\|}\right)^Tx = \gamma' \qquad (w^{*'})^Tx = \gamma'$$

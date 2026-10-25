@@ -1,3 +1,5 @@
+[Diagram: Table with columns x and prob.]
+
 | $x$ | prob |
 |---|---|
 | (7,4) | - |
@@ -7,6 +9,17 @@
 | (1,3) | - |
 | (10,1) | 18/55 |
 
-We now run k-means with initialized centers $(7,4), (1,3)$, and $(5,9)$.
+We now run k-means with initialized centers $\underbrace{(7,4)}_{\mu_1^0}, \underbrace{(1,3)}_{\mu_2^0}$, and $\underbrace{(5,9)}_{\mu_3^0}$.
 
-[Diagram: A scatter plot of the 6 points on axes 1-10, with $\mu_1^0, \mu_2^0, \mu_3^0$ labeled at $(5,9)$ish, $(7,4)$ and nearby positions, colored markers distinguishing the three chosen initial centers from the rest.]
+[Diagram: Table with columns x and prob.]
+
+| $x$ | prob |
+|---|---|
+| (7,4) | - |
+| (8,3) | |
+| (5,9) | - |
+| (3,3) | |
+| (1,3) | - |
+| (10,1) | |
+
+[Diagram: Scatter plot with six small blue points and larger colored markers: purple at the top, green at the left, and red near the lower right. The horizontal ticks run from 2 to 10 and vertical ticks from 1 to 9.]

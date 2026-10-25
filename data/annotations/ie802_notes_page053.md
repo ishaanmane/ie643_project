@@ -23,7 +23,9 @@ eg. $\bar{x}=\begin{bmatrix}0\\1\\0.4\\0.6\\0.8\\0.1\end{bmatrix}$, round($\bar{
 $$\min|x_1-0|+|x_2-1|+|x_3-0|+|x_4-1|+|x_5-1|+|x_6-0|$$
 st $Ax\leq b$, $0\leq x\leq1$
 
+not work then
+
 becomes $\min x_1+(1-x_2)+x_3+(1-x_4)+(1-x_5)+x_6$
 st $Ax\leq b$, $0\leq x\leq1$
 
-if $\bar{x}=\begin{bmatrix}0.1\\0.9\\0\\1\\0\end{bmatrix}$ → again round off gives same soln → we have to stop heuristic and flip some variables..
+if $\bar{x}=\begin{bmatrix}0.1\\0.9\\0\\1\\1\\0\end{bmatrix}$ → again round off gives same soln → we have to stop heuristic and flip some variables..

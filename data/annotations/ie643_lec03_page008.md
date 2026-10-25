@@ -1,9 +1,9 @@
-## Finite-Sample Setup
+## finite-sample setup
 
 $N$ samples.
 
 - predicting "most" no. of samples correctly
-- control the fluctuations
+- control the fluctuation
 
 ## Assumption
 

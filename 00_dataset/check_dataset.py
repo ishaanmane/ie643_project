@@ -8,7 +8,7 @@ Checks:
   2. splits: every page in exactly one split, no unit split across splits
   3. the JSONL files match splits.json, the current annotations and the prompt
   4. near-duplicate leakage: val/test pages whose text is very similar to a train page
-  5. label format: uncertain readings (??), math delimiters, length
+  5. label format: unreadable marks ([illegible]), math delimiters, length
 """
 import json
 import os
@@ -17,7 +17,7 @@ import sys
 from collections import Counter, defaultdict
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from build_dataset import HELD_OUT, split_of  # noqa: E402
+from build_dataset import HELD_OUT, HELD_OUT_PAGES, split_of  # noqa: E402
 from prompts import PAGE_PROMPT  # noqa: E402
 
 RAW, ANN, PROC = "data/raw_scans", "data/annotations", "data/processed"
@@ -72,7 +72,8 @@ def main():
     for k, v in sp.items():
         for s in v:
             unit_splits[unit_of(s)].add(k)
-    leak = {u: ks for u, ks in unit_splits.items() if len(ks) > 1}
+    # single-unit sources split by page block on purpose (HELD_OUT_PAGES); the near-duplicate check covers them
+    leak = {u: ks for u, ks in unit_splits.items() if len(ks) > 1 and not any(u in k for k in HELD_OUT_PAGES)}
     report("FAIL" if leak else "PASS", "no unit (lecture/week) spread over two splits", str(leak) if leak else "")
     missing = sorted(raw - set(seen))
     report("WARN" if missing else "PASS", "every page is in a split",
@@ -145,9 +146,9 @@ def main():
                else f"highest {top[0]:.2f} ({top[1]})")
 
     # 5. label format
-    flagged = sorted(s for s in text if "??" in text[s])
+    flagged = sorted(s for s in text if "[illegible]" in text[s])
     by_split = Counter(split_of(s) for s in flagged)
-    report("WARN" if flagged else "PASS", "annotations with uncertain readings (??)",
+    report("WARN" if flagged else "PASS", "annotations with unreadable marks ([illegible])",
            f"{len(flagged)} pages, by split {dict(by_split)}")
     styles = Counter()
     for s, t in text.items():

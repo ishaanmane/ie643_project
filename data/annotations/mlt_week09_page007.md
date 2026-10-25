@@ -1,6 +1,6 @@
 $$\|w^{\ell+1}\|^2 = \|w^\ell+xy\|^2 = (w^\ell+xy)^T(w^\ell+xy) = \|w^\ell\|^2 + 2(w^{\ell T}x)y + \|x\|^2y^2$$
 
-($2(w^{\ell T}x)y \leq 0$ because mistake; $\|x\|^2y^2 \leq R^2$)
+($2(w^{\ell T}x)y \leq 0$ because mistake; $y^2=+1$; $\|x\|^2y^2 \leq R^2$)
 
 $$\|w^{\ell+1}\|^2 \leq \|w^\ell\|^2 + R^2 \leq (\|w^{\ell-1}\|^2+R^2)+R^2 \leq \dots \leq \underbrace{\|w^0\|^2}_{=0}+\ell R^2$$
 

@@ -19,7 +19,7 @@ $$y\in\mathbb{Z}^p$$
 
 (3) If we look at integer points present, it is translation of cone. This is relaxation of original set.
 
-- We can chop off some points by looking at cone.
+- We can chopp off some points by looking at cone.
 
 [Diagram: scattered x points with two crossing lines and a horizontal line through a circled point, labeled "valid cut for original problem too", "how to get these cuts".]
 

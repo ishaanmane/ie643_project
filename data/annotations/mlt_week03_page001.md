@@ -17,7 +17,5 @@ $$F(z_1,\dots,z_n) = \sum_{i=1}^{n} \|x_i - \mu_{z_i}\|_2^2 \quad \text{(sum of 
 
 $\mu_{z_i} \rightarrow$ Mean/average of $z_i^{th}$ cluster
 
-$$\mu_k = \frac{\sum_{i=1}^{n} x_i\mathbb{1}(z_i=k)}{\sum_{i=1}^{n}\mathbb{1}(z_i=k)} \quad \text{(average of all data points which go to the $k^{th}$ cluster)}$$
-
-$z_i=k$ refers to assignment in the $k^{th}$ cluster
+$$\mu_k = \frac{\sum_{i=1}^{n} x_i\mathbb{1}(z_i=k)}{{}^{n}} \quad \text{(average of all data points which go to the $k^{th}$ cluster)}$$
 

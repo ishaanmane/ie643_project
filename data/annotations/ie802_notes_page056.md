@@ -7,9 +7,10 @@
 - Quesada Grossmann
 - Duran and Grossmann
 - Non-linear branch and bound
-- Bonmin
 
 **Extended cutting plane** (convex MINLO)
+
+NO
 
 - Separability
   - Perspective reformulation ✓
@@ -17,7 +18,7 @@
 
 ✓ Bound tightening
 ✓ Heuristics
-&nbsp;&nbsp;&nbsp;&nbsp;→ Local B0 → Random
+&nbsp;&nbsp;&nbsp;&nbsp;→ Local B → Random
 &nbsp;&nbsp;&nbsp;&nbsp;→ RINS → Multi start
 &nbsp;&nbsp;&nbsp;&nbsp;→ Feas Pump
 &nbsp;&nbsp;&nbsp;&nbsp;→ Under Cover
@@ -25,9 +26,9 @@
 ✓ SDP relaxation
 ✓ Boolean Quadratic Polytopes
 
-✓ Cuts → MIR, GG, Split cuts
+✓ Cuts → MIR, CG, Split cuts
 - Secants ✓
 ✓ McCormick ineq.
 ✓ RLT
-○ SOC?
+○ SOCs ?
 ✗ Contn dist..

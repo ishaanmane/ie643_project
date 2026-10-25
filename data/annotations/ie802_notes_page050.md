@@ -16,7 +16,7 @@ bcz goal is to find primal soln not dual
 * Gurobi may have 60-70 heuristics..
 
 **Heuristics**
-- Starting Heuristics (Don't need a feasible point to start) — try to construct a soln from scratch → kla construction heuristics
+- Starting Heuristics (Don't need a feasible point to start) — try to construct a soln from scratch → k/a construction heuristics
 - Improvement Heuristics (start with given a feasible soln → find better solns)
 
 **MINLOs:**

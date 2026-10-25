@@ -1,3 +1,5 @@
+Input: $\{(x_1,y_1),\dots,(x_n,y_n)\}$, $x_i\in\mathbb{R}^d$, $y_i\in\{+1,-1\}$
+
 $$w^0 = 0 \in \mathbb{R}^d \; [0\;0\;0\;\dots\;0] \quad \text{iteration}$$
 
 until convergence,

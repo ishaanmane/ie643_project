@@ -12,10 +12,11 @@ The JSONL records point at data/processed/<stem>.jpg, so run preprocessing befor
 training (pages are listed from raw_scans/, which is committed, so this works on a
 fresh clone where data/processed/ does not exist yet).
 
-Pages whose annotation still contains "??" (an uncertain reading) are left out of
-every split by default: as a training target they would teach the model to write
-"??", and in val/test they would count our own uncertainty as model error. They are
-listed in VERIFICATION.md; once fixed, a rebuild puts them back.
+Pages whose annotation contains "[illegible]" (a reading the labeller could not make out)
+are left out of every split by default: as a training target they would teach the model
+to write it, and in val/test they would count our own uncertainty as model error.
+A literal "??" is not a flag: the lecturers write it in their notes, so it is content.
+Flagged pages are listed in VERIFICATION.md; once fixed, a rebuild puts them back.
 Check the result with: python3 00_dataset/check_dataset.py
 
 The split is by unit (lecture or week), not by random page: consecutive pages from
@@ -28,6 +29,12 @@ Sources, told apart by filename prefix (the unit is the second part):
   ie802_notes_pageNNN   notebook (IE802), one unit "notes"
   hlcs_noteNN_page001   HumynLabs notebooks, unit = note
 Units not listed in HELD_OUT go to train.
+
+IE802 is a single notebook, so it cannot be held out by unit. Instead a contiguous block
+of its last pages is held out (HELD_OUT_PAGES): pages 41-44 val, 45-56 test. Contiguous
+blocks keep page-to-page repetition on one side; check_dataset.py's near-duplicate test
+confirms no held-out page copies a train page. Without this, notebook photos (the messiest
+input) would never be measured.
 """
 import json
 import os
@@ -47,8 +54,11 @@ DATA_DIR = "data"
 # point of holding out by unit is just to avoid near-duplicate leakage, not topic
 # balance.
 HELD_OUT = {
-    "test": ["lec03", "lec09", "week03", "week09"],
-    "val": ["lec07", "week06"],
+    "test": ["lec03", "lec09", "week03", "week09", "note17", "note18", "note19", "note20"],
+    "val": ["lec07", "week06", "note16"],
+}
+HELD_OUT_PAGES = {  # source prefix -> split -> page numbers (for single-unit sources)
+    "ie802_notes": {"val": range(41, 45), "test": range(45, 57)},
 }
 MIN_VAL_SPOT_CHECK = 5
 
@@ -56,7 +66,11 @@ MIN_VAL_SPOT_CHECK = 5
 def split_of(stem):
     # unit can be "lec03", "week09" (letters+digits) or a bare word like "notes"
     # (single-unit sources with no natural sub-division, e.g. ie802) -- both match.
-    unit = re.match(r"[a-z0-9]+_([a-z0-9]+)_page\d+$", stem).group(1)
+    m = re.match(r"([a-z0-9]+_([a-z0-9]+))_page(\d+)$", stem)
+    for split, pages in HELD_OUT_PAGES.get(m.group(1), {}).items():
+        if int(m.group(3)) in pages:
+            return split
+    unit = m.group(2)
     for split, units in HELD_OUT.items():
         if unit in units:
             return split
@@ -106,7 +120,7 @@ def build(include_flagged=False, variant="clean"):
             continue
         with open(md_path) as f:
             text = f.read().strip()
-        if "??" in text:
+        if "[illegible]" in text:
             flagged.append(stem)
             if not include_flagged:
                 continue
@@ -124,17 +138,17 @@ def build(include_flagged=False, variant="clean"):
         return
 
     with open(os.path.join(DATA_DIR, "splits.json"), "w") as f:
-        json.dump({"held_out_lectures": HELD_OUT, "splits": splits}, f, indent=2)
+        json.dump({"held_out_lectures": HELD_OUT, "held_out_pages": {k: {s: [min(r), max(r)] for s, r in v.items()} for k, v in HELD_OUT_PAGES.items()}, "splits": splits}, f, indent=2)
 
     out = [
         "# Manual verification checklist",
         "",
         "Regenerate with `python3 00_dataset/build_dataset.py`. The flagged list shrinks as you "
-        "remove the `??` marks from the annotation files.",
+        "resolve the `[illegible]` marks from the annotation files.",
         "",
     ]
     excluded = "" if include_flagged else ", left out of all splits until fixed"
-    out += checklist_lines(f"1. Flagged pages (`??` = uncertain reading), {len(flagged)} remaining{excluded}",
+    out += checklist_lines(f"1. Flagged pages (`[illegible]` = unreadable), {len(flagged)} remaining{excluded}",
                            flagged)
     out += checklist_lines(f"2. Test split: verify 100% ({len(splits['test'])} pages)", splits["test"])
     out += checklist_lines(

@@ -3,13 +3,13 @@
 $$\min c^Tx+d^Ty$$
 $$g_i(x,y)\leq0$$
 $$x\in\mathbb{R}^n$$
-$$y\in\{0,1\}^p \to \text{continuous}$$
+$$y\in\{0,1\}^p$$
 
-① Solve NLP relaxation → get $\bar{x},\bar{y}$ → round off $\bar{y}$
+① Solve NLP relaxation (continuous) → get $\bar{x},\bar{y}$ → round off $\bar{y}$
 
 ⊛ You can also solve MILP relaxation
 
-② $\min\sum_{i=1}^{p}|y_i-\text{round}(\bar{y})|$ ⇔ $\min\sum|y_i-\text{round}(y_i)|$
+② $\min\sum_{i=1}^{p}|y_i-\text{round}(\bar{y}_i)|$ ⇔ $\min\sum|y_i-\text{round}(y_i)|$
 st $g_i(x,y)\leq0$, $0\leq y\leq1$ → st $\nabla$ inequalities at $(\bar{x},\bar{y})$, $0\leq y\leq1$
 
 $\Leftrightarrow$ MILP $\{\vdots\}$, $y\in\{0,1\}^p$

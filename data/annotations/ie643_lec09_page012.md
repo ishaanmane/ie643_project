@@ -1,4 +1,4 @@
-$$KL(\hat{y}\|y) = \sum \hat{y}_j \log \frac{\hat{y}_j}{y_j}$$
+$$\min KL(\hat{y}\|y) = \sum \hat{y}_j \log \frac{\hat{y}_j}{y_j}$$
 
 $$= \underbrace{\sum \hat{y}_j \log \hat{y}_j}_{\text{min}} - \sum \hat{y}_j \log y_j$$
 

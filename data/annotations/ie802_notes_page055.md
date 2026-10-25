@@ -11,11 +11,11 @@ $$\sum_{i=1}^{p}|y_i-\hat{y}_i|\leq5$$
 **Local Jump:** solving LPs takes too long
 **Idiot Crash:** Initial / construction
 
-$$\min \bcancel{c^Tx}$$
+$$\min$$
 $$Ay\leq b$$
 $$y\in\mathbb{Z}^p$$
 
-$$\min \sum w_i(b_i-Ay)^+$$
+$$\min \sum w_i(b_i-ay)^+$$
 
 $$3y_1+y_2-y_3\leq7 \to y_1 \text{ should be small}$$
 $$-y_1+2y_2+y_3\geq9 \to y_1 \text{ should be small}$$

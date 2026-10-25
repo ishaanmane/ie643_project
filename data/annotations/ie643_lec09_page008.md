@@ -1,6 +1,6 @@
 $$\hat{y} = \begin{bmatrix} q_1 \\ q_2 \\ \vdots \\ q_C \end{bmatrix}, \quad q_j > 0, \quad \sum_j q_j = 1$$
 
-Compare two discrete prob distr's
+Compare two discrete prob distrns
 $\rightarrow$ **KL divergence**
 $\rightarrow$ Bregman div
 $\rightarrow$ JS div ...

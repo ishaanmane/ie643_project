@@ -11,11 +11,13 @@ This idea can be extended to non-convex too. $g_i(x,y)\leq0$
 a) Where $g_i$ is convex — we take relaxation of this case
 [Diagram: A hexagon with an inscribed circle.]
 
-b) Suppose $g_i$ is concave, $-m_1^2-m_2^2\leq-1$, outside circle
+b) Suppose $g_i$ is concave, $-x_1^2-x_2^2\leq-1$, outside circle
 [Diagram: A spiral/circle shape with hatching around it, "we can't chop off the point".]
 
 - Suppose we have some linear constraints, since hard we ignore concave
-- We may set corner point $\otimes$ if it is infeasible region then we are done
+[Diagram: A separate quadrilateral sketch with a circled point at its left corner and arrows along the boundary.]
+
+- We may get corner point $\otimes$ if it is infeasible region then we are done
 - if not like, we start to move to extreme region
 
 [Diagram: A quadrilateral with hatching and a circled point, arrow labeled "valid cut".]

@@ -4,4 +4,4 @@ $$\delta^L = \begin{bmatrix} \partial e/\partial a_1^L \\ \partial e/\partial a_
 
 $$e^i = -\sum_{j=1}^{C} y_j^i \log \hat{y}_j^i$$
 
-$$\frac{\partial e^i}{\partial a_o^L} = \sum_{k=1}^{C} \frac{\partial e^i}{\partial \hat{y}_k^i} \cdot \frac{\partial \hat{y}_k^i}{\partial a_j^L}$$
+$$\frac{\partial e^i}{\partial a_j^L} = \sum_{k=1}^{C} \frac{\partial e^i}{\partial \hat{y}_k^i} \cdot \frac{\partial \hat{y}_k^i}{\partial a_j^L}$$
