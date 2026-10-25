@@ -1,0 +1,107 @@
+{
+ "unit": "ie643_lec03",
+ "outline": {
+  "sections": [
+   {
+    "start": "p1.0",
+    "title": "Recap",
+    "level": 1
+   },
+   {
+    "start": "p2.0",
+    "title": "Perceptron Neuron",
+    "level": 2
+   },
+   {
+    "start": "p3.0",
+    "title": "Decision Rule",
+    "level": 2
+   },
+   {
+    "start": "p4.0",
+    "title": "Perceptron Prediction",
+    "level": 2
+   },
+   {
+    "start": "p5.0",
+    "title": "Train a perceptron",
+    "level": 1
+   },
+   {
+    "start": "p7.0",
+    "title": "Online Learning",
+    "level": 2
+   },
+   {
+    "start": "p8.0",
+    "title": "finite-sample setup",
+    "level": 1
+   },
+   {
+    "start": "p9.0",
+    "title": "Hyperplane",
+    "level": 1
+   },
+   {
+    "start": "p10.0",
+    "title": "Separability Assumption",
+    "level": 1
+   },
+   {
+    "start": "p11.0",
+    "title": "Linear separability assumption",
+    "level": 1
+   },
+   {
+    "start": "p12.0",
+    "title": "Convergence of perceptron happens under linear separability assumption",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [
+   {
+    "start": "p6.0",
+    "model_title": "Example Update",
+    "words_not_in_notes": [
+     "example"
+    ],
+    "used": "(section dropped)"
+   },
+   {
+    "start": "p13.0",
+    "model_title": "Mistake Analysis",
+    "words_not_in_notes": [
+     "analysis"
+    ],
+    "used": "(section dropped)"
+   },
+   {
+    "start": "p14.0",
+    "model_title": "Weight Update Analysis",
+    "words_not_in_notes": [
+     "analysis"
+    ],
+    "used": "(section dropped)"
+   },
+   {
+    "start": "p15.0",
+    "model_title": "Summation of Updates",
+    "words_not_in_notes": [
+     "summation"
+    ],
+    "used": "(section dropped)"
+   }
+  ],
+  "sections": 11,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p1.0\", \"title\": \"Recap\", \"level\": 1}, {\"start\": \"p2.0\", \"title\": \"Perceptron Neuron\", \"level\": 2}, {\"start\": \"p3.0\", \"title\": \"Decision Rule\", \"level\": 2}, {\"start\": \"p4.0\", \"title\": \"Perceptron Prediction\", \"level\": 2}, {\"start\": \"p5.0\", \"title\": \"Train a Perceptron\", \"level\": 1}, {\"start\": \"p6.0\", \"title\": \"Example Update\", \"level\": 2}, {\"start\": \"p7.0\", \"title\": \"Online Learning\", \"level\": 2}, {\"start\": \"p8.0\", \"title\": \"Finite-Sample Setup\", \"level\": 1}, {\"start\": \"p9.0\", \"title\": \"Hyperplane\", \"level\": 1}, {\"start\": \"p10.0\", \"title\": \"Separability Assumption\", \"level\": 1}, {\"start\": \"p11.0\", \"title\": \"Linear Separability\", \"level\": 1}, {\"start\": \"p12.0\", \"title\": \"Convergence Under Linear Separability\", \"level\": 1}, {\"start\": \"p13.0\", \"title\": \"Mistake Analysis\", \"level\": 2}, {\"start\": \"p14.0\", \"title\": \"Weight Update Analysis\", \"level\": 2}, {\"start\": \"p15.0\", \"title\": \"Summation of Updates\", \"level\": 2}]}\n```",
+ "blocks": 71,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_test",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}

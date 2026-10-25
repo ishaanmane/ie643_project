@@ -1,0 +1,44 @@
+{
+ "unit": "mlt_week06",
+ "outline": {
+  "sections": [
+   {
+    "start": "p1.0",
+    "title": "Goodness of Maximum Likelihood Estimator for Linear Regression",
+    "level": 1
+   },
+   {
+    "start": "p2.0",
+    "title": "Cross-validation for minimizing MSE",
+    "level": 1
+   },
+   {
+    "start": "p3.0",
+    "title": "Training Set & Validation Set",
+    "level": 1
+   },
+   {
+    "start": "p4.0",
+    "title": "Bayesian Modeling for linear regression",
+    "level": 1
+   },
+   {
+    "start": "p6.0",
+    "title": "Ridge Regression",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [],
+  "sections": 5,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p1.0\", \"title\": \"# Goodness of Maximum Likelihood Estimator for Linear Regression\", \"level\": 1}, {\"start\": \"p2.0\", \"title\": \"# Cross-validation for minimizing MSE\", \"level\": 1}, {\"start\": \"p3.0\", \"title\": \"# Training Set & Validation Set\", \"level\": 1}, {\"start\": \"p4.0\", \"title\": \"# Bayesian Modeling for linear regression\", \"level\": 1}, {\"start\": \"p6.0\", \"title\": \"# Ridge Regression\", \"level\": 1}]}\n```",
+ "blocks": 42,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_val",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}

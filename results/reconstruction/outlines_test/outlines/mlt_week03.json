@@ -1,0 +1,54 @@
+{
+ "unit": "mlt_week03",
+ "outline": {
+  "sections": [
+   {
+    "start": "p1.0",
+    "title": "Introduction to Clustering",
+    "level": 1
+   },
+   {
+    "start": "p4.0",
+    "title": "K-Means Clustering (Lloyd's Algorithm)",
+    "level": 1
+   },
+   {
+    "start": "p6.0",
+    "title": "Convergence of K-Means Algorithm",
+    "level": 1
+   },
+   {
+    "start": "p8.0",
+    "title": "Nature of Clusters produced by K-Means",
+    "level": 1
+   },
+   {
+    "start": "p9.4",
+    "title": "Initialization of Centroids, K-Means++",
+    "level": 1
+   },
+   {
+    "start": "p11.3",
+    "title": "Example",
+    "level": 1
+   },
+   {
+    "start": "p13.0",
+    "title": "Choice of K",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [],
+  "sections": 7,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p1.0\", \"title\": \"# Introduction to Clustering\", \"level\": 1}, {\"start\": \"p3.0\", \"start\": \"p4.0\", \"title\": \"# K-Means Clustering (Lloyd's Algorithm)\", \"level\": 1}, {\"start\": \"p5.0\", \"start\": \"p6.0\", \"title\": \"# Convergence of K-Means Algorithm\", \"level\": 1}, {\"start\": \"p7.0\", \"start\": \"p8.0\", \"title\": \"# Nature of Clusters produced by K-Means\", \"level\": 1}, {\"start\": \"p9.0\", \"start\": \"p9.4\", \"title\": \"# Initialization of Centroids, K-Means++\", \"level\": 1}, {\"start\": \"p10.0\", \"start\": \"p11.3\", \"title\": \"# Example\", \"level\": 1}, {\"start\": \"p12.0\", \"start\": \"p13.0\", \"title\": \"# Choice of K\", \"level\": 1}]}\n```",
+ "blocks": 92,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_test",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}

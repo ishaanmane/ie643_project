@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------
-Ran 13 tests in 0.046s
+Ran 13 tests in 0.042s
 
 OK
 hlcs_note16: 7 blocks -> OK; sections 3, titles replaced 0, problems 0

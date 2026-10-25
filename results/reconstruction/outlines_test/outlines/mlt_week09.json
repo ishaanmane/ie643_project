@@ -1,0 +1,54 @@
+{
+ "unit": "mlt_week09",
+ "outline": {
+  "sections": [
+   {
+    "start": "p1.0",
+    "title": "Perceptron Learning Algorithm",
+    "level": 1
+   },
+   {
+    "start": "p1.1",
+    "title": "Discriminative Model for Classification",
+    "level": 2
+   },
+   {
+    "start": "p1.11",
+    "title": "Perceptron Algorithm",
+    "level": 2
+   },
+   {
+    "start": "p3.0",
+    "title": "Understanding the Perceptron Update Rule",
+    "level": 1
+   },
+   {
+    "start": "p4.0",
+    "title": "Proof of Convergence of Perceptron Algorithm",
+    "level": 1
+   },
+   {
+    "start": "p10.0",
+    "title": "Sigmoid Functions for Modeling Class Probabilities",
+    "level": 1
+   },
+   {
+    "start": "p12.0",
+    "title": "Logistic Regression",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [],
+  "sections": 7,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p1.0\", \"title\": \"# Perceptron Learning Algorithm\", \"level\": 1}, {\"start\": \"p1.1\", \"title\": \"## Discriminative Model for Classification\", \"level\": 2}, {\"start\": \"p1.11\", \"start\": \"p1.11\", \"title\": \"## Perceptron Algorithm\", \"level\": 2}, {\"start\": \"p3.0\", \"start\": \"p3.0\", \"title\": \"# Understanding the Perceptron Update Rule\", \"level\": 1}, {\"start\": \"p4.0\", \"start\": \"p4.0\", \"title\": \"# Proof of Convergence of Perceptron Algorithm\", \"level\": 1}, {\"start\": \"p10.0\", \"start\": \"p10.0\", \"title\": \"# Sigmoid Functions for Modeling Class Probabilities\", \"level\": 1}, {\"start\": \"p12.0\", \"start\": \"p12.0\", \"title\": \"# Logistic Regression\", \"level\": 1}]}\n```",
+ "blocks": 114,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_test",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}

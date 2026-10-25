@@ -1,0 +1,19 @@
+scored 76 pages, 0 missing predictions
+source     n    CER    WER  textCER  eqMatch
+hlcs       4  0.112  0.250    0.112      -  
+ie643     34  0.356  0.534    0.302    0.153
+ie802     12  0.348  0.589    0.245    0.200
+mlt       26  0.333  0.567    0.224    0.148
+ALL       76  0.334  0.539    0.245    0.159
+
+extended metrics (higher is better except corpCER, NED; len = prediction/reference length)
+source     n corpCER     NED    tokP    tokR   tokF1   BLEU4     len     eqP     eqR    eqF1  eqEdit  diagEx   diagP   diagR   headR
+hlcs       4   0.137   0.112   0.954   0.927   0.940   0.826   0.951     -       -       -       -     1.000     -       -     0.750
+ie643     34   0.377   0.337   0.869   0.870   0.866   0.745   0.997   0.297   0.312   0.302   0.684   0.882   0.889   0.727   0.636
+ie802     12   0.355   0.338   0.832   0.783   0.804   0.590   0.973   0.240   0.239   0.238   0.608   0.917   1.000   0.857     -  
+mlt       26   0.332   0.319   0.872   0.855   0.861   0.697   0.991   0.392   0.400   0.378   0.712   0.808   0.944   0.680   0.875
+ALL       76   0.341   0.319   0.868   0.854   0.858   0.694   0.988   0.323   0.333   0.321   0.683   0.868   0.949   0.740   0.774
+95% CI CER (capped, page mean): 0.291 - 0.376
+95% CI NED: 0.279 - 0.359
+95% CI token F1: 0.840 - 0.876
+95% CI eq edit score: 0.629 - 0.734

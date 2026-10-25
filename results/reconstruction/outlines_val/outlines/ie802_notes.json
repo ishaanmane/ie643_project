@@ -1,0 +1,43 @@
+{
+ "unit": "ie802_notes",
+ "outline": {
+  "sections": [
+   {
+    "start": "p41.0",
+    "title": "Separation Problem",
+    "level": 1
+   },
+   {
+    "start": "p42.0",
+    "title": "Split inequalities",
+    "level": 1
+   },
+   {
+    "start": "p44.0",
+    "title": "Convex Hull",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [
+   {
+    "start": "p43.0",
+    "model_title": "Optimization Problem",
+    "words_not_in_notes": [
+     "optimization"
+    ],
+    "used": "(section dropped)"
+   }
+  ],
+  "sections": 3,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p41.0\", \"title\": \"Separation Problem\", \"level\": 1}, {\"start\": \"p42.0\", \"title\": \"Split Inequalities\", \"level\": 1}, {\"start\": \"p43.0\", \"title\": \"Optimization Problem\", \"level\": 1}, {\"start\": \"p44.0\", \"title\": \"Convex Hull\", \"level\": 1}]}\n```",
+ "blocks": 39,
+ "pages_md": "/home/intralab/workspace/ie643_final/preds/final_clean_val",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}
