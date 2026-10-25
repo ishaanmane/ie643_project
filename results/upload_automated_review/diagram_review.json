@@ -1,0 +1,96 @@
+{
+  "unmatched_pages": [],
+  "pages": [
+    {
+      "page": "upload_notes_page001",
+      "descriptions": 1,
+      "surya_figures": 1,
+      "merged_from": 1,
+      "matched": 1,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page002",
+      "descriptions": 1,
+      "surya_figures": 1,
+      "merged_from": 3,
+      "matched": 1,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page003",
+      "descriptions": 2,
+      "surya_figures": 2,
+      "merged_from": 2,
+      "matched": 2,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page004",
+      "descriptions": 2,
+      "surya_figures": 2,
+      "merged_from": 2,
+      "matched": 2,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page005",
+      "descriptions": 2,
+      "surya_figures": 2,
+      "merged_from": 3,
+      "matched": 2,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page006",
+      "descriptions": 2,
+      "surya_figures": 2,
+      "merged_from": 3,
+      "matched": 2,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page007",
+      "descriptions": 1,
+      "surya_figures": 1,
+      "merged_from": 12,
+      "matched": 1,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page008",
+      "descriptions": 2,
+      "surya_figures": 2,
+      "merged_from": 3,
+      "matched": 2,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page009",
+      "descriptions": 1,
+      "surya_figures": 1,
+      "merged_from": 4,
+      "matched": 1,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    },
+    {
+      "page": "upload_notes_page010",
+      "descriptions": 2,
+      "surya_figures": 2,
+      "merged_from": 3,
+      "matched": 2,
+      "extra_figures_added": 0,
+      "descriptions_without_figure": 0
+    }
+  ],
+  "note": "No guessed or manually corrected boxes were applied."
+}

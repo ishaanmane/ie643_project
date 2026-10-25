@@ -1,0 +1,261 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "adapter": "/home/intralab/workspace/ie643_project/runs/qwen25vl_clean/final_adapter",
+  "uploads": [
+    {
+      "name": "001_IE643_Lec14_Sept25.pdf",
+      "sha256": "021d50c9c6eaa278d565f09a907c997482ed97bcbfbd09bde73203bcf67816e6"
+    }
+  ],
+  "page_map": [
+    {
+      "page": "upload_notes_page001",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 1
+    },
+    {
+      "page": "upload_notes_page002",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 2
+    },
+    {
+      "page": "upload_notes_page003",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 3
+    },
+    {
+      "page": "upload_notes_page004",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 4
+    },
+    {
+      "page": "upload_notes_page005",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 5
+    },
+    {
+      "page": "upload_notes_page006",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 6
+    },
+    {
+      "page": "upload_notes_page007",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 7
+    },
+    {
+      "page": "upload_notes_page008",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 8
+    },
+    {
+      "page": "upload_notes_page009",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 9
+    },
+    {
+      "page": "upload_notes_page010",
+      "input": "001_IE643_Lec14_Sept25.pdf",
+      "input_page": 10
+    }
+  ],
+  "predictions": [
+    {
+      "page": "upload_notes_page001",
+      "generated_tokens": 120,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page002",
+      "generated_tokens": 106,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page003",
+      "generated_tokens": 110,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page004",
+      "generated_tokens": 116,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page005",
+      "generated_tokens": 172,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page006",
+      "generated_tokens": 82,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page007",
+      "generated_tokens": 48,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page008",
+      "generated_tokens": 112,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page009",
+      "generated_tokens": 56,
+      "possibly_truncated": false
+    },
+    {
+      "page": "upload_notes_page010",
+      "generated_tokens": 106,
+      "possibly_truncated": false
+    }
+  ],
+  "elapsed_seconds": 94.12,
+  "warnings": [
+    "Automatic Surya crops inserted. Generated captions and crop boundaries require review.",
+    "Recognition can misread formulas. Compilation checks do not establish mathematical correctness.",
+    "1 equation snippets remain verbatim with warnings."
+  ],
+  "layout_mode": "surya",
+  "layout": {
+    "model": "datalab-to/surya-ocr-2",
+    "surya_version": "0.22.1",
+    "vllm_version": "0.32.0",
+    "pages": 10,
+    "status": "completed"
+  },
+  "report": {
+    "unit": "upload_notes",
+    "run_id": null,
+    "pages": [
+      {
+        "page": "upload_notes_page001",
+        "descriptions": 1,
+        "surya_figures": 1,
+        "merged_from": 1,
+        "matched": 1,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page002",
+        "descriptions": 1,
+        "surya_figures": 1,
+        "merged_from": 3,
+        "matched": 1,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page003",
+        "descriptions": 2,
+        "surya_figures": 2,
+        "merged_from": 2,
+        "matched": 2,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page004",
+        "descriptions": 2,
+        "surya_figures": 2,
+        "merged_from": 2,
+        "matched": 2,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page005",
+        "descriptions": 2,
+        "surya_figures": 2,
+        "merged_from": 3,
+        "matched": 2,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page006",
+        "descriptions": 2,
+        "surya_figures": 2,
+        "merged_from": 3,
+        "matched": 2,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page007",
+        "descriptions": 1,
+        "surya_figures": 1,
+        "merged_from": 12,
+        "matched": 1,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page008",
+        "descriptions": 2,
+        "surya_figures": 2,
+        "merged_from": 3,
+        "matched": 2,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page009",
+        "descriptions": 1,
+        "surya_figures": 1,
+        "merged_from": 4,
+        "matched": 1,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      },
+      {
+        "page": "upload_notes_page010",
+        "descriptions": 2,
+        "surya_figures": 2,
+        "merged_from": 3,
+        "matched": 2,
+        "extra_figures_added": 0,
+        "descriptions_without_figure": 0
+      }
+    ],
+    "missing_pages": [],
+    "expected_pages": 10,
+    "input_directory": "/home/intralab/workspace/ie643_project/out/upload_jobs/67c6855a11a8412c93da63f309f9a137/output/predictions",
+    "outline_sections": 0,
+    "requested_format": "pdf",
+    "outline": "none (page order)",
+    "reviewed_figure_links": [],
+    "outline_unapplied_starts": [],
+    "preservation": {
+      "blocks": 47,
+      "missing": 0,
+      "missing_list": [],
+      "scope": "ordered occurrences in Markdown before math fallback; not PDF accuracy"
+    },
+    "math": {
+      "equations": 23,
+      "failed": 1,
+      "failed_list": [
+        "\\{0,1,\\dots255\\} \\to \\[0,1\\]"
+      ],
+      "reviewed_repairs": [],
+      "remaining_failed": 1,
+      "status": "completed",
+      "checked_with": "xelatex",
+      "error": null
+    },
+    "source_appendix_pages": 10,
+    "output": "/home/intralab/workspace/ie643_project/out/upload_jobs/67c6855a11a8412c93da63f309f9a137/output/documents/upload_notes/upload_notes.pdf",
+    "pandoc_errors": "",
+    "pandoc_warnings": "",
+    "pdf_audit": {
+      "status": "completed",
+      "pages": 13,
+      "outside_words": 0,
+      "examples": [],
+      "scope": "word bounds only; not overlap, glyph or semantic correctness"
+    }
+  }
+}

@@ -47,6 +47,10 @@ Rendering pages from PDFs (`00_dataset/render_*.py`) needs the original lecture 
 
 ## Current demo and evidence
 
-See [06_interface/README.md](06_interface/README.md) for inference on new images/PDFs and the local upload interface. It reuses the clean trained adapter; GPU integration verification is pending. Fresh-upload diagrams remain in an original-page appendix until fresh layout inference is connected.
+See [06_interface/README.md](06_interface/README.md) for inference on new images/PDFs and the local upload interface. It reuses the clean trained adapter; automatic Surya v2 layout and isolated GPU recognition are verified. Detected diagram crops are inserted and original pages remain appended; matching/captions still need review.
 
 Clean adapter validation CER is 0.277 on 25 pages (capped per-page macro metric against unverified labels). Test scoring remains pending. Reconstruction checks, syntax checks and manual rendering repairs do not establish OCR or equation correctness. See [submission readiness](docs/SUBMISSION_READINESS.md) and [findings](findings/).
+
+## Continuing this project
+
+Read [the current handoff](docs/HANDOFF.md) first, then [the complete work history](docs/WORK_LOG_2026-10-25.md) and [service runbook](docs/OPERATIONS.md). [Latest automatic upload evidence](results/upload_automated_review/README.md) includes the full downloadable bundle and checksums.

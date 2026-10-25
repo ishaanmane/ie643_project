@@ -1,81 +1,27 @@
-# Submission readiness audit — 2026-10-25
+# Submission readiness — current 2026-10-25
 
-Audited the official project statement, tracked code, stage READMEs, findings,
-metrics and GPU outputs through `d8beb66`. This audit cannot verify private GPU
-checkpoint files or submission files stored outside this repository.
+This supersedes the initial pre-interface audit. See [handoff](HANDOFF.md), [work history](WORK_LOG_2026-10-25.md) and [runbook](OPERATIONS.md).
 
-## Required work, in priority order
+## Completed and evidenced
 
-1. **New-input inference and upload interface.** At the initial audit no app/upload implementation was found. A local MVP is now implemented in `06_interface/`; seven CPU tests and simulated-recognition PDF integration pass. Real GPU inference and a genuinely new upload remain to be tested. Fresh Surya is not connected; originals are appended. The following describes the initial gap: The tested renderer enumerates units through existing annotations;
-   it is not yet a standalone uploaded-document pipeline. The separate inference
-   script uses the earlier Unsloth route, while successful training used Transformers
-   + PEFT. Extract an inference-only path for the existing clean adapter; accept
-   images/PDFs, preprocess, recognize, optionally obtain fresh layout, render, then
-   provide Markdown/PDF downloads and visible warnings. Test one genuinely new input.
-   An interface that only selects cached outputs does not demonstrate new-input support.
-   Confirm an accessible way to open it from the user's terminal-only GPU setup.
+- Dataset, corrected preprocessing, full Surya layout run and clean/boxed recognition training.
+- Validation scores and retained predictions; clean adapter chosen.
+- Annotation reconstruction across42-units, plain/outline prediction comparison, audited rendering fixes.
+- Real upload UI with token authentication, PDF/image input, trained recognition, tested Surya v2 layout, crops and PDF/bundle/report downloads.
+- Remote access through temporary outbound HTTP/2 tunnel. Browser flow works without same Wi-Fi.
+- Sequential model processes; two post-run observations at42 MiB, no model GPU processes. Latest automatic10-page run archived with94.12 s runtime.
+- Twelve interface tests and 13 renderer tests pass at 540208d; GPU execution separately evidenced.
+- Comprehensive engineering handoff/runbook/history and archived latest bundle with checksums.
 
-2. **Model submission and reproducible setup.** Verify the final adapter config and
-   nonempty weights, processor/tokenizer, base-model identifier, inference settings,
-   tested dependency versions, and a submission-accessible backup. Existing backup
-   notes do not prove a copy outside the same GPU machine. `runs/` is gitignored;
-   GitHub code alone does not deliver the weights. Avoid uploading large weights to
-   ordinary Git history. Record the chosen approved delivery location and checksums.
+## Remaining submission work
 
-3. **Consolidated stage-wise report.** Extensive stage notes exist, but no consolidated
-   submission report was found. Cover dataset/AI labels/splits, preprocessing fixes,
-   both training variants, baseline and fine-tuned results, Surya, outlining ablation,
-   renderer, reviewed repairs, interface, and limitations. State that recognition is
-   fine-tuned, Surya pretrained, outlining zero-shot, and PDF rendering deterministic.
-   The wording of deliverables 3/4 includes model development/fine-tuning; explain
-   the actual contribution and verify instructor expectations if clarification is needed.
+1. **Model package/delivery.** Config and 181.6 MiBadapter verified on GPU, but external submission-accessible backup not verified. Package adapter, processor/tokenizer, exact base identifier, inference settings, dependency versions and checksums; choose delivery location. `runs/` is ignored; source GitHub does not deliver weights. Do not accidentally commit base weights into ordinary Git.
+2. **Consolidated academic report.** Findings and engineering documentation exist; this is not yet a polished stage-wise submission report. Include goals/ownership, label provenance/splits, preprocessing fixes, baseline/trained metrics, layout role, outline ablation, deterministic renderer, manual fixes, UI/screenshots, limitations and reproducibility. Explain pretrained vs fine-tuned vs zero-shot components honestly; do not claim independently trained structure/generation models.
+3. **Renderer quality pass.** Neutral source-page captions, matching uncertainty flags, conservative merging and appendix clearpage are proposed, unimplemented. Rebuild saved outputs without model reruns, preserve originals andcompare visually. Review source17/19 missed diagrams and partial crops. Syntax fallback/glyph/semanticerrors remain.
+4. **Evaluation scope.** Existing25-page validation / two units, no notebook holdout, no scored test set. AI labels unverified. CurrentCER capped macro; equation exact score reference-recall-like; missing predictions excluded. Distinguish preservation, syntax, assignment count and actual accuracy.16/16 assigned figures had visible misassociations. New upload execution is not independent generalization evidence.
+5. **Submission launch/demo.** Provide trained weights separately, current runbook, screenshots and representative outputs. Temporary tunnel requires both services; no guaranteed stable URL. Confirm cold start from documented setup if time permits. Include remaining quality limitations rather than hide warnings.
+6. **Legacy docs audit.** Current handoff/main README/interface README point to current state. Older stage findings/READMEs contain historical claims; review before quoting, particularly old split counts, training pending and causal claims about boxes. Historical handoff retained unchanged for traceability.
 
-4. **Evaluation evidence and definitions.** Validation is 25 pages from two units;
-   no notebook photos and no completed test-set scoring found. Current CER is capped
-   per-page macro CER, not corpus CER. Equation matching is a reference-recall-like
-   exact-string score: duplicates and extras are not fully penalized. Missing
-   predictions are printed but excluded from the average. Label metrics accurately,
-   include coverage, and do not replace old scores silently if the scorer is improved.
-   Keep annotation-input reconstruction separate from prediction-input results.
-   Reviewed K-fold mapping and exact syntax repair are curated assistance, not learned
-   model accuracy gains. A small hand-audited formula/page set is useful; avoid using
-   those same corrected examples as an independent improvement claim. Test scores
-   against unverified references, if produced, must be explicitly provisional.
+## What not to do
 
-5. **Documentation cleanup.** Main README still says training/reconstruction are to do
-   and uses old 324/26/60 split counts; current counts are 318/25/55 plus 12 excluded.
-   Recognition README still says training has not run. Evaluation README says not
-   started. Findings/open-items also contain superseded pending items. Replace these
-   statuses and give one verified demo command and a clear output/model location.
-
-## Remaining quality work after the blockers
-
-- Source-check erroneous formulas (e.g. Ridge expression); syntactic validity is not
-  mathematical correctness. Preserve raw predictions and separately record corrections.
-- Notebook: three syntax fallbacks and missing-glyph warnings remain. Fix fonts without
-  replacing mathematical symbols with guessed content. Some crops remain incomplete.
-- Scale reviewed diagram grounding beyond one example only with additional held-out
-  checks. No trained layout metric is currently substantiated by manual box labels.
-- Retain page-order baseline; current outline is optional and has no demonstrated
-  fidelity gain on the two compared units. A new structure model or recognition
-  training run is not the first deadline priority.
-
-## Already evidenced
-
-Clean QLoRA training and adapter-based validation; 410 processed pages and Surya tags;
-42 annotation-based PDFs; four plain/outlined prediction PDFs; tested rendering fixes;
-13 regression tests; GPU XeLaTeX validation PDFs with 128/128 intermediate blocks,
-10/10 matched descriptions after one reviewed link, one reviewed syntax repair;
-notebook clipping fixed; all three latest PDFs have zero out-of-page words.
-None of these implies perfect OCR, semantic equation correctness, or complete submission.
-
-## Immediate next action
-
-Verify GPU adapter files and inference/UI dependencies (read-only), then build/test
-an inference-only entry point and upload interface. Do not retrain or reinstall the
-working GPU stack merely to begin this task. Keep pushing subject to the user's
-explicit `push` instruction and keep the GPU on the existing working branch.
-
-## Update after implementation
-
-User confirmed the clean adapter config, base identifier and 181.6 MiB weights on GPU, with torch/transformers/peft present. External checkpoint delivery remains unverified. Main README now reflects current split and stage status; older stage documents still need review. Antigravity terminal access is available; port forwarding is not yet confirmed. No physical access is required for CLI inference. Next: authorized push, GPU pull, one-page inference smoke test from `06_interface/README.md`, then a genuinely new upload.
+Do not retrain solely to fix caption/layout code. Do not install Surya 0.7as substitute for tested 0.22.1. Do not overwrite .qwen with vLLM dependencies. Do not leave manual Surya running beside managed UI. Do not remove token auth or expose GPU services on 0.0.0.0 casually. Do not claim tests prove OCR correctness. Push only on user instruction.

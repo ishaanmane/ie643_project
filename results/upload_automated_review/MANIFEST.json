@@ -1,0 +1,27 @@
+{
+  "source_downloads": [
+    "document_bundle (1).zip",
+    "inference (1).json",
+    "upload_notes (4).pdf"
+  ],
+  "pdf_matches_download": true,
+  "archive_members": 66,
+  "files": {
+    "diagram_review.json": {
+      "bytes": 2281,
+      "sha256": "21e904f3aac6aa04fe433e34ee556117ef75b4f4aab7107df4dd26fdf86bc750"
+    },
+    "inference.json": {
+      "bytes": 6850,
+      "sha256": "210b27b27309ede3e4549b972afcb819c87982e89a629826bd8b6678627509b4"
+    },
+    "upload_notes.md": {
+      "bytes": 5377,
+      "sha256": "bd301a0b744ad1986ccbc5a161d75aa52d822bbf39ef6685a95a6c7c01c96456"
+    },
+    "document_bundle.zip": {
+      "bytes": 47882332,
+      "sha256": "a0cce8c923ae95f7774c542c9427a06935fd49283070959f71ab20ef70d3436e"
+    }
+  }
+}

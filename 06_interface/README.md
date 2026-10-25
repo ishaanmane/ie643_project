@@ -1,3 +1,9 @@
+# Upload interface — current status
+
+**Verified on GPU 2026-10-25:** automatic tested Surya v2 → isolated Qwen adapter worker → PDF completed a 10-page lecture in 94.12 seconds. Memory returned to 42 MiB after completion, also observed after the preceding run. Twelve interface tests and thirteen renderer tests pass. See [current operations](../docs/OPERATIONS.md), [handoff](../docs/HANDOFF.md), and [archived evidence](../results/upload_automated_review/README.md).
+
+Quality limitations: crop-caption associations can be wrong even when every description is assigned; some crops are partial; one caption formula fell back to text. Neutral captions, conservative merging and appendix clearpage are **proposed, not implemented**. The historical implementation notes below describe earlier checkpoints; their pending-validation statements are superseded by this paragraph.
+
 ## GPU memory correction
 
 The first managed run failed: the UI process retained 7,398 MiB and Surya could not reserve 90% of VRAM. Recognition now runs in a short-lived `recognition_worker.py` subprocess, exits before rendering, and leaves the UI process without model weights. Surya still runs first in its own managed process group. No-op release no longer imports torch or initializes CUDA. Recognition failures retain `recognition.log` and raw predictions; incomplete worker output is rejected. Twelve CPU interface tests pass; repeated GPU uploads must still be tested.

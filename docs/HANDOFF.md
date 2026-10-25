@@ -1,187 +1,135 @@
-# Handoff: full project context for a new session
+# START HERE — IE643 project handoff
 
-Read this first. It records what the project is, how the machines and repo are set up, what is built (with measured results), every non-obvious problem we hit and how it was solved, what is in progress, and what comes next. Detailed results per stage are in `findings/`; run instructions are next to the code (`*/README.md`).
+Updated 2026-10-25, Asia/Kolkata, after the 12:15 GPU memory check and automatic-upload PDF review. Submission was due **today** according to the user. Current implementation commit: `540208d`; this documentation snapshot is subsequent to it. No secrets or application tokens are recorded here.
 
----
+## 1. Read order and exact stopping point
 
-## 1. The project
+1. This document: current state, constraints and next actions.
+2. [Complete work log](WORK_LOG_2026-10-25.md): chronology, failures, decisions and results through the last review.
+3. [Operations runbook](OPERATIONS.md): environments, launch, tmux, tunnel, diagnostics and recovery.
+4. [Submission readiness](SUBMISSION_READINESS.md): outstanding deliverables and honest claims.
+5. [Earlier handoff, preserved in full](history/HANDOFF_BEFORE_FINAL_UI_REVIEW_2026-10-25.md): earlier setup, historical commands, gotchas and detailed dataset/training history. Its superseded current-status paragraphs are historical, not instructions to repeat completed work.
+6. Stage `findings/`, `docs/GENERATION_RUN_REVIEW.md`, `docs/PREDICTION_COMPARISON_REVIEW.md`, `docs/PIPELINE_RESEARCH_REVIEW.md` for detailed evidence.
 
-IE643 course project (Team InTra): **turn photos/scans of handwritten lecture notes into clean, structured, searchable PDFs.** Official statement: `docs/PROJECT_STATEMENT.md`. Five deliverables: (1) preprocessing, (2) recognition with a fine-tuned vision-language model, (3) structure/layout understanding, (4) digital reconstruction, (5) PDF generation + quality evaluation. Final submission also needs trained models + code docs, a user interface, metrics, and a stage-wise report.
+**Stopping point:** automatic upload → preprocessing → tested Surya v2 → clean Qwen adapter → crop/render/PDF works on the GPU. GPU returned to **42 MiB** with only gnome-shell after two reported completed runs. Latest archived evidence is lecture 14: 10 input pages, 94.12 seconds, 16 matched descriptions, 47 preserved blocks, one math syntax fallback, 13 output PDF pages. This verifies execution, not OCR/diagram accuracy. Visual review found incorrect caption associations, partial crops and an appendix heading appearing before the last reconstructed figure.
 
-The user (Akshat) owns preprocessing, dataset, reconstruction, PDF and evaluation; a teammate (Ishaan Mane, repo owner) did the original Sauvola binarisation work.
+**Proposed next renderer changes are NOT implemented:** neutral captions with source-page references; explicit heuristic uncertainty flags; conservative spatial merging instead of count-driven merging; `\clearpage` before the source appendix. User asked whether these need new models: answer no, they are renderer/matching changes. Then user requested comprehensive documentation and saving all work. Do not imply those proposals are already shipped.
 
-## 2. Repo, branches, machines
+## 2. Project and ownership
 
-| Item | Value |
+Team InTra, IE643: convert handwritten lecture photos/scans into clean, searchable, structured PDFs. Official requirements: [PROJECT_STATEMENT.md](PROJECT_STATEMENT.md). Five stages/deliverables: preprocessing; trained recognition; structure/layout; reconstruction; PDF generation/evaluation. Submission also requires trained models, code/setup documentation, a user interface, metrics and stage-wise report.
+
+Akshat owns dataset, preprocessing, reconstruction/PDF/evaluation; Ishaan Mane owns the repository and contributed the original Sauvola preprocessing work. Do not infer that all official deliverables are satisfied: structure is pretrained Surya, optional outlining is zero-shot Qwen, rendering is deterministic. Clarify actual contributions in the report, particularly if instructions demand distinct trained models for those stages.
+
+## 3. Non-negotiable working rules
+
+- **Push only when the user explicitly says “push”.** Local implementation/tests/commits are authorized. A new request to save/document is not push authorization.
+- Single working branch everywhere: `akshat/dataset-and-preprocessing`. **Never switch the GPU checkout's branch.** A prior branch switch removed files that were not tracked on that branch.
+- GPU outputs for repo review move through Git: GPU commit/push, Mac pull. The user has also supplied UI-downloaded bundles directly; archive these as provided. Do not invent direct SSH/scp access.
+- User accesses GPU through Antigravity terminal. No usable Ports panel or SSH host address was available. Agent cannot run GPU commands itself; provide copy-paste commands, each with **Expect:**. Avoid repeated diagnostic requests after evidence is sufficient.
+- Long tasks use tmux. Detach with Ctrl-b then d. **Never Ctrl-C a training pane.** Stop only the specifically identified service. Never `tmux kill-server` or broad process-killing commands.
+- User wants concrete next actions, minimal unnecessary permission prompts and no retraining just to repair rendering/integration.
+- Do not publish tokens, email PINs, keys or full token-bearing URLs. Tokens change when the UI restarts. Historical chat tokens must not be reused as documentation credentials.
+
+## 4. Machines and dependencies
+
+| Item | Value / qualification |
 |---|---|
-| GitHub repo | `ishaanmane/ie643_project` |
-| Working branch (everything) | `akshat/dataset-and-preprocessing` (one branch only; `main` is Ishaan's original; a temporary `preds-sync` branch was deleted) |
-| Commit identity | `git -c user.name="Akshat" -c user.email="aksh10.at@gmail.com" commit ...` (no global git identity is set on the Mac) |
-| Commit trailer | `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` |
-| Mac (laptop) | repo at `/Users/akshatmac/Desktop/IE643/ie643_project`; the Claude session's working directory is `/Users/akshatmac/Desktop/IE643/Project643` (older pre-repo folder with the original dataset build; `Project643/rendered_pdfs/` holds PDFs shown to the user) |
-| GPU machine | Ubuntu, RTX 5060 Ti 16 GB (Blackwell, compute 12.0), dual-boot with Windows. User has **terminal access only** (no GUI, laptop cannot reach it over the network). Repo at `/home/intralab/workspace/ie643_project` (171 GB workspace partition). An old unused clone at `~/ie643_project` holds a backup adapter copy; do not delete it blindly |
-| GPU env | venv `/home/intralab/ie643/.qwen` (Python 3.13, installs with `uv pip`), HF cache `HF_HOME=/home/intralab/workspace/hf_cache`. Session setup: `source /home/intralab/workspace/ie643_env.sh` (deactivates conda base, activates venv, sets HF_HOME, cd to repo) |
-| GPU software | torch cu128, transformers 4.57.6, peft 0.21.2, bitsandbytes 0.50.2, pandoc 3.7, TeX Live 2025 (xelatex), DejaVu fonts, gh CLI logged in as `aksh10-at` (can push) |
-| Mac software | Python 3.9 system (no torch); Homebrew; `tectonic` (small LaTeX) and `poppler` installed; a scratch venv with transformers 4.57.6 + CPU torch + pypandoc_binary (pandoc 3.9) lives in an old session scratchpad: `/private/tmp/claude-501/-Users-akshatmac-Desktop-IE643-Project643/7f585ea5-d684-4630-8ef2-6f1e5f84f24d/scratchpad/` (`tenv/` venv, `bin/pandoc` symlink). It may be cleaned by the OS; recreate if missing. Mac disk is tight (~10 GB free) |
+| Mac checkout | `/Users/akshatmac/Desktop/IE643/ie643_project` |
+| GPU checkout | `/home/intralab/workspace/ie643_project` |
+| Repo | `https://github.com/ishaanmane/ie643_project.git` |
+| GPU setup | `source /home/intralab/workspace/ie643_env.sh` activates environment, sets cache and changes directory |
+| GPU | RTX 5060 Ti, 16 GB; observed driver 595.91.07, driver CUDA capability 13.2 |
+| Qwen environment | `/home/intralab/ie643/.qwen`; latest running-process evidence is Python **3.11.17**, overriding older notes saying 3.13 |
+| Qwen runtime | torch 2.11.0+cu128, transformers 4.57.6; earlier recorded peft 0.21.2, bitsandbytes 0.50.2 |
+| Adapter | `runs/qwen25vl_clean/final_adapter`; config verified, base identifier correct, `adapter_model.safetensors` 181.6 MiB |
+| Tested Surya client | `/home/intralab/workspace/ie643_layout_envs/surya0221`, Python 3.11, `surya-ocr==0.22.1` |
+| Tested model server | sibling `vllm0320`, `vllm==0.32.0`; checkpoint `datalab-to/surya-ocr-2` |
+| Old Surya | 0.7.0 in `.qwen` is NOT the reviewed model; do not use it as a substitute |
+| HF cache | `/home/intralab/workspace/hf_cache` |
+| PDF stack | GPU Pandoc/XeLaTeX/DejaVu/pdftotext; PyMuPDF installed after initial missing-fitz error |
+| Interface | Python stdlib HTTP server, no Gradio/Streamlit required |
+| Tunnel | `$HOME/.local/bin/cloudflared`, observed 2026.10.3; HTTP/2 required on this network |
+| Mac validation | `/usr/bin/python3` has PIL/cv2/fitz/numpy, no GPU torch; use `PYTHONPYCACHEPREFIX=/tmp/ie643-pycache` |
 
-### Working rules (agreed with the user)
+Do not confuse driver CUDA version with the torch build version. Older runtime notes remain useful history but observed process output is the current evidence.
 
-- **Push only when the user says "push".** Commit locally, then say "say push".
-- **The GPU folder never switches branch.** Always `git pull` before starting and before pushing (`git pull -q --rebase && git push -q`). Switching branches once deleted untracked-on-this-branch files (`preds/`).
-- **Moving files GPU → Mac goes through git**: GPU commits outputs (`preds/`, `logs/`, `results/pdfs/`) and pushes; the Mac pulls and shows them (Read tool for PDFs, SendUserFile to display). No network path between laptop and GPU (scp/http/ssh failed: hostname does not resolve, not on the same network).
-- Give the user copy-paste commands with an **Expect:** line after each, and ask for the output; one step at a time when they are doing setup.
-- Long GPU runs inside **tmux** (`tmux new -s qwen` / `tmux attach -t qwen`, detach Ctrl-b d). **Ctrl-C in the training pane kills (and once hung) the run.** Short runs (outline, render) do not need tmux.
-- The user dislikes doing things twice and prefers building on the GPU and pulling the result.
+## 5. Pipeline and why both models exist
 
-## 3. Pipeline as built
+### Batch dataset path
 
-```
-raw scans ──► 01 preprocessing ──► data/processed/ (410 pages)
-                                      │
-                    02 Surya layout ◄─┤  (all 410 pages, results committed)
-                    tags + figure crops
-                                      │
-                    03 Qwen2.5-VL-7B + LoRA (clean variant) ──► per-page Markdown (preds/)
-                                      │
-                    04 outline LLM (sections only) + deterministic renderer ──► Markdown ──► pandoc/xelatex ──► PDF
-                                      │
-                    05 evaluate.py (CER/WER/equations), evaluate_generation.py (blocks kept, sections, ...)
-```
+Raw images → corrected preprocessing → precomputed Surya tags → clean-adapter Markdown → optional base-Qwen text outline → deterministic renderer → Pandoc/TeX → PDF and reports.
 
-## 4. What is done (with numbers)
+### Current uploaded-document path
 
-### 4.1 Dataset (`00_dataset/`, `data/`) — details: `findings/01_dataset.md`
-- 410 pages, 4 sources: IE643 chalkboard (205; lecture 2 is low-res 2044x1228, rest 7168x4320), MLT digital ink (129), IE802 notebook (56), HumynLabs CS notes (20). Markdown labels in `data/annotations/<page>.md` (LaTeX `$...$` inline, `$$...$$` display, `[Diagram: ...]` for figures). Labels are AI-written (11 via Gemini, 399 by direct transcription) and **not human-verified**.
-- Split **by unit** (lecture/week) to avoid near-duplicate leakage: train 318, val 25 (`lec07`, `week06`), test 55 (`lec03`, `lec09`, `week03`, `week09`); 12 pages with `??` are left out of every split until fixed. `build_dataset.py` (lists from `data/raw_scans/`, so it works on a fresh clone), `check_dataset.py` (0 FAIL, 4 known WARN).
-- Leakage: highest 5-gram similarity val/test vs train 0.49 (lecture 08 re-derives backprop equations of 07/09).
-- Variants built from the same split: `clean` (`data/*.jsonl`), `boxed` (`data/boxed/*.jsonl`, images `data/processed_boxed/` drawn by `02_layout/draw_boxes.py`).
-- **Known gap (open decision):** val and test contain **no notebook-photo pages**.
+`06_interface/server.py` accepts PDF/images, one job at a time (20 pages / 25 MiB browser limit). Each job lives in `out/upload_jobs/<id>/output`:
 
-### 4.2 Preprocessing (`01_preprocessing/`) — details: `findings/02_preprocessing.md`
-- Page crop/warp → resize 2000 px → illumination flattening → CLAHE → denoise; deskew off by default.
-- Five bugs found **only by looking at images** (summary always said 0 failures): skew estimator rotated ~80% of straight pages; page warp cut off chalkboards (skip if mean brightness < 100); tilted photos (aspect < 0.6 rejected); warps covering only 53-72% of the page (minimum area now 0.8); edge clipping (rectangle grown 2%).
-- Final: 55 warped (20 HumynLabs + 35 IE802), 355 content-cropped, 0 failures. **The check number for "corrected images" is 55 warped** (old versions had 80 or 62).
-- Reproducible on Kaggle, Mac, GPU (same sizes; pixels differ ≤0.5/255; bytes differ, so never compare hashes across machines).
+1. Save originals and SHA-256; rasterize PDF/TIFF/images in supplied order.
+2. Run existing preprocessing into job-local processed images.
+3. `layout.py` checks exact package versions, starts its own vLLM server at localhost:8001, runs Surya on processed pages, shuts down its private server/worker process group, validates coverage and coordinate bounds, writes normalized tags/crops.
+4. `recognition_worker.py` loads the trained clean adapter in a **short-lived process**, writes predictions, and exits. Process exit releases CUDA/model allocations. UI itself stays lightweight.
+5. Renderer preserves transcription blocks, matches description positions to Surya figure boxes, merges boxes, inserts crops, checks math and builds PDF. Original scans remain appended.
+6. Download PDF, Markdown/bundle and inference report. Bundle includes tags, Surya results/logs and `diagram_review.json`.
 
-### 4.3 Layout, Surya v2 (`02_layout/`) — details: `findings/03_layout_surya.md`
-- Ran on Kaggle T4 (vLLM server). All 410 corrected pages: 4,283 blocks, 0 errors. Raw output `02_layout/surya_results_all.json`; per-page tags `data/tags_draft/` (boxes normalised 0-1000, reading order, type).
-- Surya on preprocessed pages beats raw scans (found margin notes, removed neighbouring-page bleed).
+Surya supplies spatial regions/types/reading order; Qwen supplies text/LaTeX and descriptions. Optional outline Qwen supplies semantic headings, not bounding boxes. These are different functions. Clean recognition does not take boxed images or Surya JSON. Using Surya for crops does not change the trained weights or CER.
 
-### 4.4 Recognition, fine-tuning (`03_recognition/`) — details: `findings/04_recognition_finetuning.md`
-- Qwen2.5-VL-7B-Instruct, 4-bit NF4 QLoRA, bf16, LoRA r16/α32 on q,k,v,o,gate,up,down (47.6M params), 318 pages, 3 epochs (120 steps, batch 1×8), lr 1e-4, answer-only loss (masking tested with the real processor). Script `finetune_qwen25vl.py` (also a notebook); data logic `qwen_data.py`.
-- Peak VRAM 13.2 GB, ~62 min per run, 31 s/step.
-- Validation (25 pages):
+Defaults: CLI/server `--layout surya`; explicit `--layout none` uses appendix-only mode. Layout failure aborts rather than silently pretending crops succeeded. No annotations or cached dataset predictions are read for fresh upload inference. Dataset lectures uploaded during tests are integration tests, not established held-out or novel-data accuracy evaluations.
 
-| Fine-tuned | CER | WER | text-only CER | equation exact |
-|---|---|---|---|---|
-| zero-shot baseline (boxed_json) | 0.712 | 0.927 | 0.892 | 0.061 |
-| `boxed_json` (boxes + layout JSON) | 0.287 | 0.469 | 0.258 | 0.273 |
-| **`clean` (chosen)** | **0.277** | 0.485 | **0.222** | 0.244 |
+## 6. Dataset, preprocessing, training and metrics
 
-- **Decision: `clean`.** The boxed model dropped side notes Surya had not boxed (65% of label length vs 97-98% for clean on those pages), and clean needs no Surya before Qwen.
-- Adapters on the GPU machine: `runs/qwen25vl_clean/final_adapter` (+ backups `/home/intralab/workspace/adapter_clean_<date>/`, `~/ie643_project/adapter_clean_<date>/`), same for `boxed_json`. Predictions committed in `preds/` (`base_*_val`, `lora_*_val`), logs in `logs/`.
-- Test split **not scored yet** (labels must be checked first).
+- 410 pages: 205 IE643 chalkboard, 129 MLT digital ink, 56 IE802 notebook, 20 HumynLabs CS.
+- Unit-level split: **318 train / 25 val / 55 test / 12 excluded uncertain**. Val: 19 lecture-7 pages plus 6 week-6 pages. No notebook photos in validation/test. Labels are AI-generated and unverified; test split not scored.
+- Preprocessing fixes: turn deskew off; avoid chalkboard warp when dark; reject implausible aspect ratio; require ≥80% warp area; expand corners 2%. Final **55 warped / 355 cropped**, zero reported failures. This count identifies corrected image generation. Surya boxes must match the exact processed image, not a different preprocessing/rasterization.
+- Surya v2 on all corrected pages: 4,283 blocks, 410 pages, zero errors; 333 figure and 14 table blocks among types. Tags are unverified drafts. Review history includes missing margins, merged text/equations, overlapping boxes, background bleed and misclassified diagrams.
+- Qwen2.5-VL-7B clean/boxed_json variants: 4-bit NF4 double quantization, bf16, r16/alpha32/dropout .05, q/k/v/o/gate/up/down adapters (47.6M parameters), 318 pages, 3 epochs/120 steps, batch1×8, LR1e-4. About 62 minutes/run, 13.2 GB peak VRAM.
+- Image limit 1,000,000 pixels, dimensions multiples of 28; answer-only loss masking; use_cache enabled for generation. Removing prepare_model_for_kbit_training avoided ~2GB fp32 upcast overhead.
 
-### 4.5 Reconstruction + PDF (`04_reconstruction/`)
-- **`render_document.py` (deterministic, no model):** per unit, pages in order, blocks copied verbatim; each `[Diagram: ...]` matched to a Surya figure by order-preserving position alignment; over-split Surya figures merged (closest pair first, stop when counts match); unmatched descriptions stay as text; extra drawings added if ≥3% of page; chalkboard crops grayscale-inverted; figures numbered, centred, ≤55% width / 30% height, pinned with `float` `[H]` (otherwise LaTeX moves them); equations checked exactly with xelatex (or tectonic on the Mac) and failing ones shown verbatim with a plain-text warning (never altered); long verbatim lines wrap (fvextra); DejaVu font if present; **reports blocks kept (must be N/N)**.
-  - All 42 units with labels: 227/243 diagrams matched (93%), 2,739 equations.
-- **`outline.py` (LLM structure only):** Qwen2.5-VL-7B text-only, zero-shot, greedy. Model sees `id | type | first words`, returns section starts/levels. Validation in code: ids exist and increase; levels 1-2; **if a section starts on a heading, the notes' exact heading text is used**; otherwise title words must occur in the notes, else the section break is dropped; repeated consecutive titles merged; outline rejected if more invalid than valid sections (page order then). Parser accepts `{"sections": [...]}` or a bare list, with or without ```json fences; strips `#` from titles; model loaded once.
-- Results on val units with model predictions (GPU): lecture 7 15 sections, **91/91 blocks kept**; week 6 5 sections, 37/37; PDFs in `results/pdfs/*_model_outline.pdf`.
+| Variant | CER | WER | Text CER | Equation exact score |
+|---|---:|---:|---:|---:|
+| Base boxed_json | .712 | .927 | .892 | .061 |
+| Trained boxed_json | .287 | .469 | .258 | .273 |
+| Trained clean (chosen) | .277 | .485 | .222 | .244 |
 
-### 4.6 Evaluation (`05_evaluation/evaluate.py`)
-- CER, WER, text-only CER (math and diagram lines removed), equation exact match; per-page capped at 1.0; references read from `data/annotations/`.
+Base clean CER .776. Clean retained side notes better in inspected examples. Boxed and clean change both image and prompt input, so do not claim a controlled causal proof that boxes alone caused the difference. Single runs / 25 validation pages constrain conclusions. CER is capped per-page macro CER; equation metric is reference-recall-like exact strings, not semantic correctness; missing predictions excluded from existing aggregate scorer. Correctly label metrics rather than silently relabel old results.
 
-### 4.7 Documentation
-- `findings/` (one file per stage + open items), `docs/PIPELINE.md`, `docs/PIPELINE_TO_OCR.md`, `docs/DATASET_AUDIT.md`, stage READMEs.
+## 7. Reconstruction evidence
 
-## 5. Intricacies discovered (read before changing anything)
+| Run | Evidence |
+|---|---|
+| 42-unit annotation reconstruction | 410 input pages, 42 PDFs; 2,579/2,579 Markdown blocks; 41 outlines/384 sections; 227/243 diagram descriptions matched; 2,739 math snippets, 6 diagnosed failures; all checks XeLaTeX |
+| Two-unit actual prediction comparison | 128/128 blocks in plain and outlined variants; 9/10 diagram descriptions, one math failure. Outline increased lecture PDF 8→9 pages, duplicated/misplaced headings and added Blank Page section; MLT mainly promoted heading level |
+| Reviewed renderer fixes | Validation: 10/10 matches after one manually reviewed table link; one exact syntax repair → zero remaining. Notebook: 622 blocks, 58/62 matches +6 extras, three remaining syntax failures. Bounds checks zero outside words |
+| Initial new-input smoke | Existing MLT page003, trained adapter, 19.11s; no fresh layout in initial version |
+| Uploaded lecture12 before layout | 20 source pages, 151.08s, 119 blocks, 11 descriptions and zero crops; source appendix only |
+| Lecture12 manual tested Surya | 9 matches +3 extras, 2 unmatched (source17/19 mislabeled text/equation); 119 blocks; one caption math failure; 21 PDF pages, zero outside words |
+| Lecture14 automatic current UI | 10 source pages, 94.12s, 16/16 descriptions assigned, 47 blocks, 23 equation snippets/one failure, 13 PDF pages, zero outside words; correct Surya/vLLM versions; archive integrity checked |
 
-**Data and preprocessing**
-- Look at images, not only summary counts; three preprocessing bugs passed "0 failures".
-- Tags must match the exact image Surya saw: `surya_to_tags.py` and `draw_boxes.py` refuse when sizes differ. Check `preprocess_report.csv`: 55 warped = corrected version.
-- `data/processed/`, `data/processed_boxed/`, `data/crops/`, `out/` are gitignored and rebuilt per machine (`batch_preprocess.py --workers 8 --force` ~5-8 min, then `draw_boxes.py`).
+Counts measure preservation/assignment/syntax, **not fidelity**. Latest review: captions for Figures7/8 do not describe crops accurately; Figure15 is partial; some neighbouring writing included; appendix title appears before Figure16; caption formula `\\{0,1,\\dots255\\} \\to \\[0,1\\]` falls back to raw text. All sixteen being assigned is not proof of correct matching. Diagram merged_from12 on one page warrants review of count-driven merging.
 
-**Kaggle / Surya**
-- Python 3.13 on Kaggle broke `numba`; use uv venvs with Python 3.11. Installing vllm + surya together made the resolver pick vllm 0.1.2: use two venvs. vLLM OOM at start on T4: `--dtype half --limit-mm-per-prompt '{"video": 0}' --max-num-batched-tokens 8192 --enforce-eager`. `pkill -f 'vllm serve'` kills its own shell; kill by GPU pid. `zip` appends to existing archives (`rm -f` first). `git clone` into an existing folder fails silently (old code). Kaggle pins dataset versions. Updating a dataset input restarts the session.
+## 8. Saved evidence and repository map
 
-**Fine-tuning**
-- The Ollama copy of Qwen cannot be trained; use HF weights.
-- `prepare_model_for_kbit_training` wastes ~2 GB VRAM (fp32 upcast); use gradient checkpointing + `enable_input_require_grads`. Generation after training needs `use_cache=True`.
-- Pre-resize images to multiples of 28 within the pixel budget so the processor does not resize again (box coordinates then line up).
-- Free GPU from Ollama: `ollama stop qwen2.5vl:7b`.
+- `results/upload_surya_review/`: committed lecture12 manual Surya PDF, Markdown, figures/source scans, tags/results/report (`0b89236`).
+- `results/upload_automated_review/`: latest 66-entry download bundle, inference report, Markdown, diagram review and SHA-256 manifest. Bundle includes the PDF, original upload, predictions, crops, original-page images, tags, raw layout, overlays and logs. Downloaded PDF byte hash verified identical to bundled PDF. Stored once inside ZIP to avoid duplicating the large images/PDF.
+- Source downloads remain `/Users/akshatmac/Downloads/inference (1).json`, `document_bundle (1).zip`, `upload_notes (4).pdf`.
+- GPU lecture12 job: `out/upload_jobs/b5a76ebb273243929bd98d59169a3ef8/output`; rebuilt directory `documents_surya_20261025_110929/upload_notes`.
+- GPU lecture14 job: `out/upload_jobs/67c6855a11a8412c93da63f309f9a137/output`.
+- Failed managed-memory job: `out/upload_jobs/e18b9dec190d4f1e9032da29fdca1711/output`.
+- `results/predictions_review/`, `results/render_fixes_review/`, `results/generation_eval*.md` retain earlier evidence.
+- Adapter weights exist on GPU, not in Git. Submission-accessible external backup/checksum package still pending.
 
-**Rendering / outline**
-- Relative `--out` broke pandoc (it runs inside the output folder); fixed with abspath.
-- The approximate math check (pandoc parser) misses LaTeX errors (model wrote `&` inside `\text{}`); exact check needs xelatex/tectonic.
-- Tectonic stops at the first error; the checker removes the failing equation and retries.
-- Inverting a green chalkboard in colour gives pink; grayscale first.
-- The model ignores format instructions sometimes (bare list, `#` in titles, a section per page); never trust its output, validate it.
-- Model titles differing only in case from the notes' heading lost content (89/91); headings now keep the notes' wording.
+## 9. Last known services and access
 
-**Workflow**
-- Laptop cannot reach the GPU machine; transfer via git only. `gh auth login --web` with device code worked for the GPU machine.
+Session names drifted: **notes-tunnel runs Python UI**, **web-tunnel runs cloudflared**. `notes-ui`, `qwen`, `surya-server`, `surya-setup` last showed idle bash. Verify live state before stopping anything. No separate manual Surya server should be running while automatic mode is used.
 
-## 6. Current state (2026-10-25, after GPU comparisons)
+UI localhost7860, managed layout localhost8001 (port8000 belongs to an unrelated Python server; leave it alone). Temporary public URL last reported: `https://batteries-phase-township-switching.trycloudflare.com/`. It expires/changes when tunnel restarts. It is not a permanent submission deployment. Mac localhost cannot access GPU localhost directly.
 
-- GPU results pulled through Git: `66e36dc` all-unit annotation reconstruction;
-  `cdb2658` actual-prediction plain versus outlined PDF comparison.
-- All-unit run: 42 PDFs, 410 pages, 2,579/2,579 intermediate blocks retained,
-  41 accepted outlines/384 sections, 227/243 diagrams matched, six diagnosed math
-  failures, all XeLaTeX checks completed. IE802 uses page-order fallback.
-- IE802 retry is now complete, but fails JSON parsing on unescaped LaTeX commands.
-  It proposes 57 sections despite a requested cap of 24. Do not increase tokens again
-  as the next fix. See `docs/GENERATION_RUN_REVIEW.md`.
-- Reviewed three annotation PDFs. Figure proportions are fixed. Notebook PDF pages
-  25 and 29 visibly clip long display equations beyond the right page edge. Some
-  glyphs and crops need work. One equation failure (`\bcancel`) needs package support;
-  the others concern malformed bracket/ampersand syntax. No semantic repair done.
-- Prediction comparison: four PDFs using 25 clean validation predictions; 128/128
-  blocks retained in both variants, 9/10 diagram descriptions matched, one invalid
-  equation. Lecture 7 grows from 8 to 9 pages with outline; MLT remains 3 pages.
-  MLT's outline only promotes one heading level. Lecture outline repeats headings,
-  starts a directional-derivative section too early, and adds a Blank Page section.
-  See `docs/PREDICTION_COMPARISON_REVIEW.md`.
-- **Current recommendation:** plain/page-order rendering as baseline; outline optional.
-  No further GPU rerun needed for this comparison. Next accuracy work: equation
-  rendering/overflow, missing glyphs, and a small source-checked Surya figure/table
-  grounding experiment. Keep trained clean weights; no evidence here for new training.
-- All outputs are reconstruction checks or a two-unit ablation, not new recognition
-  scores or proof of mathematical correctness. Existing CER result remains unchanged.
+Email-protected Quick Tunnel caused repeated login/fragment-loss problems. User authorized temporary simpler access without that layer. Current app still requires random application token for API/jobs/downloads. Form is public. HTTPS traffic passes through Cloudflare; do not describe it as never leaving the GPU. Never put token values into docs or Git. Full token URLs in earlier chat are not stable credentials.
 
-### Latest implementation after the comparison
+## 10. Next steps, in order
 
-Renderer now supports `cancel`, fits wide display math within the line, records
-compiler warnings, and optionally checks PDF word bounds using `pdftotext`.
-`--reviewed-fixes` applies an audited K-fold Surya table link and one exact syntax
-repair, preserving source predictions and original diagnostics. Thirteen tests pass;
-local validation PDFs retain 128/128 blocks, match 10/10 descriptions, and have zero
-remaining diagnosed syntax failures. Notebook retains 622/622 blocks; three syntax
-failures remain; clipped expressions now fit. See `results/render_fixes_local_validation.md`.
-This is curated rendering improvement, not a change in recognition CER.
-Next: user-authorized push, GPU pull, then
-`bash 04_reconstruction/run_render_fixes.sh --notebook`.
-No new model loading/training is needed. Inspect GPU results before claiming parity.
-
-## 7. Next steps (agreed order)
-
-1. Generation measurement (above), then record in `findings/`.
-2. Flag uncertain extraction: compare the model's text with Surya's own OCR per block/page (needs a Surya OCR run on Kaggle or the GPU machine); mark disagreeing blocks in the PDF.
-3. Cosmetic: attach short label lines next to a figure into its caption ("NP-hard", "local minimum" appear as stray lines); merge sentences split across pages; mark repeated recap content.
-4. Later: inference path for new uploads (preprocess → Qwen clean adapter → Surya for figures → outline → render), user interface, layout metric (hand-checked tags on ~20 pages), test-split scoring after label checks, report.
-
-## 8. Open decisions / user tasks
-- Hold out notebook-photo pages for val/test (needs code change: IE802 is one unit) or keep the split and note it.
-- Fix the 12 `??` pages; check the 55 test labels by hand (`data/VERIFICATION.md`).
-- Revoke the Gemini API key pasted in chat early in the project.
-
-## Latest update: upload interface (2026-10-25)
-
-GPU render fixes verified and pulled at `d8beb66`: two validation PDFs retain 128/128 blocks, match 10/10 descriptions with one reviewed link, one syntax repair leaves zero diagnosed failures. Notebook has three remaining syntax fallbacks; all three PDFs have zero out-of-page words.
-
-`06_interface/` adds inference-only clean-adapter processing for new PDFs/images and a stdlib localhost upload UI. No Gradio/Streamlit required. Seven CPU tests pass plus thirteen renderer regressions; simulated recognition with real preprocessing/PDF compilation passes. Real GPU inference is pending. Fresh Surya is not integrated; original scans are appended for checking diagrams. See its README for exact next commands. User confirmed adapter config and 181.6 MiB weights. Current access is Antigravity terminal, similar to SSH; port forwarding is unconfirmed and physical GPU access may be available later. No physical access needed for CLI. Push only on explicit instruction. Submission blockers tracked in `docs/SUBMISSION_READINESS.md`.
-
-### Managed Surya integration update
-GPU review artifacts pulled at 0b89236 under results/upload_surya_review. Tested runtime confirmed: Surya 0.22.1 + vLLM 0.32.0, model datalab-to/surya-ocr-2, isolated Python 3.11 environments in /home/intralab/workspace/ie643_layout_envs. Port 8000 belongs to an unrelated Python server; use 8001. Surya 0.7.0 in .qwen is NOT the tested model. Manual reconstruction: 9 matched descriptions + 3 extra figures; two diagrams on source pages 17/19 classified as equations/text; 119 blocks retained; one caption math fallback; 21 PDF pages, zero out-of-page words.
-New managed layout module defaults on in CLI/UI; stops only its owned subprocess group, releases previous Qwen before layout. CPU tests pass; managed GPU test pending. Stop manual Surya server before launching updated UI, restart UI Python process, use new application token, retain current cloudflared tunnel. Push still requires explicit instruction.
-
-Managed GPU startup failed because UI PID 353441 retained 7398 MiB, leaving only 8.08 GiB free for Surya's requested 13.93 GiB. Recognition changed to short-lived subprocess per document; UI no longer loads Qwen. CPU worker success/failure/no-CUDA-release tests added. GPU repeat-upload verification pending. One UI restart required after pull; preserve web-tunnel.
+1. Preserve this documentation/evidence locally, commit, push only if requested.
+2. Implement proposed renderer fixes (neutral source-page captions, uncertainty records, conservative merging, clearpage appendix). Preserve raw predictions and descriptions; no ungrounded semantic repair. Add focused regression checks and visually compare before/after using saved results, without rerunning models.
+3. Test and record updated PDFs; do not inflate match count by arbitrary reassignment. The two source17/19 diagrams need reviewed regions or explicit fallback, not fabricated confidence.
+4. Package final adapter with configs/processor/checksums and accessible delivery location. Verify outside-machine backup.
+5. Write consolidated submission report and capture UI screenshots, metrics definitions, setup/demo instructions and limitations. These engineering docs are not a completed academic report.
+6. Audit remaining stale stage READMEs/findings; optionally provisional test scoring only with clearly stated unverified labels and no notebook coverage. No new training recommended solely for renderer defects.
