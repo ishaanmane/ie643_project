@@ -1,5 +1,6 @@
 """Local upload UI for the trained model. One conversion at a time; no new web framework."""
 import argparse
+from functools import partial
 import base64
 import binascii
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -167,10 +168,11 @@ def make_handler(app):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--adapter',type=Path,default=DEFAULT_ADAPTER)
+    parser.add_argument('--layout', choices=['surya','none'], default='surya')
     parser.add_argument('--port',type=int,default=7860)
     parser.add_argument('--out',type=Path,default=Path('out/upload_jobs'))
     args=parser.parse_args()
-    app=Application(args.out,CleanRecognizer(args.adapter))
+    app=Application(args.out,CleanRecognizer(args.adapter), partial(run_document, layout_mode=args.layout))
     server=ThreadingHTTPServer(('127.0.0.1',args.port),make_handler(app))
     print(f'Open on this machine or through port forwarding:\nhttp://127.0.0.1:{args.port}/#token={app.token}',flush=True)
     print('One conversion at a time. First conversion loads the trained model. Keep this tmux pane running.',flush=True)

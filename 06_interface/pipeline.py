@@ -59,6 +59,14 @@ class CleanRecognizer:
         model.config.use_cache = True
         self.model, self.processor = model, processor
 
+    def release(self):
+        import gc
+        self.model = self.processor = None
+        gc.collect()
+        import torch
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
     def predict(self, image_path):
         import torch
         from qwen_data import load_page_image, PAGE_PROMPT
@@ -134,7 +142,7 @@ def validate_prediction(text):
         raise ValueError('Transcription contains embedded resources; raw prediction saved for review.')
 
 
-def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20, progress=None):
+def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20, progress=None, layout_mode='none'):
     import cv2
     from preprocess import NotesPreprocessor
     from render_document import render_unit
@@ -168,6 +176,13 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
             raise RuntimeError('Could not save processed page.')
         preprocessing.append({'page':page,**info})
     (output/'preprocessing.json').write_text(json.dumps(preprocessing,indent=2))
+    layout_info = {'status': 'disabled'}
+    if layout_mode == 'surya':
+        from layout import run_layout
+        recognizer.release()
+        layout_info = run_layout(data, pages, output, progress)
+    elif layout_mode != 'none':
+        raise ValueError('Unknown layout mode')
     predictions=[]
     for i,page in enumerate(pages,1):
         progress(f'Recognizing page {i}/{len(pages)}' + (' — first run loads the trained model' if i==1 else ''))
@@ -182,6 +197,14 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
     warnings = ['Automatic diagram cropping is unavailable for new uploads in this mode. '
                 'Original source pages are appended so diagrams remain available for checking.',
                 'Recognition can misread formulas. Compilation checks do not establish mathematical correctness.']
+    if layout_mode == 'surya':
+        unmatched = [p['page'] for p in report['pages'] if p['descriptions_without_figure']]
+        warnings[0] = 'Automatic Surya crops inserted. Generated captions and crop boundaries require review.'
+        if unmatched:
+            warnings.append('Diagram descriptions without crops: ' + ', '.join(unmatched))
+        review = {'unmatched_pages': unmatched, 'pages': report['pages'],
+                  'note': 'No guessed or manually corrected boxes were applied.'}
+        (output/'diagram_review.json').write_text(json.dumps(review, indent=2))
     if any(p.get('possibly_truncated') for p in predictions):
         warnings.append('At least one prediction reached the token budget; inspect its ending.')
     if report['math']['status'] != 'completed':
@@ -196,17 +219,19 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
     inference={'model':MODEL_ID,'adapter':str(getattr(recognizer,'adapter','test backend')),
                'uploads':uploads,'page_map':manifest,'predictions':predictions,
                'elapsed_seconds':round(time.time()-started,2),'warnings':warnings,
-               'layout_mode':'source appendix; no fresh Surya inference', 'report':report}
+               'layout_mode':layout_mode, 'layout':layout_info, 'report':report}
     (output/'inference.json').write_text(json.dumps(inference,indent=2))
     if not report.get('output'):
         raise RuntimeError('PDF compilation failed; see documents/upload_notes/report.json.')
     package=output/'document_bundle.zip'
     with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED) as archive:
-        for directory in ('documents','predictions','uploads'):
+        for directory in ('documents','predictions','uploads','data/tags_draft','surya_layout'):
             for path in sorted((output/directory).rglob('*')):
                 if path.is_file(): archive.write(path,path.relative_to(output))
         for name in ('inference.json','preprocessing.json'):
             archive.write(output/name,name)
+        if (output/'diagram_review.json').exists():
+            archive.write(output/'diagram_review.json', 'diagram_review.json')
     progress('Completed — review the PDF against the original pages')
     return {'pdf':str(Path(report['output']).relative_to(output)),
             'markdown':'documents/upload_notes/upload_notes.md',
@@ -219,6 +244,7 @@ def main():
     parser.add_argument('inputs',nargs='+',type=Path)
     parser.add_argument('--out',required=True,type=Path)
     parser.add_argument('--adapter',type=Path,default=DEFAULT_ADAPTER)
+    parser.add_argument('--layout', choices=['surya','none'], default='surya')
     parser.add_argument('--title',default='Lecture notes')
     parser.add_argument('--max-pages',type=int,default=20)
     parser.add_argument('--max-new-tokens',type=int,default=2048)
@@ -226,7 +252,7 @@ def main():
     if args.max_pages<1 or args.max_new_tokens<1:
         parser.error('Limits must be positive.')
     recognizer=CleanRecognizer(args.adapter,max_new_tokens=args.max_new_tokens)
-    result=run_document(args.inputs,args.out,recognizer,args.title,args.max_pages)
+    result=run_document(args.inputs,args.out,recognizer,args.title,args.max_pages,layout_mode=args.layout)
     print(json.dumps(result,indent=2))
 
 

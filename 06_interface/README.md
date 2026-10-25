@@ -1,3 +1,18 @@
+## Current managed layout update
+
+The CLI and server now default to `--layout surya`. Uses the verified Surya 0.22.1 client and vLLM 0.32.0 in `/home/intralab/workspace/ie643_layout_envs/`, checkpoint `datalab-to/surya-ocr-2`. Set `IE643_LAYOUT_ENVS` to override that directory and `IE643_LAYOUT_PORT` to override port 8001. Versions are checked before starting. There is no fallback to Surya 0.7.0.
+
+Before launching the updated UI, stop the manually started server in the **surya-server pane only**. The managed runner refuses an occupied port; it never kills an unrelated server. Restart the old UI to load the Python changes. Keep the tunnel running. Then `source /home/intralab/workspace/ie643_env.sh` and `python3 06_interface/server.py`. A restart generates a new application token.
+
+For each job: preprocess → release any previous Qwen instance → start isolated Surya server → detect layout → terminate its private server/worker process group → convert validated boxes → load Qwen adapter → recognize → crop/render. Loading models each job adds latency but avoids running both on the 16 GB GPU simultaneously. Failed layout aborts the job with logs in `surya_layout/`; it does not silently fall back. `--layout none` explicitly retains the earlier appendix-only mode.
+
+The ZIP now includes layout tags/results/logs and `diagram_review.json` listing unmatched pages. Source scans remain appended. Matching and captions still need human review; no inferred correction of unmatched boxes is performed.
+
+Validation: CPU schema, image-size/coverage checks, process-group cleanup and pipeline ordering tested. The manually operated identical Surya/client setup succeeded on GPU (9 matches, 3 extras, 2 unmatched). **The new managed lifecycle still requires a GPU upload test.**
+
+---
+The following documents the original interface and its initial validation:
+
 # New-input inference and local upload interface
 
 Uses the existing clean Qwen2.5-VL adapter with Transformers + PEFT, in 4-bit inference mode. No training, annotation lookup, or cached prediction lookup. Accepts PDF/image inputs, preprocesses each page, recognizes Markdown, checks equations, and builds a searchable PDF plus an editable ZIP bundle.
