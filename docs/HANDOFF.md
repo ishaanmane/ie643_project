@@ -121,28 +121,32 @@ raw scans ──► 01 preprocessing ──► data/processed/ (410 pages)
 **Workflow**
 - Laptop cannot reach the GPU machine; transfer via git only. `gh auth login --web` with device code worked for the GPU machine.
 
-## 6. Current state (2026-10-25)
+## 6. Current state (2026-10-25, after GPU comparisons)
 
-- GPU all-unit **LLM outline** run completed: 42 saved, 36 accepted. Rejected:
-  `ie643_lec03`, `ie643_lec04`, `ie802_notes`, `mlt_week03`, `mlt_week05`, `mlt_week09`.
-  All six pasted response endings are incomplete JSON, consistent with output truncation.
-  No all-unit PDF results have been reported yet. Originals remain in GPU `out/outlines_all`.
-- Research/priorities: `docs/PIPELINE_RESEARCH_REVIEW.md`; submission is today.
-  Keep the trained clean adapter and working environment. Prioritize renderer and
-  evaluation fixes, actual-prediction comparisons, then submission interface/report.
-- New fixes: aspect-preserving figure sizing, explicit compiler error/unchecked status,
-  ordered occurrence checks for intermediate Markdown, missing page/report accounting,
-  run manifests to ignore stale reports, actual rendered outline usage in evaluation.
-- Outline retries: `--retry-rejected --max-new-tokens 4096`, compact topic prompt;
-  accepted files are skipped and rejected originals backed up. See stage README.
-- Verified locally: eight regression tests; two validation PDFs built with Tectonic,
-  128/128 blocks retained, 9/10 figure descriptions matched, one diagnosed equation
-  failure, all nine images preserve aspect ratio. Lecture 7 page010 absent from
-  predictions is already excluded for uncertain labels. No new model improvement claim.
-- **Next action:** commit locally, push only when requested, then GPU pull on the same
-  branch and retry the six rejected outlines. Validate the retries before rendering.
-  All-unit outlines use annotations: do not apply them to prediction Markdown.
-  Create separate prediction-based outlines for the validation comparison.
+- GPU results pulled through Git: `66e36dc` all-unit annotation reconstruction;
+  `cdb2658` actual-prediction plain versus outlined PDF comparison.
+- All-unit run: 42 PDFs, 410 pages, 2,579/2,579 intermediate blocks retained,
+  41 accepted outlines/384 sections, 227/243 diagrams matched, six diagnosed math
+  failures, all XeLaTeX checks completed. IE802 uses page-order fallback.
+- IE802 retry is now complete, but fails JSON parsing on unescaped LaTeX commands.
+  It proposes 57 sections despite a requested cap of 24. Do not increase tokens again
+  as the next fix. See `docs/GENERATION_RUN_REVIEW.md`.
+- Reviewed three annotation PDFs. Figure proportions are fixed. Notebook PDF pages
+  25 and 29 visibly clip long display equations beyond the right page edge. Some
+  glyphs and crops need work. One equation failure (`\bcancel`) needs package support;
+  the others concern malformed bracket/ampersand syntax. No semantic repair done.
+- Prediction comparison: four PDFs using 25 clean validation predictions; 128/128
+  blocks retained in both variants, 9/10 diagram descriptions matched, one invalid
+  equation. Lecture 7 grows from 8 to 9 pages with outline; MLT remains 3 pages.
+  MLT's outline only promotes one heading level. Lecture outline repeats headings,
+  starts a directional-derivative section too early, and adds a Blank Page section.
+  See `docs/PREDICTION_COMPARISON_REVIEW.md`.
+- **Current recommendation:** plain/page-order rendering as baseline; outline optional.
+  No further GPU rerun needed for this comparison. Next accuracy work: equation
+  rendering/overflow, missing glyphs, and a small source-checked Surya figure/table
+  grounding experiment. Keep trained clean weights; no evidence here for new training.
+- All outputs are reconstruction checks or a two-unit ablation, not new recognition
+  scores or proof of mathematical correctness. Existing CER result remains unchanged.
 
 ## 7. Next steps (agreed order)
 
