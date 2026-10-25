@@ -1,0 +1,152 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/hlcs_note18_page001.jpg",
+  "image_size": [
+    1499,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "page_header",
+      "surya_label": "PageHeader",
+      "order": 1,
+      "bbox": [
+        420,
+        115,
+        637,
+        154
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "page_header",
+      "surya_label": "PageHeader",
+      "order": 2,
+      "bbox": [
+        838,
+        125,
+        875,
+        152
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        178,
+        178,
+        903,
+        443
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        178,
+        442,
+        896,
+        571
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        674,
+        551,
+        862,
+        578
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        226,
+        579,
+        767,
+        637
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        219,
+        665,
+        862,
+        707
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        227,
+        711,
+        862,
+        748
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 9,
+      "bbox": [
+        18,
+        917,
+        82,
+        934
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b10",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 10,
+      "bbox": [
+        828,
+        902,
+        892,
+        918
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

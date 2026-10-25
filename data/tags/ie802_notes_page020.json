@@ -1,0 +1,366 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie802_notes_page020.jpg",
+  "image_size": [
+    1497,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        930,
+        75,
+        965,
+        105
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Picture",
+      "order": 2,
+      "bbox": [
+        160,
+        65,
+        390,
+        155
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie802_notes_page020_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        465,
+        70,
+        735,
+        100
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        460,
+        105,
+        705,
+        135
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 5,
+      "bbox": [
+        530,
+        135,
+        710,
+        165
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        735,
+        125,
+        855,
+        185
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        135,
+        185,
+        775,
+        220
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        140,
+        230,
+        815,
+        260
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 9,
+      "bbox": [
+        140,
+        270,
+        385,
+        405
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie802_notes_page020_b9.png"
+    },
+    {
+      "id": "b10",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 10,
+      "bbox": [
+        445,
+        285,
+        600,
+        315
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b11",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 11,
+      "bbox": [
+        160,
+        375,
+        890,
+        455
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b12",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 12,
+      "bbox": [
+        110,
+        490,
+        280,
+        525
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b13",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 13,
+      "bbox": [
+        335,
+        495,
+        475,
+        540
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b14",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 14,
+      "bbox": [
+        530,
+        500,
+        570,
+        525
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b15",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 15,
+      "bbox": [
+        630,
+        490,
+        815,
+        535
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b16",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 16,
+      "bbox": [
+        675,
+        535,
+        855,
+        565
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b17",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 17,
+      "bbox": [
+        170,
+        560,
+        555,
+        630
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b18",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 18,
+      "bbox": [
+        560,
+        570,
+        860,
+        670
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie802_notes_page020_b18.png"
+    },
+    {
+      "id": "b19",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 19,
+      "bbox": [
+        205,
+        715,
+        445,
+        745
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b20",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 20,
+      "bbox": [
+        205,
+        745,
+        435,
+        775
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b21",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 21,
+      "bbox": [
+        205,
+        775,
+        445,
+        805
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b22",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 22,
+      "bbox": [
+        515,
+        705,
+        815,
+        845
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie802_notes_page020_b22.png"
+    },
+    {
+      "id": "b23",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 23,
+      "bbox": [
+        135,
+        850,
+        395,
+        885
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b24",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 24,
+      "bbox": [
+        270,
+        890,
+        885,
+        925
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b25",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 25,
+      "bbox": [
+        225,
+        930,
+        655,
+        965
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

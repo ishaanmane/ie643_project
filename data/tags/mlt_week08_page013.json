@@ -1,0 +1,84 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week08_page013.jpg",
+  "image_size": [
+    1112,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 1,
+      "bbox": [
+        219,
+        0,
+        588,
+        183
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week08_page013_b1.png"
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 2,
+      "bbox": [
+        12,
+        250,
+        783,
+        500
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week08_page013_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        804,
+        292,
+        987,
+        394
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 4,
+      "bbox": [
+        340,
+        500,
+        828,
+        570
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 5,
+      "bbox": [
+        78,
+        978,
+        166,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

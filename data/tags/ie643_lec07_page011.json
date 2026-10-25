@@ -1,0 +1,124 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec07_page011.jpg",
+  "image_size": [
+    2000,
+    1229
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        1000,
+        400
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        438,
+        290,
+        573,
+        450
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        805,
+        245,
+        965,
+        365
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        75,
+        445,
+        375,
+        535
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        610,
+        365,
+        985,
+        825
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        140,
+        525,
+        695,
+        645
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        140,
+        645,
+        645,
+        885
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        130,
+        835,
+        775,
+        995
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

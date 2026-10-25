@@ -1,0 +1,152 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec10_page003.jpg",
+  "image_size": [
+    2000,
+    1152
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        38,
+        9,
+        277,
+        125
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        26,
+        127,
+        280,
+        229
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        22,
+        217,
+        280,
+        315
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        10,
+        327,
+        208,
+        445
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        27,
+        406,
+        566,
+        544
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        95,
+        537,
+        477,
+        645
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 7,
+      "bbox": [
+        145,
+        625,
+        575,
+        765
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        53,
+        755,
+        393,
+        886
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 9,
+      "bbox": [
+        146,
+        863,
+        910,
+        988
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b10",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 10,
+      "bbox": [
+        478,
+        268,
+        994,
+        438
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

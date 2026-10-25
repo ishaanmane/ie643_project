@@ -1,0 +1,96 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec07_page001.jpg",
+  "image_size": [
+    2000,
+    1032
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        8,
+        11,
+        254,
+        152
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        30,
+        222,
+        213,
+        361
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        38,
+        335,
+        797,
+        517
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        43,
+        521,
+        348,
+        628
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        20,
+        661,
+        982,
+        830
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        8,
+        820,
+        995,
+        981
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

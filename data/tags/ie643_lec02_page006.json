@@ -1,0 +1,111 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec02_page006.jpg",
+  "image_size": [
+    2000,
+    1494
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        51,
+        0,
+        172,
+        62
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 2,
+      "bbox": [
+        0,
+        73,
+        615,
+        922
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec02_page006_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        725,
+        225,
+        965,
+        455
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        735,
+        495,
+        915,
+        630
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        690,
+        640,
+        920,
+        735
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        725,
+        740,
+        945,
+        880
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        665,
+        845,
+        995,
+        965
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

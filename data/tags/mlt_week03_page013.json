@@ -1,0 +1,111 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week03_page013.jpg",
+  "image_size": [
+    1492,
+    1999
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        694,
+        250
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week03_page013_b1.png"
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        37,
+        269,
+        991,
+        330
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "list",
+      "surya_label": "ListGroup",
+      "order": 3,
+      "bbox": [
+        37,
+        357,
+        708,
+        394
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 4,
+      "bbox": [
+        247,
+        398,
+        627,
+        455
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "list",
+      "surya_label": "ListGroup",
+      "order": 5,
+      "bbox": [
+        32,
+        467,
+        764,
+        509
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 6,
+      "bbox": [
+        242,
+        512,
+        726,
+        580
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 7,
+      "bbox": [
+        228,
+        977,
+        297,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

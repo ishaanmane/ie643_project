@@ -1,0 +1,307 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie802_notes_page014.jpg",
+  "image_size": [
+    1453,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        48,
+        23,
+        271,
+        102
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        339,
+        23,
+        512,
+        46
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        612,
+        16,
+        846,
+        44
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 4,
+      "bbox": [
+        350,
+        20,
+        640,
+        130
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie802_notes_page014_b4.png"
+    },
+    {
+      "id": "b5",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 5,
+      "bbox": [
+        800,
+        40,
+        930,
+        180
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 6,
+      "bbox": [
+        108,
+        125,
+        305,
+        245
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 7,
+      "bbox": [
+        15,
+        260,
+        600,
+        330
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 8,
+      "bbox": [
+        620,
+        210,
+        940,
+        380
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 9,
+      "bbox": [
+        48,
+        380,
+        450,
+        440
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b10",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 10,
+      "bbox": [
+        450,
+        380,
+        940,
+        470
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b11",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 11,
+      "bbox": [
+        115,
+        470,
+        450,
+        540
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b12",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 12,
+      "bbox": [
+        450,
+        470,
+        940,
+        540
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b13",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 13,
+      "bbox": [
+        15,
+        620,
+        110,
+        655
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b14",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 14,
+      "bbox": [
+        140,
+        610,
+        850,
+        680
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b15",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 15,
+      "bbox": [
+        130,
+        680,
+        480,
+        720
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b16",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 16,
+      "bbox": [
+        75,
+        720,
+        450,
+        820
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b17",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 17,
+      "bbox": [
+        510,
+        730,
+        650,
+        820
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b18",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 18,
+      "bbox": [
+        680,
+        700,
+        950,
+        740
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b19",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 19,
+      "bbox": [
+        75,
+        830,
+        270,
+        910
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b20",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 20,
+      "bbox": [
+        270,
+        890,
+        510,
+        995
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b21",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 21,
+      "bbox": [
+        640,
+        850,
+        950,
+        995
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

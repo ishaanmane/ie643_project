@@ -1,0 +1,68 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec08_page001.jpg",
+  "image_size": [
+    1999,
+    771
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        0,
+        16,
+        257,
+        210
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        46,
+        289,
+        971,
+        652
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        64,
+        688,
+        482,
+        965
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        525,
+        713,
+        992,
+        975
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

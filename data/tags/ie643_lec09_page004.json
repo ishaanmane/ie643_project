@@ -1,0 +1,82 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec09_page004.jpg",
+  "image_size": [
+    2000,
+    1172
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        20,
+        11,
+        455,
+        160
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        36,
+        205,
+        460,
+        383
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        20,
+        388,
+        634,
+        585
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        726,
+        158,
+        924,
+        487
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        9,
+        598,
+        998,
+        983
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

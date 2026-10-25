@@ -1,0 +1,112 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week07_page007.jpg",
+  "image_size": [
+    1348,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 1,
+      "bbox": [
+        31,
+        0,
+        645,
+        193
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week07_page007_b1.png"
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 2,
+      "bbox": [
+        115,
+        218,
+        625,
+        357
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week07_page007_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        9,
+        365,
+        589,
+        404
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 4,
+      "bbox": [
+        94,
+        420,
+        937,
+        468
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        515,
+        484,
+        989,
+        557
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 6,
+      "bbox": [
+        575,
+        561,
+        732,
+        627
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 7,
+      "bbox": [
+        93,
+        978,
+        160,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

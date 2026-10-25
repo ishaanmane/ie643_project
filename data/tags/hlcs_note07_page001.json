@@ -1,0 +1,153 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/hlcs_note07_page001.jpg",
+  "image_size": [
+    1499,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        369,
+        119,
+        621,
+        160
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        838,
+        125,
+        875,
+        152
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        177,
+        180,
+        879,
+        213
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 4,
+      "bbox": [
+        180,
+        225,
+        895,
+        480
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/hlcs_note07_page001_b4.png"
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        178,
+        513,
+        896,
+        639
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        168,
+        647,
+        893,
+        766
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        167,
+        780,
+        909,
+        817
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        229,
+        825,
+        906,
+        917
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 9,
+      "bbox": [
+        803,
+        907,
+        866,
+        922
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b10",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 10,
+      "bbox": [
+        16,
+        914,
+        62,
+        929
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

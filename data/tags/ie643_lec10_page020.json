@@ -1,0 +1,55 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec10_page020.jpg",
+  "image_size": [
+    2000,
+    1156
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        493,
+        125
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 2,
+      "bbox": [
+        96,
+        96,
+        794,
+        983
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec10_page020_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        812,
+        115,
+        995,
+        511
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

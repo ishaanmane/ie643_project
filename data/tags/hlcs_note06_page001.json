@@ -1,0 +1,167 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/hlcs_note06_page001.jpg",
+  "image_size": [
+    1499,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "page_header",
+      "surya_label": "PageHeader",
+      "order": 1,
+      "bbox": [
+        840,
+        125,
+        885,
+        155
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        165,
+        175,
+        825,
+        220
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        205,
+        225,
+        900,
+        285
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        205,
+        290,
+        835,
+        345
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        155,
+        375,
+        905,
+        495
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        170,
+        505,
+        905,
+        545
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        655,
+        550,
+        845,
+        580
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        165,
+        575,
+        905,
+        750
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 9,
+      "bbox": [
+        260,
+        740,
+        850,
+        900
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/hlcs_note06_page001_b9.png"
+    },
+    {
+      "id": "b10",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 10,
+      "bbox": [
+        15,
+        910,
+        60,
+        930
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b11",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 11,
+      "bbox": [
+        800,
+        900,
+        870,
+        925
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

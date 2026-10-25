@@ -1,0 +1,69 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week07_page002.jpg",
+  "image_size": [
+    1457,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        181,
+        0,
+        693,
+        44
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 2,
+      "bbox": [
+        64,
+        54,
+        993,
+        117
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week07_page002_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        0,
+        131,
+        993,
+        215
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 4,
+      "bbox": [
+        167,
+        978,
+        231,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

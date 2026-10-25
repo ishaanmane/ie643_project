@@ -1,0 +1,40 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week10_page009.jpg",
+  "image_size": [
+    1093,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 1,
+      "bbox": [
+        35,
+        5,
+        991,
+        85
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 2,
+      "bbox": [
+        11,
+        977,
+        113,
+        991
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

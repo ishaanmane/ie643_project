@@ -1,0 +1,112 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec05_page007.jpg",
+  "image_size": [
+    2000,
+    1040
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        500,
+        385
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 2,
+      "bbox": [
+        435,
+        15,
+        855,
+        440
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec05_page007_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        25,
+        440,
+        715,
+        660
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        400,
+        440,
+        715,
+        610
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        400,
+        660,
+        675,
+        810
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 6,
+      "bbox": [
+        690,
+        450,
+        990,
+        970
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec05_page007_b6.png"
+    },
+    {
+      "id": "b7",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 7,
+      "bbox": [
+        35,
+        770,
+        245,
+        980
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

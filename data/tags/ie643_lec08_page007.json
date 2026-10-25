@@ -1,0 +1,97 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec08_page007.jpg",
+  "image_size": [
+    1999,
+    1246
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        0,
+        20,
+        333,
+        250
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 2,
+      "bbox": [
+        0,
+        210,
+        525,
+        520
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 3,
+      "bbox": [
+        38,
+        505,
+        415,
+        760
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 4,
+      "bbox": [
+        30,
+        760,
+        480,
+        985
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "figure",
+      "surya_label": "Diagram",
+      "order": 5,
+      "bbox": [
+        515,
+        0,
+        995,
+        635
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec08_page007_b5.png"
+    },
+    {
+      "id": "b6",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 6,
+      "bbox": [
+        515,
+        670,
+        835,
+        885
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

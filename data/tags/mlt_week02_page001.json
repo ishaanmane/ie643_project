@@ -1,0 +1,139 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week02_page001.jpg",
+  "image_size": [
+    1556,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "page_header",
+      "surya_label": "PageHeader",
+      "order": 1,
+      "bbox": [
+        8,
+        6,
+        220,
+        30
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "list",
+      "surya_label": "ListGroup",
+      "order": 2,
+      "bbox": [
+        8,
+        53,
+        998,
+        128
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        236,
+        143,
+        830,
+        181
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        281,
+        183,
+        666,
+        219
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        428,
+        223,
+        916,
+        275
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "list",
+      "surya_label": "ListGroup",
+      "order": 6,
+      "bbox": [
+        8,
+        324,
+        954,
+        406
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 7,
+      "bbox": [
+        12,
+        409,
+        970,
+        662
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week02_page001_b7.png"
+    },
+    {
+      "id": "b8",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 8,
+      "bbox": [
+        91,
+        691,
+        930,
+        766
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 9,
+      "bbox": [
+        191,
+        978,
+        250,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

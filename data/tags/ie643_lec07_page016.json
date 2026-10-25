@@ -1,0 +1,68 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec07_page016.jpg",
+  "image_size": [
+    1999,
+    1564
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        54,
+        36,
+        707,
+        127
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 2,
+      "bbox": [
+        0,
+        168,
+        924,
+        414
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 3,
+      "bbox": [
+        39,
+        412,
+        400,
+        800
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        593,
+        406,
+        951,
+        500
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

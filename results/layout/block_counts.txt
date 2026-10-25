@@ -1,0 +1,1 @@
+Counter({'text': 2123, 'equation': 1314, 'figure': 334, 'page_footer': 165, 'heading': 165, 'list': 53, 'page_header': 37, 'table': 14})

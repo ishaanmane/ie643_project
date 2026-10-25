@@ -1,0 +1,26 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec06_page005.jpg",
+  "image_size": [
+    2000,
+    1147
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        1000,
+        1000
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

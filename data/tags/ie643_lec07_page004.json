@@ -1,0 +1,56 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec07_page004.jpg",
+  "image_size": [
+    1999,
+    1266
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        646,
+        700
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec07_page004_b1.png"
+    },
+    {
+      "id": "b2",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 2,
+      "bbox": [
+        677,
+        50,
+        998,
+        380
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 3,
+      "bbox": [
+        646,
+        390,
+        1000,
+        993
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec07_page004_b3.png"
+    }
+  ]
+}

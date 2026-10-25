@@ -1,0 +1,40 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec12_page013.jpg",
+  "image_size": [
+    2000,
+    1221
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        630,
+        750
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 2,
+      "bbox": [
+        670,
+        0,
+        995,
+        980
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    }
+  ]
+}

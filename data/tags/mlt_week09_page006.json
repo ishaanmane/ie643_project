@@ -1,0 +1,154 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week09_page006.jpg",
+  "image_size": [
+    1573,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        20,
+        4,
+        634,
+        31
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 2,
+      "bbox": [
+        51,
+        40,
+        336,
+        77
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        121,
+        98,
+        780,
+        138
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 4,
+      "bbox": [
+        324,
+        161,
+        510,
+        298
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week09_page006_b4.png"
+    },
+    {
+      "id": "b5",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 5,
+      "bbox": [
+        46,
+        315,
+        697,
+        360
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "figure",
+      "surya_label": "Figure",
+      "order": 6,
+      "bbox": [
+        87,
+        375,
+        687,
+        657
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/mlt_week09_page006_b6.png"
+    },
+    {
+      "id": "b7",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 7,
+      "bbox": [
+        245,
+        681,
+        875,
+        735
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b8",
+      "type": "list",
+      "surya_label": "ListGroup",
+      "order": 8,
+      "bbox": [
+        20,
+        767,
+        980,
+        890
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b9",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 9,
+      "bbox": [
+        150,
+        885,
+        425,
+        930
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b10",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 10,
+      "bbox": [
+        200,
+        978,
+        260,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

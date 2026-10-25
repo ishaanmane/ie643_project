@@ -1,0 +1,11 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week01_page013.jpg",
+  "image_size": [
+    1608,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": []
+}

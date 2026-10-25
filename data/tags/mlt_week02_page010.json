@@ -1,0 +1,82 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/mlt_week02_page010.jpg",
+  "image_size": [
+    1537,
+    2000
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 1,
+      "bbox": [
+        21,
+        4,
+        748,
+        56
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b2",
+      "type": "heading",
+      "surya_label": "SectionHeader",
+      "order": 2,
+      "bbox": [
+        6,
+        70,
+        327,
+        116
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        28,
+        125,
+        924,
+        179
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "list",
+      "surya_label": "ListGroup",
+      "order": 4,
+      "bbox": [
+        61,
+        186,
+        999,
+        365
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "page_footer",
+      "surya_label": "PageFooter",
+      "order": 5,
+      "bbox": [
+        179,
+        977,
+        246,
+        990
+      ],
+      "skip_in_text": true,
+      "text_preview": null
+    }
+  ]
+}

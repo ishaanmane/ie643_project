@@ -1,0 +1,113 @@
+{
+  "image": "/home/intralab/workspace/ie643_final/data/processed/ie643_lec11_page012.jpg",
+  "image_size": [
+    2000,
+    1641
+  ],
+  "coords": "normalised 0-1000",
+  "source": "surya-ocr 0.22.1 / datalab-to/surya-ocr-2; unverified",
+  "error": false,
+  "blocks": [
+    {
+      "id": "b1",
+      "type": "figure",
+      "surya_label": "Picture",
+      "order": 1,
+      "bbox": [
+        0,
+        0,
+        500,
+        350
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec11_page012_b1.png"
+    },
+    {
+      "id": "b2",
+      "type": "figure",
+      "surya_label": "Picture",
+      "order": 2,
+      "bbox": [
+        565,
+        95,
+        975,
+        385
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec11_page012_b2.png"
+    },
+    {
+      "id": "b3",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 3,
+      "bbox": [
+        18,
+        445,
+        455,
+        575
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b4",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 4,
+      "bbox": [
+        35,
+        580,
+        370,
+        700
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b5",
+      "type": "equation",
+      "surya_label": "Equation",
+      "order": 5,
+      "bbox": [
+        105,
+        710,
+        600,
+        880
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b6",
+      "type": "text",
+      "surya_label": "Text",
+      "order": 6,
+      "bbox": [
+        10,
+        875,
+        350,
+        990
+      ],
+      "skip_in_text": false,
+      "text_preview": null
+    },
+    {
+      "id": "b7",
+      "type": "figure",
+      "surya_label": "Picture",
+      "order": 7,
+      "bbox": [
+        685,
+        645,
+        955,
+        905
+      ],
+      "skip_in_text": false,
+      "text_preview": null,
+      "crop": "/home/intralab/workspace/ie643_final/data/crops/ie643_lec11_page012_b7.png"
+    }
+  ]
+}
