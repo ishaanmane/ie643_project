@@ -1,36 +1,36 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>InTra · Handwritten notes to PDF</title>
-<style>
-:root{font-family:system-ui,sans-serif;color:#192c39;background:#f3f6f7}*{box-sizing:border-box}body{margin:0}main{max-width:860px;margin:48px auto;padding:0 24px}header{margin-bottom:28px}.eyebrow{color:#39736a;font-weight:700;letter-spacing:.12em;font-size:12px}h1{font-size:36px;line-height:1.15;margin:12px 0}p{line-height:1.6;color:#50616d}.card{background:white;border:1px solid #dce4e8;border-radius:16px;padding:28px;margin:20px 0;box-shadow:0 3px 16px #18344405}label{display:block;font-weight:600;margin:16px 0 8px}input[type=text],input[type=password]{width:100%;padding:12px;border:1px solid #b8c7ce;border-radius:8px;font:inherit}.upload{padding:24px;border:2px dashed #b6cbc6;border-radius:10px;background:#f8fbfa}input[type=file]{max-width:100%;font:inherit}button,.link{display:inline-block;background:#176557;color:white;border:0;padding:13px 20px;border-radius:8px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer}button{margin-top:20px}button:disabled{background:#91aaa5;cursor:wait}.muted{font-size:13px}.badge{font-size:12px;background:#edf4f2;color:#286354;padding:5px 9px;border-radius:5px}ol{padding-left:24px;line-height:1.8}#status{white-space:pre-wrap;font-weight:600}#links{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.warning{border-left:3px solid #c18a34;padding-left:14px;color:#665024;font-size:14px}.error{color:#9a3030}#result[hidden]{display:none}footer{font-size:12px;color:#667985;margin:28px 0}a:focus,button:focus,input:focus{outline:3px solid #87bfc0;outline-offset:3px}@media(max-width:600px){main{margin:24px auto;padding:0 16px}h1{font-size:29px}.card{padding:20px}}
-</style></head><body><main>
-<header><div class="eyebrow">INTRA · IE643</div><h1>Handwritten notes,<br>ready to read.</h1><p>Upload scans or a PDF to create searchable notes with editable Markdown. Original source pages are included for checking formulas and diagrams.</p><span class="badge">Fine-tuned Qwen2.5-VL · Clean adapter</span></header>
-<form id="form" class="card"><label for="access-token">Application access token</label><input id="access-token" type="password" autocomplete="off" spellcheck="false" placeholder="Paste the token from the GPU interface terminal"><p class="muted">Use the value after #token= in the notes-ui terminal URL, not the email verification code. It stays in this browser tab for this session.</p><label for="title">Document title</label><input id="title" type="text" value="Lecture notes" maxlength="120" required>
-<label for="files">Your scans</label><div class="upload"><input id="files" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff" multiple required><p class="muted">PDF or images · Up to 20 pages and 25 MiB total. Files are processed in the order listed below.</p><ol id="filelist"></ol></div>
-<p class="muted">The default pipeline crops diagrams with Surya. Unmatched diagrams are flagged in the report; original pages remain in the appendix. Generated captions and mathematics need review.</p>
-<button id="convert" type="submit">Create PDF</button></form>
-<section id="result" class="card" hidden aria-live="polite"><h2 id="resulttitle">Converting your notes</h2><p id="status"></p><div id="links"></div><div id="warnings"></div></section>
-<footer>Files stay on the machine running this interface. Keep the server running during conversion. Recognition quality varies; syntax checks do not verify mathematical correctness.</footer>
-</main><script>
-const $=id=>document.getElementById(id);
-let token=sessionStorage.getItem('intra-token')||'';
-$('access-token').value=token;
-function captureToken(){
-  const value=new URLSearchParams(location.hash.slice(1)).get('token');
-  if(value){token=value;sessionStorage.setItem('intra-token',token);$('access-token').value=token;history.replaceState(null,'',location.pathname+location.search)}
-}
-captureToken();
-window.addEventListener('hashchange',captureToken);
-let busy=false;
-$('files').addEventListener('change',()=>{ $('filelist').replaceChildren();for(const file of $('files').files){const li=document.createElement('li');li.textContent=file.name;$('filelist').append(li)}});
-async function api(path,options={}){const res=await fetch(path,{...options,headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json',...(options.headers||{})}});const body=await res.text();
-if(res.redirected)throw new Error(`Login redirect during ${path}. Reopen the interface and complete email login before retrying.`);
-if(!body.trim())throw new Error(`Empty response (HTTP ${res.status}) from ${path}. Check the GPU server and tunnel logs before retrying.`);
-let data;try{data=JSON.parse(body)}catch{throw new Error(`Non-JSON response (HTTP ${res.status}) from ${path}. The tunnel or login gateway may have returned an error page.`)}
-if(!res.ok)throw new Error(data.error||`Request failed (HTTP ${res.status})`);return data}
-function showError(error){$('result').hidden=false;$('resulttitle').textContent='Conversion needs attention';$('status').textContent=error.message;$('status').className='error';$('convert').disabled=false;busy=false}
-function bytes(file){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error('Could not read '+file.name));reader.readAsDataURL(file)})}
-async function poll(id){try{const job=await api('/api/jobs/'+id);$('status').textContent=job.message;if(job.status==='running'){setTimeout(()=>poll(id),1500);return}if(job.status==='error')throw new Error(job.message);sessionStorage.removeItem('intra-job');busy=false;$('convert').disabled=false;$('resulttitle').textContent='Your document is ready';$('status').textContent=`${job.result.pages} source pages · ${Math.round(job.result.elapsed_seconds)} seconds`;for(const [kind,label] of [['pdf','Download PDF'],['bundle','Download editable bundle'],['report','Download report']]){const a=document.createElement('a');a.className='link';a.textContent=label;a.href='/download/'+id+'/'+kind+'?token='+encodeURIComponent(token);$('links').append(a)}for(const warning of job.result.warnings){const p=document.createElement('p');p.className='warning';p.textContent=warning;$('warnings').append(p)}}catch(error){sessionStorage.removeItem('intra-job');showError(error)}}
-$('form').addEventListener('submit',async event=>{event.preventDefault();if(busy)return;try{token=$('access-token').value.trim();if(!token)throw new Error('Paste the application access token into the field above.');sessionStorage.setItem('intra-token',token);const files=[...$('files').files];if(!files.length||files.length>20)throw new Error('Choose between 1 and 20 files.');if(files.reduce((sum,file)=>sum+file.size,0)>25*1024*1024)throw new Error('Keep total uploads below 25 MiB.');busy=true;$('convert').disabled=true;$('result').hidden=false;$('resulttitle').textContent='Converting your notes';$('status').className='';$('status').textContent='Uploading files…';$('links').replaceChildren();$('warnings').replaceChildren();$('status').textContent='Checking connection…';await api('/api/health');$('status').textContent='Uploading files…';const uploads=await Promise.all(files.map(async file=>({name:file.name,data:await bytes(file)})));const job=await api('/api/jobs',{method:'POST',body:JSON.stringify({title:$('title').value,files:uploads})});sessionStorage.setItem('intra-job',job.id);poll(job.id)}catch(error){showError(error)}});
-const previous=sessionStorage.getItem('intra-job');if(previous&&token){busy=true;$('convert').disabled=true;$('result').hidden=false;poll(previous)}
-</script></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><title>InTra — A clearer page</title>
+<link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="/" aria-label="InTra home"><span class="brandmark">i.</span> InTra <span class="brandtag">NOTES STUDIO</span></a><div class="connection"><span class="dot" id="connection-dot"></span><span id="connection-label">Connecting</span><button class="text-button" id="signout" hidden>Sign out</button></div></header>
+<main>
+<section class="intro"><div><p class="eyebrow">YOUR IDEAS. A CLEARER PAGE.</p><h1>From handwritten<br>to <em>ready to read.</em></h1><p class="intro-copy">Bring your lecture notes, scribbles and equations.<br>Leave with a searchable PDF and an editable copy.</p></div><aside class="intro-note"><span class="note-line"></span><p>Keep the original.<br>Make room for clarity.</p><span class="note-caption">SOURCE PAGES INCLUDED</span></aside></section>
+<div id="demo-banner" class="demo-banner" hidden><strong>Interface test mode</strong> · Files are decoded and preprocessed on this Mac. The PDF shows source previews. No recognition or layout model runs.</div>
+<section class="signin-panel" id="signin-panel" hidden><div><p class="eyebrow">PRIVATE WORKSPACE</p><h2>A key to your notes.</h2><p>Enter the access key shared by the demo operator. Your files and downloads are available in this browser session.</p></div><form id="login-form"><label for="access-key">Demo access key</label><div class="login-controls"><input id="access-key" type="password" autocomplete="off" spellcheck="false" required placeholder="Paste your access key"><button type="submit" class="button" id="login-button">Unlock workspace <span aria-hidden="true">↗</span></button></div><p id="login-error" class="field-error" role="alert"></p></form></section>
+<div class="workspace">
+<section class="upload-panel panel">
+<div class="section-title"><span class="step-number">01</span><div><h2>Bring your pages</h2><p>One document, in the order you choose.</p></div></div>
+<form id="convert-form">
+<label class="field-label" for="title">DOCUMENT TITLE</label><input id="title" type="text" value="Lecture notes" maxlength="120" required>
+<div class="dropzone" id="dropzone"><div class="upload-symbol" aria-hidden="true">↥</div><h3>Drop your notes here</h3><p>or <label for="files" class="file-label">choose files</label> from your device</p><input id="files" type="file" accept=".pdf,.heic,.heif,.hif,.png,.jpg,.jpeg,.webp,.bmp,.tif,.tiff,image/heic,image/heif" multiple><div class="format-pills"><span>PDF</span><span>HEIC / HEIF</span><span>JPG / PNG</span><span>+ more</span></div><p class="limits">20 pages maximum · 25 MiB total</p></div>
+<div class="file-heading" id="file-heading" hidden><span id="file-summary"></span><button type="button" class="text-button" id="clear-files">Clear all</button></div>
+<ol id="file-list" class="file-list" aria-label="Files in reading order"></ol>
+<p class="field-error" id="upload-error" role="alert"></p>
+<button class="button convert-button" id="convert" type="submit" disabled>Create my document <span aria-hidden="true">↗</span></button>
+<p class="below-button">Original pages stay in the appendix for easy comparison.</p>
+</form>
+</section>
+<section class="output-panel panel" aria-labelledby="output-heading">
+<div class="section-title"><span class="step-number">02</span><div><h2 id="output-heading">A fresh perspective</h2><p>Your document takes shape here.</p></div></div>
+<div id="empty-result" class="empty-result"><div class="paper-stack" aria-hidden="true"><div class="paper-sheet"><span></span><span></span><span class="short"></span><div class="paper-equation">a² + b² = c²</div><span></span><span class="short"></span><div class="paper-stamp">A CLEARER PAGE</div></div></div><h3>Your next clean copy.</h3><p>Add your pages and we’ll take it from here.<br>Text, equations and diagram crops, together.</p></div>
+<div id="result" hidden aria-live="polite"><div class="result-heading"><span class="status-pill" id="status-pill">IN PROGRESS</span><span id="elapsed" class="elapsed"></span></div><h3 id="result-title">Preparing your document</h3><p id="status">Checking files…</p><div class="progress-track" id="progress-track"><div id="progress-bar"></div></div><ol class="stages" id="stages"><li data-stage="0"><span>1</span>Read & prepare pages</li><li data-stage="1"><span>2</span>Find diagram regions</li><li data-stage="2"><span>3</span>Recognize text & equations</li><li data-stage="3"><span>4</span>Build your document</li></ol><div id="links" class="download-links"></div><div id="warnings"></div><div class="result-actions"><button class="text-button" id="retry-status" hidden>Check again</button><button class="text-button danger" id="delete-job" hidden>Delete these files from server</button></div></div>
+<div class="review-note"><span aria-hidden="true">✦</span><p><strong>A useful first draft.</strong> Compare formulas and diagram crops with the original pages before using or sharing your notes.</p></div>
+</section>
+</div>
+<footer><span>INTRA · IE643</span><p>Uploads and results expire after 24 hours. Processing runs on the operator’s machine. With a public link, uploads pass through the HTTPS tunnel provider.</p><span class="footer-end">Made for your next idea.</span></footer>
+</main>
+</body></html>

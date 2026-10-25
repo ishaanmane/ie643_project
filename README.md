@@ -54,3 +54,7 @@ Clean adapter validation CER is 0.277 on 25 pages (capped per-page macro metric 
 ## Continuing this project
 
 Read [the current handoff](docs/HANDOFF.md) first, then [the complete work history](docs/WORK_LOG_2026-10-25.md) and [service runbook](docs/OPERATIONS.md). [Latest automatic upload evidence](results/upload_automated_review/README.md) includes the full downloadable bundle and checksums.
+
+## Upload demo and HEIC support
+
+The updated [upload interface](06_interface/README.md) accepts Apple HEIC/HEIF photos, supports file ordering and restores completed downloads after restart. [Deployment instructions](docs/INTERFACE_DEPLOYMENT.md) use a private access key and a single managed HTTPS tunnel. [Mac validation](results/interface_validation/README.md) covers actual browser uploads and security checks; GPU deployment requires the explicit corrected-data adapter path.

@@ -1,0 +1,38 @@
+test_actual_heic_and_heif_in_order (test_heic.DecoderTests.test_actual_heic_and_heif_in_order) ... ok
+test_alpha_and_forged_extensions_and_oversized_images (test_heic.DecoderTests.test_alpha_and_forged_extensions_and_oversized_images) ... ok
+test_dangerous_tex_commands_and_environments_rejected (test_heic.DecoderTests.test_dangerous_tex_commands_and_environments_rejected) ... ok
+test_encrypted_corrupt_and_too_many_pdf_pages (test_heic.DecoderTests.test_encrypted_corrupt_and_too_many_pdf_pages) ... <frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+2026-10-25 19:17:10.730 python[90415:4085530] 2026-10-25 19:17:10.730587 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier
+<frozen importlib._bootstrap>:488: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+/Users/akshatmac/Desktop/IE643/ie643_project/out/interface-py312/lib/python3.12/site-packages/fitz/__init__.py:17: FutureWarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+  warnings.warn(
+ok
+test_phone_exif_orientation_applied_once (test_heic.DecoderTests.test_phone_exif_orientation_applied_once) ... ok
+test_owned_server_cleanup_does_not_target_other_groups (test_layout.LayoutTests.test_owned_server_cleanup_does_not_target_other_groups) ... ok
+test_real_surya_schema_converts_picture_and_retains_equation (test_layout.LayoutTests.test_real_surya_schema_converts_picture_and_retains_equation) ... ok
+test_invalid_adapter_not_silently_base_model (test_pipeline.InputTests.test_invalid_adapter_not_silently_base_model) ... ok
+test_multi_page_images_preserve_order_and_enforce_limit (test_pipeline.InputTests.test_multi_page_images_preserve_order_and_enforce_limit) ... ok
+test_new_input_uses_isolated_data_and_source_appendix (test_pipeline.InputTests.test_new_input_uses_isolated_data_and_source_appendix) ... ok
+test_pdf_rasterization (test_pipeline.InputTests.test_pdf_rasterization) ... ok
+test_prediction_resource_commands_rejected_but_math_allowed (test_pipeline.InputTests.test_prediction_resource_commands_rejected_but_math_allowed) ... ok
+test_failure_does_not_proceed_to_render (test_recognition_worker.WorkerTests.test_failure_does_not_proceed_to_render) ... ok
+test_success_checks_saved_output_and_uses_separate_process (test_recognition_worker.WorkerTests.test_success_checks_saved_output_and_uses_separate_process) ... ok
+test_unused_recognizer_release_does_not_initialize_cuda (test_recognition_worker.WorkerTests.test_unused_recognizer_release_does_not_initialize_cuda) ... ok
+test_authentication_has_no_query_token_backdoor (test_web.WebTests.test_authentication_has_no_query_token_backdoor) ... ok
+test_browser_jobs_are_isolated_and_downloads_have_no_token (test_web.WebTests.test_browser_jobs_are_isolated_and_downloads_have_no_token) ... ok
+test_busy_validation_and_safe_filenames (test_web.WebTests.test_busy_validation_and_safe_filenames) ... ok
+test_csrf_origin_host_and_secure_cookie (test_web.WebTests.test_csrf_origin_host_and_secure_cookie) ... ok
+test_interrupted_job_does_not_resume_or_claim_success (test_web.WebTests.test_interrupted_job_does_not_resume_or_claim_success) ... ok
+test_multipart_order_and_server_side_total_limit (test_web.WebTests.test_multipart_order_and_server_side_total_limit) ... ok
+test_normal_multipart_file_larger_than_parser_buffer (test_web.WebTests.test_normal_multipart_file_larger_than_parser_buffer) ... ok
+test_persistence_recovery_cleanup_and_secret_permissions (test_web.WebTests.test_persistence_recovery_cleanup_and_secret_permissions) ... ok
+test_rate_limited_login_and_plain_text_title (test_web.WebTests.test_rate_limited_login_and_plain_text_title) ... ok
+test_shared_login_key_cannot_become_operator_or_forge_cookies (test_web.WebTests.test_shared_login_key_cannot_become_operator_or_forge_cookies) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 1.438s
+
+OK

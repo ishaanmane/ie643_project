@@ -1,0 +1,48 @@
+test_retry_keeps_accepted_and_backs_up_rejected (test_render_reports.OutlineRetryTests.test_retry_keeps_accepted_and_backs_up_rejected) ... ok
+test_diagnosed_equation_removed_then_remainder_compiles (test_render_reports.RendererTests.test_diagnosed_equation_removed_then_remainder_compiles) ... ok
+test_missing_package_is_checker_error_not_zero_failures (test_render_reports.RendererTests.test_missing_package_is_checker_error_not_zero_failures) ... ok
+test_repeated_or_reordered_content_is_not_reported_as_preserved (test_render_reports.RendererTests.test_repeated_or_reordered_content_is_not_reported_as_preserved) ... ok
+test_retry_limit_is_not_success (test_render_reports.RendererTests.test_retry_limit_is_not_success) ... ok
+test_summary_uses_rendered_outline_and_counts_missing_reports (test_render_reports.RendererTests.test_summary_uses_rendered_outline_and_counts_missing_reports) ... ok
+test_tall_and_wide_crops_fit_without_forcing_two_dimensions (test_render_reports.RendererTests.test_tall_and_wide_crops_fit_without_forcing_two_dimensions) ... ok
+test_timeout_is_reported (test_render_reports.RendererTests.test_timeout_is_reported) ... ok
+test_changed_box_is_rejected (test_reviewed_fixes.ReviewedFixTests.test_changed_box_is_rejected) ... /Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:367: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmpz5rp50vu/md/mlt_week06_page003.md' mode='r' encoding='UTF-8'>
+  blocks = split_blocks(open(src).read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmpz5rp50vu/tags/mlt_week06_page003.json' mode='r' encoding='UTF-8'>
+  tags = json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_missing_pdf_checker_is_not_success (test_reviewed_fixes.ReviewedFixTests.test_missing_pdf_checker_is_not_success) ... ok
+test_reviewed_link_selects_fold_row_and_preserves_original_diagnosis (test_reviewed_fixes.ReviewedFixTests.test_reviewed_link_selects_fold_row_and_preserves_original_diagnosis) ... /Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:367: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmp1suir7ai/md/mlt_week06_page003.md' mode='r' encoding='UTF-8'>
+  blocks = split_blocks(open(src).read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmp1suir7ai/tags/mlt_week06_page003.json' mode='r' encoding='UTF-8'>
+  tags = json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:491: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmp1suir7ai/out/mlt_week06/mlt_week06.md' mode='w' encoding='UTF-8'>
+  open(md_path, "w").write(doc)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:510: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmp1suir7ai/out/mlt_week06/report.json' mode='w' encoding='UTF-8'>
+  json.dump(report, open(os.path.join(out, "report.json"), "w"), indent=1)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_tectonic_warning_is_not_mistaken_for_error (test_reviewed_fixes.ReviewedFixTests.test_tectonic_warning_is_not_mistaken_for_error) ... ok
+test_without_opt_in_tables_remain_unmatched_and_math_keeps_fallback (test_reviewed_fixes.ReviewedFixTests.test_without_opt_in_tables_remain_unmatched_and_math_keeps_fallback) ... /Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:367: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmpniy9hv2a/md/mlt_week06_page003.md' mode='r' encoding='UTF-8'>
+  blocks = split_blocks(open(src).read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:181: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmpniy9hv2a/tags/mlt_week06_page003.json' mode='r' encoding='UTF-8'>
+  tags = json.load(open(path))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:491: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmpniy9hv2a/out/mlt_week06/mlt_week06.md' mode='w' encoding='UTF-8'>
+  open(md_path, "w").write(doc)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/akshatmac/Desktop/IE643/ie643_project/04_reconstruction/render_document.py:510: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/sq/zhgrgft918z7_d201rmknhc80000gn/T/tmpniy9hv2a/out/mlt_week06/report.json' mode='w' encoding='UTF-8'>
+  json.dump(report, open(os.path.join(out, "report.json"), "w"), indent=1)
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.052s
+
+OK

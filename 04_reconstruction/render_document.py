@@ -215,7 +215,7 @@ def check_latex(snippets, engine, max_rounds=None):
         with tempfile.TemporaryDirectory() as tmp:
             with open(os.path.join(tmp, "m.tex"), "w") as f:
                 f.write("\n".join(lines))
-            cmd = ([engine, "-interaction=nonstopmode", "-halt-on-error", "-file-line-error", "m.tex"]
+            cmd = ([engine, "-no-shell-escape", "-interaction=nonstopmode", "-halt-on-error", "-file-line-error", "m.tex"]
                    if engine == "xelatex" else [engine, "m.tex"])
             r = subprocess.run(cmd, cwd=tmp, capture_output=True, text=True, timeout=300)
             log = r.stderr + "\n" + r.stdout
@@ -332,7 +332,7 @@ def heading_text(block):
     return re.sub(r"\s+", " ", block.lstrip().lstrip("#").strip().strip("*")).lower()
 
 
-def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, reviewed_fixes=None, data_dir=None, document_title=None, source_pages=None):
+def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, reviewed_fixes=None, data_dir=None, document_title=None, source_pages=None, secure_input=False):
     """outline: {"sections": [{"start": "p4.3", "title": ..., "level": 1|2}]} from outline.py, or None."""
     data_dir = data_dir or D
     reviewed_fixes = reviewed_fixes or {}
@@ -494,10 +494,14 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
     if pandoc and fmt in ("pdf", "html"):
         target = os.path.join(out, f"{unit}.{fmt}")
         cmd = [pandoc, md_path, "-o", target, "--resource-path", out]
+        if secure_input:
+            cmd += ["--from=markdown-raw_tex-raw_html"]
         engine = "xelatex" if shutil.which("xelatex") else "tectonic"  # tectonic: small LaTeX engine for laptops
         cmd += [f"--pdf-engine={engine}", "--lua-filter", os.path.join(ROOT, "04_reconstruction", "fit_display_math.lua"),
                 "--include-in-header", os.path.join(ROOT, "04_reconstruction", "fit_display_math.tex")] if fmt == "pdf" else ["--standalone", "--mathjax"]
-        r = subprocess.run(cmd, capture_output=True, text=True, cwd=out)
+        if fmt == "pdf" and engine == "xelatex":
+            cmd += ["--pdf-engine-opt=-no-shell-escape"]
+        r = subprocess.run(cmd, capture_output=True, text=True, cwd=out, timeout=600)
         report["output"] = target if r.returncode == 0 and os.path.exists(target) else None
         report["pandoc_errors"] = r.stderr[-1500:] if r.returncode else ""
         report["pandoc_warnings"] = r.stderr[-3000:] if not r.returncode else ""

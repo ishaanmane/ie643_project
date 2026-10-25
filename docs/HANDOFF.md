@@ -1,5 +1,7 @@
 # START HERE — IE643 project handoff
 
+> **Interface update, 2026-10-25:** The current UI is Flask/Waitress with HEIC/HEIF input, persistent private access key, browser-session job isolation, CSRF protection and a managed temporary HTTPS launcher. See [INTERFACE_DEPLOYMENT.md](INTERFACE_DEPLOYMENT.md) and [Mac test evidence](../results/interface_validation/README.md). Mac interface testing passed; GPU launch awaits the adapter retrained on corrected data. The old stdlib/token-in-download instructions below are historical.
+
 Updated 2026-10-25, Asia/Kolkata, after the 12:15 GPU memory check and automatic-upload PDF review. Submission was due **today** according to the user. Current implementation commit: `540208d`; this documentation snapshot is subsequent to it. No secrets or application tokens are recorded here.
 
 ## 1. Read order and exact stopping point
