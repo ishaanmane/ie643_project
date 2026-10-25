@@ -66,7 +66,7 @@ def build_example(page, variant, max_pixels, with_answer=True):
     else:
         prompt = BOXED_PROMPT
     if variant == "boxed_json":
-        tags = json.load(open(os.path.join(DATA, "tags_draft", page + ".json")))
+        tags = json.load(open(os.path.join(DATA, "tags", page + ".json")))
         blocks = layout_blocks(tags, *image.size)
         prompt += LAYOUT_INTRO + json.dumps(blocks, separators=(",", ":"))
     messages = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": prompt}]}]
@@ -87,7 +87,7 @@ def check_inputs(variant, splits=("train", "val", "test")):
             if not os.path.exists(os.path.join(DATA, "annotations", p + ".md")):
                 problems.append(f"{p}: no annotation")
             if variant == "boxed_json":
-                tp = os.path.join(DATA, "tags_draft", p + ".json")
+                tp = os.path.join(DATA, "tags", p + ".json")
                 if not os.path.exists(tp):
                     problems.append(f"{p}: no tags")
                 elif os.path.exists(img):

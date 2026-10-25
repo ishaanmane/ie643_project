@@ -7,8 +7,7 @@ the pipeline uses:
   <tags-out>/<page_id>.json   blocks in reading order, boxes normalised to 0-1000
   <crops-out>/<page_id>_bN.png  one crop per figure / diagram / table block
 
-Output goes to data/tags_draft/ by default, NOT data/tags/: these are unverified
-model boxes. A page's file moves to data/tags/ only after a person has checked it.
+Output goes to data/tags/. These are Surya's boxes, used as-is (zero-shot, not hand-checked).
 
 Usage (from the repo root):
     python3 02_layout/surya_to_tags.py --results surya_out/<folder>/results.json --images data/processed
@@ -72,7 +71,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--results", required=True, help="results.json written by surya_layout")
     p.add_argument("--images", default="data/processed", help="the folder Surya was run on")
-    p.add_argument("--tags-out", default="data/tags_draft")
+    p.add_argument("--tags-out", default="data/tags")
     p.add_argument("--crops-out", default="data/crops")
     a = p.parse_args()
 

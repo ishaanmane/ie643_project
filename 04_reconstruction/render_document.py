@@ -175,7 +175,7 @@ def merge_split_figures(figs, target):
 
 def page_figures(page, data_dir=None):
     """Surya figure blocks of a page, with their position (0-1) in reading order."""
-    path = os.path.join(data_dir or D, "tags_draft", page + ".json")
+    path = os.path.join(data_dir or D, "tags", page + ".json")
     if not os.path.exists(path):
         return [], 0
     tags = json.load(open(path))
@@ -389,7 +389,7 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
                 continue  # the reviewed caption does not occur in this input variant
             if len(candidates) != 1 or candidates[0] in matched_desc:
                 raise ValueError(f"{page}: reviewed caption is ambiguous or already matched")
-            with open(os.path.join(data_dir, "tags_draft", page + ".json")) as f:
+            with open(os.path.join(data_dir, "tags", page + ".json")) as f:
                 tags = json.load(f)
             tagged = [b for b in tags["blocks"] if b["id"] == link["surya_block"]]
             if (len(tagged) != 1 or tagged[0]["bbox"] != link["bbox"]

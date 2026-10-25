@@ -1,7 +1,7 @@
 """Stage 2: Surya v2 layout on every page of data/processed/ (GPU machine).
 
 Starts its own vLLM server for Surya, runs surya_layout on the folder, stops the
-server, then converts the result to data/tags_draft/<page>.json and figure/table crops
+server, then converts the result to data/tags/<page>.json and figure/table crops
 in data/crops/. Same code path as the upload interface (06_interface/layout.py), so the
 batch run and uploads use one version: surya-ocr 0.22.1, vllm 0.32.0.
 
@@ -10,7 +10,7 @@ time data/processed/ is regenerated; old tags and crops are moved to a backup fi
 
 Usage (from the repo root, on the GPU machine):
     python3 02_layout/run_layout.py
-Output: data/tags_draft/, data/crops/, out/layout_<time>/surya_layout/ (logs, raw results.json)
+Output: data/tags/, data/crops/, out/layout_<time>/surya_layout/ (logs, raw results.json)
 """
 import argparse
 import shutil
@@ -36,7 +36,7 @@ def main():
     output = ROOT / "out" / f"layout_{stamp}"
     output.mkdir(parents=True)
     backup = ROOT / "out" / f"layout_backup_{stamp}"
-    for name in ("tags_draft", "crops"):
+    for name in ("tags", "crops"):
         if (data / name).exists():
             backup.mkdir(exist_ok=True)
             shutil.move(str(data / name), str(backup / name))
@@ -53,7 +53,7 @@ def main():
             shutil.move(str(output / f.name), str(data / "processed" / f.name))
     shutil.copy2(output / "surya_layout" / "processed" / "results.json", output / "results.json")
     crops = len(list((data / "crops").glob("*.png")))
-    print(f"pages {info['pages']}, tags {len(list((data / 'tags_draft').glob('*.json')))}, "
+    print(f"pages {info['pages']}, tags {len(list((data / 'tags').glob('*.json')))}, "
           f"crops {crops}, {time.time() - start:.0f} s; raw results {output / 'results.json'}"
           + (f"; previous tags/crops in {backup}" if backup.exists() else ""))
 

@@ -17,13 +17,13 @@ FIXES = json.loads((Path(__file__).resolve().parents[1] / 'reviewed_render_fixes
 class ReviewedFixTests(unittest.TestCase):
     def make_input(self, root):
         page = 'mlt_week06_page003'
-        for directory in ['tags_draft', 'processed', 'md']:
+        for directory in ['tags', 'processed', 'md']:
             (root / directory).mkdir()
         Image.new('RGB', (1501,2000), 'white').save(root/'processed'/f'{page}.jpg')
         tags = {'image_size':[1501,2000], 'blocks':[
             {'id':'b1','order':1,'type':'table','bbox':[283,7,704,80]},
             {'id':'b5','order':5,'type':'table','bbox':[211,304,621,351]}]}
-        (root/'tags_draft'/f'{page}.json').write_text(json.dumps(tags))
+        (root/'tags'/f'{page}.json').write_text(json.dumps(tags))
         (root/'md'/f'{page}.md').write_text('[Diagram: '+FIXES['figures'][0]['description']+']\n\n$$'+FIXES['math'][0]['original']+'$$')
         return page
 
@@ -59,7 +59,7 @@ class ReviewedFixTests(unittest.TestCase):
     def test_changed_box_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);page=self.make_input(root)
-            path=root/'tags_draft'/f'{page}.json'
+            path=root/'tags'/f'{page}.json'
             tags=json.loads(path.read_text());tags['blocks'][1]['bbox'][0]=212
             path.write_text(json.dumps(tags))
             with self.assertRaisesRegex(ValueError,'changed'):

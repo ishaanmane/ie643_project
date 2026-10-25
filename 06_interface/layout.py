@@ -42,7 +42,7 @@ def convert_results(results, data, pages):
         tags, warning = convert_page(page, item, str(image_path), str(crops))
         if warning: raise ValueError(warning)
         tags['source'] = 'surya-ocr 0.22.1 / ' + MODEL + '; unverified'
-        (data / 'tags_draft' / (page + '.json')).write_text(json.dumps(tags, indent=2))
+        (data / 'tags' / (page + '.json')).write_text(json.dumps(tags, indent=2))
 
 
 def stop_owned_server(proc):

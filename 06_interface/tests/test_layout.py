@@ -11,14 +11,14 @@ from layout import convert_results, stop_owned_server
 class LayoutTests(unittest.TestCase):
     def test_real_surya_schema_converts_picture_and_retains_equation(self):
         with tempfile.TemporaryDirectory() as tmp:
-            d=Path(tmp);(d/'processed').mkdir();(d/'tags_draft').mkdir()
+            d=Path(tmp);(d/'processed').mkdir();(d/'tags').mkdir()
             Image.new('RGB',(100,80),'white').save(d/'processed/p.jpg')
             item={'image_bbox':[0,0,100,80], 'bboxes':[
                 {'bbox':[10,10,40,40],'label':'Picture','position':0},
                 {'bbox':[50,10,90,40],'label':'Equation','position':1}]}
             r=d/'results.json';r.write_text(json.dumps({'p':[item]}))
             convert_results(r,d,['p'])
-            tags=json.loads((d/'tags_draft/p.json').read_text())
+            tags=json.loads((d/'tags/p.json').read_text())
             self.assertEqual([b['type'] for b in tags['blocks']],['figure','equation'])
             self.assertTrue(Path(tags['blocks'][0]['crop']).exists())
             self.assertIn('0.22.1',tags['source'])

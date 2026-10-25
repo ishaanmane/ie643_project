@@ -120,7 +120,7 @@ def main():
             ok = ids == sorted(sp[k]) and not absent
             report("PASS" if ok else "FAIL", f"boxed/{k}.jsonl: same pages as {k}, images exist",
                    "" if ok else f"{len(absent)} images missing; ids match: {ids == sorted(sp[k])}")
-            no_tags += sum(not os.path.exists(f"data/tags_draft/{i}.json") for i in ids)
+            no_tags += sum(not os.path.exists(f"data/tags/{i}.json") for i in ids)
         report("WARN" if no_tags else "PASS", "boxed variant: every page has Surya boxes",
                f"{no_tags} pages without boxes (Surya not run on them)" if no_tags else "")
 

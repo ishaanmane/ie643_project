@@ -18,7 +18,7 @@ Run all commands from the repo root.
 1. Surya runs on **preprocessed** pages, not raw scans. On the 10-page test this found the margin notes it missed on raw scans and removed the neighbouring-page bleed (`02_layout/experiments/SURYA_FINDINGS.md`).
 2. The full preprocessing must be **re-run on the fixed code** before Surya is run on all pages. The only full run predates the two page-crop fixes.
 3. Boxes are stored **normalised to 0-1000**, and figure crops are cut from **exactly the image Surya saw**. Preprocessing crops the page, so boxes from a processed image cannot be mapped onto the raw scan; the converter refuses to crop if the sizes differ.
-4. Surya output goes to `data/tags_draft/` (unverified). Only hand-checked pages go to `data/tags/`.
+4. Surya output goes to `data/tags/`, used as-is (not hand-checked).
 5. The split decision (notebook pages in test) comes **before** rebuilding the JSONL and before any fine-tuning.
 6. Deskew stays off (measured: it rotated straight pages and fails on chalkboards).
 
@@ -76,7 +76,7 @@ Output: `surya_out_all/surya_in_all/results.json`. Download it; it is the only S
 python3 02_layout/surya_to_tags.py --results surya_out_all/surya_in_all/results.json --images data/processed
 ```
 Output per page:
-- `data/tags_draft/<page>.json`: blocks in reading order, each with `type` (text, equation, heading, list, caption, table, figure, page_header, page_footer…), `surya_label`, `bbox` (0-1000), `skip_in_text` (true for headers and footers), `text_preview` (empty, for manual filling) and `crop` for figures and tables.
+- `data/tags/<page>.json`: blocks in reading order, each with `type` (text, equation, heading, list, caption, table, figure, page_header, page_footer…), `surya_label`, `bbox` (0-1000), `skip_in_text` (true for headers and footers), `text_preview` (empty, for manual filling) and `crop` for figures and tables.
 - `data/crops/<page>_bN.png`: the figure and table crops for the PDF. Gitignored; rerun the converter to regenerate them.
 
 Checked: on the 10 test pages it gives 128 blocks and 5 crops (neuron diagram, circle sketch, compile-flow figure and two more), and pointing it at raw scans instead writes no crops and warns.
@@ -84,7 +84,7 @@ Checked: on the 10 test pages it gives 128 blocks and 5 crops (neuron diagram, c
 ## Stage 3b: boxed variant (for the clean-vs-boxed comparison)
 
 ```bash
-python3 02_layout/experiments/draw_boxes.py                        # data/processed + data/tags_draft -> data/processed_boxed/
+python3 02_layout/experiments/draw_boxes.py                        # data/processed + data/tags -> data/processed_boxed/
 python3 00_dataset/build_dataset.py --variant boxed    # -> data/boxed/{train,val,test}.jsonl, same pages and splits
 ```
 Thin cyan boxes (3 px on a 2000 px page), a colour none of our inks use. The boxed files use `BOXED_PROMPT`, which tells the model the boxes are hints and to transcribe everything, including content outside the boxes (Surya misses some). Pages without Surya tags are copied without boxes and reported; the builder warns if any are left. The clean files (`data/*.jsonl`) are not touched. A model trained on the boxed set needs Surya and `draw_boxes.py` on every input at inference time too.
@@ -94,7 +94,7 @@ Thin cyan boxes (3 px on a 2000 px page), a colour none of our inks use. The box
 1. **Decide the split.** Currently no notebook-photo pages are in val or test. Option: move a block of IE802 pages and a few HumynLabs notes into test (`HELD_OUT` in `00_dataset/build_dataset.py`).
 2. **Rebuild** the JSONL, split file and checklist: `python3 00_dataset/build_dataset.py`. Pages still containing `??` are left out of every split until fixed. Then run `python3 00_dataset/check_dataset.py`: it must end with `0 FAIL` (current state: 0 FAIL, 4 WARN, the warnings being the 12 left-out pages, no notebook pages in val/test, and the `??` count).
 3. **Check labels by hand** (`data/VERIFICATION.md`): the 12 flagged pages, all test pages, a val sample. Edit `data/annotations/*.md`, then rebuild again.
-4. **Check layout boxes for about 20 test pages:** correct `data/tags_draft/<page>.json` (boxes, types, order), fill `text_preview`, and move the file to `data/tags/`.
+4. **Check layout boxes for about 20 test pages:** correct `data/tags/<page>.json` (boxes, types, order), fill `text_preview`.
 5. **Layout metric:** box overlap (IoU / mAP) and reading-order agreement between Surya's draft and the checked tags. Script not written yet.
 
 ## Stage 5: hand-off to OCR

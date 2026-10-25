@@ -1,7 +1,7 @@
 """Draw the Surya layout boxes onto the preprocessed pages (the "boxed" variant).
 
 For the clean-vs-boxed comparison: the boxed training set uses these images, the
-clean set uses data/processed/ as is. Boxes come from data/tags_draft/ (written by
+clean set uses data/processed/ as is. Boxes come from data/tags/ (written by
 02_layout/surya_to_tags.py) and are drawn thin, in cyan by default, a colour none of
 our inks use (MLT notes use red, green, blue and purple; IE802 has red notes).
 
@@ -38,7 +38,7 @@ def draw(image, blocks, colour, labels):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--images", default="data/processed")
-    p.add_argument("--tags", default="data/tags_draft")
+    p.add_argument("--tags", default="data/tags")
     p.add_argument("--out", default="data/processed_boxed")
     p.add_argument("--colour", default="0,255,255", help="R,G,B")
     p.add_argument("--labels", action="store_true")

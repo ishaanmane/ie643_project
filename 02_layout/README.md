@@ -11,7 +11,7 @@ python3 02_layout/run_layout.py
 ```
 
 Starts a private vLLM server, runs Surya on every image in `data/processed/`, stops the server,
-and writes `data/tags_draft/<page>.json` (blocks, boxes normalised to 0-1000) and
+and writes `data/tags/<page>.json` (blocks, boxes normalised to 0-1000) and
 `data/crops/<page>_bN.png` (one per figure/table). Previous tags and crops are moved to
 `out/layout_backup_<time>/`. Uses the same code as the upload interface (`06_interface/layout.py`)
 and the environments in `/home/intralab/workspace/ie643_layout_envs` (see `docs/OPERATIONS.md`).
@@ -69,4 +69,4 @@ os.environ["SURYA_INFERENCE_URL"] = "http://localhost:8000/v1"
 
 Why those server flags: `--dtype half` (the T4 has no bf16), `--limit-mm-per-prompt '{"video": 0}'` and a small `--max-num-batched-tokens` (otherwise vLLM's start-up memory check for video inputs runs the card out of memory), `--enforce-eager` (skips a memory-heavy optimisation). To stop a stuck server, kill by GPU process id (`nvidia-smi --query-compute-apps=pid --format=csv,noheader | xargs kill -9`); `pkill -f 'vllm serve'` also kills the shell running it.
 
-Convert Surya output to our tags format and crop figures: `python3 02_layout/surya_to_tags.py --results <results.json> --images data/processed` (writes `data/tags_draft/` and `data/crops/`). Full runbook: [../docs/PIPELINE_TO_OCR.md](../docs/PIPELINE_TO_OCR.md).
+Convert Surya output to our tags format and crop figures: `python3 02_layout/surya_to_tags.py --results <results.json> --images data/processed` (writes `data/tags/` and `data/crops/`). Full runbook: [../docs/PIPELINE_TO_OCR.md](../docs/PIPELINE_TO_OCR.md).

@@ -103,7 +103,7 @@ def build(include_flagged=False, variant="clean"):
         if missing:
             sys.exit(f"{len(missing)} pages have no boxed image in {image_dir}/ "
                      f"(run 02_layout/experiments/draw_boxes.py first): {missing[:5]}")
-        no_tags = [s for s in stems if not os.path.exists(f"data/tags_draft/{s}.json")]
+        no_tags = [s for s in stems if not os.path.exists(f"data/tags/{s}.json")]
         if no_tags:
             print(f"WARNING: {len(no_tags)} of {len(stems)} pages have no Surya tags, so their "
                   f"'boxed' image has no boxes. Run Surya on all pages first.")

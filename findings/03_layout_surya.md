@@ -31,7 +31,7 @@ Preprocessing helped where it is meant to (busy notebook photos) and changed a f
 ## Outputs
 
 - `02_layout/experiments/surya_results_all.json`: raw Surya output, the only part that needs a GPU.
-- `data/tags_draft/<page>.json` (`surya_to_tags.py`): blocks in reading order with type, box normalised to 0-1000, header/footer flag. Unverified drafts.
+- `data/tags/<page>.json` (`surya_to_tags.py`): blocks in reading order with type, box normalised to 0-1000, header/footer flag. Unverified drafts.
 - `data/crops/` (gitignored): figure and table crops for the PDF stage.
 - `data/processed_boxed/` (`draw_boxes.py`): thin cyan boxes, no labels (labels would cover handwriting and could be copied into the output).
 

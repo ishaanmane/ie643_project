@@ -197,7 +197,7 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
     started = time.time()
     data = output/'data'
     (data/'processed').mkdir(parents=True)
-    (data/'tags_draft').mkdir()
+    (data/'tags').mkdir()
     (output/'predictions').mkdir()
     originals = output/'uploads'; originals.mkdir()
     uploads=[]
@@ -269,7 +269,7 @@ def run_document(inputs, output, recognizer, title='Lecture notes', max_pages=20
         raise RuntimeError('PDF compilation failed; see documents/upload_notes/report.json.')
     package=output/'document_bundle.zip'
     with zipfile.ZipFile(package,'w',zipfile.ZIP_DEFLATED) as archive:
-        for directory in ('documents','predictions','uploads','data/tags_draft','surya_layout'):
+        for directory in ('documents','predictions','uploads','data/tags','surya_layout'):
             for path in sorted((output/directory).rglob('*')):
                 if path.is_file(): archive.write(path,path.relative_to(output))
         for name in ('inference.json','preprocessing.json'):
