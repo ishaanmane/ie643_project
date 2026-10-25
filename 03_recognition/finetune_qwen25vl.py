@@ -13,7 +13,7 @@ Model choice uses val only (best epoch by validation loss); test is scored once,
 
 Input: page image (with Surya boxes for boxed / boxed_json) + instruction (+ the page's
 layout tags as JSON for boxed_json). Target: data/annotations/<page>.md. Only the
-answer is in the loss. Outputs: runs/qwen25vl_<variant>/ (adapter), preds/ (predictions).
+answer is in the loss. Outputs: runs/<run-name>/ (adapter), preds/<run-name>_*/ (predictions).
 """
 import argparse
 import csv
