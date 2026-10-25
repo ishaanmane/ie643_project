@@ -38,3 +38,5 @@ python3 -m unittest discover -s 04_reconstruction/tests -v
 ```
 
 **Expect:** 7 interface tests and 13 renderer tests pass. Interface tests require localhost binding but no model download or GPU.
+
+If the email login redirect drops the URL fragment, paste the application token directly into the form after login. This is the value after `#token=` in the notes-ui terminal, not the email PIN. Fragment changes are also handled without requiring reload. The static HTML is read per request, so pulling this UI fix requires only refreshing the browser, not restarting the GPU server.
