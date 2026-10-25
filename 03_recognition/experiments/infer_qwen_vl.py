@@ -3,9 +3,9 @@
 Run from the repo root on a GPU machine. NOT yet run on a GPU.
 
 Zero-shot baseline on validation pages:
-    python 03_recognition/infer_qwen_vl.py --split data/val.jsonl --out preds/base_val
+    python 03_recognition/experiments/infer_qwen_vl.py --split data/val.jsonl --out preds/base_val
 With the fine-tuned adapter:
-    python 03_recognition/infer_qwen_vl.py --split data/val.jsonl --adapter /kaggle/working/qwen_lora --out preds/lora_val
+    python 03_recognition/experiments/infer_qwen_vl.py --split data/val.jsonl --adapter /kaggle/working/qwen_lora --out preds/lora_val
 Resumable: pages that already have a .md in --out are skipped.
 Score with: python 05_evaluation/evaluate.py --pred preds/base_val --split data/val.jsonl
 """

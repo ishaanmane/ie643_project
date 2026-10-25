@@ -17,6 +17,7 @@ labels), not from the copy inside the JSONL; the split file only says which page
 """
 import argparse
 import csv
+import json
 import os
 import re
 import statistics as st
@@ -24,8 +25,21 @@ import sys
 
 import jiwer
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "03_recognition"))
-from common import load_records  # noqa: E402
+
+def load_records(jsonl_path):
+    """One dict per page of a split file: id, image_path, answer (JSONL copy of the label)."""
+    recs = []
+    with open(jsonl_path) as fh:
+        for line in fh:
+            user, assistant = json.loads(line)["messages"]
+            image_path = next(c["image"] for c in user["content"] if c["type"] == "image")
+            answer = assistant["content"]
+            if not isinstance(answer, str):
+                answer = "".join(c.get("text", "") for c in answer)
+            recs.append({"id": os.path.splitext(os.path.basename(image_path))[0],
+                         "image_path": image_path, "answer": answer})
+    return recs
+
 
 MATH = re.compile(r"\$\$(.+?)\$\$", re.S)
 

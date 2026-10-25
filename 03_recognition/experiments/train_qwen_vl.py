@@ -4,10 +4,10 @@ Run from the repo root on a GPU machine (Kaggle T4). NOT yet run: the Unsloth/TR
 calls follow Unsloth's published vision notebooks and may need a small adjustment.
 
 Pilot (find the largest image size that fits, and the seconds per step):
-    python 03_recognition/train_qwen_vl.py --max-steps 20 --limit 40 --grad-accum 1 --max-pixels 1000000
+    python 03_recognition/experiments/train_qwen_vl.py --max-steps 20 --limit 40 --grad-accum 1 --max-pixels 1000000
 (with --grad-accum 1, sec/step is seconds per page: full training time = sec/step x 324 x epochs)
 Real run:
-    python 03_recognition/train_qwen_vl.py --epochs 3 --max-pixels 1000000
+    python 03_recognition/experiments/train_qwen_vl.py --epochs 3 --max-pixels 1000000
 Saves the LoRA adapter (a few hundred MB) to --out.
 """
 import argparse

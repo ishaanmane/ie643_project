@@ -3,9 +3,13 @@ finetune_qwen25vl.ipynb, for running on a remote GPU machine inside tmux.
 
 Run from the repo root:
     python3 03_recognition/finetune_qwen25vl.py --dry-run           # checks + examples only, no GPU
-    python3 03_recognition/finetune_qwen25vl.py --pilot             # baseline + 5 training steps
-    python3 03_recognition/finetune_qwen25vl.py                     # real run (baseline is reused)
-    python3 03_recognition/finetune_qwen25vl.py --variant clean     # comparison run
+    python3 03_recognition/finetune_qwen25vl.py --pilot             # 5 training steps: memory and speed
+    python3 03_recognition/finetune_qwen25vl.py --test              # real run: baseline, train, val + test scores
+
+Each run is isolated by --run-name (default final_clean): adapter in runs/<run-name>/,
+predictions in preds/<run-name>_{base_val,val,base_test,test}/. An existing final adapter is never
+overwritten. Predictions are resumable, so a crashed run continues where it stopped.
+Model choice uses val only (best epoch by validation loss); test is scored once, at the end.
 
 Input: page image (with Surya boxes for boxed / boxed_json) + instruction (+ the page's
 layout tags as JSON for boxed_json). Target: data/annotations/<page>.md. Only the
@@ -34,10 +38,10 @@ def log(*a):
 
 def check_data(variant):
     rows = list(csv.DictReader(open(os.path.join(D, "processed", "preprocess_report.csv"))))
-    warped = sum(r["crop"] == "quad" for r in rows)
-    log(f"preprocessed pages: {len(rows)}, warped: {warped} (55 = corrected images)")
-    if warped != 55:
-        sys.exit("STOP: data/processed is not the corrected version; rerun 01_preprocessing/batch_preprocess.py")
+    whitened = sum(r.get("crop") == "whiten+brightness" for r in rows)
+    log(f"preprocessed pages: {len(rows)}, desk-whitened: {whitened} (19 = current version)")
+    if len(rows) != 410 or "bg_removed" not in rows[0]:
+        sys.exit("STOP: data/processed is not the current version; rerun 01_preprocessing/batch_preprocess.py --force")
     problems = Q.check_inputs(variant)
     log(f"input problems for {variant}: {len(problems)}")
     if problems:
@@ -69,16 +73,22 @@ def predict(model, processor, pages, out_dir, variant, max_pixels, max_new_token
         log(f"[{i}/{len(pages)}] {p}: {len(pred)} chars, {time.time() - t:.0f}s")
 
 
-def score(pred_dir, title):
+def score(pred_dir, title, split="val"):
     r = subprocess.run([sys.executable, os.path.join(ROOT, "05_evaluation", "evaluate.py"),
-                        "--pred", pred_dir, "--split", os.path.join(D, "val.jsonl")],
+                        "--pred", pred_dir, "--split", os.path.join(D, split + ".jsonl")],
                        cwd=ROOT, capture_output=True, text=True)
-    print(f"\n=== {title} ===\n{r.stdout or r.stderr}", flush=True)
+    text = f"\n=== {title} ===\n{r.stdout or r.stderr}"
+    print(text, flush=True)
+    with open(os.path.join(pred_dir + "_score.txt"), "w") as fh:
+        fh.write(text)
 
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--variant", default="boxed_json", choices=["boxed_json", "boxed", "clean"])
+    p.add_argument("--variant", default="clean", choices=["clean", "boxed_json", "boxed"],
+                   help="clean = final; boxed variants are the dropped experiment")
+    p.add_argument("--run-name", default="final_clean")
+    p.add_argument("--test", action="store_true", help="also baseline + fine-tuned scores on the test split")
     p.add_argument("--pilot", action="store_true", help="5 training steps to measure memory and speed")
     p.add_argument("--dry-run", action="store_true", help="checks and example building only, no model")
     p.add_argument("--max-pixels", type=int, default=1_000_000)
@@ -87,14 +97,17 @@ def main():
     p.add_argument("--grad-accum", type=int, default=8)
     p.add_argument("--lora-r", type=int, default=16)
     p.add_argument("--max-new-tokens", type=int, default=1280)
-    p.add_argument("--eval-pages", type=int, default=10, help="val pages for baseline/fine-tuned scoring (25 = all)")
+    p.add_argument("--eval-pages", type=int, default=0, help="val pages to score (0 = all)")
     p.add_argument("--skip-baseline", action="store_true")
     a = p.parse_args()
 
-    out_dir = os.path.join(ROOT, "runs", f"qwen25vl_{a.variant}")
-    val_pages = Q.page_ids("val")[:a.eval_pages]
-    base_pred = os.path.join(ROOT, "preds", f"base_{a.variant}_val")
-    ft_pred = os.path.join(ROOT, "preds", f"lora_{a.variant}_val")
+    out_dir = os.path.join(ROOT, "runs", a.run_name)
+    if os.path.exists(os.path.join(out_dir, "final_adapter")) and not a.dry_run:
+        sys.exit(f"STOP: {out_dir}/final_adapter exists; choose another --run-name")
+    val_pages = Q.page_ids("val")[:a.eval_pages or None]
+    test_pages = Q.page_ids("test")
+    pred = lambda name: os.path.join(ROOT, "preds", f"{a.run_name}_{name}")
+    base_pred, ft_pred = pred("base_val"), pred("val")
 
     # 1. data
     check_data(a.variant)
@@ -137,6 +150,9 @@ def main():
     if not a.skip_baseline:
         predict(model, processor, val_pages, base_pred, a.variant, a.max_pixels, a.max_new_tokens)
         score(base_pred, f"BASELINE zero-shot ({a.variant}, {len(val_pages)} val pages)")
+        if a.test and not a.pilot:
+            predict(model, processor, test_pages, pred("base_test"), a.variant, a.max_pixels, a.max_new_tokens)
+            score(pred("base_test"), f"BASELINE zero-shot ({a.variant}, {len(test_pages)} test pages)", "test")
 
     # 5. LoRA training
     from peft import LoraConfig, get_peft_model
@@ -177,8 +193,12 @@ def main():
     log("adapter saved to", adapter)
     model.config.use_cache = True
     predict(trainer.model, processor, val_pages, ft_pred, a.variant, a.max_pixels, a.max_new_tokens)
-    score(base_pred, f"BASELINE zero-shot ({a.variant})")
-    score(ft_pred, f"FINE-TUNED ({a.variant})")
+    score(base_pred, f"BASELINE zero-shot ({a.variant}, val)")
+    score(ft_pred, f"FINE-TUNED ({a.variant}, val)")
+    if a.test:
+        predict(trainer.model, processor, test_pages, pred("test"), a.variant, a.max_pixels, a.max_new_tokens)
+        score(pred("base_test"), f"BASELINE zero-shot ({a.variant}, test)", "test")
+        score(pred("test"), f"FINE-TUNED ({a.variant}, test)", "test")
 
 
 if __name__ == "__main__":
