@@ -410,7 +410,9 @@ def render_unit(unit, pages, md_dir, out_root, fmt, outline=None, run_id=None, r
             cap = caption.replace("[", "\\[").replace("]", "\\]").replace("\n", " ")
             return f"![{cap}]({'figures/' + name}){{width={figure_width_percent(crop.size):.4f}%}}"
 
-        body = [f"<!-- page: {page} -->"]
+        # Page marker for the Markdown file. With secure_input the PDF is built with raw HTML
+        # off, so an HTML comment would be printed as text on the page; leave it out there.
+        body = [] if secure_input else [f"<!-- page: {page} -->"]
         pnum = int(re.search(r"page(\d+)$", page).group(1))
         for k, b in enumerate(blocks):
             bid = f"p{pnum}.{k}"
