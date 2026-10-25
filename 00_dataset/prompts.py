@@ -1,0 +1,48 @@
+"""The two training-example 'instructions', in one place.
+
+Everything else — the model, the JSONL format, the training loop — is identical for
+both. The only thing that differs is this text, because it's just a string sitting
+inside each training example's user turn, not a mode switch anywhere else. Both
+build_dataset.py (our 205 pages) and build_external_dataset.py (public equation
+datasets) import from here, so there is exactly one place that defines what each
+instruction says.
+"""
+
+PAGE_PROMPT = (
+    "Convert this handwritten lecture note page to clean structured Markdown. "
+    "Write math in LaTeX: $...$ for inline math and $$...$$ for display equations. "
+    "Preserve headings (#, ##), bullet points, numbering, and logical structure. "
+    "Describe diagrams as [Diagram: ...]."
+)
+
+# Same instruction for the "boxed" variant (pages with Surya layout boxes drawn on),
+# plus one sentence so the model knows what the boxes are and does not skip content
+# Surya missed.
+BOXED_PROMPT = PAGE_PROMPT + (
+    " Thin cyan boxes mark detected layout blocks; they are hints only, so transcribe"
+    " everything on the page, including anything outside the boxes."
+)
+
+EQUATION_PROMPT = "Convert this handwritten mathematical expression to LaTeX."
+
+
+def build_record(image_path, prompt, ground_truth):
+    """One training example: an image + an instruction, paired with the correct answer.
+
+    Used for both page-level examples (prompt=PAGE_PROMPT) and single-equation
+    examples (prompt=EQUATION_PROMPT) — same shape either way, so the model just
+    sees "some images come with instruction A, some come with instruction B" and
+    learns to behave differently depending on which one it's given.
+    """
+    return {
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "image", "image": image_path},
+                    {"type": "text", "text": prompt},
+                ],
+            },
+            {"role": "assistant", "content": ground_truth},
+        ]
+    }

@@ -1,0 +1,28 @@
+{
+  "description": "Explicit source-reviewed rendering fixes; not automatic model corrections or new accuracy evidence.",
+  "math": [
+    {
+      "original": "= E\\left[\\|\\hat{w}_{ML}-w\\|^2\\right] \\quad \\text{(Expected value of the norm of estimator & $w\\in\\mathbb{R}^d$, over randomness in $y$)}",
+      "replacement": "= E\\left[\\|\\hat{w}_{ML}-w\\|^2\\right] \\quad \\text{(Expected value of the norm of estimator \\& } w\\in\\mathbb{R}^d \\text{, over randomness in } y \\text{)}",
+      "reason": "Escape literal ampersand and move dollar-delimited math out of text mode; retain the original symbols and words."
+    }
+  ],
+  "figures": [
+    {
+      "page": "mlt_week06_page003",
+      "description": "A row of boxes labeled $F_1, F_2, \\dots, F_k$, each representing a fold.",
+      "surya_block": "b5",
+      "bbox": [
+        211,
+        304,
+        621,
+        351
+      ],
+      "image_size": [
+        1501,
+        2000
+      ],
+      "reason": "Visually verified against the processed source: the K-fold row is Surya table b5, not training/validation table b1."
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "status": "AI-assisted audit complete; two unreadable pages excluded; not full human verification",
+  "date": "2026-10-25",
+  "scope": "76 test pages; AI-assisted visual comparison, not full human verification",
+  "pages": [
+    {
+      "id": "hlcs_note17_page001",
+      "scan_sha256": "77d7bdd6ab306b499caf1df80be9a398d356ab03d4d0e4ee20b43bbb4954370a",
+      "label_sha256": "0d40b6cc5fe9ef3aa8dd525a89a5d9a87061becb8d9c6eb240fa0b38e067ea14",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "hlcs_note18_page001",
+      "scan_sha256": "d7159682ed1cdff7e3ccffd9e8b33c5b95fc37388baff7e67a879713109e809d",
+      "label_sha256": "42e85d4fbbe633abab378ab6bb9ba6b98749a91b8c954e9b41b8ff41ce8bb709",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "hlcs_note19_page001",
+      "scan_sha256": "ea1a693df0a5babc71eaa7e1ee80c8f39a5e45c32a22c1b445528fde716d7e94",
+      "label_sha256": "66aca0a8fa6e47a6d8cf3d4ac9611f554463b62a2eb1b4bc4f73e4a478d6c281",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "hlcs_note20_page001",
+      "scan_sha256": "361355b529888888f90ae27f43e917ed9e0de40f6f53a1794330e6272dbf5203",
+      "label_sha256": "5b8a7e897bd2ee7e84dffda1cec522f0a31566a808f411d42e2e8ae803c8ebc2",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page001",
+      "scan_sha256": "8ad767bced428b54ac6bb08d66fe5ba71c5e741df0c713f0e0dd00f576375095",
+      "label_sha256": "f99df161e1f1a57d0ba2b15ca506a1a18b92b06fcc22da1953c228c891109fb6",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page002",
+      "scan_sha256": "a918710f7f5560afb74211715fd7c585b0ef8d5b0b25bf7d4abe3ba2b47793a3",
+      "label_sha256": "26f1f224991bbf642c5d6d0156818424ca90d63308acf4678c8c686fbe3206fd",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page003",
+      "scan_sha256": "319422259fb8b91e8491b55588f1a99699793a292c25afe01c882bf0cc2cd82d",
+      "label_sha256": "8c32ac8372dc5a1c085c6062b38f48aee84ba32ad6440f572f4d5ada25db2442",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page004",
+      "scan_sha256": "f656aedaf3cb1e59bd3ee1136fcb66510b90564fa676eea9e625e375c1be423d",
+      "label_sha256": "dc35f29d613b1284968c1b184a329d11e90ca9465ccd6218c9e3bace1ef1a635",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page005",
+      "scan_sha256": "388784ee1e418efc2c4db4f8d1c1820f1cca70cddc1624ec57e2b7c1be9a6d6a",
+      "label_sha256": "863b2fed5c79527f60e23b831fd12487fa92664a8221357ff71a6cf1ff541ddc",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page006",
+      "scan_sha256": "ea862ecd02c92136693c5e420828d637e61f99851b96f5c517903cae20d88273",
+      "label_sha256": "063c76c5fef999b65711b8e1e3c28ac321d428191d2c82c02e36b5e8b3c939a6",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page007",
+      "scan_sha256": "30582bf74afccc9454cecf3b63dba488fc8d197f4ded52e17a3338bdfc53ebfc",
+      "label_sha256": "dd5d4dfd8d7a8b2309b3152482412af4d1d02daf69a17159883632e4364dd107",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page008",
+      "scan_sha256": "a75b84bcb1c9cf2955b4f817c10ffcfaf042d3366596735594ba6fb5754b2838",
+      "label_sha256": "d86b6b98d3a1b6d67f4d40489987d9f354e524802c2a41948c796b55b6f87fa3",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page009",
+      "scan_sha256": "f8f80e30234bcf5f9f4aacc1bd2f4cbb12b04cc15715e3bee8ff6753c884805a",
+      "label_sha256": "60e04a9b198d0329b7e67e66e09afedf48de6f79aed0bc807452902a014af5bb",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page010",
+      "scan_sha256": "aede382a2092d556fb846f1ed55beb644368c05bd67efd72544bdd9cd01ddfc0",
+      "label_sha256": "fd7c9f4d13c0e16cf5a7bcd216f2d12ae7eba77d5eb9c6505a7f5310bebaf1b4",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page011",
+      "scan_sha256": "3c3c4ffd586e2c2fc540b324ce570d28f683c8e79146e6bbea8b361d39806089",
+      "label_sha256": "5482161025693c640cea0836558218aee1256aff8c389cd61fcfb499054df65c",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page012",
+      "scan_sha256": "a5dae3edbd9a7e78f2e498a9f147fd73a4feb05905aa92533274d7f6209401a6",
+      "label_sha256": "fb07b5e50bcd7cda56e131e4198c6f6ae5e32ee2a47e44cc0e2b0023b50972c0",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page013",
+      "scan_sha256": "6aef02c13e36c54990ceb1db55ed7d4528bd2e03f0edee717a727e5c9894d308",
+      "label_sha256": "e8b618103ae1aeb8d3f5f8ebb4c6baff124167e7e55e5a9d72d910354bbecede",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page014",
+      "scan_sha256": "e70ea7d33f7c312cff8a1941b11346e43d7395b623a8477277a28025e8b01f93",
+      "label_sha256": "a001261876ec5f447308415e38c570ae2f47d635471fb8d430847ed415a9902e",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec03_page015",
+      "scan_sha256": "d7bddc9a4dfaa09153b339c638bd83bd216009cdd50fd24c0d48f587b53d3ca8",
+      "label_sha256": "122ac4971518d09d7d16bf48561961b058ac35ca29b44290db89b6582c15336f",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page001",
+      "scan_sha256": "70b93c960d55937a56f81ac0d949a2a7aadd8ede270da946b7e23b7040baabae",
+      "label_sha256": "452fd520bff3d072d5f65b80d9dbf920e066852b535e5d158d91947fd4bf5373",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page002",
+      "scan_sha256": "a1eef9bc1bd9aba9fcc96a64bf193aea076f3ae09243db2afc6f225fc8e516ee",
+      "label_sha256": "f857ae4bc96570c7b23beebae6b1160e7fa001d124fb71d73c204ca685a61f54",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page003",
+      "scan_sha256": "1688685fbbb9f1f2c6abb0e667a51119fa168d6ae27234ae256984f792efc0b1",
+      "label_sha256": "da660b087f61b0be6f97aa26ab94be0625aa2f37cf47eab93fa5b4406b312bed",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page004",
+      "scan_sha256": "e804dab563935b7cf5705ceb06fcfde6726e0f8b990e9726b205a3947c161c9e",
+      "label_sha256": "59941f76244de16fb784881908d9a57ac97e040ac955adecc88a048c7c84056a",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page005",
+      "scan_sha256": "3a2b5597413b33819b3c488de3c0c7cc4959a408084081af902a7afebff4ef70",
+      "label_sha256": "762edce536fd821531016f4664f0b8aad22fbba1902e8724b7beb44134135755",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page006",
+      "scan_sha256": "3acd2380e9c39b332c8a326d6b8e1bd767491e2a681bcac68310b035ed8b6b5d",
+      "label_sha256": "905016af381f9bb4628cae257229ff97d3b6930acc4744f620a2d8862660df1d",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page007",
+      "scan_sha256": "80302773a151ca14983bb695b034067d6fdb514d6279c7d3eb8e6ef6f53a8dab",
+      "label_sha256": "dc3ae924db08927f30e553f0fc5bd36fbed98378f9816fae4b638ead2a3cab9f",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page008",
+      "scan_sha256": "c895cb678ebfc439852bc85f319b51e5def6e517e320a7e9f7da5a68f3c99886",
+      "label_sha256": "b03ad0c1a4ce2df80d1f5dddc35ef4e6df809aa690111070d6c905084bec07b3",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page009",
+      "scan_sha256": "dd9bd34cdc72e4088f8f877d26b2b9bfe5f116255a4e7c7f36adb66d3ea45310",
+      "label_sha256": "28d979ca650a2d3199628c8ea22ec50750770f10926e4687874edc71fd24dd48",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page010",
+      "scan_sha256": "1a98b7adbfec01cfe33df5dc59edf043202372abaf2e9d29963d2d9bd13271ab",
+      "label_sha256": "4b77495cc877e41c75c326bb4c32eed9fdb0b0ea3a8cc8ec635e6df469ada01d",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page011",
+      "scan_sha256": "06abcf00cf661289ce49cfd7a5ea623f0efd0ea071a6f807b3f3233aeef564af",
+      "label_sha256": "9e334b28fb1c067f0792928ae77d63ffedf135a1865597fd15e48bf2320d8507",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page012",
+      "scan_sha256": "e04481522c8fa734cf0c565e8597968b0c3ec6f406fb3b343882dc7902e963c3",
+      "label_sha256": "8802a90479f099216c326da21aa96bd32a068a5ec757e9ae537420df84cf7c41",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page013",
+      "scan_sha256": "2af734cd2f01ac7ae7e233b218fb91484ce08a0048e4371b4596a4b988ac8170",
+      "label_sha256": "fdfcdfe2ac8bf4a7a39b53ddd84f74dc196a9b2a193575111f4e78576d44c09e",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page014",
+      "scan_sha256": "27feb7d73daa779be75dc327afd4d32dd0ff76df06d547a96eeff3cd5fc170f9",
+      "label_sha256": "a69aff896d4b496c082bf3aaa8c347b6e13673ee32fbcbe225fc987628943a08",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page015",
+      "scan_sha256": "c4c0d51bc3021e4df85d344fdf986976d22913422e9daa6c5ad7bfe7f1e98f54",
+      "label_sha256": "f6017bb9082cbb6ce8a3c54fe7447e10ec841a739fd541eed1ced19ba0584906",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page016",
+      "scan_sha256": "c8832f3a5ca3181ae32225d87cbbeb853bfcddf3a9a6deb1508126412e1865fd",
+      "label_sha256": "170fa79e2f168adfa44e7e41a7e035f302540854347197e0ad744ed83b82a440",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page017",
+      "scan_sha256": "d6b55480a8aa530aabe5377f794508cfc917bce4d7048e74c7790750c70608a9",
+      "label_sha256": "f185a5d7319f72fb43c3b365a0a77809c3f7d3ec8ce25402b6b444af669761e9",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page018",
+      "scan_sha256": "f09f89b05619a4ecdd1703ff69e41226e37b13dd72518538ba3cd60e5a686772",
+      "label_sha256": "287ddcb23645d3f5546826303c378aca942578745de28ac6b98c08437728f683",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie643_lec09_page019",
+      "scan_sha256": "130282d8a04010db0be1395fe82f60827717ffd225a2f6b8b85897c28a4865ed",
+      "label_sha256": "65481911a286b365dbd7d678f3a7ec1a6a352db65768a1a196cd73283a675c0b",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page045",
+      "scan_sha256": "f43c833fb0f89369f235061f16c84162ae4eaae6d3c764974fe0800922435a6b",
+      "label_sha256": "80d8660f08a66aa8a4af5c24c58575e672974d6c4db7079b79aa5f857d665ec1",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page046",
+      "scan_sha256": "f58a68026d4d83b8973f22b576ba9896268536ce348260857a473a74ce637974",
+      "label_sha256": "cbf55fb406d3a3746099508d8313fde0ddb38ea7d8ef61228a8e36cda088a0c4",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page047",
+      "scan_sha256": "d45ddca83a6a599df7783fece43f93e877a47f4862a63dcc2e3a0da19cc3556d",
+      "label_sha256": "c4476aa349ce58e4e793616952be865fc26b22f20e5ee46ef2943f7b8772515f",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page048",
+      "scan_sha256": "cf7d9f22926e21f7bbdd52e62c1d9f772baa89b6103a00db01cae7f580c77388",
+      "label_sha256": "7ce4586bf06e7a77deaeef2ec2385e80861815f958de974cf57908493c91766a",
+      "eligible_for_test_scoring": false
+    },
+    {
+      "id": "ie802_notes_page049",
+      "scan_sha256": "7836b28400d43a44f6054bda3d275b162353e5f465a6fe68d5451b8c5dda1762",
+      "label_sha256": "136d981e8b28bacf43822dcad59d93bc3b512b77b9799d445cc703e9b213eb10",
+      "eligible_for_test_scoring": false
+    },
+    {
+      "id": "ie802_notes_page050",
+      "scan_sha256": "362e8627786958c18a4286b2562021de993b7f86d53b80d7b45c0af1b85ae5bb",
+      "label_sha256": "cd2cb72d5c9da1185c20c53e1f5872682e36f6e14a0e8b8f6ca5a6fe59455ea9",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page051",
+      "scan_sha256": "bd2eddf896eef5c7fd8ba08e78d5bd483c408939be6905b6f5002514c9b9a56d",
+      "label_sha256": "4bb5648b2203b8eac14330f1ec51cde130ea87a62bcdb52ad6e25876ab9e8b40",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page052",
+      "scan_sha256": "50c02cc661885c2a33b716892a1a92fbf7193309f4a5395293c7ba82aa2b5fee",
+      "label_sha256": "b2ca995ac5216a2a7e678a1595d943afa4b32d8176f857afdafcc4080f692191",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page053",
+      "scan_sha256": "e9c45121ae2341c29cc20d89a0df2286ce5f5e311b2935c9bd42927bff3ec876",
+      "label_sha256": "db2ccef99cae6bac047ef6f07ce935b1a63a9d2c3be8bfc49609f33f762ccdb2",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page054",
+      "scan_sha256": "9536d1dbfdd104816a7ae0412a3dc3a25db242686550291f82739b1464b1230e",
+      "label_sha256": "6cfe7a23a3ffe8b776c1ec85fa91c342844a3e53d22df66e7842b09db05406b2",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page055",
+      "scan_sha256": "52e99d9b1d00ba9a6c7f6229811b8fe73f3b5f81e927046c8223ed20c03c6e37",
+      "label_sha256": "baa536521d441cb7f2204321890ce4d4424a3aa16237d26f04177410ff45e3b4",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "ie802_notes_page056",
+      "scan_sha256": "9a3cf921069d05a09d9d71ab9465e6af8ce7513e33f98b411066ce8f11a2adba",
+      "label_sha256": "a6c781324e8afec28328f1082c2a1c359c130d93ce7d7a5c08985bd23f1de913",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page001",
+      "scan_sha256": "d843f88ea4eb5c6eba0dc7ce76619b56f22207c5ec8e614e22ef46adf1af9c24",
+      "label_sha256": "f0d46a012d3926dd22b957dff6b32a7b40fdd73862dc357a5f3764f6eb48c4bb",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page002",
+      "scan_sha256": "558bba12c00af37e997f90e00998bdc655279cc6686c6672de227f9281223212",
+      "label_sha256": "0df57d1f21856cbae667050426654c6de668219afa7218a47a7631e4d35b2859",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page003",
+      "scan_sha256": "5c77d63bc0e4cf57b0c5bdfd6de45aa12b6a85d1025e4d104077a258fa4806d7",
+      "label_sha256": "02ef2ea6a5bc8c803bd67a6cb4fb27311c7b48bcd575b8434dcd325b34fc9f9c",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page004",
+      "scan_sha256": "86ed8a0acfc2ad50e1a7f8d129c492521e2a932bacb133ed5fedb894184bc947",
+      "label_sha256": "1ba85a0c7579cd2e67f3d8b2e511557963a7d4a9d68378e55f6ad5d4afa99c88",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page005",
+      "scan_sha256": "57cc17cc7aa0c69ca26d5bbf6b2f34fe81be57e11c8b65bbd568cefbd4a042eb",
+      "label_sha256": "b8f3a8ea112d472fdf20932822d1cb698c242698953f776d5f6a8463118d1034",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page006",
+      "scan_sha256": "9ca1e51875e61e8c53336799836347338303e7d62e928a60535e1b1e3fdda46e",
+      "label_sha256": "2ce52c0aa0cd54582a4b6767da13f047131632a471b0692cf8fca52f61bbfbc5",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page007",
+      "scan_sha256": "773aa9b354c9ba715b7a310e94e597dcea9e5429c516202eacc7ca68ce22b41d",
+      "label_sha256": "9a720db4777390d2ab2e7f3b5018611b1894e79f3da937c65ac9e4046f221306",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page008",
+      "scan_sha256": "fbc95b8b7e42dbff6e4b26b20be0f20104bf45413486244dc859b1f2f9e1132d",
+      "label_sha256": "5df410385bbd05404116307c5d033eb54381956325b1041bdad7b59f3db0c002",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page009",
+      "scan_sha256": "c3881d29f6638e18802b9e930126b8a742b632c0047403a719f48d998317eeaa",
+      "label_sha256": "cb0faba4945bc72d5a24474661460405f8669c54aca0ce0fe063bed2dbfb3650",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page010",
+      "scan_sha256": "cfebde1c90c391ada86ae4c090d16e2b3fee51a79e947886ec7b9324d81669ea",
+      "label_sha256": "cecac8f9bc059c634cbcbf3aab62d45aa7bd77a722b639d30311fcc3b4f9aea1",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page011",
+      "scan_sha256": "495a6d7737b840942be28e7bb61057c5cbb5a0c051b0b1e7f290aa9ea4b122c0",
+      "label_sha256": "aa0ef9d4b0abb0076bb311f935e4605f706f281fdc8a8866a257d193ee8f38a3",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page012",
+      "scan_sha256": "0e2c6f3c8ba6f1430576334756621418c0b3d1d6cd7e40ded5c36daa0bbd886e",
+      "label_sha256": "f32ba58eff0c85b41f988a4e27d6277047e76b68731f22d240b11537bfe2cb6f",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week03_page013",
+      "scan_sha256": "8d5d101827f0cccf2489110b4bb5cb9252fde7e795e549822c645b43ce1b5481",
+      "label_sha256": "1a6141009545620602b64d3497f2b0af978da2c7ea56427a21541f71ccf00966",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page001",
+      "scan_sha256": "788b90c164ebde04a8f1c0c8f93f360f442e17838bd034ecd39bb142358359c2",
+      "label_sha256": "cbcf272f4811c4341a80875e686eccc4a11d511ea5f3c23bc0005aed4852f538",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page002",
+      "scan_sha256": "595e649d36641fd26cf07e991267186844140fd2823c1c1d61f4b77bda8c959d",
+      "label_sha256": "9f3f3754fac9f2607f4c445319b15425c3ebbd998fb44e54e14dc60ab3cfae8a",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page003",
+      "scan_sha256": "b5fd9ca9f004d915361afe3324a67d477f38a3e0e0b5e6b35d0c49b8cfaf9362",
+      "label_sha256": "e0746905d575b4592b243209363d32a6a3265f6f374d81299e5b90b165ee6cbb",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page004",
+      "scan_sha256": "20f9523b43a30308055d1c7bccc884864fe5cc9c19e10d4fd1f0b08c37ba4bff",
+      "label_sha256": "8dd68f30d6436820ebcdc909940e8f8709fedea9d71bea8d62e2afa3d9e7a367",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page005",
+      "scan_sha256": "198a1691e73d9056fc199668bc519bd580a32e711d3b4d93b892c0f613fb0cb8",
+      "label_sha256": "c7e893519d47f6882328d8accb836679cdf12d389c252e10f5cfa8dc6d04cf5f",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page006",
+      "scan_sha256": "2694e24edd1a204d1b9bea02e6b387ddaa61aae71aab88b636bf8147f3f9716b",
+      "label_sha256": "9ce2503ec7dc735de446f3bd4abe4d87ad7f1e200a69d73eac4f61a62ec92330",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page007",
+      "scan_sha256": "2765553790b90fa1c1072fe4f77b0782df10e38d53f80673fc07a15139f0d537",
+      "label_sha256": "db92b93692e4d4a6696f6f437d13847a7f23286c6ed4a54123633df1ffa09552",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page008",
+      "scan_sha256": "b36fdac4d65677a30f08896b012571fdb274db78f99bd3dec1902d2b94565881",
+      "label_sha256": "59b3ddf5021ea800195e558b9e6fcc78df05fbcd086d09ce236ac993ddf1c8e9",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page009",
+      "scan_sha256": "d4bb9b2a903c46b7278417b4cf3a0648644a4c3a874290ebc017548e8097e056",
+      "label_sha256": "bd651025e8cd0be10e24ebd533390756c1e21455471e22f2285838ebaa85afed",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page010",
+      "scan_sha256": "b7f5ab50c925732dd73533e28bc53d16894eb3c05d4f244463ee17462ec4fcdb",
+      "label_sha256": "579b782a4d4da3a81b2cf29eeaa26ec25aca7366143efdbe20daf27381f29e1c",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page011",
+      "scan_sha256": "fb61b959e6e0be4d47c6eb60d8e3dcb3fb1e01a9045a0161f2bbe85038211fc5",
+      "label_sha256": "e9c9337f84c6b368b1c68a49bf81e519eecafc92e93d8543a102bc4cf22d0c05",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page012",
+      "scan_sha256": "32f9c4dd84b026235e294fba743b1f7093a11366eb9ee17d13a94ce15c390f73",
+      "label_sha256": "43d742fa343aa87617f5e00edf8b8322d816c1f956e028213d52447259b5a8a2",
+      "eligible_for_test_scoring": true
+    },
+    {
+      "id": "mlt_week09_page013",
+      "scan_sha256": "d106ed1b469e056d8a065ae19b2d7a757fe1ae5e0383ab7c6042cd41f83b4b32",
+      "label_sha256": "0308ef02da4c2ceaf312ff57c7b67f37d632d0c140b4ea41e0f0d10f73a4fd75",
+      "eligible_for_test_scoring": true
+    }
+  ],
+  "scored_test_pages": 74,
+  "excluded_pages": [
+    "ie802_notes_page048",
+    "ie802_notes_page049"
+  ]
+}
