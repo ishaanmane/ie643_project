@@ -217,6 +217,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--unit", action="append")
     p.add_argument("--all", action="store_true", help="every unit")
+    p.add_argument("--split", choices=["train", "val", "test"], help="only the pages of this split")
     p.add_argument("--pages-md", default=os.path.join(D, "annotations"))
     p.add_argument("--out", default=os.path.join(ROOT, "out", "outlines"))
     p.add_argument("--model", default="Qwen/Qwen2.5-VL-7B-Instruct")
@@ -229,7 +230,7 @@ def main():
         p.error("--max-new-tokens must be positive")
     a.out, a.pages_md = os.path.abspath(a.out), os.path.abspath(a.pages_md)
     os.makedirs(a.out, exist_ok=True)
-    units = all_units()
+    units = all_units(a.split)
     if not (a.all or a.unit):
         sys.exit("give --unit <name> or --all")
     backup_dir = os.path.join(a.out, "retry_backups", str(time.time_ns()))

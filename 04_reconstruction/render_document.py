@@ -59,8 +59,13 @@ def unit_title(unit):
     return UNIT_NAMES.get(src, unit).format(n=num)
 
 
-def all_units():
+def all_units(split=None):
+    """unit -> its pages in order; with split ("val"/"test"), only that split's pages
+    (IE802 is split by page block, so a unit can be partly in a split)."""
     pages = sorted(f[:-3] for f in os.listdir(os.path.join(D, "annotations")) if f.endswith(".md"))
+    if split:
+        keep = set(json.load(open(os.path.join(D, "splits.json")))["splits"][split])
+        pages = [p for p in pages if p in keep]
     units = {}
     for p in pages:
         units.setdefault(unit_of(p), []).append(p)
@@ -521,6 +526,7 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("--unit", action="append", help="e.g. ie643_lec07 (repeatable)")
     p.add_argument("--all", action="store_true")
+    p.add_argument("--split", choices=["train", "val", "test"], help="only the pages of this split")
     p.add_argument("--pages-md", default=os.path.join(D, "annotations"),
                    help="folder of per-page Markdown (labels or model predictions)")
     p.add_argument("--out", default=os.path.join(ROOT, "out", "documents"))
@@ -533,7 +539,7 @@ def main():
     a.out, a.pages_md = os.path.abspath(a.out), os.path.abspath(a.pages_md)  # pandoc runs inside the output folder
     latex = shutil.which("xelatex") or shutil.which("tectonic")
     fmt = a.format or ("pdf" if latex and shutil.which("pandoc") else "html" if shutil.which("pandoc") else "md")
-    units = all_units()
+    units = all_units(a.split)
     chosen = sorted(units) if a.all else (a.unit or [])
     if not chosen:
         sys.exit("give --unit <name> or --all; units: " + ", ".join(sorted(units)))

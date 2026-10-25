@@ -11,7 +11,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import render_document as renderer
 from pdf_audit import audit_pdf
 
-FIXES = json.loads((Path(__file__).resolve().parents[1] / 'reviewed_render_fixes.json').read_text())
+FIXES = json.loads((Path(__file__).resolve().parents[1] / 'experiments' / 'reviewed_render_fixes.json').read_text())
 
 
 class ReviewedFixTests(unittest.TestCase):
