@@ -1,0 +1,112 @@
+{
+ "unit": "ie643_lec07",
+ "outline": {
+  "sections": [
+   {
+    "start": "p1.0",
+    "title": "Announcement",
+    "level": 1
+   },
+   {
+    "start": "p2.0",
+    "title": "Recap",
+    "level": 1
+   },
+   {
+    "start": "p3.0",
+    "title": "Supervised learning",
+    "level": 1
+   },
+   {
+    "start": "p4.0",
+    "title": "Directional Derivative",
+    "level": 1
+   },
+   {
+    "start": "p6.0",
+    "title": "Gradient",
+    "level": 2
+   },
+   {
+    "start": "p7.0",
+    "title": "Descent Direction",
+    "level": 2
+   },
+   {
+    "start": "p8.0",
+    "title": "Negative Gradient Direction",
+    "level": 2
+   },
+   {
+    "start": "p9.0",
+    "title": "Property",
+    "level": 1
+   },
+   {
+    "start": "p11.0",
+    "title": "Gradient Descent",
+    "level": 1
+   },
+   {
+    "start": "p12.0",
+    "title": "Stochastic Gradient Descent",
+    "level": 1
+   },
+   {
+    "start": "p13.0",
+    "title": "Mini-batch SGD",
+    "level": 1
+   },
+   {
+    "start": "p14.0",
+    "title": "Adam",
+    "level": 1
+   },
+   {
+    "start": "p16.0",
+    "title": "Computation of sample-based gradient",
+    "level": 1
+   },
+   {
+    "start": "p17.0",
+    "title": "Forward Chain Rule",
+    "level": 2
+   },
+   {
+    "start": "p19.0",
+    "title": "Chain Rule",
+    "level": 2
+   },
+   {
+    "start": "p20.0",
+    "title": "Blank Page",
+    "level": 1
+   }
+  ]
+ },
+ "report": {
+  "ok": true,
+  "problems": [],
+  "titles_replaced": [
+   {
+    "start": "p18.0",
+    "model_title": "Backward Chain Rule",
+    "words_not_in_notes": [
+     "backward"
+    ],
+    "used": "(section dropped)"
+   }
+  ],
+  "merged_repeats": [
+   "p5.0",
+   "p15.0"
+  ],
+  "sections": 16,
+  "first_section_at_first_block": true
+ },
+ "raw_model_output": "```json\n{\"sections\": [{\"start\": \"p1.0\", \"title\": \"Announcement\", \"level\": 1}, {\"start\": \"p2.0\", \"title\": \"Recap\", \"level\": 1}, {\"start\": \"p3.0\", \"title\": \"Supervised Learning\", \"level\": 1}, {\"start\": \"p4.0\", \"title\": \"Directional Derivative\", \"level\": 1}, {\"start\": \"p5.0\", \"title\": \"Directional Derivative\", \"level\": 2}, {\"start\": \"p6.0\", \"title\": \"Gradient\", \"level\": 2}, {\"start\": \"p7.0\", \"title\": \"Descent Direction\", \"level\": 2}, {\"start\": \"p8.0\", \"title\": \"Negative Gradient Direction\", \"level\": 2}, {\"start\": \"p9.0\", \"title\": \"Property\", \"level\": 1}, {\"start\": \"p11.0\", \"title\": \"Gradient Descent\", \"level\": 1}, {\"start\": \"p12.0\", \"title\": \"Stochastic Gradient Descent\", \"level\": 1}, {\"start\": \"p13.0\", \"title\": \"Mini-batch SGD\", \"level\": 1}, {\"start\": \"p14.0\", \"title\": \"Adam\", \"level\": 1}, {\"start\": \"p15.0\", \"title\": \"Adam\", \"level\": 2}, {\"start\": \"p16.0\", \"title\": \"Computation of Sample-based Gradient\", \"level\": 1}, {\"start\": \"p17.0\", \"title\": \"Forward Chain Rule\", \"level\": 2}, {\"start\": \"p18.0\", \"title\": \"Backward Chain Rule\", \"level\": 2}, {\"start\": \"p19.0\", \"title\": \"Chain Rule\", \"level\": 2}, {\"start\": \"p20.0\", \"title\": \"Blank Page\", \"level\": 1}]}\n```",
+ "blocks": 91,
+ "pages_md": "/home/intralab/workspace/ie643_project/preds/lora_clean_val",
+ "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+ "max_new_tokens": 4096
+}
