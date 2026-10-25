@@ -39,4 +39,10 @@ Preprocessing helped where it is meant to (busy notebook photos) and changed a f
 
 - `confidence` is one value per page, so it cannot rank boxes.
 - Coordinates are in each image's pixels; stored normalised so they survive resizing. Boxes only map onto the exact image Surya saw: the converter refuses to crop otherwise.
-- Surya v2 needs a model server (vLLM on NVIDIA). Hard to bundle into a final app; any model trained on boxed input needs Surya at inference too.
+- Surya v2 needs a model server (vLLM on NVIDIA). The upload app now manages that server in an isolated process before recognition. A boxed-input recognition variant would also require compatible layout inputs; the chosen clean variant does not.
+
+## Fresh-upload integration and limitations (2026-10-25)
+
+Verified the GPU client is Surya 0.22.1 with vLLM 0.32.0 and the same `datalab-to/surya-ocr-2` checkpoint used for the reviewed Kaggle run. Surya 0.7.0 found in the recognition environment was not substituted. Separate Python 3.11 environments avoid dependency changes to Qwen. Layout runs on job-local processed images, with coverage/dimension/bounds checks before normalized tags and crops are written.
+
+Lecture12 manual rebuild assigned 9 descriptions, inserted 3 extras and left 2 unmatched. Visual inspection confirmed missing real diagrams on source pages 17/19: their regions were classified as equations/text. Automatic lecture14 assigned 16/16 descriptions, but some caption associations and crop extents were wrong. One page's 12 raw regions were merged to one figure. This motivates conservative matching and review flags; assignment coverage is not layout accuracy. Details: [upload findings](08_upload_interface_and_reconstruction.md).
